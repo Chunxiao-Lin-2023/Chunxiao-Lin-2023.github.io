@@ -8,7 +8,7 @@
 
 # Basic Site Settings
 locale                   : "en-US"
-title                    : "Chunxiao Lin's Personal Website"
+title                    : "Chunxiao Lin's Homepage"
 title_separator          : "-"
 name                     : &name "Chunxiao Lin"
 description              : &description "4th-year Ph.D @Virginia Tech"
