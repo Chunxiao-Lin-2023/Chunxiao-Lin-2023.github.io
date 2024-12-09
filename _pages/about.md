@@ -7,13 +7,19 @@ redirect_from:
   - /about.html
 ---
 
-Welcome! I am a fourth-year Ph.D. student at Virginia Tech, working under the guidance of [Prof. Yang Yi](https://www.yangyi.ece.vt.edu/). My research primarily focuses on FPGA acceleration of online neuromorphic computing, with an emphasis on applications in wireless communication tasks.
+Welcome! I am a fourth-year Ph.D. student at Virginia Tech, working under the guidance of [Prof. Yang Yi](https://www.yangyi.ece.vt.edu/). My research primarily focuses on the FPGA acceleration of online neuromorphic computing, with an emphasis on applications in wireless communication tasks.
 
 I have extensive experience in designing machine learning-based solutions for MIMO-OFDM systems, developing FPGA-based architectures for neural networks, and implementing FPGA-accelerated on-chip learning. Beyond these core areas, I have contributed to projects involving clustering algorithms, LTE/5G communication systems, hardware security, and VLSI design.
 
+Before that, I obtained my master's degree in Electrical and Computer Engineering at the Viterbi School of Engineering, University of Southern California. My specialization was in Computer architecture and VLSI design. I completed my undergraduate studies at Huazhong University of Science and Technology, China, where I majored in Opto-electronic Information and gained a solid foundation in Analog and Digital Circuit Design.
+
+Please find my [CV]() here.
+
+
 <!-- This is the front page of a website that is powered by the [Academic Pages template](https://github.com/academicpages/academicpages.github.io) and hosted on GitHub pages. [GitHub pages](https://pages.github.com) is a free service in which websites are built and hosted from code and data stored in a GitHub repository, automatically updating when a new commit is made to the repository. This template was forked from the [Minimal Mistakes Jekyll Theme](https://mmistakes.github.io/minimal-mistakes/) created by Michael Rose, and then extended to support the kinds of content that academics have: publications, talks, teaching, a portfolio, blog posts, and a dynamically-generated CV. You can fork [this template](https://github.com/academicpages/academicpages.github.io) right now, modify the configuration and markdown files, add your own PDFs and other content, and have your own site for free, with no ads! -->
 
-A data-driven personal website
+
+<!--A data-driven personal website
 ======
 Like many other Jekyll-based GitHub Pages templates, Academic Pages makes you separate the website's content from its form. The content & metadata of your website are in structured markdown files, while various other files constitute the theme, specifying how to transform that content & metadata into HTML pages. You keep these various markdown (.md), YAML (.yml), HTML, and CSS files in a public GitHub repository. Each time you commit and push an update to the repository, the [GitHub pages](https://pages.github.com/) service creates static HTML pages based on these files, which are hosted on GitHub's servers free of charge.
 
@@ -50,4 +56,4 @@ Example: editing a markdown file for a talk
 
 For more info
 ------
-More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/), the [growing wiki](https://github.com/academicpages/academicpages.github.io/wiki), and you can always [ask a question on GitHub](https://github.com/academicpages/academicpages.github.io/discussions). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful.
+More info about configuring Academic Pages can be found in [the guide](https://academicpages.github.io/markdown/), the [growing wiki](https://github.com/academicpages/academicpages.github.io/wiki), and you can always [ask a question on GitHub](https://github.com/academicpages/academicpages.github.io/discussions). The [guides for the Minimal Mistakes theme](https://mmistakes.github.io/minimal-mistakes/docs/configuration/) (which this theme was forked from) might also be helpful. -->
