@@ -1,7 +1,7 @@
 ---
 title: "GF-Flush: A GF (2) Algebraic Attack on Dynamically Secured Scan Chains"
 collection: publications
-category: manuscripts
+category: conferences
 permalink: /publication/2021_Paper1_GF-Flush
 excerpt: 'This paper is about the number 1. The number 2 is left for future work.'
 date: 2021-05-31
