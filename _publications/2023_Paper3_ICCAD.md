@@ -1,7 +1,7 @@
 ---
 title: "Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerators"
 collection: publications
-category: manuscripts
+category: conferences
 permalink: /publication/2023_Paper3_ICCAD
 excerpt: 'This paper proposed a DSP-based reservoir neuron design in Echo State Network, and tested it in MIMO-OFDM symbol detection task using an SDR/FPGA testbed.'
 date: 2023-10-28
