@@ -5,6 +5,7 @@ category: manuscripts
 permalink: /publication/2024_Paper4_Frontiers
 excerpt: 'This paper proposed a DSP-based reservoir neuron design in Echo State Network, and tested it in MIMO-OFDM symbol detection task using an SDR/FPGA testbed.'
 date: 2024-02-21
+status: published
 venue: 'Frontiers in Computational Neuroscience'
 paperurl: 'http://academicpages.github.io/files/paper1.pdf'
 ---
