@@ -5,6 +5,7 @@ category: conferences
 permalink: /publication/2022_Paper2_ISQED
 excerpt: 'This paper proposed a bit-serial-based matrix multiplication for the reservoir neuron design in Echo State Network.'
 date: 2022-04-06
+status: published
 venue: '2022 23rd International Symposium on Quality Electronic Design (ISQED)'
 paperurl: 'http://academicpages.github.io/files/paper1.pdf'
 ---
