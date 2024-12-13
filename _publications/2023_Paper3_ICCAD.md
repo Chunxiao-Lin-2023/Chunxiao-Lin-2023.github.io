@@ -5,6 +5,7 @@ category: conferences
 permalink: /publication/2023_Paper3_ICCAD
 excerpt: 'This paper proposed a DSP-based reservoir neuron design in Echo State Network, and tested it in MIMO-OFDM symbol detection task using an SDR/FPGA testbed.'
 date: 2023-10-28
+status: published
 venue: '2023 IEEE/ACM International Conference on Computer Aided Design (ICCAD)'
 paperurl: 'http://academicpages.github.io/files/paper1.pdf'
 ---
