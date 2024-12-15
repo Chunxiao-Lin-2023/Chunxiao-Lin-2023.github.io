@@ -7,5 +7,6 @@ excerpt: "This is a chapter accepted in a book."
 date: 2025-01-01
 status: expected
 venue: 'Frontiers of Electronic Design, Technologies, Methodologies, Tools, Applications & Trends'
+paperurl: '/files/paper2.pdf'
 ---
 
