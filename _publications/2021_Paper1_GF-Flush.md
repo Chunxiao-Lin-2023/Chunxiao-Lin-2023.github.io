@@ -10,6 +10,7 @@ excerpt: '<span style="color: red;">Author List: Dake Chen, Chunxiao Lin, Peter 
           <ol>
             <li>Developed a Python script to transfer bench format netlist into Verilog circuit and add dynamic encrypted logic into it.</li>
             <li>Improved the verification part of a scan-based attack by verifying the Math model with the simulation on Modelsim.</li>
+          </ol>
           '
 status: published
 date: 2021-05-31
