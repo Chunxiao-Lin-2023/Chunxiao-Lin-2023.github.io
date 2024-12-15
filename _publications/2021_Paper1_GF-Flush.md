@@ -13,6 +13,6 @@ excerpt: '<span style="color: blue;">Author List: Dake Chen, Chunxiao Lin, Peter
 status: published
 date: 2021-05-31
 venue: '2021 IEEE International Symposium on Defect and Fault Tolerance in VLSI and Nanotechnology Systems (DFT)'
-paperurl: 'http://academicpages.github.io/files/paper1.pdf'
+paperurl: 'https://github.com/Chunxiao-Lin-2023/Chunxiao-Lin-2023.github.io/blob/master/files/01_GF-Flush_A_GF2_Algebraic_Attack_on_Dynamically_Secured_Scan_Chains.pdf'
 ---
 
