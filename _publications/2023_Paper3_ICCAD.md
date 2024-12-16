@@ -3,13 +3,17 @@ title: "Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerat
 collection: publications
 category: conferences
 permalink: /publication/2023_Paper3_ICCAD
-excerpt: 'This paper proposed a DSP-based reservoir neuron design in Echo State Network, and tested it in MIMO-OFDM symbol detection task using an SDR/FPGA testbed.'
+excerpt: '<span style="color: blue;">Author List: Chunxiao Lin, Muhammad Farhan Azmine, Yang Yi</span><br> 
+          This paper introduces an FPGA-based AI accelerator for the MIMO-OFDM symbol detection task in the wireless domain.
+          We introduced a low-cost, low-power architecture for the ESN neurons using the DSP48E1 slices in the Xilinx Virtex-7 FPGA board.<br>
+          <b>My contributions in this work are:</b><br>
+          (1) Developed a DSP-based MAC operation block design for both the reservoir neurons and output neurons.<br>
+          (2) Designed a fixed-point number system for the FPGA-based ESN, including the MAC operations and the non-linear tanh function.<br>
+          (3) Applied the FPGA-based ESN design to the real-world, real-time wireless communication task: 2x2 MIMO-OFDM symbol detection.<br>
+          (4) Developed an SDR/FPGA joint platform for the testing of the ESN-based symbol detectors.<br>
+          '
 date: 2023-10-28
 status: published
 venue: '2023 IEEE/ACM International Conference on Computer Aided Design (ICCAD)'
-paperurl: 'http://academicpages.github.io/files/paper1.pdf'
+paperurl: 'https://github.com/Chunxiao-Lin-2023/Chunxiao-Lin-2023.github.io/blob/master/files/03_ICCAD_2023.pdf'
 ---
-
-C. Lin, M. F. Azmine and Y. Yi, "Invited Paper: Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerators," 2023 IEEE/ACM International Conference on Computer Aided Design (ICCAD), San Francisco, CA, USA, 2023, pp. 1-8, doi: 10.1109/ICCAD57390.2023.10323918.
-
-The contents above will be part of a list of publications, if the user clicks the link for the publication than the contents of section will be rendered as a full page, allowing you to provide more information about the paper for the reader. When publications are displayed as a single page, the contents of the above "citation" field will automatically be included below this section in a smaller font.
