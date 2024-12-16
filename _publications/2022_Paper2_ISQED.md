@@ -3,7 +3,13 @@ title: "Fpga-based reservoir computing with optimized reservoir node architectur
 collection: publications
 category: conferences
 permalink: /publication/2022_Paper2_ISQED
-excerpt: 'This paper proposed a bit-serial-based matrix multiplication for the reservoir neuron design in Echo State Network.'
+excerpt: '<span style="color: blue;">Author List: Chunxiao Lin, Yibin Liang, Yang Yi</span><br> 
+          This paper introduces a low-cost architecture for the reservoir neurons in echo state networks(ESNs).
+          We adopt the bit-serial matrix multiplier and direct spatial implementation of the weight matrix to fully exploit the sparseness property.<br>
+          <b>My contributions in this work are:</b><br>
+          (1)Developed a Python script to transfer bench format netlist into Verilog circuit and add dynamic encrypted logic into it.<br>
+          (2)Improved the verification part of a scan-based attack by verifying the Math model with the simulation on Modelsim.
+          '
 date: 2022-04-06
 status: published
 venue: '2022 23rd International Symposium on Quality Electronic Design (ISQED)'
