@@ -7,15 +7,12 @@ excerpt: '<span style="color: blue;">Author List: Chunxiao Lin, Yibin Liang, Yan
           This paper introduces a low-cost architecture for the reservoir neurons in echo state networks(ESNs).
           We adopt the bit-serial matrix multiplier and direct spatial implementation of the weight matrix to fully exploit the sparseness property.<br>
           <b>My contributions in this work are:</b><br>
-          (1)Developed a Python script to transfer bench format netlist into Verilog circuit and add dynamic encrypted logic into it.<br>
-          (2)Improved the verification part of a scan-based attack by verifying the Math model with the simulation on Modelsim.
+          (1) Developed a bit-serial vector-matrix multiplier for the ESN reservoir state updating.<br>
+          (2) Introduced zero-skipping logic optimizations to exploit the sparsity of the ESN weight matrix.<br>
+          (3) Adopted the canonical signed digit representation to increase the sparsity in bit level, which boosts the performance of the proposed architecture.<br> 
           '
 date: 2022-04-06
 status: published
 venue: '2022 23rd International Symposium on Quality Electronic Design (ISQED)'
-paperurl: 'http://academicpages.github.io/files/paper1.pdf'
+paperurl: 'https://github.com/Chunxiao-Lin-2023/Chunxiao-Lin-2023.github.io/blob/master/files/02_ISQED_2022.pdf'
 ---
-
-C. Lin, Y. Liang and Y. Yi, "FPGA-based Reservoir Computing with Optimized Reservoir Node Architecture," 2022 23rd International Symposium on Quality Electronic Design (ISQED), Santa Clara, CA, USA, 2022, pp. 1-6, doi: 10.1109/ISQED54688.2022.9806247.
-
-The contents above will be part of a list of publications, if the user clicks the link for the publication than the contents of section will be rendered as a full page, allowing you to provide more information about the paper for the reader. When publications are displayed as a single page, the contents of the above "citation" field will automatically be included below this section in a smaller font.
