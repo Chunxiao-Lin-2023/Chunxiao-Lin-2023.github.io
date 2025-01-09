@@ -21,4 +21,4 @@ More details:
 
 
 
-![](/images/projects/foo-bar-identity.jpg)
+<!-- ![](/images/projects/foo-bar-identity.jpg) -->
