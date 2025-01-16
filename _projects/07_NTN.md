@@ -22,3 +22,12 @@ Project overview:
 Setup: 
 1. ns3-based NTN system
 2. 10 on-ground users and 93 on-satellite base stations.
+
+Algorithm Details:
+(1)	At each step:
+  (a)	for each user:
+    (i)	Apply the KMeans clustering algorithm to all the satellites based on the geographic coordinates
+    (ii)	Select the satellite cluster with the highest mean RSRP as the target cluster
+    (iii)	search the source satellite(current serving satellite) within the target cluster. 
+      1)	If the source satellite is in the target cluster, keep it as the serving satellite
+      2)	otherwise, handover to the satellite with the highest RSRP in the target cluster
