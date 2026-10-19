@@ -2,7 +2,7 @@
 title: "Optimized Reservoir Node Architecture for FPGA-based RC Systems"
 collection: projects
 #permalink: /project/2022_Paper2_ISQED
-excerpt: 'This paper proposed a bit-serial-based matrix multiplication for the reservoir neuron design in Echo State Network.'
+excerpt: 'A low-cost bit-serial reservoir neuron that exploits the fixed, sparse ESN weights (ISQED 2022).'
 date: 2021-10-01
 status: From 2021-10 to 2022-02
 #venue: '2022 23rd International Symposium on Quality Electronic Design (ISQED)'
@@ -21,4 +21,4 @@ More details:
 
 
 
-<!-- ![](/images/projects/foo-bar-identity.jpg) -->
+<!--  -->
