@@ -9,5 +9,5 @@ excerpt: '<span style="color: blue;">Author List: Andrew Liu, Muhammad Farhan Az
 date: 2026-02-13
 status: Published
 venue: 'AI (MDPI)'
-paperurl: 'https://doi.org/10.3390/ai7020070'
+paperurl: 'https://github.com/Chunxiao-Lin-2023/Chunxiao-Lin-2023.github.io/blob/master/files/12_AI_MDPI_2026.pdf'
 ---

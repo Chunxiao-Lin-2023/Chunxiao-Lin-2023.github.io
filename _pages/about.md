@@ -7,7 +7,7 @@ redirect_from:
   - /about.html
 ---
 
-Welcome! I am a fourth-year Ph.D. student at Virginia Tech, working under the guidance of [Prof. Yang Yi](https://www.yangyi.ece.vt.edu/). My research primarily focuses on the FPGA acceleration of online neuromorphic computing, with an emphasis on applications in wireless communication tasks.
+Welcome! I am a sixth-year Ph.D. student at Virginia Tech, working under the guidance of [Prof. Yang Yi](https://www.yangyi.ece.vt.edu/). My research focuses on FPGA acceleration of echo state networks (reservoir computing) with on-chip learning, and on bringing them into real-time wireless systems: symbol detection, MIMO channel prediction, and live distributed-MIMO testbeds.
 
 I have extensive experience in designing machine learning-based solutions for MIMO-OFDM systems, developing FPGA-based architectures for neural networks, and implementing FPGA-accelerated on-chip learning. Beyond these core areas, I have contributed to projects involving clustering algorithms, LTE/5G communication systems, hardware security, and VLSI design.
 
