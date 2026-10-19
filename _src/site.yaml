@@ -10,7 +10,7 @@ email: chunxiaol@vt.edu
 scholar: https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en
 github: https://github.com/Chunxiao-Lin-2023
 photo: photo.jpg
-role: Ph.D. student, Computer Engineering<br>Virginia Tech · BRICCS@VT
+role: Ph.D. student, Computer Engineering<br>Virginia Tech · <a href="https://bricc.ece.vt.edu/">BRICCS@VT</a>
 lab: "Advisor: Prof. Yang (Cindy) Yi"
 lab_url: https://www.yangyi.ece.vt.edu/
 cv_pdf: CV_Chunxiao_Lin.pdf
@@ -18,7 +18,7 @@ url: https://chunxiao-lin-2023.github.io
 
 about: |
   I am a Ph.D. student at Virginia Tech, advised by
-  <a href="https://www.yangyi.ece.vt.edu/">Prof. Yang (Cindy) Yi</a>, and a member of <b>BRICCS@VT</b>.
+  <a href="https://www.yangyi.ece.vt.edu/">Prof. Yang (Cindy) Yi</a>, and a member of <a href="https://bricc.ece.vt.edu/"><b>BRICCS@VT</b></a> (Brain-Inspired Computing, Communication, and Security Lab).
   I design <b>FPGA accelerators for echo state networks</b> (reservoir computing), from cost-efficient
   reservoir neurons to <b>on-chip learning</b>, and bring them into <b>real-time wireless systems</b>
   for symbol detection and MIMO channel prediction.
