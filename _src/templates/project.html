@@ -1,20 +1,34 @@
 {% extends "base.html" %}{% from "macros.html" import pub, meta %}
 {% block title %}{{ pr.title }} · {{ site.name }}{% endblock %}
+{% macro figs(list, root) %}{% if list %}<div class="figs{{ ' one' if list|length == 1 }}">{% for f in list %}<figure><img src="{{ root }}assets/img/proj/{{ f.file }}" alt="" loading="lazy"><figcaption>{{ f.cap }}</figcaption></figure>{% endfor %}</div>{% endif %}{% endmacro %}
 {% block body %}
-<p class="crumb"><a href="{{ root }}projects/">← Projects</a></p>
+{% set D = pr.detail or {} %}
+{% set T = {'setup': 'System setup', 'design': 'Design', 'photo': 'Real-world setup', 'demo': 'Live demo', 'results': 'Results'} %}
+<p class="crumb"><a href="{{ root }}projects/">← All projects</a></p>
 <h1 class="page">{{ pr.title }}</h1>
 <div class="pmeta big">{{ meta(pr) }}</div>
-<div class="detail{{ ' noimg' if not pr.img }}">
-  <div>
-    <p class="lead">{{ pr.text }}</p>
-    {% if pr.kpis %}<div class="kpis">{% for k in pr.kpis %}<div class="kpi"><b>{{ k.v }}</b><span>{{ k.l }}</span></div>{% endfor %}</div>{% endif %}
-    {% if pr.points %}<ul>{% for x in pr.points %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+<p class="ovw">{{ D.overview or pr.text }}</p>
+{% if pr.kpis %}<div class="kpis">{% for k in pr.kpis %}<div class="kpi"><b>{{ k.v }}</b><span>{{ k.l }}</span></div>{% endfor %}</div>{% endif %}
+
+{% if D %}
+{% for s in (D.order or ['design', 'results']) %}
+  {% set items = D[s] if s in D else [] %}
+  {% set fl = (D.figures or [])|selectattr('section', 'equalto', s)|list %}
+  {% if items or fl or (s == 'demo' and pr.videos) %}
+  <h2>{{ T[s] }}</h2>
+  <div class="sec">
+    {% if s == 'results' %}{% if items %}<ul class="res">{% for x in items %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+    {% else %}{% for x in items %}{% if x.h %}<h3>{{ x.h }}</h3>{% endif %}<p>{{ x.p }}</p>{% endfor %}{% endif %}
+    {{ figs(fl, root) }}
+    {% if s == 'demo' %}<div class="figs">{% for v in pr.videos %}<figure><video controls muted loop playsinline preload="metadata" poster="{{ root }}assets/video/{{ v.poster }}"><source src="{{ root }}assets/video/{{ v.src }}" type="video/mp4"></video><figcaption>{{ v.cap }}</figcaption></figure>{% endfor %}</div>{% endif %}
   </div>
-  {% if pr.img %}<div class="pimg"><img src="{{ root }}assets/img/pubs/{{ pr.img }}" alt=""></div>{% endif %}
-</div>
-{% if pr.wide_img %}<figure class="wide"><img src="{{ root }}assets/img/pubs/{{ pr.wide_img }}" alt="">{% if pr.wide_cap %}<figcaption>{{ pr.wide_cap }}</figcaption>{% endif %}</figure>{% endif %}
-{% if pr.videos %}<h2>Demo videos</h2>
-<div class="vids">{% for v in pr.videos %}<figure><video controls muted playsinline preload="metadata" poster="{{ root }}assets/video/{{ v.poster }}"><source src="{{ root }}assets/video/{{ v.src }}" type="video/mp4"></video><figcaption>{{ v.cap }}</figcaption></figure>{% endfor %}</div>{% endif %}
-{% if pr.pub_list %}<h2>Publications</h2>
+  {% endif %}
+{% endfor %}
+{% else %}
+  {% if pr.points %}<ul class="res">{% for x in pr.points %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+  {% if pr.img %}<div class="figs one"><figure><img src="{{ root }}assets/img/pubs/{{ pr.img }}" alt=""></figure></div>{% endif %}
+{% endif %}
+
+{% if pr.pub_list %}<h2>Publication{{ 's' if pr.pub_list|length > 1 }}</h2>
 {% for p in pr.pub_list %}{{ pub(p, root) }}{% endfor %}{% endif %}
 {% endblock %}

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,28 +9,85 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
-  <a class="" href="../../">about</a>
-  <a class="" href="../../publications/">publications</a>
-  <a class="on" href="../../projects/">projects</a>
-  <a class="" href="../../cv/">cv</a>
-</nav></header>
+<div class="layout">
+<aside class="side">
+  <a href="../../"><img class="avatar" src="../../assets/img/photo.jpg" alt="Chunxiao Lin"></a>
+  <div class="who"><a href="../../" class="nm">Chunxiao (Calvin) Lin</a>
+    <div class="role">Ph.D. student, Computer Engineering<br>Virginia Tech</div></div>
+  <nav class="snav">
+    <a class="" href="../../">About</a>
+    <a class="on" href="../../projects/">Projects</a>
+    <a class="" href="../../publications/">Publications</a>
+    <a class="" href="../../cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="https://www.yangyi.ece.vt.edu/">Advisor: Prof. Yang (Cindy) Yi</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a></li>
+    <li><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="../../files/CV_Chunxiao_Lin.pdf" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+</aside>
 <main>
-<p class="crumb"><a href="../../projects/">← Projects</a></p>
+
+
+<p class="crumb"><a href="../../projects/">← All projects</a></p>
 <h1 class="page">DSP-based ESN and SDR/FPGA platform for MIMO-OFDM detection</h1>
 <div class="pmeta big"><span class="ptag">ICCAD'23</span><span class="per">2022</span></div>
-<div class="detail">
-  <div>
-    <p class="lead">A DSP48E1-array reservoir neuron for 2×2 MIMO-OFDM symbol detection, tested over the air with an SDR platform (PC, Virtex-7 FPGA and two USRPs running a GNU Radio Wi-Fi link).</p>
-    <div class="kpis"><div class="kpi"><b>3.3×</b><span>throughput for only +21.4% LUT and +33% FF</span></div><div class="kpi"><b>0.04</b><span>average BER over a real wireless channel</span></div><div class="kpi"><b>−50%</b><span>BRAM (and −33.3% DSP IP) usage</span></div></div>
-    <ul><li>A 3×3 DSP array in three stages: all nine slices run MAC, then three groups reduce, then one final sum.</li></ul>
+<p class="ovw">MIMO-OFDM symbol detection with conventional LMMSE depends on channel estimation and degrades in changing, multipath channels, while ML detectors are costly to put in hardware. This work builds an FPGA accelerator for an echo state network (ESN) symbol detector on a Virtex-7 board and demonstrates it in real time for 2x2 MIMO-OFDM on an SDR testbed with USRP radios and GNU Radio.</p>
+<div class="kpis"><div class="kpi"><b>3.3×</b><span>input throughput vs SISO ESN accelerator</span></div><div class="kpi"><b>34.8 MS/s</b><span>input processing speed</span></div><div class="kpi"><b>9 DSPs</b><span>per reservoir neuron</span></div><div class="kpi"><b>≤0.03%</b><span>BER gap, hardware vs software ESN</span></div></div>
+
+
+
+  
+  
+  
+  <h2>System setup</h2>
+  <div class="sec">
+    <h3>SDR/FPGA loop</h3><p>A Wi-Fi radio system in GNU Radio on a host PC generates the transmit signal and sends it to the transmitting USRP; the receiving USRP passes the received signal to the FPGA. The FPGA-based ESN detects and recovers the OFDM symbols and returns them to the PC, where the bit error rate (BER) is measured against a conventional MMSE detector running in the same radio system.</p>
+    <div class="figs one"><figure><img src="../../assets/img/proj/sdr-fpga_1.png" alt="" loading="lazy"><figcaption>System setup: USRP radios and a GNU Radio host PC exchange received and detected symbols with the FPGA accelerator.</figcaption></figure></div>
+    
   </div>
-  <div class="pimg"><img src="../../assets/img/pubs/iccad_platform.png" alt=""></div>
-</div>
+  
+
+  
+  
+  
+  <h2>Design</h2>
+  <div class="sec">
+    <h3>nine-DSP reservoir neuron</h3><p>Each reservoir neuron performs its 48 multiplications and 47 additions (40 inputs + 8 reservoir states) with only 9 DSP48E1 slices, with weights in a per-neuron local memory and states in a shared global state memory. Stage I runs 9 parallel multiply-accumulates; Stage II joins the DSPs in groups of three over the dedicated PCIN/PCOUT cascade to compress 9 partial sums to 3; Stage III merges them into one sum using the {A:B} concatenation and the 3-input ALU.</p><h3>Fixed-point tanh and word lengths</h3><p>tanh is approximated piecewise-linearly: saturated to ±1 for |x| ≥ 8, otherwise slope·x + intercept, with slope and intercept read from two BRAM look-up tables of depth 2^8 and computed on another DSP. Inputs are normalised to (-0.1, 0.1) so output weights fit in (-700, 700) as 16-bit values (sign, 10 integer and 5 fractional bits); an 8-neuron reservoir was chosen as the second-best BER at much lower cost.</p>
+    <div class="figs one"><figure><img src="../../assets/img/proj/sdr-fpga_2.png" alt="" loading="lazy"><figcaption>Reservoir neuron architecture: nine DSP48E1 slices in three pipelined stages plus a fixed-point tanh from two look-up tables.</figcaption></figure></div>
+    
+  </div>
+  
+
+  
+  
+  
+  <h2>Real-world setup</h2>
+  <div class="sec">
+    <p>The testbed combines a Xilinx Virtex-7 VC707 board running at 125 MHz, a host PC with GNU Radio, and USRP B210 transmitters and receivers. Tests ran in an RF lab with strong multipath, over 5 scenarios from a 10 m line-of-sight link to fully blocked non-line-of-sight links, each repeated for 3 trials.</p>
+    <div class="figs one"><figure><img src="../../assets/img/proj/sdr-fpga_3.png" alt="" loading="lazy"><figcaption>The real-time testbed: USRP B210 transmitters and receivers, GNU Radio on the host PC and the Virtex-7 FPGA board.</figcaption></figure></div>
+    
+  </div>
+  
+
+  
+  
+  
+  <h2>Results</h2>
+  <div class="sec">
+    <ul class="res"><li>Processing speed of 34.8 M input samples/s, 3.3× the 10.53 M samples/s of the earlier ESN FPGA accelerator for SISO-OFDM.</li><li>Against that SISO design: 50% less BRAM and 33.3% fewer DSP blocks, at the cost of 21.4% more LUTs and 33% more FFs.</li><li>Total utilization on the VC707: 13,314 LUTs (4.9%), 10,750 FFs (1.77%), 6 BRAMs (0.58%) and 108 DSPs (3.86%).</li><li>Hardware ESN BER stays within 0.03% of the floating-point software ESN in all 5 scenarios (e.g. 4.531% vs 4.506% in scenario 5).</li><li>ESN beats MMSE in every scenario, most clearly in poor channels: 4.531% vs 8.335% BER in scenario 5 and 3.084% vs 4.470% in scenario 3.</li><li>Vivado power report at 125 MHz: 0.256 W dynamic, 0.262 W static and about 0.754 W total on-chip, with no timing violations.</li></ul>
+    
+    <div class="figs one"><figure><img src="../../assets/img/proj/sdr-fpga_4.png" alt="" loading="lazy"><figcaption>Measured BER of the hardware ESN, software ESN and MMSE detectors in five indoor scenarios.</figcaption></figure></div>
+    
+  </div>
+  
 
 
-<h2>Publications</h2>
+
+<h2>Publication</h2>
 
 <div class="pub" id="lin2023iccad">
   <div class="pub-l"><span class="badge">ICCAD</span><img src="../../assets/img/pubs/iccad_platform.png" alt=""></div>
@@ -37,23 +95,15 @@
     <div class="t">Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerators</div>
     <div class="a"><em>Chunxiao Lin</em>, Muhammad Farhan Azmine, Yang Yi</div>
     <div class="v">IEEE/ACM International Conference on Computer Aided Design (ICCAD), 2023</div>
-    <div class="s">A DSP-based FPGA echo state network and an SDR/FPGA platform for over-the-air 2x2 MIMO-OFDM symbol detection.</div>
-    <div class="btns"><a class="btn" href="https://doi.org/10.1109/ICCAD57390.2023.10323918">DOI</a><a class="btn" href="../../files/03_ICCAD_2023.pdf">PDF</a><a class="btn" href="#" data-bib="bib-lin2023iccad">BIB</a></div>
-    <pre class="bib" id="bib-lin2023iccad" hidden>@inproceedings{lin2023iccad,
-  title = {Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerators},
-  author = {Lin, Chunxiao and Azmine, Muhammad Farhan and Yi, Yang},
-  booktitle = {IEEE/ACM International Conference on Computer Aided Design (ICCAD)},
-  year = {2023},
-  doi = {10.1109/ICCAD57390.2023.10323918}
-}</pre>
+    <div class="s">Builds a DSP48E1-based FPGA echo-state-network accelerator for 2x2 MIMO-OFDM symbol detection and validates it on a real-time SDR testbed, reaching 3.3× the throughput of a prior SISO design and beating MMSE.</div>
+    <div class="btns"><a class="btn" href="../../files/03_ICCAD_2023.pdf">PDF</a><a class="btn" href="https://doi.org/10.1109/ICCAD57390.2023.10323918">Publisher</a></div>
   </div>
 </div>
 
-</main>
-<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));

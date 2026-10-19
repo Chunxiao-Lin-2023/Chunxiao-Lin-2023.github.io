@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,28 +9,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
-  <a class="" href="../../">about</a>
-  <a class="" href="../../publications/">publications</a>
-  <a class="on" href="../../projects/">projects</a>
-  <a class="" href="../../cv/">cv</a>
-</nav></header>
+<div class="layout">
+<aside class="side">
+  <a href="../../"><img class="avatar" src="../../assets/img/photo.jpg" alt="Chunxiao Lin"></a>
+  <div class="who"><a href="../../" class="nm">Chunxiao (Calvin) Lin</a>
+    <div class="role">Ph.D. student, Computer Engineering<br>Virginia Tech</div></div>
+  <nav class="snav">
+    <a class="" href="../../">About</a>
+    <a class="on" href="../../projects/">Projects</a>
+    <a class="" href="../../publications/">Publications</a>
+    <a class="" href="../../cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="https://www.yangyi.ece.vt.edu/">Advisor: Prof. Yang (Cindy) Yi</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a></li>
+    <li><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="../../files/CV_Chunxiao_Lin.pdf" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+</aside>
 <main>
-<p class="crumb"><a href="../../projects/">← Projects</a></p>
+
+
+<p class="crumb"><a href="../../projects/">← All projects</a></p>
 <h1 class="page">Dynamically secured scan chains and the GF-Flush attack</h1>
 <div class="pmeta big"><span class="ptag">DFT'21</span><span class="per">2020 – 2021</span></div>
-<div class="detail">
-  <div>
-    <p class="lead">Implemented a dynamically secured scan chain and verified a scan-based attack; the follow-up GF(2) algebraic flush attack recovers the dynamic key by solving linear equations over GF(2).</p>
-    <div class="kpis"><div class="kpi"><b>< 7 s</b><span>to recover a 500-bit key</span></div><div class="kpi"><b>>4300×</b><span>faster than SAT-based attacks</span></div></div>
-    <ul><li>A Python flow converts bench-format netlists into Verilog and inserts the dynamic encryption logic.</li><li>The attack's math model was verified against ModelSim simulation.</li><li>The attack extends to scan chains compressed with multiple-input signature registers (MISRs).</li></ul>
+<p class="ovw">State-of-the-art scan-chain defenses use an LFSR-driven dynamic key to pseudo-randomly invert scan data, and existing SAT attacks on them are slow and assume the combinational logic is unlocked. GF-Flush models the LFSR, locking gates and MISR compactor as linear equations over GF(2) and recovers the secret LFSR seed by solving them.</p>
+<div class="kpis"><div class="kpi"><b>< 7 s</b><span>to recover a 500-bit key</span></div><div class="kpi"><b>4307x</b><span>average speed-up over SAT attack</span></div><div class="kpi"><b>66 s</b><span>to recover a 1000-bit key</span></div></div>
+
+
+
+  
+  
+  
+  <h2>Design</h2>
+  <div class="sec">
+    <h3>Threat model</h3><p>The attacker knows the reverse-engineered netlist (LFSR feedback vector c, chain length N, locking-gate positions b) and has an oracle chip with the correct seed. Logic 0s are shifted into the obfuscated chain ("flushing") and the scan outputs o are captured.</p><h3>GF(2) model of the defense</h3><p>The LFSR is written as a transition matrix T, so its state at cycle t is T^t s for seed s. With all-zero inputs, each scan output is an XOR of key bits, i.e. one linear equation in s; lambda such equations form the system A s = o, which is solved over GF(2).</p><h3>Bypassing the shadow chain</h3><p>Recent defenses add a shadow chain so the first scan-out bits leak nothing. The attack simply skips the first N outputs and uses the next lambda outputs to build A. A rank-deficient A yields 2^k candidate seeds instead of a unique one.</p><h3>Extension to MISR compaction</h3><p>Because a Multiple-Input Signature Register is also built from XORs and flip-flops, its signature can be written in terms of the seed bits as well. Each test round gives h equations, so N rounds collect enough of them; the authors describe this as the first attack on obfuscated scan chains that models a MISR.</p>
+    <div class="figs"><figure><img src="../../assets/img/proj/scan-chain_1.png" alt="" loading="lazy"><figcaption>The LFSR (a) and the dynamically secured scan chain it drives through XOR locking gates (b).</figcaption></figure><figure><img src="../../assets/img/proj/scan-chain_2.png" alt="" loading="lazy"><figcaption>GF-Flush flow: flush zeros through the oracle, derive T and A from the netlist, then solve As = o for the seed.</figcaption></figure></div>
+    
   </div>
-  <div class="pimg"><img src="../../assets/img/pubs/gfflush_scan.png" alt=""></div>
-</div>
+  
+
+  
+  
+  
+  <h2>Results</h2>
+  <div class="sec">
+    <ul class="res"><li>Recovers a 500-bit key in under 7 s on average (MATLAB, Intel i7-8700); a 1000-bit key took 66 s.</li><li>87% of random LFSR configurations gave a unique seed; over 1000 random configurations at lambda = 500 the average number of candidate seeds was 2.5.</li><li>Against run-times reported for the DynUnlock SAT attack on ISCAS-89 s38584, s38417 and s35932 (144-368 key bits), GF-Flush is 4307x faster on average (e.g. s38417 with 368 bits: 70591 s vs 4.51 s).</li><li>Against a reproduced SAT attack on four smaller ISCAS-89 circuits (10-40 key bits), the average speed-up is 33292x.</li><li>With a MISR of practical length (h > 16), run-time stays under 8 hours for key lengths under 250 bits.</li></ul>
+    
+    <div class="figs one"><figure><img src="../../assets/img/proj/scan-chain_3.png" alt="" loading="lazy"><figcaption>Average attack run-time versus key length lambda without a MISR, staying under 7 s at 500 bits.</figcaption></figure></div>
+    
+  </div>
+  
 
 
-<h2>Publications</h2>
+
+<h2>Publication</h2>
 
 <div class="pub" id="chen2021dft">
   <div class="pub-l"><span class="badge">DFT</span></div>
@@ -37,23 +73,15 @@
     <div class="t">GF-Flush: A GF(2) Algebraic Attack on Dynamically Secured Scan Chains</div>
     <div class="a">Dake Chen, <em>Chunxiao Lin</em>, Peter A. Beerel</div>
     <div class="v">IEEE International Symposium on Defect and Fault Tolerance in VLSI and Nanotechnology Systems (DFT), 2021</div>
-    
-    <div class="btns"><a class="btn" href="https://doi.org/10.1109/DFT52944.2021.9568356">DOI</a><a class="btn" href="../../files/01_GF-Flush_2021.pdf">PDF</a><a class="btn" href="#" data-bib="bib-chen2021dft">BIB</a></div>
-    <pre class="bib" id="bib-chen2021dft" hidden>@inproceedings{chen2021dft,
-  title = {GF-Flush: A GF(2) Algebraic Attack on Dynamically Secured Scan Chains},
-  author = {Chen, Dake and Lin, Chunxiao and Beerel, Peter A.},
-  booktitle = {IEEE International Symposium on Defect and Fault Tolerance in VLSI and Nanotechnology Systems (DFT)},
-  year = {2021},
-  doi = {10.1109/DFT52944.2021.9568356}
-}</pre>
+    <div class="s">Proposes GF-Flush, a GF(2) algebraic attack that recovers LFSR seeds of dynamically obfuscated scan chains, including shadow-chain and MISR variants, breaking 500-bit keys in under 7 s, over 4300x faster than SAT attacks.</div>
+    <div class="btns"><a class="btn" href="../../files/01_GF-Flush_2021.pdf">PDF</a><a class="btn" href="https://doi.org/10.1109/DFT52944.2021.9568356">Publisher</a></div>
   </div>
 </div>
 
-</main>
-<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));

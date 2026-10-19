@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,28 +9,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
-  <a class="" href="../../">about</a>
-  <a class="" href="../../publications/">publications</a>
-  <a class="on" href="../../projects/">projects</a>
-  <a class="" href="../../cv/">cv</a>
-</nav></header>
+<div class="layout">
+<aside class="side">
+  <a href="../../"><img class="avatar" src="../../assets/img/photo.jpg" alt="Chunxiao Lin"></a>
+  <div class="who"><a href="../../" class="nm">Chunxiao (Calvin) Lin</a>
+    <div class="role">Ph.D. student, Computer Engineering<br>Virginia Tech</div></div>
+  <nav class="snav">
+    <a class="" href="../../">About</a>
+    <a class="on" href="../../projects/">Projects</a>
+    <a class="" href="../../publications/">Publications</a>
+    <a class="" href="../../cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="https://www.yangyi.ece.vt.edu/">Advisor: Prof. Yang (Cindy) Yi</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a></li>
+    <li><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="../../files/CV_Chunxiao_Lin.pdf" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+</aside>
 <main>
-<p class="crumb"><a href="../../projects/">← Projects</a></p>
+
+
+<p class="crumb"><a href="../../projects/">← All projects</a></p>
 <h1 class="page">Hybrid DSP–CLB reservoir neuron</h1>
 <div class="pmeta big"><span class="ptag">ICNC'26</span><span class="per">2024 – 2025</span></div>
-<div class="detail">
-  <div>
-    <p class="lead">Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, so the DSPs never sit idle; a range-addressable tanh keeps the activation cheap.</p>
-    <div class="kpis"><div class="kpi"><b>0.97 µs</b><span>per prediction for a full ESN (64, 8, 64)</span></div><div class="kpi"><b>+25%</b><span>DSP efficiency vs. the DSP-only MAC (72×72 MVM)</span></div><div class="kpi"><b>5.7–14.2 dB</b><span>lower NMSE than the AR predictor</span></div></div>
-    <ul><li>Range-addressable LUT tanh: interpolation where tanh bends, ±1 in saturation; the DSP is clock-gated above the threshold and the table BRAM drops by 25%.</li><li>13% less processing time than the DSP-only MAC on a 72×72 matrix–vector product.</li></ul>
+<p class="ovw">MIMO channels change quickly with user mobility, so channel state information must be predicted ahead of time, and the predictor has to keep up in real time on modest hardware. This paper uses a small Echo State Network (ESN) to predict 2×2 MIMO channels 20 symbols ahead and implements its inference on a Virtex-7 FPGA with an optimized reservoir neuron.</p>
+<div class="kpis"><div class="kpi"><b>65.98M</b><span>input samples per second</span></div><div class="kpi"><b>97 cycles</b><span>ESN inference latency at 100 MHz</span></div><div class="kpi"><b>81.1 MOPS/DSP</b><span>DSP efficiency (vs. 65.0 baseline)</span></div><div class="kpi"><b>25%</b><span>less BRAM for tanh</span></div></div>
+
+
+
+  
+  
+  
+  <h2>Design</h2>
+  <div class="sec">
+    <h3>ESN channel predictor</h3><p>Channel coefficients for 2 transmit antennas, 2 receive antennas and 8 subcarriers are split into real and imaginary parts, giving 64 input and 64 output features. An 8-neuron reservoir (spectral radius 0.7, sparsity 0.8) maps the current symbol's channel to the channel 20 symbols later, trained on NS-3 3GPP V2V urban channels.</p><h3>MAC_DA reservoir neuron</h3><p>Each neuron computes its input and recurrent products as one multiply-accumulate over the concatenated vector {x; r}. Nine DSP slices work in parallel, and their partial sums are merged by a fast adder tree of four carry-save/carry-lookahead blocks, so a neuron finishes in ⌈(Ni+Nr)/9⌉+2 cycles. Because the reservoir is small, one MAC_DA per neuron is affordable.</p><h3>RALUT-based tanh</h3><p>The tanh activation works on |s| (sign restored at the end) and truncates the input to [0, 8]. LUTs of intercepts and slopes feed a DSP that performs linear interpolation; above a threshold the DSP is bypassed and the intercept is used directly. This range-addressable LUT replaces two 256-entry BRAMs with three 128-entry ones, a 25% BRAM saving.</p>
+    <div class="figs one"><figure><img src="../../assets/img/proj/hybrid-neuron_1.png" alt="" loading="lazy"><figcaption>Reservoir neuron: the nine-DSP MAC_DA with its CSA/CLA adder tree, followed by the RALUT-based tanh.</figcaption></figure></div>
+    
   </div>
-  <div class="pimg"><img src="../../assets/img/pubs/icnc_neuron.png" alt=""></div>
-</div>
+  
+
+  
+  
+  
+  <h2>Results</h2>
+  <div class="sec">
+    <ul class="res"><li>On a 72×72 matrix-vector product, MAC_DA raises DSP efficiency from 65.0 to 81.1 MOPS/DSP and cuts processing time from 1040 ns to 900 ns (13.5%) compared with an earlier DSP-only MAC design, at the cost of more LUTs (25016 vs 9176), FFs (13688 vs 328) and power (0.253 W vs 0.183 W).</li><li>At 100 MHz the full ESN inference takes 97 clock cycles and processes 65.98M input samples/s, reported as 527% faster than the earlier ESN design.</li><li>The complete 64-input/64-output system uses 20127 LUTs (6.63%), 2927 FFs (0.48%), 40 BRAMs (3.88%) and 152 DSPs (5.43%) of the Virtex-7 VC707.</li><li>At medium mobility (10 km/h), both the software and the FPGA ESN have lower NMSE than an order-20 AR predictor at every SNR from 0 to 20 dB; the FPGA ESN trails the software ESN slightly at low SNR, with the gap widening at high SNR.</li><li>Across 5, 10 and 20 km/h mobility, the FPGA ESN beats the AR predictor in every case over the full 0–20 dB SNR range.</li></ul>
+    
+    <div class="figs"><figure><img src="../../assets/img/proj/hybrid-neuron_2.png" alt="" loading="lazy"><figcaption>Resource use, DSP efficiency, power and processing time of MAC_DA versus the baseline MAC on a 72×72 matrix-vector product.</figcaption></figure><figure><img src="../../assets/img/proj/hybrid-neuron_3.png" alt="" loading="lazy"><figcaption>NMSE versus SNR at medium mobility for the software ESN, the FPGA ESN and the AR predictor.</figcaption></figure><figure><img src="../../assets/img/proj/hybrid-neuron_4.png" alt="" loading="lazy"><figcaption>NMSE versus SNR of the FPGA ESN and the AR predictor at low, medium and high mobility.</figcaption></figure></div>
+    
+  </div>
+  
 
 
-<h2>Publications</h2>
+
+<h2>Publication</h2>
 
 <div class="pub" id="lin2026icnc">
   <div class="pub-l"><span class="badge">ICNC</span><img src="../../assets/img/pubs/icnc_neuron.png" alt=""></div>
@@ -37,24 +73,15 @@
     <div class="t">FPGA-based High-speed Reservoir Computing for MIMO Channel Prediction</div>
     <div class="a"><em>Chunxiao Lin</em>, Ummay Sumaya Khan, Lingjia Liu, Yang Yi</div>
     <div class="v">International Conference on Computing, Networking and Communications (ICNC), pp. 465–470, 2026</div>
-    <div class="s">A hybrid DSP–CLB reservoir neuron and a range-addressable tanh for high-speed ESN inference.</div>
-    <div class="btns"><a class="btn" href="https://doi.org/10.1109/ICNC68183.2026.11417007">DOI</a><a class="btn" href="#" data-bib="bib-lin2026icnc">BIB</a></div>
-    <pre class="bib" id="bib-lin2026icnc" hidden>@inproceedings{lin2026icnc,
-  title = {FPGA-based High-speed Reservoir Computing for MIMO Channel Prediction},
-  author = {Lin, Chunxiao and Khan, Ummay Sumaya and Liu, Lingjia and Yi, Yang},
-  booktitle = {International Conference on Computing, Networking and Communications (ICNC)},
-  pages = {465--470},
-  year = {2026},
-  doi = {10.1109/ICNC68183.2026.11417007}
-}</pre>
+    <div class="s">An FPGA Echo State Network for MIMO channel prediction whose nine-DSP MAC_DA neurons and range-addressable tanh LUT reach 65.98M samples/s and beat an autoregressive predictor at all tested mobilities.</div>
+    <div class="btns"><a class="btn" href="../../files/2026_ICNC.pdf">PDF</a><a class="btn" href="https://doi.org/10.1109/ICNC68183.2026.11417007">Publisher</a></div>
   </div>
 </div>
 
-</main>
-<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));

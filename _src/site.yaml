@@ -10,6 +10,10 @@ email: chunxiaol@vt.edu
 scholar: https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en
 github: https://github.com/Chunxiao-Lin-2023
 photo: photo.jpg
+role: Ph.D. student, Computer Engineering<br>Virginia Tech
+lab: "Advisor: Prof. Yang (Cindy) Yi"
+lab_url: https://www.yangyi.ece.vt.edu/
+cv_pdf: CV_Chunxiao_Lin.pdf
 url: https://chunxiao-lin-2023.github.io
 
 about: |
@@ -53,7 +57,6 @@ project_groups:
     period: 2024 – 2026
     tag: TCAD'26
     img: tcad_overall.png
-    highlight: true
     text: 'A complete echo state network on one FPGA: inference and recursive-least-squares (RLS) training share
       the same DSP arrays, so the channel predictor retrains itself on chip.'
     kpis:
@@ -71,12 +74,12 @@ project_groups:
       size L.'
     pubs:
     - lin2026tcad
+    highlight: true
   - id: hybrid-neuron
     title: Hybrid DSP–CLB reservoir neuron
     period: 2024 – 2025
     tag: ICNC'26
     img: icnc_neuron.png
-    highlight: true
     text: Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, so the DSPs
       never sit idle; a range-addressable tanh keeps the activation cheap.
     kpis:
@@ -92,6 +95,7 @@ project_groups:
     - 13% less processing time than the DSP-only MAC on a 72×72 matrix–vector product.
     pubs:
     - lin2026icnc
+    highlight: true
   - id: bit-serial
     title: Bit-serial reservoir neuron
     period: 2021 – 2022
@@ -104,6 +108,7 @@ project_groups:
     - Much lower resource utilization than earlier hardware ESNs at comparable accuracy.
     pubs:
     - lin2022isqed
+    highlight: true
   - id: hwsw
     title: Hardware–software co-design of an on-chip ESN
     period: 2025
@@ -175,7 +180,6 @@ project_groups:
       count.
     pubs:
     - lin2024frontiers
-    highlight: true
 - name: Neuromorphic and spiking computing
   blurb: Collaborations on spiking reservoirs and neuromorphic chips.
   projects:
@@ -268,9 +272,16 @@ project_groups:
     - An ns-3 NTN setup with 10 ground users and 93 satellite base stations.
 live_demo:
   project: testbeds
-  title: 'Live demo: real-time channel prediction on FPGA'
-  text: A distributed MIMO link runs through a radio channel emulator, and an FPGA reservoir-computing accelerator
-    predicts each user's channel frame by frame over 10 Gb/s Ethernet, live.
+  title: Real-time channel prediction on an FPGA
+  text: >-
+    A base station and its users must know the radio channel, which is how the signal is distorted on the way.
+    When users move, that knowledge goes stale within milliseconds. Here an FPGA accelerator learns how the
+    channel changes and predicts the next one, live, for two users at once.
+  explain:
+    - {h: "Left: what the receiver measures", p: "The live channel of every antenna pair of the two users, about 1,250 new measurements per second per user."}
+    - {h: "Middle: how good the prediction is", p: "Prediction error of the FPGA (blue) against simply reusing the last measurement (orange). Lower is better; blue stays below orange."}
+    - {h: "Right: how fast", p: "Time from a new measurement to the prediction arriving back at the PC (green), under one millisecond, and the FPGA's own share (grey)."}
+  fig_cap: "The setup: a 4-antenna base station and two 2-antenna users are linked through a radio channel emulator; host PCs stream the channel to the FPGA over 10 Gb/s Ethernet."
 
 education:
   - {degree: "Ph.D., Computer Engineering", school: "Virginia Tech", note: "Advisor: Prof. Yang (Cindy) Yi · 2021 – 2027 (expected)"}
@@ -281,3 +292,5 @@ skills:
   - {area: "Languages", items: "Verilog, SystemVerilog, Python, MATLAB, C"}
   - {area: "Tools", items: "Xilinx Vivado, Vitis, Quartus, Cadence, ns-3, PyCharm, Jupyter, CLion"}
   - {area: "Platforms", items: "Xilinx Virtex-7 FPGA, Zynq-7000 SoC FPGA, Zynq UltraScale+ RFSoC, USRP software-defined radios"}
+
+highlight_order: [onchip-rls, hybrid-neuron, sdr-fpga, bit-serial]

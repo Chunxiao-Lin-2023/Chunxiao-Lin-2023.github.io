@@ -1,0 +1,49 @@
+id: surveys
+overview: >-
+  Reservoir computing trains only a linear readout on top of a fixed recurrent network, which
+  makes it attractive for low-power hardware and for wireless signal processing. These two papers
+  review echo state network (ESN) and liquid state machine (LSM) theory, benchmark both on chaotic
+  time series including under reservoir quantization, and apply an ESN to MIMO-OFDM channel prediction.
+design:
+  - h: "ESN formulation (both papers)"
+    p: >-
+      A fixed random reservoir of tanh units maps the input into a high-dimensional state, and only
+      the output weights are trained, in closed form by ridge regression. The echo state property is
+      kept by scaling the reservoir's spectral radius; reservoir size, sparsity and input scaling are
+      the main hyperparameters.
+  - h: "LSM pipeline (AI 2026)"
+    p: >-
+      The input is encoded into spike trains (rate plus positive/negative threshold encoding) that
+      drive a sparse reservoir of leaky integrate-and-fire neurons. Spikes are decoded by Gaussian
+      smoothing into continuous states, and a linear readout is trained with Adam on the MSE loss.
+  - h: "Hardware-aware benchmark protocol (AI 2026)"
+    p: >-
+      ESNs (10-200 neurons) and LSMs (100-700 neurons) are compared on the same Mackey-Glass segment
+      (5000/1000 train/test, one-step-ahead) with reservoir weights quantized to 2, 3, 6 and 16 bits.
+      A NARMA-10 benchmark with 6- to 16-bit weights checks that the trends hold on a second task.
+  - h: "ESN benchmark and channel prediction (ICDMW 2025)"
+    p: >-
+      An ESN is swept from 10 to 200 reservoir neurons on Mackey-Glass. It is then applied to a 2x2
+      MIMO-OFDM vehicle-to-vehicle channel generated with NS-3 (3GPP SCM), using the channel at symbol
+      i to predict symbol i+20, and compared with an order-20 autoregressive (AR) predictor.
+results:
+  - "AI 2026: ESN training error drops quickly with reservoir size, but test MSE stops improving beyond about 50-100 neurons and degrades earlier at 2-bit precision, a sign of overfitting."
+  - "AI 2026: LSM training and test MSE keep decreasing from 100 to 700 neurons at every bit width, and the 3-bit LSM closely tracks the 16-bit one; the ESN still reaches lower absolute test MSE."
+  - "AI 2026: at N = 200 the best ridge coefficient is beta = 1e-5 (test MSE 0.000143 at full precision, 0.000154 at 2-bit); tuning beta does not remove the ESN saturation trend."
+  - "AI 2026: NARMA-10 results follow the same ESN-versus-LSM trends as Mackey-Glass."
+  - "ICDMW 2025: in channel prediction, a 20-neuron ESN gives lower NMSE than the order-20 AR predictor at every tested SNR from 0 to 20 dB."
+kpis:
+  - {v: "3-bit", l: "LSM tracks 16-bit accuracy (AI)"}
+  - {v: "0-20 dB", l: "SNR range where ESN beats AR"}
+figures:
+  - {file: surveys_1.png, cap: "AI 2026: LSM pipeline with spike encoding, liquid reservoir, decoding and linear readout.", section: design}
+  - {file: surveys_2.png, cap: "AI 2026: Mackey-Glass test MSE versus reservoir size for the full-precision ESN and the 16-bit and 3-bit LSMs.", section: results}
+  - {file: surveys_3.png, cap: "ICDMW 2025: channel-prediction NMSE versus SNR for the ESN and the AR baseline.", section: results}
+pub_summary:
+  liu2026ai: >-
+    Reviews reservoir computing foundations and benchmarks ESNs against LSMs on Mackey-Glass and
+    NARMA-10 under 2- to 16-bit quantization, finding LSMs scale and tolerate low precision better
+    while ESNs reach lower error.
+  liu2025icdmw: >-
+    Reviews echo state network theory, benchmarks ESN reservoir sizes on Mackey-Glass, and applies a
+    small ESN to MIMO-OFDM channel prediction, where it beats an autoregressive predictor in NMSE.

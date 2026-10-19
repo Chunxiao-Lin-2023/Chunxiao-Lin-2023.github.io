@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,28 +9,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
-  <a class="" href="../../">about</a>
-  <a class="" href="../../publications/">publications</a>
-  <a class="on" href="../../projects/">projects</a>
-  <a class="" href="../../cv/">cv</a>
-</nav></header>
+<div class="layout">
+<aside class="side">
+  <a href="../../"><img class="avatar" src="../../assets/img/photo.jpg" alt="Chunxiao Lin"></a>
+  <div class="who"><a href="../../" class="nm">Chunxiao (Calvin) Lin</a>
+    <div class="role">Ph.D. student, Computer Engineering<br>Virginia Tech</div></div>
+  <nav class="snav">
+    <a class="" href="../../">About</a>
+    <a class="on" href="../../projects/">Projects</a>
+    <a class="" href="../../publications/">Publications</a>
+    <a class="" href="../../cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="https://www.yangyi.ece.vt.edu/">Advisor: Prof. Yang (Cindy) Yi</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a></li>
+    <li><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="../../files/CV_Chunxiao_Lin.pdf" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+</aside>
 <main>
-<p class="crumb"><a href="../../projects/">← Projects</a></p>
+
+
+<p class="crumb"><a href="../../projects/">← All projects</a></p>
 <h1 class="page">Legendre-SNN on Loihi-2</h1>
 <div class="pmeta big"><span class="ptag">TCASAI'26</span><span class="per">2026</span></div>
-<div class="detail noimg">
-  <div>
-    <p class="lead">A multivariate Legendre spiking neural network on Intel's Loihi-2 neuromorphic chip, for time-series classification and 5G jamming detection.</p>
-    
+<p class="ovw">Spiking neural networks are rarely deployed end-to-end on neuromorphic chips, because their non-spiking parts usually stay on an off-chip CPU. This work runs a multivariate reservoir-based Legendre-SNN entirely on Intel Loihi-2, placing the non-spiking reservoir on the on-chip Lakemont core, and evaluates it on 24 time-series datasets including a new 5G pilot-jamming detection set.</p>
+<div class="kpis"><div class="kpi"><b>16.87 mJ</b><span>per-sample energy on Loihi-2</span></div><div class="kpi"><b>> 100x</b><span>less energy than CPU baselines</span></div><div class="kpi"><b>7 of 23</b><span>datasets beating LSTM-FCN on-chip</span></div></div>
+
+
+
+  
+  
+  
+  <h2>Design</h2>
+  <div class="sec">
+    <h3>mv-LSNN model</h3><p>Each of the K input dimensions feeds its own Legendre Delay Network (LDN), a fixed linear reservoir that produces a d-dimensional temporal feature vector. The features are rate-encoded by 2Kd integrate-and-fire neurons, followed by a trainable spiking hidden layer (3Kd CUBA neurons) and c output neurons; the class is the most active output neuron.</p><h3>Quantization for Loihi-2</h3><p>The LDN matrices, states and inputs are scaled by P = 4096 and rounded, so the reservoir and encoder run with 32-bit integer operations. The hidden and output layers are rebuilt with Loihi-2's CUBA neurons.</p><h3>On-chip mapping with Lava</h3><p>The model is split into four Lava Processes. The reservoir and encoder run as C code on a Lakemont (LMT) x86 core, the spiking layers on Neuro-Cores, and only the input feed and class readout stay on the host CPU. The paper documents how to program the LMT core, which has little official documentation.</p><h3>Training and evaluation flow</h3><p>The spiking layers are trained on CPU/GPU with lava-dl (SLAYER, spike-rate loss, Adam) and converted with netx. Accuracy is reported on CPU/GPU, on the Loihi-2 simulator and on the physical Kapoho Point board.</p><h3>5G WirelessJamming dataset</h3><p>A 2x2 MIMO 5G NR link over a CDL channel is simulated, with a jammer that corrupts only the pilot symbols at jammer Eb/N0 from 0 to 5 dB. The released dataset has 1000 clean and 1000 jammed signals of 1016 time steps each, split 60/40 into train and test.</p>
+    <div class="figs"><figure><img src="../../assets/img/proj/loihi_1.png" alt="" loading="lazy"><figcaption>mv-LSNN: one LDN per input dimension, two-neuron spike encoding, a spiking hidden layer and a class output layer.</figcaption></figure><figure><img src="../../assets/img/proj/loihi_2.png" alt="" loading="lazy"><figcaption>Mapping on Loihi-2: reservoir and encoder on the Lakemont core, spiking layers on Neuro-Cores, I/O on the host CPU.</figcaption></figure></div>
     
   </div>
   
-</div>
+
+  
+  
+  
+  <h2>Results</h2>
+  <div class="sec">
+    <ul class="res"><li>On 23 TSC datasets, mv-LSNN on physical Loihi-2 beats LSTM-FCN (on GPU) on 7; on CPU/GPU or the Loihi-2 simulator it beats it on at least 8.</li><li>Jamming detection on physical Loihi-2 reaches 73.25% (0 dB) to 87.63% (5 dB), above the ESN-Dense baseline (70.88% to 86.88%); on CPU/GPU mv-LSNN reaches up to 94.50%.</li><li>Per-sample energy for jamming detection: 16.87 mJ for mv-LSNN on Loihi-2 vs 4030.05 mJ (Dense-ANN), 9126.34 mJ (ESN), 10907.09 mJ (ESN-Dense) and 2037.87 mJ (LSTM-Dense) on an Intel Xeon W-2225 CPU.</li><li>That is more than 200x less energy than Dense-ANN, more than 500x less than ESN and ESN-Dense, and more than 100x less than LSTM-Dense, with 14112 trainable parameters.</li><li>LSTM-Dense remains more accurate (93.63% to 98.88%); higher LDN orders close the gap, but beyond order 12 a 4-dimensional input exceeds the LMT core memory.</li></ul>
+    
+    <div class="figs one"><figure><img src="../../assets/img/proj/loihi_3.png" alt="" loading="lazy"><figcaption>Jamming-detection accuracy (%) at six jammer Eb/N0 levels, mv-LSNN on each backend versus non-spiking benchmark models.</figcaption></figure></div>
+    
+  </div>
+  
 
 
-<h2>Publications</h2>
+
+<h2>Publication</h2>
 
 <div class="pub" id="gaurav2026tcasai">
   <div class="pub-l"><span class="badge">TCASAI</span></div>
@@ -37,25 +73,15 @@
     <div class="t">Multivariate Legendre-SNN on Loihi-2 for Time Series Classification and 5G Jamming Detection</div>
     <div class="a">Ramashish Gaurav, Sujata Sinha, <em>Chunxiao Lin</em>, Terrence C. Stewart, Lingjia Liu, Yang Yi</div>
     <div class="v">IEEE Transactions on Circuits and Systems for Artificial Intelligence (TCASAI), 2026</div>
-    
-    <div class="btns"><a class="btn" href="https://doi.org/10.1109/TCASAI.2026.3658587">DOI</a><a class="btn" href="#" data-bib="bib-gaurav2026tcasai">BIB</a></div>
-    <pre class="bib" id="bib-gaurav2026tcasai" hidden>@article{gaurav2026tcasai,
-  title = {Multivariate Legendre-SNN on Loihi-2 for Time Series Classification and 5G Jamming Detection},
-  author = {Gaurav, Ramashish and Sinha, Sujata and Lin, Chunxiao and Stewart, Terrence C. and Liu, Lingjia and Yi, Yang},
-  journal = {IEEE Transactions on Circuits and Systems for Artificial Intelligence (TCASAI)},
-  volume = {3},
-  number = {4},
-  year = {2026},
-  doi = {10.1109/TCASAI.2026.3658587}
-}</pre>
+    <div class="s">Deploys a multivariate Legendre-SNN entirely on Loihi-2 by running its reservoir on the on-chip Lakemont core, evaluating 24 time-series datasets and 5G jamming detection at 16.87 mJ per sample.</div>
+    <div class="btns"><a class="btn" href="../../files/2026_TCASAI.pdf">PDF</a><a class="btn" href="https://doi.org/10.1109/TCASAI.2026.3658587">Publisher</a></div>
   </div>
 </div>
 
-</main>
-<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));

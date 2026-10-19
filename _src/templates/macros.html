@@ -8,23 +8,23 @@
     <div class="t">{{ p.title_h }}</div>
     <div class="a">{{ p.authors_h }}</div>
     <div class="v">{{ p.venue_h }}, {{ p.year }}{% if p.status %} <span class="tagacc">{{ p.status }}</span>{% endif %}</div>
-    {% if p.summary %}<div class="s">{{ p.summary|replace('--','–') }}</div>{% endif %}
-    <div class="btns">{{ links(p, root) }}</div>
-    <pre class="bib" id="bib-{{ p.key }}" hidden>{{ p.bib }}</pre>
+    {% if p.one_line %}<div class="s">{{ p.one_line }}</div>{% endif %}
+    <div class="btns">{% if p.pdf_url %}<a class="btn" href="{{ p.pdf_url if p.pdf_url.startswith('http') else root ~ p.pdf_url[1:] }}">PDF</a>{% endif %}{% if p.doi_url %}<a class="btn" href="{{ p.doi_url }}">Publisher</a>{% endif %}</div>
   </div>
 </div>
 {% endmacro %}
 
-{# compact entry: key information only (publications page) #}
+{# compact entry: key information + one-line summary (publications page) #}
+{% macro pdfurl(p, root) %}{{ p.pdf_url if p.pdf_url.startswith('http') else root ~ p.pdf_url[1:] }}{% endmacro %}
 {% macro pubrow(p, root) %}
 <div class="prow" id="{{ p.key }}">
   <span class="badge">{{ p.abbr }}</span>
   <div>
-    <div class="t">{% if p.news %}<span class="new">New</span>{% endif %}{{ p.title_h }}</div>
+    <div class="t">{% if p.news %}<span class="new">New</span>{% endif %}{% if p.pdf_url %}<a href="{{ pdfurl(p, root) }}">{{ p.title_h }}</a>{% elif p.doi_url %}<a href="{{ p.doi_url }}">{{ p.title_h }}</a>{% else %}{{ p.title_h }}{% endif %}</div>
     <div class="a">{{ p.authors_h }}</div>
     <div class="v">{{ p.venue_h }}, {{ p.year }}{% if p.status %} <span class="tagacc">{{ p.status }}</span>{% endif %}</div>
-    <div class="btns">{{ links(p, root) }}{% if p.project and p.project.has_page %}<a class="btn proj-btn" href="{{ root }}projects/{{ p.project.id }}/">Project</a>{% endif %}</div>
-    <pre class="bib" id="bib-{{ p.key }}" hidden>{{ p.bib }}</pre>
+    {% if p.one_line %}<div class="s">{{ p.one_line }}</div>{% endif %}
+    <div class="btns">{% if p.pdf_url %}<a class="btn" href="{{ pdfurl(p, root) }}">PDF</a>{% endif %}{% if p.project and p.project.has_page %}<a class="btn proj-btn" href="{{ root }}projects/{{ p.project.id }}/">Project page</a>{% endif %}</div>
   </div>
 </div>
 {% endmacro %}

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,28 +9,74 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
-  <a class="" href="../../">about</a>
-  <a class="" href="../../publications/">publications</a>
-  <a class="on" href="../../projects/">projects</a>
-  <a class="" href="../../cv/">cv</a>
-</nav></header>
+<div class="layout">
+<aside class="side">
+  <a href="../../"><img class="avatar" src="../../assets/img/photo.jpg" alt="Chunxiao Lin"></a>
+  <div class="who"><a href="../../" class="nm">Chunxiao (Calvin) Lin</a>
+    <div class="role">Ph.D. student, Computer Engineering<br>Virginia Tech</div></div>
+  <nav class="snav">
+    <a class="" href="../../">About</a>
+    <a class="on" href="../../projects/">Projects</a>
+    <a class="" href="../../publications/">Publications</a>
+    <a class="" href="../../cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="https://www.yangyi.ece.vt.edu/">Advisor: Prof. Yang (Cindy) Yi</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a></li>
+    <li><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="../../files/CV_Chunxiao_Lin.pdf" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+</aside>
 <main>
-<p class="crumb"><a href="../../projects/">← Projects</a></p>
+
+
+<p class="crumb"><a href="../../projects/">← All projects</a></p>
 <h1 class="page">On-chip RLS learning for MIMO channel prediction</h1>
 <div class="pmeta big"><span class="ptag">TCAD'26</span><span class="per">2024 – 2026</span></div>
-<div class="detail">
-  <div>
-    <p class="lead">A complete echo state network on one FPGA: inference and recursive-least-squares (RLS) training share the same DSP arrays, so the channel predictor retrains itself on chip.</p>
-    <div class="kpis"><div class="kpi"><b>3.87 µs</b><span>per training + prediction step (Virtex-7, 100 MHz)</span></div><div class="kpi"><b>5.3×</b><span>lower NMSE than the prior on-chip ESN learner</span></div><div class="kpi"><b>>1600×</b><span>energy efficiency vs. a CPU (290× vs. a GPU)</span></div><div class="kpi"><b>264 Mb/s</b><span>on 64-dimensional channel data</span></div></div>
-    <ul><li>An output-stationary systolic array computes the readout, about one MAC per DSP per cycle.</li><li>A three-stage pipelined RLS update takes 2L+4 cycles: O(L²) work, but time grows only linearly with the state size L.</li></ul>
+<p class="ovw">MIMO channel prediction needs a model that keeps learning from fresh pilot data within a fraction of a millisecond, but prior Echo State Network (ESN) work ran on CPUs/GPUs or put only inference on an FPGA. This work builds a complete ESN on a Virtex-7 FPGA in which both inference and recursive-least-squares (RLS) training run on chip in 16-bit fixed point, validated on a real-time PC-FPGA testbed.</p>
+<div class="kpis"><div class="kpi"><b>3.87 µs</b><span>per training + inference step</span></div><div class="kpi"><b>>1600×</b><span>energy efficiency vs. CPU</span></div><div class="kpi"><b>290×</b><span>energy efficiency vs. GPU</span></div><div class="kpi"><b>0.025 ms</b><span>to process one full subframe</span></div></div>
+
+
+
+  
+  
+  
+  <h2>Design</h2>
+  <div class="sec">
+    <h3>Reservoir layer (MAC_DA + RALUT tanh)</h3><p>Each reservoir neuron fuses its input and recurrent products into one multiply-accumulate over the concatenated vector {x; r}. A MAC_DA unit runs nine DSP48E1 slices in parallel and merges their partial sums with a carry-save/carry-lookahead adder tree, finishing in ⌈(Ni+Nr)/9⌉+2 cycles. The tanh uses a 256-entry LUT with DSP-based linear interpolation that is bypassed in the flat high-input region to save dynamic power.</p><h3>Output layer (DSP_SA systolic array)</h3><p>The 64-output readout is a matrix-vector product handled by DSP_SA, a 1-D systolic array of cascaded DSP48E1 slices that passes the state vector from DSP to DSP. An N-DSP array finishes an (N×M)·(M×1) product in N+M+1 cycles with every DSP busy; the output weights are split across banked BRAMs and eight-DSP arrays run in parallel.</p><h3>Inversion-free RLS training block</h3><p>The RLS update is split into an output-weight module (Kalman gain and weight update) and a covariance-matrix module, each with its own DSP_SA for the large matrix-vector products, while MAC_DA is reused for the inner product. Division is replaced by a leading-one-detector reciprocal LUT with a barrel shifter, and division by the fixed forgetting factor λ = 0.999 by a shift-and-add.</p><h3>Pipelining and fixed-point design</h3><p>A three-stage pipeline (gain element, parallel weight/covariance MACs, shift-and-add) updates both W_out and Φ in 2(Ni+Nr)+4 cycles. Every variable has a Q-format chosen from floating-point range analysis, and inference and per-sample training latency both grow linearly with the state size L = Ni+Nr even though the RLS arithmetic is quadratic.</p>
+    <div class="figs"><figure><img src="../../assets/img/proj/onchip-rls_1.png" alt="" loading="lazy"><figcaption>Overall on-chip ESN: MAC_DA reservoir neurons with RALUT tanh, the DSP_SA output layer, and the RLS training block.</figcaption></figure><figure><img src="../../assets/img/proj/onchip-rls_2.png" alt="" loading="lazy"><figcaption>RLS training block, split into the output-weight update and the covariance-matrix (Φ) update paths.</figcaption></figure></div>
+    
   </div>
-  <div class="pimg"><img src="../../assets/img/pubs/tcad_overall.png" alt=""></div>
-</div>
+  
+
+  
+  
+  
+  <h2>Real-world setup</h2>
+  <div class="sec">
+    <p>The design was validated on a real-time testbed: a host PC streams training and test data to the Virtex-7 FPGA over Ethernet and receives the predictions back.</p>
+    <div class="figs one"><figure><img src="../../assets/img/proj/onchip-rls_testbed.jpg" alt="" loading="lazy"><figcaption>Real-time PC–FPGA testbed with the Virtex-7 board.</figcaption></figure></div>
+    
+  </div>
+  
+
+  
+  
+  
+  <h2>Results</h2>
+  <div class="sec">
+    <ul class="res"><li>One full training-plus-inference step takes 3.87 µs at 100 MHz (inference alone 0.97 µs, 65.98M samples/s); a 14-symbol subframe (4 training pilots + 10 predictions) takes 0.025 ms, within the sub-millisecond Next-G budget.</li><li>Energy efficiency is 213.94 Mb/s/W (264 Mb/s at 1.234 W), versus 0.13 for an Intel Xeon W-2225 CPU and 0.73 for an NVIDIA RTX A2000 GPU running the same ESN with RLS: more than 1600× and 290× higher.</li><li>Against prior FPGA ESNs with on-chip training, area efficiency is 17× and energy efficiency more than 1700× that of the pseudo-inverse design of Galán-Prado et al.; area efficiency is 2.6× below a ridge-regression design that handles only a (1, 16, 1) ESN with 1-bit data.</li><li>On a 72×72 matrix-vector product, DSP_SA reaches 12.71 GOPS in 0.81 µs with the highest area efficiency (0.508 GOPS/kNRC), 2.66× and 1.52× better than two prior FPGA MAC designs; its DSP efficiency is 88.9 MOPS/DSP versus 65.0 for the earlier DSP-only MAC.</li><li>For 2×2 MIMO-OFDM channel prediction (NS-3 3GPP V2V urban channel, 10 km/h, 20-symbol horizon), the FPGA ESN beats AR, MLP, CNN and GRU at every SNR from 0 to 20 dB; its gap to the floating-point CPU/GPU ESN is about 2.0–2.3 dB at 0–4 dB SNR and grows to 12.9 dB at 20 dB due to fixed-point effects.</li><li>On Mackey-Glass prediction the hardware NMSE is 0.048 (simulation 0.043), versus 0.256 for the only other FPGA ESN in the comparison with on-chip training.</li><li>Resource cost (NRC) and power scale near-linearly when Ni = No is swept from 16 to 256 and Nr from 8 to 64.</li></ul>
+    
+    <div class="figs"><figure><img src="../../assets/img/proj/onchip-rls_3.png" alt="" loading="lazy"><figcaption>NMSE versus SNR for AR, MLP, CNN, GRU and the CPU, GPU and FPGA ESN channel predictors.</figcaption></figure><figure><img src="../../assets/img/proj/onchip-rls_4.png" alt="" loading="lazy"><figcaption>Throughput, power and energy efficiency of the FPGA design against CPU and GPU baselines running the same ESN with RLS.</figcaption></figure></div>
+    
+  </div>
+  
 
 
-<h2>Publications</h2>
+
+<h2>Publication</h2>
 
 <div class="pub" id="lin2026tcad">
   <div class="pub-l"><span class="badge">TCAD</span><img src="../../assets/img/pubs/tcad_overall.png" alt=""></div>
@@ -37,23 +84,15 @@
     <div class="t">FPGA-based Reservoir Computing with On-chip Learning for MIMO Channel Prediction</div>
     <div class="a"><em>Chunxiao Lin</em>, Ummay Sumaya Khan, Meiyu Zheng, Muhammad Farhan Azmine, Lingjia Liu, Daniel J. Jakubisin, Yang Yi</div>
     <div class="v">IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD), 2026</div>
-    <div class="s">A complete on-chip ESN system on FPGA, with inference and RLS training on the same chip, for MIMO channel prediction.</div>
-    <div class="btns"><a class="btn" href="https://doi.org/10.1109/TCAD.2026.3715776">DOI</a><a class="btn" href="#" data-bib="bib-lin2026tcad">BIB</a></div>
-    <pre class="bib" id="bib-lin2026tcad" hidden>@article{lin2026tcad,
-  title = {FPGA-based Reservoir Computing with On-chip Learning for MIMO Channel Prediction},
-  author = {Lin, Chunxiao and Khan, Ummay Sumaya and Zheng, Meiyu and Azmine, Muhammad Farhan and Liu, Lingjia and Jakubisin, Daniel J. and Yi, Yang},
-  journal = {IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)},
-  year = {2026},
-  doi = {10.1109/TCAD.2026.3715776}
-}</pre>
+    <div class="s">First FPGA architecture for RLS-based on-chip ESN learning, applied to MIMO channel prediction: a training-plus-inference step takes 3.87 µs, with over 1600× and 290× the energy efficiency of CPU and GPU.</div>
+    <div class="btns"><a class="btn" href="../../files/2026_TCAD.pdf">PDF</a><a class="btn" href="https://doi.org/10.1109/TCAD.2026.3715776">Publisher</a></div>
   </div>
 </div>
 
-</main>
-<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));

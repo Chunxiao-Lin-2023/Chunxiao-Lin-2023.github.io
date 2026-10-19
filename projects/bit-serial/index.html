@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,28 +9,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
-  <a class="" href="../../">about</a>
-  <a class="" href="../../publications/">publications</a>
-  <a class="on" href="../../projects/">projects</a>
-  <a class="" href="../../cv/">cv</a>
-</nav></header>
+<div class="layout">
+<aside class="side">
+  <a href="../../"><img class="avatar" src="../../assets/img/photo.jpg" alt="Chunxiao Lin"></a>
+  <div class="who"><a href="../../" class="nm">Chunxiao (Calvin) Lin</a>
+    <div class="role">Ph.D. student, Computer Engineering<br>Virginia Tech</div></div>
+  <nav class="snav">
+    <a class="" href="../../">About</a>
+    <a class="on" href="../../projects/">Projects</a>
+    <a class="" href="../../publications/">Publications</a>
+    <a class="" href="../../cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="https://www.yangyi.ece.vt.edu/">Advisor: Prof. Yang (Cindy) Yi</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a></li>
+    <li><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="../../files/CV_Chunxiao_Lin.pdf" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+</aside>
 <main>
-<p class="crumb"><a href="../../projects/">← Projects</a></p>
+
+
+<p class="crumb"><a href="../../projects/">← All projects</a></p>
 <h1 class="page">Bit-serial reservoir neuron</h1>
 <div class="pmeta big"><span class="ptag">ISQED'22</span><span class="per">2021 – 2022</span></div>
-<div class="detail">
-  <div>
-    <p class="lead">A low-cost reservoir neuron that hard-wires the fixed, sparse ESN weights into a bit-serial multiplier, with canonical-signed-digit encoding and an optimized tanh.</p>
+<p class="ovw">Updating the reservoir states of an echo state network (ESN) is dominated by multiply-accumulate operations with a large, sparse, fixed weight matrix, which costs many DSP blocks and LUTs on an FPGA. This work builds a reservoir-node architecture that replaces DSP-based multipliers with bit-serial logic hard-wired to the fixed weights, plus a simplified tanh activation, and applies it to an ESN for OFDM symbol detection.</p>
+<div class="kpis"><div class="kpi"><b>80.7%</b><span>fewer LUTs than DSP-based ESN</span></div><div class="kpi"><b>162 → 16</b><span>DSP blocks</span></div><div class="kpi"><b>12 → 0</b><span>BRAM blocks</span></div></div>
+
+
+
+  
+  
+  
+  <h2>Design</h2>
+  <div class="sec">
+    <h3>Bit-serial building blocks</h3><p>The basic unit is a bit-serial adder: a full adder, a D flip-flop holding the carry, and shift registers for the two operands and the sum; a subtractor is obtained by inverting one operand and setting the initial carry to 1. Bit products are formed with AND gates and summed by a tree of bit-serial adders, built from LUTs and registers rather than the FPGA's DSP blocks.</p><h3>Constant propagation of fixed, sparse weights</h3><p>Because ESN weights never change, each weight bit is a constant in the multi-bit by single-bit multiplier. Where a weight bit is 1, the AND gate is removed and the input shift register feeds the adder directly; where it is 0, the adder is replaced by a D flip-flop, so zero weights and zero bits cost almost no logic.</p><h3>Multi-bit and vector-matrix multiplier</h3><p>Multi-bit weights are handled by one multi-single multiplier per weight bit, chained through bit-serial adders with a one-clock offset so each partial product is automatically weighted by its bit position. One such multiplier per row of the extended weight matrix produces all reservoir pre-activations in parallel.</p><h3>Canonical signed digit (CSD) weights</h3><p>Weights are recoded into CSD form (digits 1, 0, -1), which minimises the number of non-zero digits, e.g. 11110 becomes 100000 - 000010. Each CSD number is split into two unsigned numbers whose products are subtracted, which also lets the unsigned-weight multiplier handle signed weights.</p><h3>Simplified tanh activation</h3><p>A hyperbolic tangent activation is kept for accuracy on OFDM symbol detection, but it is realised with simple DSP units instead of the large DSP groups used in the earlier DSP-based ESN design.</p>
+    <div class="figs"><figure><img src="../../assets/img/proj/bit-serial_1.png" alt="" loading="lazy"><figcaption>Vector-matrix multiplier: one row of bit-serial multi-single multipliers per reservoir node, chained by bit-serial adders across weight bits.</figcaption></figure><figure><img src="../../assets/img/proj/bit-serial_2.png" alt="" loading="lazy"><figcaption>Constant propagation with fixed weight bits: a 1 removes the AND gate, a 0 replaces the adder with a D flip-flop.</figcaption></figure></div>
     
-    <ul><li>Zero weights and zero bits cost no logic; a known 1-bit operand reduces the multiplier to wiring.</li><li>Much lower resource utilization than earlier hardware ESNs at comparable accuracy.</li></ul>
   </div>
-  <div class="pimg"><img src="../../assets/img/pubs/isqed_arch.png" alt=""></div>
-</div>
+  
+
+  
+  
+  
+  <h2>Results</h2>
+  <div class="sec">
+    <ul class="res"><li>LUTs reduced from 11,011 to 2,133 (80.7% lower, as reported) versus the prior DSP-based ESN, both synthesised for the Virtex-7 VC707.</li><li>DSP blocks reduced from 162 to 16 and BRAM from 12 to 0 versus the DSP-based ESN.</li><li>Flip-flops reduced from 7,001 to 5,978 (14.8% lower, as reported).</li><li>Throughput of 64 bits per 0.83 µs versus 64 bits per 0.46 µs for the DSP-based design, a 44.5% throughput loss accepted for the hardware savings.</li><li>The bit-serial vector-matrix multiplier delivers its result after 44 clock cycles, set by the input and weight bit widths and the input vector length.</li><li>Evaluated on an ESN with 4 inputs, 16 reservoir nodes and 2 outputs for OFDM symbol detection, written in SystemVerilog and synthesised with Vivado 2019.1.3.</li></ul>
+    
+    <div class="figs one"><figure><img src="../../assets/img/proj/bit-serial_3.png" alt="" loading="lazy"><figcaption>Resource utilization of the DSP-based ESN versus the ESN with the proposed reservoir nodes on the Virtex-7 VC707.</figcaption></figure></div>
+    
+  </div>
+  
 
 
-<h2>Publications</h2>
+
+<h2>Publication</h2>
 
 <div class="pub" id="lin2022isqed">
   <div class="pub-l"><span class="badge">ISQED</span><img src="../../assets/img/pubs/isqed_arch.png" alt=""></div>
@@ -37,23 +73,15 @@
     <div class="t">FPGA-based Reservoir Computing with Optimized Reservoir Node Architecture</div>
     <div class="a"><em>Chunxiao Lin</em>, Yibin Liang, Yang Yi</div>
     <div class="v">International Symposium on Quality Electronic Design (ISQED), 2022</div>
-    
-    <div class="btns"><a class="btn" href="https://doi.org/10.1109/ISQED54688.2022.9806247">DOI</a><a class="btn" href="../../files/02_ISQED_2022.pdf">PDF</a><a class="btn" href="#" data-bib="bib-lin2022isqed">BIB</a></div>
-    <pre class="bib" id="bib-lin2022isqed" hidden>@inproceedings{lin2022isqed,
-  title = {FPGA-based Reservoir Computing with Optimized Reservoir Node Architecture},
-  author = {Lin, Chunxiao and Liang, Yibin and Yi, Yang},
-  booktitle = {International Symposium on Quality Electronic Design (ISQED)},
-  year = {2022},
-  doi = {10.1109/ISQED54688.2022.9806247}
-}</pre>
+    <div class="s">Proposes an FPGA reservoir-node architecture using bit-serial multipliers hard-wired to fixed sparse weights, CSD weight encoding and a simplified tanh, cutting LUTs by 80.7% and DSPs from 162 to 16 versus a DSP-based ESN.</div>
+    <div class="btns"><a class="btn" href="../../files/02_ISQED_2022.pdf">PDF</a><a class="btn" href="https://doi.org/10.1109/ISQED54688.2022.9806247">Publisher</a></div>
   </div>
 </div>
 
-</main>
-<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));

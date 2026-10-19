@@ -80,6 +80,8 @@ def load():
         p['pdf_url'] = (pdf if pdf and pdf.startswith('http') else ('/files/' + pdf if pdf else None))
         p['doi_url'] = 'https://doi.org/' + p['doi'] if p.get('doi') else None
         p['bib'] = bibtex_clean(p)
+        if p.get('oneline'):
+            p['one_line'] = p['oneline']
     pubs.sort(key=lambda p: -int(p['year']))
     bykey = {p['key']: p for p in pubs}
     site['all_projects'] = []
@@ -90,7 +92,25 @@ def load():
                 p['project'] = pr
             pr['has_page'] = bool(pr.get('img') or pr.get('points') or pr.get('kpis') or pr.get('pubs') or pr.get('videos'))
             site['all_projects'].append(pr)
-    site['highlights'] = [pr for pr in site['all_projects'] if pr.get('highlight')]
+    byid = {pr['id']: pr for pr in site['all_projects']}
+    # per-project detail pages live in _src/projects/<id>.yaml
+    for pr in site['all_projects']:
+        f = os.path.join(SRC, 'projects', pr['id'] + '.yaml')
+        if os.path.exists(f):
+            det = yaml.safe_load(open(f, encoding='utf-8'))
+            pr['detail'] = det
+            if det.get('kpis'):
+                pr['kpis'] = det['kpis']
+            ps = det.get('pub_summary')
+            if isinstance(ps, str) and pr.get('pubs'):
+                ps = {pr['pubs'][0]: ps}
+            for k, v in (ps or {}).items():
+                if k in bykey:
+                    bykey[k]['one_line'] = v
+            if det.get('figures') and not pr.get('img'):
+                pr['img'] = '../proj/' + det['figures'][0]['file']
+            pr['has_page'] = True
+    site['highlights'] = [byid[i] for i in site['highlight_order']]
     site['demo'] = next(pr for pr in site['all_projects'] if pr['id'] == site['live_demo']['project'])
     return site, pubs
 

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,25 +9,52 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
-  <a class="" href="../../">about</a>
-  <a class="" href="../../publications/">publications</a>
-  <a class="on" href="../../projects/">projects</a>
-  <a class="" href="../../cv/">cv</a>
-</nav></header>
+<div class="layout">
+<aside class="side">
+  <a href="../../"><img class="avatar" src="../../assets/img/photo.jpg" alt="Chunxiao Lin"></a>
+  <div class="who"><a href="../../" class="nm">Chunxiao (Calvin) Lin</a>
+    <div class="role">Ph.D. student, Computer Engineering<br>Virginia Tech</div></div>
+  <nav class="snav">
+    <a class="" href="../../">About</a>
+    <a class="on" href="../../projects/">Projects</a>
+    <a class="" href="../../publications/">Publications</a>
+    <a class="" href="../../cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="https://www.yangyi.ece.vt.edu/">Advisor: Prof. Yang (Cindy) Yi</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a></li>
+    <li><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="../../files/CV_Chunxiao_Lin.pdf" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+</aside>
 <main>
-<p class="crumb"><a href="../../projects/">← Projects</a></p>
+
+
+<p class="crumb"><a href="../../projects/">← All projects</a></p>
 <h1 class="page">AI for circuit and system design</h1>
 <div class="pmeta big"><span class="ptag">Springer</span><span class="per">2025</span></div>
-<div class="detail noimg">
-  <div>
-    <p class="lead">Two book chapters: AI-powered FPGA CAD flows, and machine-learning-enhanced analysis and design for trustworthy integrated circuits.</p>
-    
+<p class="ovw">Two survey chapters in the Springer book "AI-Enabled Electronic Circuit and System Design" (2025) review how machine learning is being used to improve the tools that design chips and FPGAs. The first walks through every stage of the FPGA design flow, from writing hardware code to routing wires, and the second covers how machine learning both attacks and defends the security of integrated circuits across the supply chain.</p>
+
+
+
+
+  
+  
+  
+  <h2>Design</h2>
+  <div class="sec">
+    <h3>FPGA CAD flow, stage by stage</h3><p>Chapter 7 (Lin and Yi) introduces FPGA architecture and vendors, then lays out the standard FPGA CAD flow: high-level or RTL synthesis, logic synthesis, placement, routing, and bitstream generation. Each later section takes one stage, explains the conventional algorithm, and points out where it is slow or inaccurate.</p><h3>Where machine learning helps in the FPGA flow</h3><p>The chapter surveys ML methods for each stage: predicting timing, resource and power from HLS reports, ML-guided design space exploration over HLS pragmas, reinforcement learning for logic optimization and technology mapping, and ML-based congestion and routability prediction during placement. For routing it covers deep Q-network, reinforcement learning and CNN-based routers, and it compares HLS exploration methods by ease of use, runtime and accuracy.</p><h3>Threats across the IC supply chain</h3><p>Chapter 13 (Yang, Hu, Chen, Lin, Yi, Beerel and Nuzzo) maps five threats to hardware, namely malicious modification, IP piracy, side-channel analysis, reverse engineering and counterfeiting, onto the stages of the IC supply chain. It pairs them with four groups of protection methods: design obfuscation, hardware Trojan detection, vulnerability identification, and IC identifiers.</p><h3>Machine learning on both sides of hardware security</h3><p>The chapter reviews ML-assisted attacks on logic locking and the defenses against them, ML for hardware Trojan detection, ML in hardware fuzzing and IC reverse engineering, and ML modeling attacks and defenses for physical unclonable functions. It argues that conventional design methods should generate the training data and correct ML outputs, while ML captures complex patterns and explores large design spaces efficiently.</p>
+    <div class="figs"><figure><img src="../../assets/img/proj/books_1.png" alt="" loading="lazy"><figcaption>The typical FPGA CAD flow that structures Chapter 7, from RTL or high-level synthesis through logic synthesis, placement and routing to bitstream generation.</figcaption></figure><figure><img src="../../assets/img/proj/books_2.png" alt="" loading="lazy"><figcaption>Threats to hardware across the IC supply chain and the protection methods that Chapter 13 reviews, from design obfuscation to IC identifiers.</figcaption></figure></div>
     
   </div>
   
-</div>
+
+  
+  
+  
+
 
 
 <h2>Publications</h2>
@@ -37,16 +65,8 @@
     <div class="t">Enhancing FPGA CAD Flow with AI-Powered Solutions</div>
     <div class="a"><em>Chunxiao Lin</em>, Yang Yi</div>
     <div class="v">AI-Enabled Electronic Circuit and System Design, Springer, 2025</div>
-    
-    <div class="btns"><a class="btn" href="https://doi.org/10.1007/978-3-031-71436-8_7">DOI</a><a class="btn" href="#" data-bib="bib-lin2025book">BIB</a></div>
-    <pre class="bib" id="bib-lin2025book" hidden>@incollection{lin2025book,
-  title = {Enhancing FPGA CAD Flow with AI-Powered Solutions},
-  author = {Lin, Chunxiao and Yi, Yang},
-  booktitle = {AI-Enabled Electronic Circuit and System Design},
-  publisher = {Springer},
-  year = {2025},
-  doi = {10.1007/978-3-031-71436-8_7}
-}</pre>
+    <div class="s">Surveys AI and machine learning methods across the FPGA CAD flow, covering HLS metric prediction and design space exploration, logic synthesis, placement congestion and routability prediction, and learning-based routing.</div>
+    <div class="btns"><a class="btn" href="../../files/2025_Springer_FPGA_CAD_AI.pdf">PDF</a><a class="btn" href="https://doi.org/10.1007/978-3-031-71436-8_7">Publisher</a></div>
   </div>
 </div>
 
@@ -56,25 +76,15 @@
     <div class="t">Machine Learning-Enhanced Analysis and Design for Trustworthy Integrated Circuits</div>
     <div class="a">K. Yang, Y. Hu, D. Chen, <em>Chunxiao Lin</em>, Yang Yi, Peter A. Beerel, P. Nuzzo</div>
     <div class="v">AI-Enabled Electronic Circuit and System Design, Springer, pp. 467–496, 2025</div>
-    
-    <div class="btns"><a class="btn" href="https://doi.org/10.1007/978-3-031-71436-8_13">DOI</a><a class="btn" href="#" data-bib="bib-yang2025book">BIB</a></div>
-    <pre class="bib" id="bib-yang2025book" hidden>@incollection{yang2025book,
-  title = {Machine Learning-Enhanced Analysis and Design for Trustworthy Integrated Circuits},
-  author = {Yang, K. and Hu, Y. and Chen, D. and Lin, Chunxiao and Yi, Yang and Beerel, Peter A. and Nuzzo, P.},
-  booktitle = {AI-Enabled Electronic Circuit and System Design},
-  publisher = {Springer},
-  pages = {467--496},
-  year = {2025},
-  doi = {10.1007/978-3-031-71436-8_13}
-}</pre>
+    <div class="s">Reviews how machine learning enhances and threatens IC trustworthiness, covering logic-locking attacks and defenses, hardware Trojan detection, fuzzing, reverse engineering and PUFs, and argues for combining ML with conventional methods.</div>
+    <div class="btns"><a class="btn" href="../../files/2025_Springer_Trustworthy_IC_ML.pdf">PDF</a><a class="btn" href="https://doi.org/10.1007/978-3-031-71436-8_13">Publisher</a></div>
   </div>
 </div>
 
-</main>
-<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));

@@ -1,30 +1,29 @@
 {% extends "base.html" %}{% from "macros.html" import hcard %}
 {% block body %}
-<section class="hero">
-  <div>
-    <h1>{{ site.first }} <b>{{ site.last }}</b></h1>
-    <div class="sub">{{ site.title }}</div>
-    <p>{{ site.about }}</p>
-    <p>{{ site.about2 }}</p>
-    <div class="chips">{% for i in site.interests %}<span>{{ i }}</span>{% endfor %}</div>
-    <div class="icons"><a href="mailto:{{ site.email }}">Email</a><a href="{{ site.scholar }}">Google Scholar</a><a href="{{ site.github }}">GitHub</a><a href="{{ root }}cv/">CV</a></div>
-  </div>
-  <img class="photo" src="{{ root }}assets/img/{{ site.photo }}" alt="{{ site.name }}">
+<section class="intro">
+  <h1>Hi, I'm {{ site.first }}.</h1>
+  <p>{{ site.about }}</p>
+  <p>{{ site.about2 }}</p>
+  <div class="quick"><a class="pri" href="#demo">▶ Live demo</a><a href="{{ root }}projects/">All {{ site.all_projects|length }} projects</a><a href="{{ root }}publications/">{{ pubs|length }} publications</a><a href="{{ root }}files/{{ site.cv_pdf }}" download>Download CV</a></div>
 </section>
 
-{% set d = site.demo %}{% set v = d.videos[0] %}
-<h2>Live demo</h2>
-<section class="demo">
-  <video controls muted playsinline preload="metadata" poster="{{ root }}assets/video/{{ v.poster }}"><source src="{{ root }}assets/video/{{ v.src }}" type="video/mp4"></video>
-  <div class="demo-t">
-    <h3>{{ site.live_demo.title }}</h3>
-    <p>{{ site.live_demo.text }}</p>
-    <img src="{{ root }}assets/img/pubs/{{ d.wide_img }}" alt="System overview">
-    <a class="cta" href="{{ root }}projects/{{ d.id }}/">About the testbed →</a>
-  </div>
+{% set d = site.demo %}{% set L = site.live_demo %}
+<h2 id="demo">Live demo</h2>
+<section class="demo2">
+  <p class="lead"><b>{{ L.title }}.</b> {{ L.text }}</p>
+  <video autoplay muted loop playsinline controls preload="auto" poster="{{ root }}assets/video/{{ d.videos[0].poster }}"><source src="{{ root }}assets/video/{{ d.videos[0].src }}" type="video/mp4"></video>
+  <div class="explain">{% for e in L.explain %}<div><b>{{ e.h }}</b>{{ e.p }}</div>{% endfor %}</div>
+  <figure><img src="{{ root }}assets/img/pubs/{{ d.wide_img }}" alt="System overview"><figcaption>{{ L.fig_cap }}</figcaption></figure>
+  <p class="more"><a href="{{ root }}projects/{{ d.id }}/">How the testbed works →</a></p>
 </section>
 
 <h2>Highlighted projects</h2>
 <div class="hgrid">{% for pr in site.highlights %}{{ hcard(pr, root) }}{% endfor %}</div>
-<p class="more"><a href="{{ root }}projects/">All projects →</a> &nbsp;·&nbsp; <a href="{{ root }}publications/">All {{ pubs|length }} publications →</a></p>
+
+<h2>All projects</h2>
+<div class="banner"><b>{{ site.all_projects|length }} projects across {{ site.project_groups|length }} fields, from FPGA accelerators to hardware security.</b><a href="{{ root }}projects/">Browse all projects →</a></div>
+<div class="fields" style="margin-top:14px">{% for g in site.project_groups %}
+  <a class="field" href="{{ root }}projects/#g{{ loop.index }}"><b>{{ g.name }}</b><span class="cnt">{{ g.projects|length }} project{{ 's' if g.projects|length > 1 }}</span>
+  <ul>{% for pr in g.projects[:4] %}<li>{{ pr.title }}</li>{% endfor %}{% if g.projects|length > 4 %}<li>…</li>{% endif %}</ul></a>
+{% endfor %}</div>
 {% endblock %}

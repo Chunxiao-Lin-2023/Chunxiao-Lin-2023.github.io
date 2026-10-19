@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,25 +9,60 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
-  <a class="" href="../../">about</a>
-  <a class="" href="../../publications/">publications</a>
-  <a class="on" href="../../projects/">projects</a>
-  <a class="" href="../../cv/">cv</a>
-</nav></header>
+<div class="layout">
+<aside class="side">
+  <a href="../../"><img class="avatar" src="../../assets/img/photo.jpg" alt="Chunxiao Lin"></a>
+  <div class="who"><a href="../../" class="nm">Chunxiao (Calvin) Lin</a>
+    <div class="role">Ph.D. student, Computer Engineering<br>Virginia Tech</div></div>
+  <nav class="snav">
+    <a class="" href="../../">About</a>
+    <a class="on" href="../../projects/">Projects</a>
+    <a class="" href="../../publications/">Publications</a>
+    <a class="" href="../../cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="https://www.yangyi.ece.vt.edu/">Advisor: Prof. Yang (Cindy) Yi</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a></li>
+    <li><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="../../files/CV_Chunxiao_Lin.pdf" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+</aside>
 <main>
-<p class="crumb"><a href="../../projects/">← Projects</a></p>
+
+
+<p class="crumb"><a href="../../projects/">← All projects</a></p>
 <h1 class="page">Surveys of reservoir computing and echo state networks</h1>
 <div class="pmeta big"><span class="ptag">AI'26 · ICDMW'25</span><span class="per">2025 – 2026</span></div>
-<div class="detail noimg">
-  <div>
-    <p class="lead">Two surveys: reservoir computing from foundations to neuromorphic intelligence, and echo state networks with benchmarks and applications to next-G wireless communication.</p>
-    
+<p class="ovw">Reservoir computing trains only a linear readout on top of a fixed recurrent network, which makes it attractive for low-power hardware and for wireless signal processing. These two papers review echo state network (ESN) and liquid state machine (LSM) theory, benchmark both on chaotic time series including under reservoir quantization, and apply an ESN to MIMO-OFDM channel prediction.</p>
+<div class="kpis"><div class="kpi"><b>3-bit</b><span>LSM tracks 16-bit accuracy (AI)</span></div><div class="kpi"><b>0-20 dB</b><span>SNR range where ESN beats AR</span></div></div>
+
+
+
+  
+  
+  
+  <h2>Design</h2>
+  <div class="sec">
+    <h3>ESN formulation (both papers)</h3><p>A fixed random reservoir of tanh units maps the input into a high-dimensional state, and only the output weights are trained, in closed form by ridge regression. The echo state property is kept by scaling the reservoir's spectral radius; reservoir size, sparsity and input scaling are the main hyperparameters.</p><h3>LSM pipeline (AI 2026)</h3><p>The input is encoded into spike trains (rate plus positive/negative threshold encoding) that drive a sparse reservoir of leaky integrate-and-fire neurons. Spikes are decoded by Gaussian smoothing into continuous states, and a linear readout is trained with Adam on the MSE loss.</p><h3>Hardware-aware benchmark protocol (AI 2026)</h3><p>ESNs (10-200 neurons) and LSMs (100-700 neurons) are compared on the same Mackey-Glass segment (5000/1000 train/test, one-step-ahead) with reservoir weights quantized to 2, 3, 6 and 16 bits. A NARMA-10 benchmark with 6- to 16-bit weights checks that the trends hold on a second task.</p><h3>ESN benchmark and channel prediction (ICDMW 2025)</h3><p>An ESN is swept from 10 to 200 reservoir neurons on Mackey-Glass. It is then applied to a 2x2 MIMO-OFDM vehicle-to-vehicle channel generated with NS-3 (3GPP SCM), using the channel at symbol i to predict symbol i+20, and compared with an order-20 autoregressive (AR) predictor.</p>
+    <div class="figs one"><figure><img src="../../assets/img/proj/surveys_1.png" alt="" loading="lazy"><figcaption>AI 2026: LSM pipeline with spike encoding, liquid reservoir, decoding and linear readout.</figcaption></figure></div>
     
   </div>
   
-</div>
+
+  
+  
+  
+  <h2>Results</h2>
+  <div class="sec">
+    <ul class="res"><li>AI 2026: ESN training error drops quickly with reservoir size, but test MSE stops improving beyond about 50-100 neurons and degrades earlier at 2-bit precision, a sign of overfitting.</li><li>AI 2026: LSM training and test MSE keep decreasing from 100 to 700 neurons at every bit width, and the 3-bit LSM closely tracks the 16-bit one; the ESN still reaches lower absolute test MSE.</li><li>AI 2026: at N = 200 the best ridge coefficient is beta = 1e-5 (test MSE 0.000143 at full precision, 0.000154 at 2-bit); tuning beta does not remove the ESN saturation trend.</li><li>AI 2026: NARMA-10 results follow the same ESN-versus-LSM trends as Mackey-Glass.</li><li>ICDMW 2025: in channel prediction, a 20-neuron ESN gives lower NMSE than the order-20 AR predictor at every tested SNR from 0 to 20 dB.</li></ul>
+    
+    <div class="figs"><figure><img src="../../assets/img/proj/surveys_2.png" alt="" loading="lazy"><figcaption>AI 2026: Mackey-Glass test MSE versus reservoir size for the full-precision ESN and the 16-bit and 3-bit LSMs.</figcaption></figure><figure><img src="../../assets/img/proj/surveys_3.png" alt="" loading="lazy"><figcaption>ICDMW 2025: channel-prediction NMSE versus SNR for the ESN and the AR baseline.</figcaption></figure></div>
+    
+  </div>
+  
+
 
 
 <h2>Publications</h2>
@@ -37,17 +73,8 @@
     <div class="t">Reservoir Computing: Foundations, Advances, and Challenges Toward Neuromorphic Intelligence</div>
     <div class="a">Andrew Liu, Muhammad Farhan Azmine, <em>Chunxiao Lin</em>, Yang Yi</div>
     <div class="v">AI (MDPI), 2026</div>
-    
-    <div class="btns"><a class="btn" href="https://doi.org/10.3390/ai7020070">DOI</a><a class="btn" href="../../files/12_AI_MDPI_2026.pdf">PDF</a><a class="btn" href="#" data-bib="bib-liu2026ai">BIB</a></div>
-    <pre class="bib" id="bib-liu2026ai" hidden>@article{liu2026ai,
-  title = {Reservoir Computing: Foundations, Advances, and Challenges Toward Neuromorphic Intelligence},
-  author = {Liu, Andrew and Azmine, Muhammad Farhan and Lin, Chunxiao and Yi, Yang},
-  journal = {AI (MDPI)},
-  volume = {7},
-  number = {2},
-  year = {2026},
-  doi = {10.3390/ai7020070}
-}</pre>
+    <div class="s">Reviews reservoir computing foundations and benchmarks ESNs against LSMs on Mackey-Glass and NARMA-10 under 2- to 16-bit quantization, finding LSMs scale and tolerate low precision better while ESNs reach lower error.</div>
+    <div class="btns"><a class="btn" href="../../files/12_AI_MDPI_2026.pdf">PDF</a><a class="btn" href="https://doi.org/10.3390/ai7020070">Publisher</a></div>
   </div>
 </div>
 
@@ -57,24 +84,15 @@
     <div class="t">Echo State Networks in Reservoir Computing: Foundations, Benchmarks, and Applications to Next-G Wireless Communication</div>
     <div class="a">Andrew Liu, <em>Chunxiao Lin</em>, Daniel Rosen, Yang Yi</div>
     <div class="v">IEEE International Conference on Data Mining Workshops (ICDMW), pp. 3076–3080, 2025</div>
-    
-    <div class="btns"><a class="btn" href="https://doi.org/10.1109/ICDMW69685.2025.00405">DOI</a><a class="btn" href="#" data-bib="bib-liu2025icdmw">BIB</a></div>
-    <pre class="bib" id="bib-liu2025icdmw" hidden>@inproceedings{liu2025icdmw,
-  title = {Echo State Networks in Reservoir Computing: Foundations, Benchmarks, and Applications to Next-G Wireless Communication},
-  author = {Liu, Andrew and Lin, Chunxiao and Rosen, Daniel and Yi, Yang},
-  booktitle = {IEEE International Conference on Data Mining Workshops (ICDMW)},
-  pages = {3076--3080},
-  year = {2025},
-  doi = {10.1109/ICDMW69685.2025.00405}
-}</pre>
+    <div class="s">Reviews echo state network theory, benchmarks ESN reservoir sizes on Mackey-Glass, and applies a small ESN to MIMO-OFDM channel prediction, where it beats an autoregressive predictor in NMSE.</div>
+    <div class="btns"><a class="btn" href="../../files/2025_ICDMW.pdf">PDF</a><a class="btn" href="https://doi.org/10.1109/ICDMW69685.2025.00405">Publisher</a></div>
   </div>
 </div>
 
-</main>
-<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));

@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,43 +9,49 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="">Chunxiao <b>Lin</b></a>
-  <a class="on" href="">about</a>
-  <a class="" href="publications/">publications</a>
-  <a class="" href="projects/">projects</a>
-  <a class="" href="cv/">cv</a>
-</nav></header>
+<div class="layout">
+<aside class="side">
+  <a href=""><img class="avatar" src="assets/img/photo.jpg" alt="Chunxiao Lin"></a>
+  <div class="who"><a href="" class="nm">Chunxiao (Calvin) Lin</a>
+    <div class="role">Ph.D. student, Computer Engineering<br>Virginia Tech</div></div>
+  <nav class="snav">
+    <a class="on" href="">About</a>
+    <a class="" href="projects/">Projects</a>
+    <a class="" href="publications/">Publications</a>
+    <a class="" href="cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="https://www.yangyi.ece.vt.edu/">Advisor: Prof. Yang (Cindy) Yi</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a></li>
+    <li><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="files/CV_Chunxiao_Lin.pdf" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+</aside>
 <main>
-<section class="hero">
-  <div>
-    <h1>Chunxiao <b>Lin</b></h1>
-    <div class="sub">Ph.D. student · Computer Engineering · Virginia Tech</div>
-    <p>I am a sixth-year Ph.D. student at Virginia Tech, advised by
+<section class="intro">
+  <h1>Hi, I'm Chunxiao.</h1>
+  <p>I am a sixth-year Ph.D. student at Virginia Tech, advised by
 <a href="https://www.yangyi.ece.vt.edu/">Prof. Yang (Cindy) Yi</a>.
 I design <b>FPGA accelerators for echo state networks</b> (reservoir computing), from cost-efficient
 reservoir neurons to <b>on-chip learning</b>, and bring them into <b>real-time wireless systems</b>
 for symbol detection and MIMO channel prediction.
 </p>
-    <p>Before Virginia Tech, I received my master's degree in Electrical and Computer Engineering from the University of
+  <p>Before Virginia Tech, I received my master's degree in Electrical and Computer Engineering from the University of
 Southern California and my B.E. in Opto-electronic Information from Huazhong University of Science and Technology.
 </p>
-    <div class="chips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
-    <div class="icons"><a href="mailto:chunxiaol@vt.edu">Email</a><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a><a href="cv/">CV</a></div>
-  </div>
-  <img class="photo" src="assets/img/photo.jpg" alt="Chunxiao Lin">
+  <div class="quick"><a class="pri" href="#demo">▶ Live demo</a><a href="projects/">All 18 projects</a><a href="publications/">12 publications</a><a href="files/CV_Chunxiao_Lin.pdf" download>Download CV</a></div>
 </section>
 
 
-<h2>Live demo</h2>
-<section class="demo">
-  <video controls muted playsinline preload="metadata" poster="assets/video/10g_demo.jpg"><source src="assets/video/10g_demo.mp4" type="video/mp4"></video>
-  <div class="demo-t">
-    <h3>Live demo: real-time channel prediction on FPGA</h3>
-    <p>A distributed MIMO link runs through a radio channel emulator, and an FPGA reservoir-computing accelerator predicts each user's channel frame by frame over 10 Gb/s Ethernet, live.</p>
-    <img src="assets/img/pubs/testbed_system.jpg" alt="System overview">
-    <a class="cta" href="projects/testbeds/">About the testbed →</a>
-  </div>
+<h2 id="demo">Live demo</h2>
+<section class="demo2">
+  <p class="lead"><b>Real-time channel prediction on an FPGA.</b> A base station and its users must know the radio channel, which is how the signal is distorted on the way. When users move, that knowledge goes stale within milliseconds. Here an FPGA accelerator learns how the channel changes and predicts the next one, live, for two users at once.</p>
+  <video autoplay muted loop playsinline controls preload="auto" poster="assets/video/10g_demo.jpg"><source src="assets/video/10g_demo.mp4" type="video/mp4"></video>
+  <div class="explain"><div><b>Left: what the receiver measures</b>The live channel of every antenna pair of the two users, about 1,250 new measurements per second per user.</div><div><b>Middle: how good the prediction is</b>Prediction error of the FPGA (blue) against simply reusing the last measurement (orange). Lower is better; blue stays below orange.</div><div><b>Right: how fast</b>Time from a new measurement to the prediction arriving back at the PC (green), under one millisecond, and the FPGA's own share (grey).</div></div>
+  <figure><img src="assets/img/pubs/testbed_system.jpg" alt="System overview"><figcaption>The setup: a 4-antenna base station and two 2-antenna users are linked through a radio channel emulator; host PCs stream the channel to the FPGA over 10 Gb/s Ethernet.</figcaption></figure>
+  <p class="more"><a href="projects/testbeds/">How the testbed works →</a></p>
 </section>
 
 <h2>Highlighted projects</h2>
@@ -53,36 +60,53 @@ Southern California and my B.E. in Opto-electronic Information from Huazhong Uni
   <img src="assets/img/pubs/tcad_overall.png" alt="">
   <div class="hb"><b>On-chip RLS learning for MIMO channel prediction</b><div class="pmeta"><span class="ptag">TCAD'26</span><span class="per">2024 – 2026</span></div>
   <p>A complete echo state network on one FPGA: inference and recursive-least-squares (RLS) training share the same DSP arrays, so the channel predictor retrains itself on chip.</p>
-  <div class="kpis"><div class="kpi"><b>3.87 µs</b><span>per training + prediction step (Virtex-7, 100 MHz)</span></div><div class="kpi"><b>5.3×</b><span>lower NMSE than the prior on-chip ESN learner</span></div></div></div>
+  <div class="kpis"><div class="kpi"><b>3.87 µs</b><span>per training + inference step</span></div><div class="kpi"><b>>1600×</b><span>energy efficiency vs. CPU</span></div></div></div>
 </a>
 
 <a class="hcard" href="projects/hybrid-neuron/">
   <img src="assets/img/pubs/icnc_neuron.png" alt="">
   <div class="hb"><b>Hybrid DSP–CLB reservoir neuron</b><div class="pmeta"><span class="ptag">ICNC'26</span><span class="per">2024 – 2025</span></div>
   <p>Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, so the DSPs never sit idle; a range-addressable tanh keeps the activation cheap.</p>
-  <div class="kpis"><div class="kpi"><b>0.97 µs</b><span>per prediction for a full ESN (64, 8, 64)</span></div><div class="kpi"><b>+25%</b><span>DSP efficiency vs. the DSP-only MAC (72×72 MVM)</span></div></div></div>
+  <div class="kpis"><div class="kpi"><b>65.98M</b><span>input samples per second</span></div><div class="kpi"><b>97 cycles</b><span>ESN inference latency at 100 MHz</span></div></div></div>
 </a>
 
 <a class="hcard" href="projects/sdr-fpga/">
   <img src="assets/img/pubs/iccad_platform.png" alt="">
   <div class="hb"><b>DSP-based ESN and SDR/FPGA platform for MIMO-OFDM detection</b><div class="pmeta"><span class="ptag">ICCAD'23</span><span class="per">2022</span></div>
   <p>A DSP48E1-array reservoir neuron for 2×2 MIMO-OFDM symbol detection, tested over the air with an SDR platform (PC, Virtex-7 FPGA and two USRPs running a GNU Radio Wi-Fi link).</p>
-  <div class="kpis"><div class="kpi"><b>3.3×</b><span>throughput for only +21.4% LUT and +33% FF</span></div><div class="kpi"><b>0.04</b><span>average BER over a real wireless channel</span></div></div></div>
+  <div class="kpis"><div class="kpi"><b>3.3×</b><span>input throughput vs SISO ESN accelerator</span></div><div class="kpi"><b>34.8 MS/s</b><span>input processing speed</span></div></div></div>
 </a>
 
-<a class="hcard" href="projects/mmimo/">
-  <img src="assets/img/pubs/front_mmimo_uplink.png" alt="">
-  <div class="hb"><b>Scalable ESN symbol detector for massive MIMO-OFDM</b><div class="pmeta"><span class="ptag">Frontiers'24</span><span class="per">2023</span></div>
-  <p>A hardware-accelerated reservoir neuron speeds up an ESN symbol detector for massive MIMO-OFDM, validated on a Virtex-7 FPGA across a range of MIMO configurations against linear MMSE detection.</p>
-  </div>
+<a class="hcard" href="projects/bit-serial/">
+  <img src="assets/img/pubs/isqed_arch.png" alt="">
+  <div class="hb"><b>Bit-serial reservoir neuron</b><div class="pmeta"><span class="ptag">ISQED'22</span><span class="per">2021 – 2022</span></div>
+  <p>A low-cost reservoir neuron that hard-wires the fixed, sparse ESN weights into a bit-serial multiplier, with canonical-signed-digit encoding and an optimized tanh.</p>
+  <div class="kpis"><div class="kpi"><b>80.7%</b><span>fewer LUTs than DSP-based ESN</span></div><div class="kpi"><b>162 → 16</b><span>DSP blocks</span></div></div></div>
 </a>
 </div>
-<p class="more"><a href="projects/">All projects →</a> &nbsp;·&nbsp; <a href="publications/">All 12 publications →</a></p>
-</main>
-<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+
+<h2>All projects</h2>
+<div class="banner"><b>18 projects across 5 fields, from FPGA accelerators to hardware security.</b><a href="projects/">Browse all projects →</a></div>
+<div class="fields" style="margin-top:14px">
+  <a class="field" href="projects/#g1"><b>FPGA accelerators for reservoir computing</b><span class="cnt">6 projects</span>
+  <ul><li>On-chip RLS learning for MIMO channel prediction</li><li>Hybrid DSP–CLB reservoir neuron</li><li>Bit-serial reservoir neuron</li><li>Hardware–software co-design of an on-chip ESN</li><li>…</li></ul></a>
+
+  <a class="field" href="projects/#g2"><b>Real-time wireless systems</b><span class="cnt">3 projects</span>
+  <ul><li>Real-time 10G Ethernet PC–FPGA testbed for distributed MIMO</li><li>DSP-based ESN and SDR/FPGA platform for MIMO-OFDM detection</li><li>Scalable ESN symbol detector for massive MIMO-OFDM</li></ul></a>
+
+  <a class="field" href="projects/#g3"><b>Neuromorphic and spiking computing</b><span class="cnt">2 projects</span>
+  <ul><li>SPARC: spiking reservoir computing with on-chip R-STDP</li><li>Legendre-SNN on Loihi-2</li></ul></a>
+
+  <a class="field" href="projects/#g4"><b>Surveys and book chapters</b><span class="cnt">2 projects</span>
+  <ul><li>Surveys of reservoir computing and echo state networks</li><li>AI for circuit and system design</li></ul></a>
+
+  <a class="field" href="projects/#g5"><b>Earlier projects: VLSI, hardware security and networking</b><span class="cnt">5 projects</span>
+  <ul><li>Dynamically secured scan chains and the GF-Flush attack</li><li>Low-power 10T-SRAM for in-memory computing</li><li>4-node cardinal chip multiprocessor</li><li>CPU hardware system design</li><li>…</li></ul></a>
+</div>
+
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));

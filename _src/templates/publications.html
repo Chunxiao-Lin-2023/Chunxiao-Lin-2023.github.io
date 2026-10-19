@@ -2,7 +2,7 @@
 {% block title %}Publications · {{ site.name }}{% endblock %}
 {% block body %}
 <h1 class="page">Publications</h1>
-<p class="sub">{{ pubs|length }} papers · also on <a href="{{ site.scholar }}">Google Scholar</a>. <span class="ul-me">Underlined</span> = me.</p>
+<p class="sub">{{ pubs|length }} papers · also on <a href="{{ site.scholar }}">Google Scholar</a> · <span class="ul-me">underlined</span> = me</p>
 <div class="filters"><button class="on" data-kind="all">All</button>{% for k, label in kinds %}<button data-kind="{{ k }}">{{ label }}</button>{% endfor %}</div>
 {% for k, label in kinds %}
 <div class="pubgroup" data-kind="{{ k }}">

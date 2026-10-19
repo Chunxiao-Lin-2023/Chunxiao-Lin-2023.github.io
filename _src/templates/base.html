@@ -1,3 +1,10 @@
+{% set I = {
+ 'mail': '<svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+ 'scholar': '<svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg>',
+ 'github': '<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg>',
+ 'cv': '<svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+ 'pin': '<svg viewBox="0 0 24 24"><path d="M12 22s7-7.2 7-12a7 7 0 0 0-14 0c0 4.8 7 12 7 12z" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="10" r="2.5" fill="currentColor"/></svg>',
+ 'lab': '<svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg>'} %}
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,18 +15,30 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ root }}assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="{{ root }}">{{ site.first }} <b>{{ site.last }}</b></a>
-  <a class="{{ 'on' if active=='about' }}" href="{{ root }}">about</a>
-  <a class="{{ 'on' if active=='publications' }}" href="{{ root }}publications/">publications</a>
-  <a class="{{ 'on' if active=='projects' }}" href="{{ root }}projects/">projects</a>
-  <a class="{{ 'on' if active=='cv' }}" href="{{ root }}cv/">cv</a>
-</nav></header>
-<main>{% block body %}{% endblock %}</main>
-<footer>© {{ site.display_name }} · Virginia Tech · <a href="mailto:{{ site.email }}">{{ site.email }}</a></footer>
+<div class="layout">
+<aside class="side">
+  <a href="{{ root }}"><img class="avatar" src="{{ root }}assets/img/{{ site.photo }}" alt="{{ site.name }}"></a>
+  <div class="who"><a href="{{ root }}" class="nm">{{ site.display_name }}</a>
+    <div class="role">{{ site.role }}</div></div>
+  <nav class="snav">
+    <a class="{{ 'on' if active=='about' }}" href="{{ root }}">About</a>
+    <a class="{{ 'on' if active=='projects' }}" href="{{ root }}projects/">Projects</a>
+    <a class="{{ 'on' if active=='publications' }}" href="{{ root }}publications/">Publications</a>
+    <a class="{{ 'on' if active=='cv' }}" href="{{ root }}cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li>{{ I.lab }}<a href="{{ site.lab_url }}">{{ site.lab }}</a></li>
+    <li>{{ I.mail }}<a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
+    <li>{{ I.scholar }}<a href="{{ site.scholar }}">Google Scholar</a></li>
+    <li>{{ I.github }}<a href="{{ site.github }}">GitHub</a></li>
+    <li>{{ I.cv }}<a href="{{ root }}files/{{ site.cv_pdf }}" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips">{% for i in site.interests %}<span>{{ i }}</span>{% endfor %}</div>
+</aside>
+<main>{% block body %}{% endblock %}
+<footer>© {{ site.display_name }} · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));

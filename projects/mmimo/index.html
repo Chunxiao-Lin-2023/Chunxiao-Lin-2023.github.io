@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
@@ -8,28 +9,63 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../../assets/style.css">
 </head><body>
-<header><nav class="nav">
-  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
-  <a class="" href="../../">about</a>
-  <a class="" href="../../publications/">publications</a>
-  <a class="on" href="../../projects/">projects</a>
-  <a class="" href="../../cv/">cv</a>
-</nav></header>
+<div class="layout">
+<aside class="side">
+  <a href="../../"><img class="avatar" src="../../assets/img/photo.jpg" alt="Chunxiao Lin"></a>
+  <div class="who"><a href="../../" class="nm">Chunxiao (Calvin) Lin</a>
+    <div class="role">Ph.D. student, Computer Engineering<br>Virginia Tech</div></div>
+  <nav class="snav">
+    <a class="" href="../../">About</a>
+    <a class="on" href="../../projects/">Projects</a>
+    <a class="" href="../../publications/">Publications</a>
+    <a class="" href="../../cv/">CV</a>
+  </nav>
+  <ul class="contact">
+    <li><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="https://www.yangyi.ece.vt.edu/">Advisor: Prof. Yang (Cindy) Yi</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M3 6l9 7 9-7" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.9V17h2V9z" fill="currentColor"/><path d="M5 13.2V17c0 1.7 3.1 3 7 3s7-1.3 7-3v-3.8l-7 3.8z" fill="currentColor"/></svg><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a></li>
+    <li><svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 .5a11.5 11.5 0 0 0-3.6 22.4c.6.1.8-.3.8-.6v-2c-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.2 1.2a11 11 0 0 1 5.8 0c2.2-1.5 3.2-1.2 3.2-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.9 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A11.5 11.5 0 0 0 12 .5z"/></svg><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a></li>
+    <li><svg viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M13 10v7m-3-3l3 3 3-3" fill="none" stroke="currentColor" stroke-width="2"/></svg><a href="../../files/CV_Chunxiao_Lin.pdf" download>Download CV (PDF)</a></li>
+  </ul>
+  <div class="schips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+</aside>
 <main>
-<p class="crumb"><a href="../../projects/">← Projects</a></p>
+
+
+<p class="crumb"><a href="../../projects/">← All projects</a></p>
 <h1 class="page">Scalable ESN symbol detector for massive MIMO-OFDM</h1>
 <div class="pmeta big"><span class="ptag">Frontiers'24</span><span class="per">2023</span></div>
-<div class="detail">
-  <div>
-    <p class="lead">A hardware-accelerated reservoir neuron speeds up an ESN symbol detector for massive MIMO-OFDM, validated on a Virtex-7 FPGA across a range of MIMO configurations against linear MMSE detection.</p>
+<p class="ovw">Symbol detection in massive MIMO-OFDM, a key 6G technology, is hard for channel-estimation methods such as LMMSE because accurate CSI for many antennas is costly to obtain. This work applies an echo state network (ESN) detector to MIMO sizes up to 4x64 in simulation and builds a DSP-based FPGA accelerator for it, validated as a 2x2 proof of concept on a Virtex-7 SDR/FPGA testbed.</p>
+<div class="kpis"><div class="kpi"><b>0.001%</b><span>ESN BER in 4x64 MIMO (LMMSE 6.680%)</span></div><div class="kpi"><b>3.3×</b><span>throughput vs SISO ESN accelerator</span></div><div class="kpi"><b>9 DSPs</b><span>per reservoir neuron</span></div></div>
+
+
+
+  
+  
+  
+  <h2>Design</h2>
+  <div class="sec">
+    <h3>ESN symbol detector with pilot training</h3><p>The received time-domain signals from all Nr antennas feed an ESN whose readout predicts the transmitted symbols of every stream. Only the output weights are trained, first on the known training-sequence symbols and then recursively on pilot subcarriers in each data symbol, so the detector keeps tracking a changing channel without explicit channel estimation.</p><h3>Nine-DSP reservoir neuron</h3><p>Each neuron's 48 multiplications and 47 additions (40 inputs + 8 reservoir states in the 2x2 design) run on only 9 DSP48E1 slices, avoiding a CLB-based adder tree. Stage I performs 9 parallel MACs, Stage II compresses them to 3 sums over the PCIN/PCOUT cascade, and Stage III merges those into one, taking ⌈(Nres+Nin)/9⌉+1+2+2 clock cycles per update.</p><h3>Fixed-point tanh</h3><p>The neuron's sum indexes two 2^8-entry look-up tables holding the slope and intercept of a first-order piecewise-linear tanh, and a further DSP computes slope·x + intercept. The output saturates for |x| ≥ 8, where the tanh error is below 10^-6, and symmetry means only the positive half is stored.</p><h3>Sizing and proof-of-concept testbed</h3><p>An 8-neuron reservoir (second-best BER, half the DSPs of 16 neurons) with 40 inputs and 4 outputs is implemented, with 16-bit output weights at 2^-5 precision. The design runs at 125 MHz on a Virtex-7 board connected by Ethernet to GNU Radio and two USRPs, and is tested in 5 line-of-sight and blocked scenarios in an RF lab.</p>
+    <div class="figs"><figure><img src="../../assets/img/proj/mmimo_1.png" alt="" loading="lazy"><figcaption>ESN-based symbol detector at the receiver: signals from all antennas drive the reservoir, and the trained readout outputs the transmitted symbols.</figcaption></figure><figure><img src="../../assets/img/proj/mmimo_2.png" alt="" loading="lazy"><figcaption>Proposed reservoir neuron: nine DSP48E1 slices perform the three-stage MAC, followed by a two-LUT fixed-point tanh.</figcaption></figure></div>
     
-    <ul><li>Low bit error rate, low resource utilization and high throughput, with performance that scales with the antenna count.</li></ul>
   </div>
-  <div class="pimg"><img src="../../assets/img/pubs/front_mmimo_uplink.png" alt=""></div>
-</div>
+  
+
+  
+  
+  
+  <h2>Results</h2>
+  <div class="sec">
+    <ul class="res"><li>Simulated BER with 1,024 subcarriers, ESN vs LMMSE: 2.261% vs 5.460% (2x2), 2.022% vs 13.088% (4x4), 2.079% vs 3.167% (4x16) and 0.001% vs 6.680% (4x64).</li><li>From 2x2 to 4x64 MIMO, ESNs with 8-16 reservoir neurons give the lowest BER in most cases, so the reservoir need not grow with the antenna count.</li><li>FPGA processing speed of up to 34.8 M input samples/s, almost 3.3× the 10.53 M samples/s of a SISO-specific ESN FPGA implementation.</li><li>Against that SISO design: 50% less BRAM and 33.3% fewer DSP blocks, with 21.4% more LUTs and 33% more FFs.</li><li>Utilization: 13,314 LUTs (4.9%), 10,750 FFs (1.77%), 6 BRAMs (0.58%) and 108 DSPs (3.86%); 0.256 W dynamic and 0.262 W static power at 125 MHz.</li></ul>
+    
+    <div class="figs one"><figure><img src="../../assets/img/proj/mmimo_3.png" alt="" loading="lazy"><figcaption>BER versus reservoir size for 2x2, 4x4, 4x16 and 4x64 MIMO.</figcaption></figure></div>
+    
+  </div>
+  
 
 
-<h2>Publications</h2>
+
+<h2>Publication</h2>
 
 <div class="pub" id="lin2024frontiers">
   <div class="pub-l"><span class="badge">Frontiers</span><img src="../../assets/img/pubs/front_mmimo_uplink.png" alt=""></div>
@@ -37,24 +73,15 @@
     <div class="t">Leveraging Neuro-Inspired AI Accelerator for High-Speed Computing in 6G Networks</div>
     <div class="a"><em>Chunxiao Lin</em>, Muhammad Farhan Azmine, Yibin Liang, Yang Yi</div>
     <div class="v">Frontiers in Computational Neuroscience, 2024</div>
-    <div class="s">An ESN-based symbol detector for massive MIMO-OFDM, accelerated with a DSP-based FPGA architecture.</div>
-    <div class="btns"><a class="btn" href="https://doi.org/10.3389/fncom.2024.1345644">DOI</a><a class="btn" href="../../files/04_Frontiers_2024.pdf">PDF</a><a class="btn" href="#" data-bib="bib-lin2024frontiers">BIB</a></div>
-    <pre class="bib" id="bib-lin2024frontiers" hidden>@article{lin2024frontiers,
-  title = {Leveraging Neuro-Inspired AI Accelerator for High-Speed Computing in 6G Networks},
-  author = {Lin, Chunxiao and Azmine, Muhammad Farhan and Liang, Yibin and Yi, Yang},
-  journal = {Frontiers in Computational Neuroscience},
-  volume = {18},
-  year = {2024},
-  doi = {10.3389/fncom.2024.1345644}
-}</pre>
+    <div class="s">Applies an echo state network to massive MIMO-OFDM symbol detection, outperforming LMMSE from 2x2 to 4x64 MIMO, and validates a nine-DSP-per-neuron FPGA accelerator on a real-time SDR testbed.</div>
+    <div class="btns"><a class="btn" href="../../files/04_Frontiers_2024.pdf">PDF</a><a class="btn" href="https://doi.org/10.3389/fncom.2024.1345644">Publisher</a></div>
   </div>
 </div>
 
-</main>
-<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech</footer></main>
+</div>
 <script>
-document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
- const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
 document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
  document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
  const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
