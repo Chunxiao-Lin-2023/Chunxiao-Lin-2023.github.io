@@ -27,13 +27,11 @@
     <a class="{{ 'on' if active=='cv' }}" href="{{ root }}cv/">CV</a>
   </nav>
   <ul class="contact">
-    <li>{{ I.lab }}<a href="{{ site.lab_url }}">{{ site.lab }}</a></li>
     <li>{{ I.mail }}<a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
     <li>{{ I.scholar }}<a href="{{ site.scholar }}">Google Scholar</a></li>
     <li>{{ I.github }}<a href="{{ site.github }}">GitHub</a></li>
     <li>{{ I.cv }}<a href="{{ root }}files/{{ site.cv_pdf }}" download>Download CV (PDF)</a></li>
   </ul>
-  <div class="schips">{% for i in site.interests %}<span>{{ i }}</span>{% endfor %}</div>
 </aside>
 <main>{% block body %}{% endblock %}
 <footer>© {{ site.display_name }} · Virginia Tech</footer></main>

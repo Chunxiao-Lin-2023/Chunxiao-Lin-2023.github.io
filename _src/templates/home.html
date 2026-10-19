@@ -4,6 +4,7 @@
   <h1>Hi, I'm {{ site.first }}.</h1>
   <p>{{ site.about }}</p>
   <p>{{ site.about2 }}</p>
+  <div class="kw"><span>Research interests</span>{% for i in site.interests %}<em>{{ i }}</em>{% endfor %}</div>
   <div class="quick"><a class="pri" href="#demo">▶ Live demo</a><a href="{{ root }}projects/">All {{ site.all_projects|length }} projects</a><a href="{{ root }}publications/">{{ pubs|length }} publications</a><a href="{{ root }}files/{{ site.cv_pdf }}" download>Download CV</a></div>
 </section>
 
