@@ -1,0 +1,30 @@
+{% extends "base.html" %}{% from "macros.html" import hcard %}
+{% block body %}
+<section class="hero">
+  <div>
+    <h1>{{ site.first }} <b>{{ site.last }}</b></h1>
+    <div class="sub">{{ site.title }}</div>
+    <p>{{ site.about }}</p>
+    <p>{{ site.about2 }}</p>
+    <div class="chips">{% for i in site.interests %}<span>{{ i }}</span>{% endfor %}</div>
+    <div class="icons"><a href="mailto:{{ site.email }}">Email</a><a href="{{ site.scholar }}">Google Scholar</a><a href="{{ site.github }}">GitHub</a><a href="{{ root }}cv/">CV</a></div>
+  </div>
+  <img class="photo" src="{{ root }}assets/img/{{ site.photo }}" alt="{{ site.name }}">
+</section>
+
+{% set d = site.demo %}{% set v = d.videos[0] %}
+<h2>Live demo</h2>
+<section class="demo">
+  <video controls muted playsinline preload="metadata" poster="{{ root }}assets/video/{{ v.poster }}"><source src="{{ root }}assets/video/{{ v.src }}" type="video/mp4"></video>
+  <div class="demo-t">
+    <h3>{{ site.live_demo.title }}</h3>
+    <p>{{ site.live_demo.text }}</p>
+    <img src="{{ root }}assets/img/pubs/{{ d.wide_img }}" alt="System overview">
+    <a class="cta" href="{{ root }}projects/{{ d.id }}/">About the testbed →</a>
+  </div>
+</section>
+
+<h2>Highlighted projects</h2>
+<div class="hgrid">{% for pr in site.highlights %}{{ hcard(pr, root) }}{% endfor %}</div>
+<p class="more"><a href="{{ root }}projects/">All projects →</a> &nbsp;·&nbsp; <a href="{{ root }}publications/">All {{ pubs|length }} publications →</a></p>
+{% endblock %}

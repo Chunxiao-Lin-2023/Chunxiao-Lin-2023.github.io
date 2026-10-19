@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AI for circuit and system design · Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="../../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
+  <a class="" href="../../">about</a>
+  <a class="" href="../../publications/">publications</a>
+  <a class="on" href="../../projects/">projects</a>
+  <a class="" href="../../cv/">cv</a>
+</nav></header>
+<main>
+<p class="crumb"><a href="../../projects/">← Projects</a></p>
+<h1 class="page">AI for circuit and system design</h1>
+<div class="pmeta big"><span class="ptag">Springer</span><span class="per">2025</span></div>
+<div class="detail noimg">
+  <div>
+    <p class="lead">Two book chapters: AI-powered FPGA CAD flows, and machine-learning-enhanced analysis and design for trustworthy integrated circuits.</p>
+    
+    
+  </div>
+  
+</div>
+
+
+<h2>Publications</h2>
+
+<div class="pub" id="lin2025book">
+  <div class="pub-l"><span class="badge">Springer</span></div>
+  <div>
+    <div class="t">Enhancing FPGA CAD Flow with AI-Powered Solutions</div>
+    <div class="a"><em>Chunxiao Lin</em>, Yang Yi</div>
+    <div class="v">AI-Enabled Electronic Circuit and System Design, Springer, 2025</div>
+    
+    <div class="btns"><a class="btn" href="https://doi.org/10.1007/978-3-031-71436-8_7">DOI</a><a class="btn" href="#" data-bib="bib-lin2025book">BIB</a></div>
+    <pre class="bib" id="bib-lin2025book" hidden>@incollection{lin2025book,
+  title = {Enhancing FPGA CAD Flow with AI-Powered Solutions},
+  author = {Lin, Chunxiao and Yi, Yang},
+  booktitle = {AI-Enabled Electronic Circuit and System Design},
+  publisher = {Springer},
+  year = {2025},
+  doi = {10.1007/978-3-031-71436-8_7}
+}</pre>
+  </div>
+</div>
+
+<div class="pub" id="yang2025book">
+  <div class="pub-l"><span class="badge">Springer</span></div>
+  <div>
+    <div class="t">Machine Learning-Enhanced Analysis and Design for Trustworthy Integrated Circuits</div>
+    <div class="a">K. Yang, Y. Hu, D. Chen, <em>Chunxiao Lin</em>, Yang Yi, Peter A. Beerel, P. Nuzzo</div>
+    <div class="v">AI-Enabled Electronic Circuit and System Design, Springer, pp. 467–496, 2025</div>
+    
+    <div class="btns"><a class="btn" href="https://doi.org/10.1007/978-3-031-71436-8_13">DOI</a><a class="btn" href="#" data-bib="bib-yang2025book">BIB</a></div>
+    <pre class="bib" id="bib-yang2025book" hidden>@incollection{yang2025book,
+  title = {Machine Learning-Enhanced Analysis and Design for Trustworthy Integrated Circuits},
+  author = {Yang, K. and Hu, Y. and Chen, D. and Lin, Chunxiao and Yi, Yang and Beerel, Peter A. and Nuzzo, P.},
+  booktitle = {AI-Enabled Electronic Circuit and System Design},
+  publisher = {Springer},
+  pages = {467--496},
+  year = {2025},
+  doi = {10.1007/978-3-031-71436-8_13}
+}</pre>
+  </div>
+</div>
+
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

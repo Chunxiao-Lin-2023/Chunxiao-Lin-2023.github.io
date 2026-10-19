@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hybrid DSP–CLB reservoir neuron · Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="../../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
+  <a class="" href="../../">about</a>
+  <a class="" href="../../publications/">publications</a>
+  <a class="on" href="../../projects/">projects</a>
+  <a class="" href="../../cv/">cv</a>
+</nav></header>
+<main>
+<p class="crumb"><a href="../../projects/">← Projects</a></p>
+<h1 class="page">Hybrid DSP–CLB reservoir neuron</h1>
+<div class="pmeta big"><span class="ptag">ICNC'26</span><span class="per">2024 – 2025</span></div>
+<div class="detail">
+  <div>
+    <p class="lead">Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, so the DSPs never sit idle; a range-addressable tanh keeps the activation cheap.</p>
+    <div class="kpis"><div class="kpi"><b>0.97 µs</b><span>per prediction for a full ESN (64, 8, 64)</span></div><div class="kpi"><b>+25%</b><span>DSP efficiency vs. the DSP-only MAC (72×72 MVM)</span></div><div class="kpi"><b>5.7–14.2 dB</b><span>lower NMSE than the AR predictor</span></div></div>
+    <ul><li>Range-addressable LUT tanh: interpolation where tanh bends, ±1 in saturation; the DSP is clock-gated above the threshold and the table BRAM drops by 25%.</li><li>13% less processing time than the DSP-only MAC on a 72×72 matrix–vector product.</li></ul>
+  </div>
+  <div class="pimg"><img src="../../assets/img/pubs/icnc_neuron.png" alt=""></div>
+</div>
+
+
+<h2>Publications</h2>
+
+<div class="pub" id="lin2026icnc">
+  <div class="pub-l"><span class="badge">ICNC</span><img src="../../assets/img/pubs/icnc_neuron.png" alt=""></div>
+  <div>
+    <div class="t">FPGA-based High-speed Reservoir Computing for MIMO Channel Prediction</div>
+    <div class="a"><em>Chunxiao Lin</em>, Ummay Sumaya Khan, Lingjia Liu, Yang Yi</div>
+    <div class="v">International Conference on Computing, Networking and Communications (ICNC), pp. 465–470, 2026</div>
+    <div class="s">A hybrid DSP–CLB reservoir neuron and a range-addressable tanh for high-speed ESN inference.</div>
+    <div class="btns"><a class="btn" href="https://doi.org/10.1109/ICNC68183.2026.11417007">DOI</a><a class="btn" href="#" data-bib="bib-lin2026icnc">BIB</a></div>
+    <pre class="bib" id="bib-lin2026icnc" hidden>@inproceedings{lin2026icnc,
+  title = {FPGA-based High-speed Reservoir Computing for MIMO Channel Prediction},
+  author = {Lin, Chunxiao and Khan, Ummay Sumaya and Liu, Lingjia and Yi, Yang},
+  booktitle = {International Conference on Computing, Networking and Communications (ICNC)},
+  pages = {465--470},
+  year = {2026},
+  doi = {10.1109/ICNC68183.2026.11417007}
+}</pre>
+  </div>
+</div>
+
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

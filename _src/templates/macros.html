@@ -1,0 +1,50 @@
+{% macro links(p, root) %}{% if p.doi_url %}<a class="btn" href="{{ p.doi_url }}">DOI</a>{% endif %}{% if p.pdf_url %}<a class="btn" href="{{ p.pdf_url if p.pdf_url.startswith('http') else root ~ p.pdf_url[1:] }}">PDF</a>{% endif %}<a class="btn" href="#" data-bib="bib-{{ p.key }}">BIB</a>{% endmacro %}
+
+{# full entry: thumbnail + summary (used on project pages) #}
+{% macro pub(p, root) %}
+<div class="pub" id="{{ p.key }}">
+  <div class="pub-l"><span class="badge">{{ p.abbr }}</span>{% if p.img %}<img src="{{ root }}assets/img/pubs/{{ p.img }}" alt="">{% endif %}</div>
+  <div>
+    <div class="t">{{ p.title_h }}</div>
+    <div class="a">{{ p.authors_h }}</div>
+    <div class="v">{{ p.venue_h }}, {{ p.year }}{% if p.status %} <span class="tagacc">{{ p.status }}</span>{% endif %}</div>
+    {% if p.summary %}<div class="s">{{ p.summary|replace('--','–') }}</div>{% endif %}
+    <div class="btns">{{ links(p, root) }}</div>
+    <pre class="bib" id="bib-{{ p.key }}" hidden>{{ p.bib }}</pre>
+  </div>
+</div>
+{% endmacro %}
+
+{# compact entry: key information only (publications page) #}
+{% macro pubrow(p, root) %}
+<div class="prow" id="{{ p.key }}">
+  <span class="badge">{{ p.abbr }}</span>
+  <div>
+    <div class="t">{% if p.news %}<span class="new">New</span>{% endif %}{{ p.title_h }}</div>
+    <div class="a">{{ p.authors_h }}</div>
+    <div class="v">{{ p.venue_h }}, {{ p.year }}{% if p.status %} <span class="tagacc">{{ p.status }}</span>{% endif %}</div>
+    <div class="btns">{{ links(p, root) }}{% if p.project and p.project.has_page %}<a class="btn proj-btn" href="{{ root }}projects/{{ p.project.id }}/">Project</a>{% endif %}</div>
+    <pre class="bib" id="bib-{{ p.key }}" hidden>{{ p.bib }}</pre>
+  </div>
+</div>
+{% endmacro %}
+
+{% macro meta(pr) %}{% if pr.unpublished %}<span class="ongoing">{{ 'Unpublished · ' ~ pr.period if pr.period else 'Ongoing' }}</span>{% else %}{% if pr.tag %}<span class="ptag">{{ pr.tag }}</span>{% endif %}{% if pr.period %}<span class="per">{{ pr.period }}</span>{% endif %}{% endif %}{% endmacro %}
+
+{# project card (projects page) #}
+{% macro pcard(pr, root) %}
+{% if pr.has_page %}<a class="card" href="{{ root }}projects/{{ pr.id }}/">{% else %}<div class="card static">{% endif %}
+  {% if pr.img %}<img src="{{ root }}assets/img/pubs/{{ pr.img }}" alt="">{% else %}<div class="card-ph"><span>{{ 'Ongoing' if pr.unpublished else pr.tag }}</span></div>{% endif %}
+  <div><b>{{ pr.title }}</b><div class="pmeta">{{ meta(pr) }}</div><p>{{ pr.text }}</p>{% if pr.has_page %}<span class="go">Details →</span>{% endif %}</div>
+{% if pr.has_page %}</a>{% else %}</div>{% endif %}
+{% endmacro %}
+
+{# highlight card (home page) #}
+{% macro hcard(pr, root) %}
+<a class="hcard" href="{{ root }}projects/{{ pr.id }}/">
+  <img src="{{ root }}assets/img/pubs/{{ pr.img }}" alt="">
+  <div class="hb"><b>{{ pr.title }}</b><div class="pmeta">{{ meta(pr) }}</div>
+  <p>{{ pr.text }}</p>
+  {% if pr.kpis %}<div class="kpis">{% for k in pr.kpis[:2] %}<div class="kpi"><b>{{ k.v }}</b><span>{{ k.l }}</span></div>{% endfor %}</div>{% endif %}</div>
+</a>
+{% endmacro %}

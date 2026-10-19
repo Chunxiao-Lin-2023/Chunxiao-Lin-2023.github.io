@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Real-time 10G Ethernet PC–FPGA testbed for distributed MIMO · Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="../../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
+  <a class="" href="../../">about</a>
+  <a class="" href="../../publications/">publications</a>
+  <a class="on" href="../../projects/">projects</a>
+  <a class="" href="../../cv/">cv</a>
+</nav></header>
+<main>
+<p class="crumb"><a href="../../projects/">← Projects</a></p>
+<h1 class="page">Real-time 10G Ethernet PC–FPGA testbed for distributed MIMO</h1>
+<div class="pmeta big"><span class="ongoing">Unpublished · 2026</span></div>
+<div class="detail">
+  <div>
+    <p class="lead">An end-to-end, live channel-prediction loop for a distributed MIMO (DMIMO) system: a 4-antenna base station serves two 2-antenna users through a radio channel emulator, and an FPGA reservoir-computing accelerator predicts each user's channel frame by frame.</p>
+    
+    <ul><li>Software-defined radios carry the 4×2 DMIMO link through the channel emulator.</li><li>The host PCs stream channel estimates to the FPGA over 10 Gb/s Ethernet and get predictions back in real time.</li><li>A live visualizer shows the input channels, prediction error against outdated CSI, and end-to-end latency.</li></ul>
+  </div>
+  <div class="pimg"><img src="../../assets/img/pubs/testbed_photo.jpg" alt=""></div>
+</div>
+<figure class="wide"><img src="../../assets/img/pubs/testbed_system.jpg" alt=""><figcaption>System overview: base station and two users linked through a radio channel emulator; the FPGA predicts each user's channel.</figcaption></figure>
+<h2>Demo videos</h2>
+<div class="vids"><figure><video controls muted playsinline preload="metadata" poster="../../assets/video/10g_demo.jpg"><source src="../../assets/video/10g_demo.mp4" type="video/mp4"></video><figcaption>Live demo, 10 GbE testbed: two users predicted in parallel; the visualizer shows the input channels, prediction error vs. outdated CSI, and end-to-end latency.</figcaption></figure><figure><video controls muted playsinline preload="metadata" poster="../../assets/video/1g_demo.jpg"><source src="../../assets/video/1g_demo.mp4" type="video/mp4"></video><figcaption>Earlier 1 GbE testbed (processor + programmable-logic hybrid), used to bring up each new model.</figcaption></figure></div>
+
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

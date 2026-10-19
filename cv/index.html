@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CV · Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="../">Chunxiao <b>Lin</b></a>
+  <a class="" href="../">about</a>
+  <a class="" href="../publications/">publications</a>
+  <a class="" href="../projects/">projects</a>
+  <a class="on" href="../cv/">cv</a>
+</nav></header>
+<main>
+<h1 class="page">Curriculum Vitae</h1>
+<p class="sub">Chunxiao (Calvin) Lin · chunxiaol@vt.edu</p>
+<h2>Education</h2>
+<table class="news"><tr><td><b>Ph.D., Computer Engineering</b><br><span class="mut">Virginia Tech · Advisor: Prof. Yang (Cindy) Yi · 2021 – 2027 (expected)</span></td></tr><tr><td><b>Master's, Electrical and Computer Engineering</b><br><span class="mut">University of Southern California · Computer architecture and VLSI design · 2019 – 2021</span></td></tr><tr><td><b>B.E., Opto-electronic Information</b><br><span class="mut">Huazhong University of Science and Technology</span></td></tr></table>
+<h2>Research interests</h2>
+<div class="chips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+<h2>Skills</h2>
+<table class="news"><tr><td>Languages</td><td>Verilog, SystemVerilog, Python, MATLAB, C</td></tr><tr><td>Tools</td><td>Xilinx Vivado, Vitis, Quartus, Cadence, ns-3, PyCharm, Jupyter, CLion</td></tr><tr><td>Platforms</td><td>Xilinx Virtex-7 FPGA, Zynq-7000 SoC FPGA, Zynq UltraScale+ RFSoC, USRP software-defined radios</td></tr></table>
+<h2>Publications</h2>
+<ol class="cvpubs"><li><em>Chunxiao Lin</em>, Ummay Sumaya Khan, Meiyu Zheng, Muhammad Farhan Azmine, Lingjia Liu, Daniel J. Jakubisin, Yang Yi, “FPGA-based Reservoir Computing with On-chip Learning for MIMO Channel Prediction,” <i>IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)</i>, 2026.</li><li><em>Chunxiao Lin</em>, Ummay Sumaya Khan, Lingjia Liu, Yang Yi, “FPGA-based High-speed Reservoir Computing for MIMO Channel Prediction,” <i>International Conference on Computing, Networking and Communications (ICNC), pp. 465–470</i>, 2026.</li><li>S. S. Chowdhury, M. R. Sarkar, J. Ling, <em>Chunxiao Lin</em>, Yang Yi, “SPARC: Spiking Reservoir Computing with On-Chip R-STDP for Spectrum Sensing,” <i>IEEE Transactions on Very Large Scale Integration (VLSI) Systems</i>, 2026 (accepted).</li><li>Ramashish Gaurav, Sujata Sinha, <em>Chunxiao Lin</em>, Terrence C. Stewart, Lingjia Liu, Yang Yi, “Multivariate Legendre-SNN on Loihi-2 for Time Series Classification and 5G Jamming Detection,” <i>IEEE Transactions on Circuits and Systems for Artificial Intelligence (TCASAI)</i>, 2026.</li><li>Andrew Liu, Muhammad Farhan Azmine, <em>Chunxiao Lin</em>, Yang Yi, “Reservoir Computing: Foundations, Advances, and Challenges Toward Neuromorphic Intelligence,” <i>AI (MDPI)</i>, 2026.</li><li>Andrew Liu, <em>Chunxiao Lin</em>, Daniel Rosen, Yang Yi, “Echo State Networks in Reservoir Computing: Foundations, Benchmarks, and Applications to Next-G Wireless Communication,” <i>IEEE International Conference on Data Mining Workshops (ICDMW), pp. 3076–3080</i>, 2025.</li><li><em>Chunxiao Lin</em>, Yang Yi, “Enhancing FPGA CAD Flow with AI-Powered Solutions,” <i>AI-Enabled Electronic Circuit and System Design, Springer</i>, 2025.</li><li>K. Yang, Y. Hu, D. Chen, <em>Chunxiao Lin</em>, Yang Yi, Peter A. Beerel, P. Nuzzo, “Machine Learning-Enhanced Analysis and Design for Trustworthy Integrated Circuits,” <i>AI-Enabled Electronic Circuit and System Design, Springer, pp. 467–496</i>, 2025.</li><li><em>Chunxiao Lin</em>, Muhammad Farhan Azmine, Yibin Liang, Yang Yi, “Leveraging Neuro-Inspired AI Accelerator for High-Speed Computing in 6G Networks,” <i>Frontiers in Computational Neuroscience</i>, 2024.</li><li><em>Chunxiao Lin</em>, Muhammad Farhan Azmine, Yang Yi, “Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerators,” <i>IEEE/ACM International Conference on Computer Aided Design (ICCAD)</i>, 2023.</li><li><em>Chunxiao Lin</em>, Yibin Liang, Yang Yi, “FPGA-based Reservoir Computing with Optimized Reservoir Node Architecture,” <i>International Symposium on Quality Electronic Design (ISQED)</i>, 2022.</li><li>Dake Chen, <em>Chunxiao Lin</em>, Peter A. Beerel, “GF-Flush: A GF(2) Algebraic Attack on Dynamically Secured Scan Chains,” <i>IEEE International Symposium on Defect and Fault Tolerance in VLSI and Nanotechnology Systems (DFT)</i>, 2021.</li></ol>
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

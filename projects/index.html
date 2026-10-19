@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Projects · Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="../">Chunxiao <b>Lin</b></a>
+  <a class="" href="../">about</a>
+  <a class="" href="../publications/">publications</a>
+  <a class="on" href="../projects/">projects</a>
+  <a class="" href="../cv/">cv</a>
+</nav></header>
+<main>
+<h1 class="page">Projects</h1>
+<p class="sub">Grouped by field. Open a project for its details and papers.</p>
+<nav class="toc"><a href="#g1">FPGA accelerators for reservoir computing</a><a href="#g2">Real-time wireless systems</a><a href="#g3">Neuromorphic and spiking computing</a><a href="#g4">Surveys and book chapters</a><a href="#g5">Earlier projects: VLSI, hardware security and networking</a></nav>
+
+<h2 id="g1">FPGA accelerators for reservoir computing</h2><p class="blurb">The core of my Ph.D.: reservoir neurons, readouts and on-chip learning on FPGA.</p>
+<div class="grid">
+<a class="card" href="../projects/onchip-rls/">
+  <img src="../assets/img/pubs/tcad_overall.png" alt="">
+  <div><b>On-chip RLS learning for MIMO channel prediction</b><div class="pmeta"><span class="ptag">TCAD'26</span><span class="per">2024 – 2026</span></div><p>A complete echo state network on one FPGA: inference and recursive-least-squares (RLS) training share the same DSP arrays, so the channel predictor retrains itself on chip.</p><span class="go">Details →</span></div>
+</a>
+
+<a class="card" href="../projects/hybrid-neuron/">
+  <img src="../assets/img/pubs/icnc_neuron.png" alt="">
+  <div><b>Hybrid DSP–CLB reservoir neuron</b><div class="pmeta"><span class="ptag">ICNC'26</span><span class="per">2024 – 2025</span></div><p>Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, so the DSPs never sit idle; a range-addressable tanh keeps the activation cheap.</p><span class="go">Details →</span></div>
+</a>
+
+<a class="card" href="../projects/bit-serial/">
+  <img src="../assets/img/pubs/isqed_arch.png" alt="">
+  <div><b>Bit-serial reservoir neuron</b><div class="pmeta"><span class="ptag">ISQED'22</span><span class="per">2021 – 2022</span></div><p>A low-cost reservoir neuron that hard-wires the fixed, sparse ESN weights into a bit-serial multiplier, with canonical-signed-digit encoding and an optimized tanh.</p><span class="go">Details →</span></div>
+</a>
+
+<div class="card static">
+  <div class="card-ph"><span>Ongoing</span></div>
+  <div><b>Hardware–software co-design of an on-chip ESN</b><div class="pmeta"><span class="ongoing">Unpublished · 2025</span></div><p>An on-chip ESN with inference in programmable logic and learning on the embedded processor of a Zynq SoC FPGA.</p></div>
+</div>
+
+<div class="card static">
+  <div class="card-ph"><span>Ongoing</span></div>
+  <div><b>Advanced reservoir models on FPGA</b><div class="pmeta"><span class="ongoing">Ongoing</span></div><p>Hardware for newer reservoir models and larger wireless systems.</p></div>
+</div>
+
+<div class="card static">
+  <div class="card-ph"><span>Ongoing</span></div>
+  <div><b>Toward an ASIC neural receiver</b><div class="pmeta"><span class="ongoing">Ongoing</span></div><p>Taking the real-time ESN receiver from FPGA toward a chip.</p></div>
+</div>
+</div>
+
+<h2 id="g2">Real-time wireless systems</h2><p class="blurb">Putting the accelerators into live wireless links.</p>
+<div class="grid">
+<a class="card" href="../projects/testbeds/">
+  <img src="../assets/img/pubs/testbed_photo.jpg" alt="">
+  <div><b>Real-time 10G Ethernet PC–FPGA testbed for distributed MIMO</b><div class="pmeta"><span class="ongoing">Unpublished · 2026</span></div><p>An end-to-end, live channel-prediction loop for a distributed MIMO (DMIMO) system: a 4-antenna base station serves two 2-antenna users through a radio channel emulator, and an FPGA reservoir-computing accelerator predicts each user's channel frame by frame.</p><span class="go">Details →</span></div>
+</a>
+
+<a class="card" href="../projects/sdr-fpga/">
+  <img src="../assets/img/pubs/iccad_platform.png" alt="">
+  <div><b>DSP-based ESN and SDR/FPGA platform for MIMO-OFDM detection</b><div class="pmeta"><span class="ptag">ICCAD'23</span><span class="per">2022</span></div><p>A DSP48E1-array reservoir neuron for 2×2 MIMO-OFDM symbol detection, tested over the air with an SDR platform (PC, Virtex-7 FPGA and two USRPs running a GNU Radio Wi-Fi link).</p><span class="go">Details →</span></div>
+</a>
+
+<a class="card" href="../projects/mmimo/">
+  <img src="../assets/img/pubs/front_mmimo_uplink.png" alt="">
+  <div><b>Scalable ESN symbol detector for massive MIMO-OFDM</b><div class="pmeta"><span class="ptag">Frontiers'24</span><span class="per">2023</span></div><p>A hardware-accelerated reservoir neuron speeds up an ESN symbol detector for massive MIMO-OFDM, validated on a Virtex-7 FPGA across a range of MIMO configurations against linear MMSE detection.</p><span class="go">Details →</span></div>
+</a>
+</div>
+
+<h2 id="g3">Neuromorphic and spiking computing</h2><p class="blurb">Collaborations on spiking reservoirs and neuromorphic chips.</p>
+<div class="grid">
+<a class="card" href="../projects/sparc/">
+  <div class="card-ph"><span>TVLSI (accepted)</span></div>
+  <div><b>SPARC: spiking reservoir computing with on-chip R-STDP</b><div class="pmeta"><span class="ptag">TVLSI (accepted)</span><span class="per">2026</span></div><p>A spiking reservoir with on-chip reward-modulated STDP learning, applied to spectrum sensing.</p><span class="go">Details →</span></div>
+</a>
+
+<a class="card" href="../projects/loihi/">
+  <div class="card-ph"><span>TCASAI'26</span></div>
+  <div><b>Legendre-SNN on Loihi-2</b><div class="pmeta"><span class="ptag">TCASAI'26</span><span class="per">2026</span></div><p>A multivariate Legendre spiking neural network on Intel's Loihi-2 neuromorphic chip, for time-series classification and 5G jamming detection.</p><span class="go">Details →</span></div>
+</a>
+</div>
+
+<h2 id="g4">Surveys and book chapters</h2>
+<div class="grid">
+<a class="card" href="../projects/surveys/">
+  <div class="card-ph"><span>AI'26 · ICDMW'25</span></div>
+  <div><b>Surveys of reservoir computing and echo state networks</b><div class="pmeta"><span class="ptag">AI'26 · ICDMW'25</span><span class="per">2025 – 2026</span></div><p>Two surveys: reservoir computing from foundations to neuromorphic intelligence, and echo state networks with benchmarks and applications to next-G wireless communication.</p><span class="go">Details →</span></div>
+</a>
+
+<a class="card" href="../projects/books/">
+  <div class="card-ph"><span>Springer</span></div>
+  <div><b>AI for circuit and system design</b><div class="pmeta"><span class="ptag">Springer</span><span class="per">2025</span></div><p>Two book chapters: AI-powered FPGA CAD flows, and machine-learning-enhanced analysis and design for trustworthy integrated circuits.</p><span class="go">Details →</span></div>
+</a>
+</div>
+
+<h2 id="g5">Earlier projects: VLSI, hardware security and networking</h2>
+<div class="grid">
+<a class="card" href="../projects/scan-chain/">
+  <img src="../assets/img/pubs/gfflush_scan.png" alt="">
+  <div><b>Dynamically secured scan chains and the GF-Flush attack</b><div class="pmeta"><span class="ptag">DFT'21</span><span class="per">2020 – 2021</span></div><p>Implemented a dynamically secured scan chain and verified a scan-based attack; the follow-up GF(2) algebraic flush attack recovers the dynamic key by solving linear equations over GF(2).</p><span class="go">Details →</span></div>
+</a>
+
+<a class="card" href="../projects/sram/">
+  <img src="../assets/img/pubs/sram_imc.png" alt="">
+  <div><b>Low-power 10T-SRAM for in-memory computing</b><div class="pmeta"><span class="ptag">USC</span><span class="per">2020</span></div><p>A 10T-SRAM cell reads Q and QB onto two read bit-lines at once; two cells sharing a bit-line, with tuned inverter trip points, compute NOR and NAND in memory.</p><span class="go">Details →</span></div>
+</a>
+
+<div class="card static">
+  <div class="card-ph"><span>USC</span></div>
+  <div><b>4-node cardinal chip multiprocessor</b><div class="pmeta"><span class="ptag">USC</span><span class="per">2021</span></div><p>Design of a 4-node chip multiprocessor.</p></div>
+</div>
+
+<div class="card static">
+  <div class="card-ph"><span>USC</span></div>
+  <div><b>CPU hardware system design</b><div class="pmeta"><span class="ptag">USC</span><span class="per">2020</span></div><p>Design and implementation of a CPU hardware system.</p></div>
+</div>
+
+<a class="card" href="../projects/ntn/">
+  <div class="card-ph"><span>ns-3</span></div>
+  <div><b>ML-based handover for LEO non-terrestrial networks</b><div class="pmeta"><span class="ptag">ns-3</span><span class="per">2023</span></div><p>A clustering-based handover and target-satellite selection algorithm for an LEO satellite network, aiming at fewer handovers and better bitrate, delay and jitter.</p><span class="go">Details →</span></div>
+</a>
+</div>
+
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

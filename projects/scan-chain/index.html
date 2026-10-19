@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dynamically secured scan chains and the GF-Flush attack · Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="../../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
+  <a class="" href="../../">about</a>
+  <a class="" href="../../publications/">publications</a>
+  <a class="on" href="../../projects/">projects</a>
+  <a class="" href="../../cv/">cv</a>
+</nav></header>
+<main>
+<p class="crumb"><a href="../../projects/">← Projects</a></p>
+<h1 class="page">Dynamically secured scan chains and the GF-Flush attack</h1>
+<div class="pmeta big"><span class="ptag">DFT'21</span><span class="per">2020 – 2021</span></div>
+<div class="detail">
+  <div>
+    <p class="lead">Implemented a dynamically secured scan chain and verified a scan-based attack; the follow-up GF(2) algebraic flush attack recovers the dynamic key by solving linear equations over GF(2).</p>
+    <div class="kpis"><div class="kpi"><b>< 7 s</b><span>to recover a 500-bit key</span></div><div class="kpi"><b>>4300×</b><span>faster than SAT-based attacks</span></div></div>
+    <ul><li>A Python flow converts bench-format netlists into Verilog and inserts the dynamic encryption logic.</li><li>The attack's math model was verified against ModelSim simulation.</li><li>The attack extends to scan chains compressed with multiple-input signature registers (MISRs).</li></ul>
+  </div>
+  <div class="pimg"><img src="../../assets/img/pubs/gfflush_scan.png" alt=""></div>
+</div>
+
+
+<h2>Publications</h2>
+
+<div class="pub" id="chen2021dft">
+  <div class="pub-l"><span class="badge">DFT</span></div>
+  <div>
+    <div class="t">GF-Flush: A GF(2) Algebraic Attack on Dynamically Secured Scan Chains</div>
+    <div class="a">Dake Chen, <em>Chunxiao Lin</em>, Peter A. Beerel</div>
+    <div class="v">IEEE International Symposium on Defect and Fault Tolerance in VLSI and Nanotechnology Systems (DFT), 2021</div>
+    
+    <div class="btns"><a class="btn" href="https://doi.org/10.1109/DFT52944.2021.9568356">DOI</a><a class="btn" href="../../files/01_GF-Flush_2021.pdf">PDF</a><a class="btn" href="#" data-bib="bib-chen2021dft">BIB</a></div>
+    <pre class="bib" id="bib-chen2021dft" hidden>@inproceedings{chen2021dft,
+  title = {GF-Flush: A GF(2) Algebraic Attack on Dynamically Secured Scan Chains},
+  author = {Chen, Dake and Lin, Chunxiao and Beerel, Peter A.},
+  booktitle = {IEEE International Symposium on Defect and Fault Tolerance in VLSI and Nanotechnology Systems (DFT)},
+  year = {2021},
+  doi = {10.1109/DFT52944.2021.9568356}
+}</pre>
+  </div>
+</div>
+
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

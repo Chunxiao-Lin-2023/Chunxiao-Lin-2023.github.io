@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ML-based handover for LEO non-terrestrial networks · Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="../../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
+  <a class="" href="../../">about</a>
+  <a class="" href="../../publications/">publications</a>
+  <a class="on" href="../../projects/">projects</a>
+  <a class="" href="../../cv/">cv</a>
+</nav></header>
+<main>
+<p class="crumb"><a href="../../projects/">← Projects</a></p>
+<h1 class="page">ML-based handover for LEO non-terrestrial networks</h1>
+<div class="pmeta big"><span class="ptag">ns-3</span><span class="per">2023</span></div>
+<div class="detail noimg">
+  <div>
+    <p class="lead">A clustering-based handover and target-satellite selection algorithm for an LEO satellite network, aiming at fewer handovers and better bitrate, delay and jitter.</p>
+    
+    <ul><li>Each step, K-means groups the satellites by position; the user picks the cluster with the highest mean RSRP and keeps its satellite if it is in that cluster, otherwise hands over to the strongest one.</li><li>An ns-3 NTN setup with 10 ground users and 93 satellite base stations.</li></ul>
+  </div>
+  
+</div>
+
+
+
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DSP-based ESN and SDR/FPGA platform for MIMO-OFDM detection · Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="../../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
+  <a class="" href="../../">about</a>
+  <a class="" href="../../publications/">publications</a>
+  <a class="on" href="../../projects/">projects</a>
+  <a class="" href="../../cv/">cv</a>
+</nav></header>
+<main>
+<p class="crumb"><a href="../../projects/">← Projects</a></p>
+<h1 class="page">DSP-based ESN and SDR/FPGA platform for MIMO-OFDM detection</h1>
+<div class="pmeta big"><span class="ptag">ICCAD'23</span><span class="per">2022</span></div>
+<div class="detail">
+  <div>
+    <p class="lead">A DSP48E1-array reservoir neuron for 2×2 MIMO-OFDM symbol detection, tested over the air with an SDR platform (PC, Virtex-7 FPGA and two USRPs running a GNU Radio Wi-Fi link).</p>
+    <div class="kpis"><div class="kpi"><b>3.3×</b><span>throughput for only +21.4% LUT and +33% FF</span></div><div class="kpi"><b>0.04</b><span>average BER over a real wireless channel</span></div><div class="kpi"><b>−50%</b><span>BRAM (and −33.3% DSP IP) usage</span></div></div>
+    <ul><li>A 3×3 DSP array in three stages: all nine slices run MAC, then three groups reduce, then one final sum.</li></ul>
+  </div>
+  <div class="pimg"><img src="../../assets/img/pubs/iccad_platform.png" alt=""></div>
+</div>
+
+
+<h2>Publications</h2>
+
+<div class="pub" id="lin2023iccad">
+  <div class="pub-l"><span class="badge">ICCAD</span><img src="../../assets/img/pubs/iccad_platform.png" alt=""></div>
+  <div>
+    <div class="t">Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerators</div>
+    <div class="a"><em>Chunxiao Lin</em>, Muhammad Farhan Azmine, Yang Yi</div>
+    <div class="v">IEEE/ACM International Conference on Computer Aided Design (ICCAD), 2023</div>
+    <div class="s">A DSP-based FPGA echo state network and an SDR/FPGA platform for over-the-air 2x2 MIMO-OFDM symbol detection.</div>
+    <div class="btns"><a class="btn" href="https://doi.org/10.1109/ICCAD57390.2023.10323918">DOI</a><a class="btn" href="../../files/03_ICCAD_2023.pdf">PDF</a><a class="btn" href="#" data-bib="bib-lin2023iccad">BIB</a></div>
+    <pre class="bib" id="bib-lin2023iccad" hidden>@inproceedings{lin2023iccad,
+  title = {Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerators},
+  author = {Lin, Chunxiao and Azmine, Muhammad Farhan and Yi, Yang},
+  booktitle = {IEEE/ACM International Conference on Computer Aided Design (ICCAD)},
+  year = {2023},
+  doi = {10.1109/ICCAD57390.2023.10323918}
+}</pre>
+  </div>
+</div>
+
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

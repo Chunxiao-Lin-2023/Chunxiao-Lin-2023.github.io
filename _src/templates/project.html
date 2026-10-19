@@ -1,0 +1,20 @@
+{% extends "base.html" %}{% from "macros.html" import pub, meta %}
+{% block title %}{{ pr.title }} · {{ site.name }}{% endblock %}
+{% block body %}
+<p class="crumb"><a href="{{ root }}projects/">← Projects</a></p>
+<h1 class="page">{{ pr.title }}</h1>
+<div class="pmeta big">{{ meta(pr) }}</div>
+<div class="detail{{ ' noimg' if not pr.img }}">
+  <div>
+    <p class="lead">{{ pr.text }}</p>
+    {% if pr.kpis %}<div class="kpis">{% for k in pr.kpis %}<div class="kpi"><b>{{ k.v }}</b><span>{{ k.l }}</span></div>{% endfor %}</div>{% endif %}
+    {% if pr.points %}<ul>{% for x in pr.points %}<li>{{ x }}</li>{% endfor %}</ul>{% endif %}
+  </div>
+  {% if pr.img %}<div class="pimg"><img src="{{ root }}assets/img/pubs/{{ pr.img }}" alt=""></div>{% endif %}
+</div>
+{% if pr.wide_img %}<figure class="wide"><img src="{{ root }}assets/img/pubs/{{ pr.wide_img }}" alt="">{% if pr.wide_cap %}<figcaption>{{ pr.wide_cap }}</figcaption>{% endif %}</figure>{% endif %}
+{% if pr.videos %}<h2>Demo videos</h2>
+<div class="vids">{% for v in pr.videos %}<figure><video controls muted playsinline preload="metadata" poster="{{ root }}assets/video/{{ v.poster }}"><source src="{{ root }}assets/video/{{ v.src }}" type="video/mp4"></video><figcaption>{{ v.cap }}</figcaption></figure>{% endfor %}</div>{% endif %}
+{% if pr.pub_list %}<h2>Publications</h2>
+{% for p in pr.pub_list %}{{ pub(p, root) }}{% endfor %}{% endif %}
+{% endblock %}

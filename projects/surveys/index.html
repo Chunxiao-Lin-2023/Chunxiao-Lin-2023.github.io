@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surveys of reservoir computing and echo state networks · Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="../../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
+  <a class="" href="../../">about</a>
+  <a class="" href="../../publications/">publications</a>
+  <a class="on" href="../../projects/">projects</a>
+  <a class="" href="../../cv/">cv</a>
+</nav></header>
+<main>
+<p class="crumb"><a href="../../projects/">← Projects</a></p>
+<h1 class="page">Surveys of reservoir computing and echo state networks</h1>
+<div class="pmeta big"><span class="ptag">AI'26 · ICDMW'25</span><span class="per">2025 – 2026</span></div>
+<div class="detail noimg">
+  <div>
+    <p class="lead">Two surveys: reservoir computing from foundations to neuromorphic intelligence, and echo state networks with benchmarks and applications to next-G wireless communication.</p>
+    
+    
+  </div>
+  
+</div>
+
+
+<h2>Publications</h2>
+
+<div class="pub" id="liu2026ai">
+  <div class="pub-l"><span class="badge">AI</span></div>
+  <div>
+    <div class="t">Reservoir Computing: Foundations, Advances, and Challenges Toward Neuromorphic Intelligence</div>
+    <div class="a">Andrew Liu, Muhammad Farhan Azmine, <em>Chunxiao Lin</em>, Yang Yi</div>
+    <div class="v">AI (MDPI), 2026</div>
+    
+    <div class="btns"><a class="btn" href="https://doi.org/10.3390/ai7020070">DOI</a><a class="btn" href="../../files/12_AI_MDPI_2026.pdf">PDF</a><a class="btn" href="#" data-bib="bib-liu2026ai">BIB</a></div>
+    <pre class="bib" id="bib-liu2026ai" hidden>@article{liu2026ai,
+  title = {Reservoir Computing: Foundations, Advances, and Challenges Toward Neuromorphic Intelligence},
+  author = {Liu, Andrew and Azmine, Muhammad Farhan and Lin, Chunxiao and Yi, Yang},
+  journal = {AI (MDPI)},
+  volume = {7},
+  number = {2},
+  year = {2026},
+  doi = {10.3390/ai7020070}
+}</pre>
+  </div>
+</div>
+
+<div class="pub" id="liu2025icdmw">
+  <div class="pub-l"><span class="badge">ICDMW</span></div>
+  <div>
+    <div class="t">Echo State Networks in Reservoir Computing: Foundations, Benchmarks, and Applications to Next-G Wireless Communication</div>
+    <div class="a">Andrew Liu, <em>Chunxiao Lin</em>, Daniel Rosen, Yang Yi</div>
+    <div class="v">IEEE International Conference on Data Mining Workshops (ICDMW), pp. 3076–3080, 2025</div>
+    
+    <div class="btns"><a class="btn" href="https://doi.org/10.1109/ICDMW69685.2025.00405">DOI</a><a class="btn" href="#" data-bib="bib-liu2025icdmw">BIB</a></div>
+    <pre class="bib" id="bib-liu2025icdmw" hidden>@inproceedings{liu2025icdmw,
+  title = {Echo State Networks in Reservoir Computing: Foundations, Benchmarks, and Applications to Next-G Wireless Communication},
+  author = {Liu, Andrew and Lin, Chunxiao and Rosen, Daniel and Yi, Yang},
+  booktitle = {IEEE International Conference on Data Mining Workshops (ICDMW)},
+  pages = {3076--3080},
+  year = {2025},
+  doi = {10.1109/ICDMW69685.2025.00405}
+}</pre>
+  </div>
+</div>
+
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

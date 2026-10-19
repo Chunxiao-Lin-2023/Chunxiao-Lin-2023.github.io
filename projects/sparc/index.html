@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SPARC: spiking reservoir computing with on-chip R-STDP · Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="../../assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="../../">Chunxiao <b>Lin</b></a>
+  <a class="" href="../../">about</a>
+  <a class="" href="../../publications/">publications</a>
+  <a class="on" href="../../projects/">projects</a>
+  <a class="" href="../../cv/">cv</a>
+</nav></header>
+<main>
+<p class="crumb"><a href="../../projects/">← Projects</a></p>
+<h1 class="page">SPARC: spiking reservoir computing with on-chip R-STDP</h1>
+<div class="pmeta big"><span class="ptag">TVLSI (accepted)</span><span class="per">2026</span></div>
+<div class="detail noimg">
+  <div>
+    <p class="lead">A spiking reservoir with on-chip reward-modulated STDP learning, applied to spectrum sensing.</p>
+    
+    
+  </div>
+  
+</div>
+
+
+<h2>Publications</h2>
+
+<div class="pub" id="sparc2026tvlsi">
+  <div class="pub-l"><span class="badge">TVLSI</span></div>
+  <div>
+    <div class="t">SPARC: Spiking Reservoir Computing with On-Chip R-STDP for Spectrum Sensing</div>
+    <div class="a">S. S. Chowdhury, M. R. Sarkar, J. Ling, <em>Chunxiao Lin</em>, Yang Yi</div>
+    <div class="v">IEEE Transactions on Very Large Scale Integration (VLSI) Systems, 2026 <span class="tagacc">accepted</span></div>
+    
+    <div class="btns"><a class="btn" href="#" data-bib="bib-sparc2026tvlsi">BIB</a></div>
+    <pre class="bib" id="bib-sparc2026tvlsi" hidden>@article{sparc2026tvlsi,
+  title = {SPARC: Spiking Reservoir Computing with On-Chip R-STDP for Spectrum Sensing},
+  author = {Chowdhury, S. S. and Sarkar, M. R. and Ling, J. and Lin, Chunxiao and Yi, Yang},
+  journal = {IEEE Transactions on Very Large Scale Integration (VLSI) Systems},
+  year = {2026}
+}</pre>
+  </div>
+</div>
+
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

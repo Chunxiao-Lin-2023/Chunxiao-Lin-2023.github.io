@@ -1,0 +1,283 @@
+# Everything on the site except the publication list (that comes from publications.bib).
+# Unpublished work: one-line, high-level descriptions only — no numbers, no figures, no design details.
+
+name: Chunxiao Lin
+display_name: Chunxiao (Calvin) Lin
+first: Chunxiao
+last: Lin
+title: Ph.D. student · Computer Engineering · Virginia Tech
+email: chunxiaol@vt.edu
+scholar: https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en
+github: https://github.com/Chunxiao-Lin-2023
+photo: photo.jpg
+url: https://chunxiao-lin-2023.github.io
+
+about: |
+  I am a sixth-year Ph.D. student at Virginia Tech, advised by
+  <a href="https://www.yangyi.ece.vt.edu/">Prof. Yang (Cindy) Yi</a>.
+  I design <b>FPGA accelerators for echo state networks</b> (reservoir computing), from cost-efficient
+  reservoir neurons to <b>on-chip learning</b>, and bring them into <b>real-time wireless systems</b>
+  for symbol detection and MIMO channel prediction.
+about2: |
+  Before Virginia Tech, I received my master's degree in Electrical and Computer Engineering from the University of
+  Southern California and my B.E. in Opto-electronic Information from Huazhong University of Science and Technology.
+
+interests: [Reservoir computing, FPGA accelerators, On-chip learning, Next-G wireless, Neuromorphic hardware]
+
+research:
+  - step: "1 · Inference"
+    title: Cost-efficient reservoir neurons
+    text: CLB-only, DSP-only and hybrid DSP–CLB neurons, a range-addressable tanh, and a systolic readout.
+    img: isqed_arch.png
+    refs: "ISQED'22 · ICCAD'23 · ICNC'26"
+  - step: "2 · Learning"
+    title: On-chip RLS training
+    text: A divider-free, pipelined recursive-least-squares learner in fixed point, sharing the arrays of inference.
+    img: tcad_rls.png
+    refs: "TCAD'26"
+  - step: "3 · System"
+    title: Real-time wireless validation
+    text: FPGA accelerators running in live SDR and PC–FPGA loops for symbol detection and channel prediction.
+    img: iccad_platform.png
+    refs: "ICCAD'23 · ongoing"
+
+# Projects, grouped by field. Numbers (kpis) come from published papers only.
+# Unpublished work: no numbers, no internal hardware blocks (system-level figures, photos, demo videos are OK).
+#   id = URL of the detail page (projects/<id>/)   pubs = bib keys   highlight = card on the home page
+project_groups:
+- name: FPGA accelerators for reservoir computing
+  blurb: 'The core of my Ph.D.: reservoir neurons, readouts and on-chip learning on FPGA.'
+  projects:
+  - id: onchip-rls
+    title: On-chip RLS learning for MIMO channel prediction
+    period: 2024 – 2026
+    tag: TCAD'26
+    img: tcad_overall.png
+    highlight: true
+    text: 'A complete echo state network on one FPGA: inference and recursive-least-squares (RLS) training share
+      the same DSP arrays, so the channel predictor retrains itself on chip.'
+    kpis:
+    - v: 3.87 µs
+      l: per training + prediction step (Virtex-7, 100 MHz)
+    - v: 5.3×
+      l: lower NMSE than the prior on-chip ESN learner
+    - v: '>1600×'
+      l: energy efficiency vs. a CPU (290× vs. a GPU)
+    - v: 264 Mb/s
+      l: on 64-dimensional channel data
+    points:
+    - An output-stationary systolic array computes the readout, about one MAC per DSP per cycle.
+    - 'A three-stage pipelined RLS update takes 2L+4 cycles: O(L²) work, but time grows only linearly with the state
+      size L.'
+    pubs:
+    - lin2026tcad
+  - id: hybrid-neuron
+    title: Hybrid DSP–CLB reservoir neuron
+    period: 2024 – 2025
+    tag: ICNC'26
+    img: icnc_neuron.png
+    highlight: true
+    text: Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, so the DSPs
+      never sit idle; a range-addressable tanh keeps the activation cheap.
+    kpis:
+    - v: 0.97 µs
+      l: per prediction for a full ESN (64, 8, 64)
+    - v: +25%
+      l: DSP efficiency vs. the DSP-only MAC (72×72 MVM)
+    - v: 5.7–14.2 dB
+      l: lower NMSE than the AR predictor
+    points:
+    - 'Range-addressable LUT tanh: interpolation where tanh bends, ±1 in saturation; the DSP is clock-gated above
+      the threshold and the table BRAM drops by 25%.'
+    - 13% less processing time than the DSP-only MAC on a 72×72 matrix–vector product.
+    pubs:
+    - lin2026icnc
+  - id: bit-serial
+    title: Bit-serial reservoir neuron
+    period: 2021 – 2022
+    tag: ISQED'22
+    img: isqed_arch.png
+    text: A low-cost reservoir neuron that hard-wires the fixed, sparse ESN weights into a bit-serial multiplier,
+      with canonical-signed-digit encoding and an optimized tanh.
+    points:
+    - Zero weights and zero bits cost no logic; a known 1-bit operand reduces the multiplier to wiring.
+    - Much lower resource utilization than earlier hardware ESNs at comparable accuracy.
+    pubs:
+    - lin2022isqed
+  - id: hwsw
+    title: Hardware–software co-design of an on-chip ESN
+    period: 2025
+    text: An on-chip ESN with inference in programmable logic and learning on the embedded processor of a Zynq SoC
+      FPGA.
+    unpublished: true
+  - id: advanced-rc
+    title: Advanced reservoir models on FPGA
+    text: Hardware for newer reservoir models and larger wireless systems.
+    unpublished: true
+  - id: asic
+    title: Toward an ASIC neural receiver
+    text: Taking the real-time ESN receiver from FPGA toward a chip.
+    unpublished: true
+- name: Real-time wireless systems
+  blurb: Putting the accelerators into live wireless links.
+  projects:
+  - id: testbeds
+    title: Real-time 10G Ethernet PC–FPGA testbed for distributed MIMO
+    period: 2026
+    img: testbed_photo.jpg
+    wide_img: testbed_system.jpg
+    wide_cap: 'System overview: base station and two users linked through a radio channel emulator; the FPGA predicts
+      each user''s channel.'
+    text: 'An end-to-end, live channel-prediction loop for a distributed MIMO (DMIMO) system: a 4-antenna base station
+      serves two 2-antenna users through a radio channel emulator, and an FPGA reservoir-computing accelerator predicts
+      each user''s channel frame by frame.'
+    points:
+    - Software-defined radios carry the 4×2 DMIMO link through the channel emulator.
+    - The host PCs stream channel estimates to the FPGA over 10 Gb/s Ethernet and get predictions back in real time.
+    - A live visualizer shows the input channels, prediction error against outdated CSI, and end-to-end latency.
+    unpublished: true
+    videos:
+    - src: 10g_demo.mp4
+      poster: 10g_demo.jpg
+      cap: 'Live demo, 10 GbE testbed: two users predicted in parallel; the visualizer shows the input channels,
+        prediction error vs. outdated CSI, and end-to-end latency.'
+    - src: 1g_demo.mp4
+      poster: 1g_demo.jpg
+      cap: Earlier 1 GbE testbed (processor + programmable-logic hybrid), used to bring up each new model.
+  - id: sdr-fpga
+    title: DSP-based ESN and SDR/FPGA platform for MIMO-OFDM detection
+    period: 2022
+    tag: ICCAD'23
+    img: iccad_platform.png
+    text: A DSP48E1-array reservoir neuron for 2×2 MIMO-OFDM symbol detection, tested over the air with an SDR platform
+      (PC, Virtex-7 FPGA and two USRPs running a GNU Radio Wi-Fi link).
+    kpis:
+    - v: 3.3×
+      l: throughput for only +21.4% LUT and +33% FF
+    - v: '0.04'
+      l: average BER over a real wireless channel
+    - v: −50%
+      l: BRAM (and −33.3% DSP IP) usage
+    points:
+    - 'A 3×3 DSP array in three stages: all nine slices run MAC, then three groups reduce, then one final sum.'
+    pubs:
+    - lin2023iccad
+    highlight: true
+  - id: mmimo
+    title: Scalable ESN symbol detector for massive MIMO-OFDM
+    period: 2023
+    tag: Frontiers'24
+    img: front_mmimo_uplink.png
+    text: A hardware-accelerated reservoir neuron speeds up an ESN symbol detector for massive MIMO-OFDM, validated
+      on a Virtex-7 FPGA across a range of MIMO configurations against linear MMSE detection.
+    points:
+    - Low bit error rate, low resource utilization and high throughput, with performance that scales with the antenna
+      count.
+    pubs:
+    - lin2024frontiers
+    highlight: true
+- name: Neuromorphic and spiking computing
+  blurb: Collaborations on spiking reservoirs and neuromorphic chips.
+  projects:
+  - id: sparc
+    title: 'SPARC: spiking reservoir computing with on-chip R-STDP'
+    period: 2026
+    tag: TVLSI (accepted)
+    text: A spiking reservoir with on-chip reward-modulated STDP learning, applied to spectrum sensing.
+    pubs:
+    - sparc2026tvlsi
+  - id: loihi
+    title: Legendre-SNN on Loihi-2
+    period: 2026
+    tag: TCASAI'26
+    text: A multivariate Legendre spiking neural network on Intel's Loihi-2 neuromorphic chip, for time-series classification
+      and 5G jamming detection.
+    pubs:
+    - gaurav2026tcasai
+- name: Surveys and book chapters
+  blurb: ''
+  projects:
+  - id: surveys
+    title: Surveys of reservoir computing and echo state networks
+    period: 2025 – 2026
+    tag: AI'26 · ICDMW'25
+    text: 'Two surveys: reservoir computing from foundations to neuromorphic intelligence, and echo state networks
+      with benchmarks and applications to next-G wireless communication.'
+    pubs:
+    - liu2026ai
+    - liu2025icdmw
+  - id: books
+    title: AI for circuit and system design
+    period: 2025
+    tag: Springer
+    text: 'Two book chapters: AI-powered FPGA CAD flows, and machine-learning-enhanced analysis and design for trustworthy
+      integrated circuits.'
+    pubs:
+    - lin2025book
+    - yang2025book
+- name: 'Earlier projects: VLSI, hardware security and networking'
+  blurb: ''
+  projects:
+  - id: scan-chain
+    title: Dynamically secured scan chains and the GF-Flush attack
+    period: 2020 – 2021
+    tag: DFT'21
+    img: gfflush_scan.png
+    text: Implemented a dynamically secured scan chain and verified a scan-based attack; the follow-up GF(2) algebraic
+      flush attack recovers the dynamic key by solving linear equations over GF(2).
+    kpis:
+    - v: < 7 s
+      l: to recover a 500-bit key
+    - v: '>4300×'
+      l: faster than SAT-based attacks
+    points:
+    - A Python flow converts bench-format netlists into Verilog and inserts the dynamic encryption logic.
+    - The attack's math model was verified against ModelSim simulation.
+    - The attack extends to scan chains compressed with multiple-input signature registers (MISRs).
+    pubs:
+    - chen2021dft
+  - id: sram
+    title: Low-power 10T-SRAM for in-memory computing
+    period: 2020
+    tag: USC
+    img: sram_imc.png
+    text: A 10T-SRAM cell reads Q and QB onto two read bit-lines at once; two cells sharing a bit-line, with tuned
+      inverter trip points, compute NOR and NAND in memory.
+    points:
+    - A 64×64 10T-SRAM array with two asymmetric sense amplifiers.
+    - 'Leakage reduction: high-Vt devices, transistor sizing, stacking and negative Vgs.'
+  - id: multiprocessor
+    title: 4-node cardinal chip multiprocessor
+    period: 2021
+    tag: USC
+    text: Design of a 4-node chip multiprocessor.
+  - id: cpu
+    title: CPU hardware system design
+    period: 2020
+    tag: USC
+    text: Design and implementation of a CPU hardware system.
+  - id: ntn
+    title: ML-based handover for LEO non-terrestrial networks
+    period: 2023
+    tag: ns-3
+    text: A clustering-based handover and target-satellite selection algorithm for an LEO satellite network, aiming
+      at fewer handovers and better bitrate, delay and jitter.
+    points:
+    - Each step, K-means groups the satellites by position; the user picks the cluster with the highest mean RSRP
+      and keeps its satellite if it is in that cluster, otherwise hands over to the strongest one.
+    - An ns-3 NTN setup with 10 ground users and 93 satellite base stations.
+live_demo:
+  project: testbeds
+  title: 'Live demo: real-time channel prediction on FPGA'
+  text: A distributed MIMO link runs through a radio channel emulator, and an FPGA reservoir-computing accelerator
+    predicts each user's channel frame by frame over 10 Gb/s Ethernet, live.
+
+education:
+  - {degree: "Ph.D., Computer Engineering", school: "Virginia Tech", note: "Advisor: Prof. Yang (Cindy) Yi · 2021 – 2027 (expected)"}
+  - {degree: "Master's, Electrical and Computer Engineering", school: "University of Southern California", note: "Computer architecture and VLSI design · 2019 – 2021"}
+  - {degree: "B.E., Opto-electronic Information", school: "Huazhong University of Science and Technology", note: ""}
+
+skills:
+  - {area: "Languages", items: "Verilog, SystemVerilog, Python, MATLAB, C"}
+  - {area: "Tools", items: "Xilinx Vivado, Vitis, Quartus, Cadence, ns-3, PyCharm, Jupyter, CLion"}
+  - {area: "Platforms", items: "Xilinx Virtex-7 FPGA, Zynq-7000 SoC FPGA, Zynq UltraScale+ RFSoC, USRP software-defined radios"}

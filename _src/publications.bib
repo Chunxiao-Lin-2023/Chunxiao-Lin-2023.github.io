@@ -1,0 +1,162 @@
+% Publication list for the website. build.py turns this into the Publications page and the
+% "Selected publications" block on the home page.
+% Extra fields used by the site:
+%   abbr     = badge text            selected = {true} -> shown on the home page
+%   img      = thumbnail (assets/img/pubs/...)     pdf = local file in /files or URL
+%   status   = {accepted} for not-yet-published papers (shown as a tag)
+%   kind     = journal | conference | book
+
+@article{lin2026tcad,
+  title   = {FPGA-based Reservoir Computing with On-chip Learning for MIMO Channel Prediction},
+  author  = {Lin, Chunxiao and Khan, Ummay Sumaya and Zheng, Meiyu and Azmine, Muhammad Farhan and Liu, Lingjia and Jakubisin, Daniel J. and Yi, Yang},
+  journal = {IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)},
+  year    = {2026},
+  doi     = {10.1109/TCAD.2026.3715776},
+  abbr    = {TCAD},
+  kind    = {journal},
+  selected = {true},
+  img     = {tcad_overall.png},
+  summary = {A complete on-chip ESN system on FPGA, with inference and RLS training on the same chip, for MIMO channel prediction.},
+  news    = {Jan 2026}
+}
+
+@inproceedings{lin2026icnc,
+  title     = {FPGA-based High-speed Reservoir Computing for MIMO Channel Prediction},
+  author    = {Lin, Chunxiao and Khan, Ummay Sumaya and Liu, Lingjia and Yi, Yang},
+  booktitle = {International Conference on Computing, Networking and Communications (ICNC)},
+  pages     = {465--470},
+  year      = {2026},
+  abbr      = {ICNC},
+  kind      = {conference},
+  selected  = {true},
+  img       = {icnc_neuron.png},
+  summary   = {A hybrid DSP--CLB reservoir neuron and a range-addressable tanh for high-speed ESN inference.},
+  news    = {Feb 2026},
+  doi       = {10.1109/ICNC68183.2026.11417007}
+}
+
+@article{sparc2026tvlsi,
+  title   = {SPARC: Spiking Reservoir Computing with On-Chip R-STDP for Spectrum Sensing},
+  author  = {Chowdhury, S. S. and Sarkar, M. R. and Ling, J. and Lin, Chunxiao and Yi, Yang},
+  journal = {IEEE Transactions on Very Large Scale Integration (VLSI) Systems},
+  year    = {2026},
+  abbr    = {TVLSI},
+  kind    = {journal},
+  status  = {accepted},
+  news    = {2026},
+  selected = {true}
+}
+
+@article{gaurav2026tcasai,
+  title   = {Multivariate Legendre-SNN on Loihi-2 for Time Series Classification and 5G Jamming Detection},
+  author  = {Gaurav, Ramashish and Sinha, Sujata and Lin, Chunxiao and Stewart, Terrence C. and Liu, Lingjia and Yi, Yang},
+  journal = {IEEE Transactions on Circuits and Systems for Artificial Intelligence (TCASAI)},
+  volume  = {3},
+  number  = {4},
+  year    = {2026},
+  doi     = {10.1109/TCASAI.2026.3658587},
+  abbr    = {TCASAI},
+  kind    = {journal},
+  news    = {Aug 2026},
+  selected = {true}
+}
+
+@article{liu2026ai,
+  title   = {Reservoir Computing: Foundations, Advances, and Challenges Toward Neuromorphic Intelligence},
+  author  = {Liu, Andrew and Azmine, Muhammad Farhan and Lin, Chunxiao and Yi, Yang},
+  journal = {AI (MDPI)},
+  year    = {2026},
+  doi     = {10.3390/ai7020070},
+  pdf     = {12_AI_MDPI_2026.pdf},
+  abbr    = {AI},
+  kind    = {journal},
+  news    = {Feb 2026},
+  volume  = {7},
+  number  = {2}
+}
+
+@inproceedings{liu2025icdmw,
+  title     = {Echo State Networks in Reservoir Computing: Foundations, Benchmarks, and Applications to Next-G Wireless Communication},
+  author    = {Liu, Andrew and Lin, Chunxiao and Rosen, Daniel and Yi, Yang},
+  booktitle = {IEEE International Conference on Data Mining Workshops (ICDMW)},
+  year      = {2025},
+  doi       = {10.1109/ICDMW69685.2025.00405},
+  abbr      = {ICDMW},
+  kind      = {conference},
+  pages     = {3076--3080}
+}
+
+@incollection{lin2025book,
+  title     = {Enhancing FPGA CAD Flow with AI-Powered Solutions},
+  author    = {Lin, Chunxiao and Yi, Yang},
+  booktitle = {AI-Enabled Electronic Circuit and System Design},
+  publisher = {Springer},
+  year      = {2025},
+  abbr      = {Springer},
+  kind      = {book},
+  doi       = {10.1007/978-3-031-71436-8_7}
+}
+
+@incollection{yang2025book,
+  title     = {Machine Learning-Enhanced Analysis and Design for Trustworthy Integrated Circuits},
+  author    = {Yang, K. and Hu, Y. and Chen, D. and Lin, Chunxiao and Yi, Yang and Beerel, Peter A. and Nuzzo, P.},
+  booktitle = {AI-Enabled Electronic Circuit and System Design},
+  publisher = {Springer},
+  pages     = {467--496},
+  year      = {2025},
+  abbr      = {Springer},
+  kind      = {book},
+  doi       = {10.1007/978-3-031-71436-8_13}
+}
+
+@article{lin2024frontiers,
+  title   = {Leveraging Neuro-Inspired AI Accelerator for High-Speed Computing in 6G Networks},
+  author  = {Lin, Chunxiao and Azmine, Muhammad Farhan and Liang, Yibin and Yi, Yang},
+  journal = {Frontiers in Computational Neuroscience},
+  volume  = {18},
+  year    = {2024},
+  doi     = {10.3389/fncom.2024.1345644},
+  pdf     = {04_Frontiers_2024.pdf},
+  abbr    = {Frontiers},
+  kind    = {journal},
+  selected = {true},
+  img     = {front_mmimo_uplink.png},
+  summary = {An ESN-based symbol detector for massive MIMO-OFDM, accelerated with a DSP-based FPGA architecture.}
+}
+
+@inproceedings{lin2023iccad,
+  title     = {Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerators},
+  author    = {Lin, Chunxiao and Azmine, Muhammad Farhan and Yi, Yang},
+  booktitle = {IEEE/ACM International Conference on Computer Aided Design (ICCAD)},
+  year      = {2023},
+  doi       = {10.1109/ICCAD57390.2023.10323918},
+  pdf       = {03_ICCAD_2023.pdf},
+  abbr      = {ICCAD},
+  kind      = {conference},
+  selected  = {true},
+  img       = {iccad_platform.png},
+  summary   = {A DSP-based FPGA echo state network and an SDR/FPGA platform for over-the-air 2x2 MIMO-OFDM symbol detection.}
+}
+
+@inproceedings{lin2022isqed,
+  title     = {FPGA-based Reservoir Computing with Optimized Reservoir Node Architecture},
+  author    = {Lin, Chunxiao and Liang, Yibin and Yi, Yang},
+  booktitle = {International Symposium on Quality Electronic Design (ISQED)},
+  year      = {2022},
+  doi       = {10.1109/ISQED54688.2022.9806247},
+  pdf       = {02_ISQED_2022.pdf},
+  abbr      = {ISQED},
+  kind      = {conference},
+  img       = {isqed_arch.png}
+}
+
+@inproceedings{chen2021dft,
+  title     = {GF-Flush: A GF(2) Algebraic Attack on Dynamically Secured Scan Chains},
+  author    = {Chen, Dake and Lin, Chunxiao and Beerel, Peter A.},
+  booktitle = {IEEE International Symposium on Defect and Fault Tolerance in VLSI and Nanotechnology Systems (DFT)},
+  year      = {2021},
+  pdf       = {01_GF-Flush_2021.pdf},
+  abbr      = {DFT},
+  kind      = {conference},
+  doi       = {10.1109/DFT52944.2021.9568356}
+}

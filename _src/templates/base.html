@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{% block title %}{{ site.name }}{% endblock %}</title>
+<meta name="description" content="{{ site.name }} — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="{{ root }}assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ root }}assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="{{ root }}">{{ site.first }} <b>{{ site.last }}</b></a>
+  <a class="{{ 'on' if active=='about' }}" href="{{ root }}">about</a>
+  <a class="{{ 'on' if active=='publications' }}" href="{{ root }}publications/">publications</a>
+  <a class="{{ 'on' if active=='projects' }}" href="{{ root }}projects/">projects</a>
+  <a class="{{ 'on' if active=='cv' }}" href="{{ root }}cv/">cv</a>
+</nav></header>
+<main>{% block body %}{% endblock %}</main>
+<footer>© {{ site.display_name }} · Virginia Tech · <a href="mailto:{{ site.email }}">{{ site.email }}</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>

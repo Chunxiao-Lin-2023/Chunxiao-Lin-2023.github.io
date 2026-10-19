@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chunxiao Lin</title>
+<meta name="description" content="Chunxiao Lin — FPGA accelerators for echo state networks with on-chip learning, for real-time wireless systems.">
+<link rel="icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+</head><body>
+<header><nav class="nav">
+  <a class="brand" href="">Chunxiao <b>Lin</b></a>
+  <a class="on" href="">about</a>
+  <a class="" href="publications/">publications</a>
+  <a class="" href="projects/">projects</a>
+  <a class="" href="cv/">cv</a>
+</nav></header>
+<main>
+<section class="hero">
+  <div>
+    <h1>Chunxiao <b>Lin</b></h1>
+    <div class="sub">Ph.D. student · Computer Engineering · Virginia Tech</div>
+    <p>I am a sixth-year Ph.D. student at Virginia Tech, advised by
+<a href="https://www.yangyi.ece.vt.edu/">Prof. Yang (Cindy) Yi</a>.
+I design <b>FPGA accelerators for echo state networks</b> (reservoir computing), from cost-efficient
+reservoir neurons to <b>on-chip learning</b>, and bring them into <b>real-time wireless systems</b>
+for symbol detection and MIMO channel prediction.
+</p>
+    <p>Before Virginia Tech, I received my master's degree in Electrical and Computer Engineering from the University of
+Southern California and my B.E. in Opto-electronic Information from Huazhong University of Science and Technology.
+</p>
+    <div class="chips"><span>Reservoir computing</span><span>FPGA accelerators</span><span>On-chip learning</span><span>Next-G wireless</span><span>Neuromorphic hardware</span></div>
+    <div class="icons"><a href="mailto:chunxiaol@vt.edu">Email</a><a href="https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en">Google Scholar</a><a href="https://github.com/Chunxiao-Lin-2023">GitHub</a><a href="cv/">CV</a></div>
+  </div>
+  <img class="photo" src="assets/img/photo.jpg" alt="Chunxiao Lin">
+</section>
+
+
+<h2>Live demo</h2>
+<section class="demo">
+  <video controls muted playsinline preload="metadata" poster="assets/video/10g_demo.jpg"><source src="assets/video/10g_demo.mp4" type="video/mp4"></video>
+  <div class="demo-t">
+    <h3>Live demo: real-time channel prediction on FPGA</h3>
+    <p>A distributed MIMO link runs through a radio channel emulator, and an FPGA reservoir-computing accelerator predicts each user's channel frame by frame over 10 Gb/s Ethernet, live.</p>
+    <img src="assets/img/pubs/testbed_system.jpg" alt="System overview">
+    <a class="cta" href="projects/testbeds/">About the testbed →</a>
+  </div>
+</section>
+
+<h2>Highlighted projects</h2>
+<div class="hgrid">
+<a class="hcard" href="projects/onchip-rls/">
+  <img src="assets/img/pubs/tcad_overall.png" alt="">
+  <div class="hb"><b>On-chip RLS learning for MIMO channel prediction</b><div class="pmeta"><span class="ptag">TCAD'26</span><span class="per">2024 – 2026</span></div>
+  <p>A complete echo state network on one FPGA: inference and recursive-least-squares (RLS) training share the same DSP arrays, so the channel predictor retrains itself on chip.</p>
+  <div class="kpis"><div class="kpi"><b>3.87 µs</b><span>per training + prediction step (Virtex-7, 100 MHz)</span></div><div class="kpi"><b>5.3×</b><span>lower NMSE than the prior on-chip ESN learner</span></div></div></div>
+</a>
+
+<a class="hcard" href="projects/hybrid-neuron/">
+  <img src="assets/img/pubs/icnc_neuron.png" alt="">
+  <div class="hb"><b>Hybrid DSP–CLB reservoir neuron</b><div class="pmeta"><span class="ptag">ICNC'26</span><span class="per">2024 – 2025</span></div>
+  <p>Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, so the DSPs never sit idle; a range-addressable tanh keeps the activation cheap.</p>
+  <div class="kpis"><div class="kpi"><b>0.97 µs</b><span>per prediction for a full ESN (64, 8, 64)</span></div><div class="kpi"><b>+25%</b><span>DSP efficiency vs. the DSP-only MAC (72×72 MVM)</span></div></div></div>
+</a>
+
+<a class="hcard" href="projects/sdr-fpga/">
+  <img src="assets/img/pubs/iccad_platform.png" alt="">
+  <div class="hb"><b>DSP-based ESN and SDR/FPGA platform for MIMO-OFDM detection</b><div class="pmeta"><span class="ptag">ICCAD'23</span><span class="per">2022</span></div>
+  <p>A DSP48E1-array reservoir neuron for 2×2 MIMO-OFDM symbol detection, tested over the air with an SDR platform (PC, Virtex-7 FPGA and two USRPs running a GNU Radio Wi-Fi link).</p>
+  <div class="kpis"><div class="kpi"><b>3.3×</b><span>throughput for only +21.4% LUT and +33% FF</span></div><div class="kpi"><b>0.04</b><span>average BER over a real wireless channel</span></div></div></div>
+</a>
+
+<a class="hcard" href="projects/mmimo/">
+  <img src="assets/img/pubs/front_mmimo_uplink.png" alt="">
+  <div class="hb"><b>Scalable ESN symbol detector for massive MIMO-OFDM</b><div class="pmeta"><span class="ptag">Frontiers'24</span><span class="per">2023</span></div>
+  <p>A hardware-accelerated reservoir neuron speeds up an ESN symbol detector for massive MIMO-OFDM, validated on a Virtex-7 FPGA across a range of MIMO configurations against linear MMSE detection.</p>
+  </div>
+</a>
+</div>
+<p class="more"><a href="projects/">All projects →</a> &nbsp;·&nbsp; <a href="publications/">All 12 publications →</a></p>
+</main>
+<footer>© Chunxiao (Calvin) Lin · Virginia Tech · <a href="mailto:chunxiaol@vt.edu">chunxiaol@vt.edu</a></footer>
+<script>
+document.querySelectorAll('[data-bib]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();
+ const p=document.getElementById(b.dataset.bib);p.hidden=!p.hidden;}));
+document.querySelectorAll('.filters button').forEach(b=>b.addEventListener('click',()=>{
+ document.querySelectorAll('.filters button').forEach(x=>x.classList.toggle('on',x===b));
+ const k=b.dataset.kind;document.querySelectorAll('.pubgroup').forEach(g=>g.hidden=!(k==='all'||g.dataset.kind===k));}));
+</script>
+</body></html>
