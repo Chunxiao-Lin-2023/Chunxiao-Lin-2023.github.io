@@ -109,20 +109,6 @@ project_groups:
     pubs:
     - lin2022isqed
     highlight: true
-  - id: hwsw
-    title: Hardware–software co-design of an on-chip ESN
-    period: 2025
-    text: An on-chip ESN with inference in programmable logic and learning on the embedded processor of a Zynq SoC
-      FPGA.
-    unpublished: true
-  - id: advanced-rc
-    title: Advanced reservoir models on FPGA
-    text: Hardware for newer reservoir models and larger wireless systems.
-    unpublished: true
-  - id: asic
-    title: Toward an ASIC neural receiver
-    text: Taking the real-time ESN receiver from FPGA toward a chip.
-    unpublished: true
 - name: Real-time wireless systems
   blurb: Putting the accelerators into live wireless links.
   projects:
