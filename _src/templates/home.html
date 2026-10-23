@@ -21,6 +21,9 @@
 <h2>Highlighted projects</h2>
 <div class="hgrid">{% for pr in site.highlights %}{{ hcard(pr, root) }}{% endfor %}</div>
 
+<h2>Tools &amp; hardware</h2>
+<div class="tools">{% for g in site.toolbox %}<div><b>{{ g.group }}</b><div class="stk">{% for x in g['items'] %}<i>{{ x }}</i>{% endfor %}</div></div>{% endfor %}</div>
+
 <h2>All projects</h2>
 <div class="banner"><b>{{ site.all_projects|length }} projects across {{ site.project_groups|length }} fields, from FPGA accelerators to hardware security.</b><a href="{{ root }}projects/">Browse all projects →</a></div>
 <div class="fields" style="margin-top:14px">{% for g in site.project_groups %}

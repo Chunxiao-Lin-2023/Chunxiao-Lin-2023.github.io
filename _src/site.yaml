@@ -400,3 +400,17 @@ highlight_order: [onchip-rls, hybrid-neuron, sdr-fpga, bit-serial]
 seeking: "Graduating May 2027 · seeking full-time FPGA, RTL and system-level hardware design roles in low-latency networking, wireless PHY and AI hardware acceleration"
 core_skills: [System-level design, HW/SW partitioning, End-to-end integration, Verilog / SystemVerilog, RTL design, Xilinx Vivado, DSP48 datapaths, Systolic arrays, Fixed-point design,
   AXI, 10G Ethernet, Zynq / RFSoC, PS–PL co-design, SDR (USRP), Python, MATLAB, C]
+
+toolbox:
+  - group: FPGA boards
+    items: [Xilinx Virtex-7 VC707, Xilinx Virtex-7 VC709, Zynq-7000 ZC702, Zynq UltraScale+ ZCU104, Zynq UltraScale+ RFSoC ZCU216]
+  - group: Radio & lab equipment
+    items: [USRP B210, USRP N310, USRP X310, Keysight PROPSIM F16 channel emulator, 10G SFP+ / 1G Ethernet links]
+  - group: FPGA / EDA tools
+    items: [Xilinx Vivado, Xilinx Vitis, Intel Quartus, Cadence Virtuoso, ModelSim]
+  - group: IP & interfaces
+    items: [10G Ethernet MAC + PCS/PMA, UDP/IP (lwIP), AXI4 / AXI-Stream, PS–PL (Zynq) interfaces, DSP48 slices, Block RAM]
+  - group: Languages
+    items: [Verilog, SystemVerilog, Python, MATLAB, C, C++]
+  - group: Software & simulation
+    items: [GNU Radio, ns-3, Linux, Jupyter, PyCharm, CLion]
