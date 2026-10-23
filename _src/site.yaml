@@ -50,7 +50,6 @@ research:
 #   id = URL of the detail page (projects/<id>/)   pubs = bib keys   highlight = card on the home page
 project_groups:
 - name: FPGA accelerators for reservoir computing
-  blurb: 'The core of my Ph.D.: reservoir neurons, readouts and on-chip learning on FPGA.'
   projects:
   - id: onchip-rls
     title: On-chip RLS learning for MIMO channel prediction
@@ -110,7 +109,6 @@ project_groups:
     - lin2022isqed
     highlight: true
 - name: Real-time wireless systems
-  blurb: Putting the accelerators into live wireless links.
   projects:
   - id: testbeds
     title: Real-time 10G Ethernet PC–FPGA testbed for distributed MIMO
@@ -167,7 +165,6 @@ project_groups:
     pubs:
     - lin2024frontiers
 - name: Neuromorphic and spiking computing
-  blurb: Collaborations on spiking reservoirs and neuromorphic chips.
   projects:
   - id: sparc
     title: 'SPARC: spiking reservoir computing with on-chip R-STDP'
@@ -185,7 +182,6 @@ project_groups:
     pubs:
     - gaurav2026tcasai
 - name: Surveys and book chapters
-  blurb: ''
   projects:
   - id: surveys
     title: Surveys of reservoir computing and echo state networks
@@ -206,7 +202,6 @@ project_groups:
     - lin2025book
     - yang2025book
 - name: 'Earlier projects: VLSI, hardware security and networking'
-  blurb: ''
   projects:
   - id: scan-chain
     title: Dynamically secured scan chains and the GF-Flush attack

@@ -2,10 +2,9 @@
 {% block title %}Projects · {{ site.name }}{% endblock %}
 {% block body %}
 <h1 class="page">Projects</h1>
-<p class="sub">Grouped by field. Open a project for its details and papers.</p>
 <nav class="toc">{% for g in site.project_groups %}<a href="#g{{ loop.index }}">{{ g.name }}</a>{% endfor %}</nav>
 {% for g in site.project_groups %}
-<h2 id="g{{ loop.index }}">{{ g.name }}</h2>{% if g.blurb %}<p class="blurb">{{ g.blurb }}</p>{% endif %}
+<h2 id="g{{ loop.index }}">{{ g.name }}</h2>
 <div class="grid">{% for pr in g.projects %}{{ pcard(pr, root) }}{% endfor %}</div>
 {% endfor %}
 {% endblock %}
