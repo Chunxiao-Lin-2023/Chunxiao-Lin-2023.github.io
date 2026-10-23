@@ -395,6 +395,6 @@ skills:
 
 highlight_order: [onchip-rls, hybrid-neuron, sdr-fpga, bit-serial]
 
-seeking: "Graduating May 2027 · open to full-time roles in FPGA / digital design, hardware accelerators and wireless systems"
+seeking: "Graduating May 2027 · seeking full-time FPGA / RTL design roles in low-latency networking, wireless PHY and AI hardware acceleration"
 core_skills: [Verilog / SystemVerilog, RTL design, Xilinx Vivado, DSP48 datapaths, Systolic arrays, Fixed-point design,
   AXI, 10G Ethernet, Zynq / RFSoC, PS–PL co-design, SDR (USRP), Python, MATLAB, C]
