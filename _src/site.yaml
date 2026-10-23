@@ -21,7 +21,7 @@ about: |
   <a href="https://www.yangyi.ece.vt.edu/">Prof. Yang (Cindy) Yi</a>, and a member of <a href="https://bricc.ece.vt.edu/"><b>BRICCS@VT</b></a> (Brain-Inspired Computing, Communication, and Security Lab).
   I design <b>FPGA accelerators for echo state networks</b> (reservoir computing), from cost-efficient
   reservoir neurons to <b>on-chip learning</b>, and bring them into <b>real-time wireless systems</b>
-  for symbol detection and MIMO channel prediction.
+  for MIMO symbol detection and channel prediction.
 about2: |
   Before Virginia Tech, I received my master's degree in Electrical and Computer Engineering from the University of
   Southern California and my B.E. in Opto-electronic Information from Huazhong University of Science and Technology.
@@ -41,7 +41,7 @@ research:
     refs: "TCAD'26"
   - step: "3 · System"
     title: Real-time wireless validation
-    text: FPGA accelerators running in live SDR and PC–FPGA loops for symbol detection and channel prediction.
+    text: FPGA accelerators running in live SDR and PC–FPGA loops for MIMO symbol detection and channel prediction.
     img: iccad_platform.png
     refs: "ICCAD'23 · ongoing"
 
