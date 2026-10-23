@@ -24,7 +24,7 @@
     <div class="a">{{ p.authors_h }}</div>
     <div class="v">{{ p.venue_h }}, {{ p.year }}{% if p.status %} <span class="tagacc">{{ p.status }}</span>{% endif %}</div>
     {% if p.one_line %}<div class="s">{{ p.one_line }}</div>{% endif %}
-    <div class="btns">{% if p.pdf_url %}<a class="btn" href="{{ pdfurl(p, root) }}">PDF</a>{% endif %}{% if p.project and p.project.has_page %}<a class="btn proj-btn" href="{{ root }}projects/{{ p.project.id }}/">Project page</a>{% endif %}</div>
+    <div class="btns">{% if p.pdf_url %}<a class="btn" href="{{ pdfurl(p, root) }}">PDF</a>{% elif p.doi_url %}<a class="btn" href="{{ p.doi_url }}">Publisher</a>{% endif %}{% if p.project and p.project.has_page %}<a class="btn proj-btn" href="{{ root }}projects/{{ p.project.id }}/">Project page</a>{% endif %}</div>
   </div>
 </div>
 {% endmacro %}
