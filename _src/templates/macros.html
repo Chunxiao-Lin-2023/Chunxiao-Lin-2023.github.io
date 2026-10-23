@@ -35,7 +35,7 @@
 {% macro pcard(pr, root) %}
 {% if pr.has_page %}<a class="card" href="{{ root }}projects/{{ pr.id }}/">{% else %}<div class="card static">{% endif %}
   {% if pr.img %}<img src="{{ root }}assets/img/pubs/{{ pr.img }}" alt="">{% else %}<div class="card-ph"><span>{{ 'Ongoing' if pr.unpublished else pr.tag }}</span></div>{% endif %}
-  <div><b>{{ pr.title }}</b><div class="pmeta">{{ meta(pr) }}</div><p>{{ pr.text }}</p>{% if pr.has_page %}<span class="go">Details →</span>{% endif %}</div>
+  <div><b>{{ pr.title }}</b><div class="pmeta">{{ meta(pr) }}</div><p>{{ pr.text }}</p>{% if pr.stack %}<div class="stk">{% for t in pr.stack[:4] %}<i>{{ t }}</i>{% endfor %}</div>{% endif %}{% if pr.has_page %}<span class="go">Details →</span>{% endif %}</div>
 {% if pr.has_page %}</a>{% else %}</div>{% endif %}
 {% endmacro %}
 

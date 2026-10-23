@@ -7,6 +7,11 @@
 <p class="crumb"><a href="{{ root }}projects/">← All projects</a></p>
 <h1 class="page">{{ pr.title }}</h1>
 <div class="pmeta big">{{ meta(pr) }}</div>
+<div class="glance">
+  {% if pr.impact %}<div><b>Why it matters</b>{{ pr.impact }}</div>{% endif %}
+  {% if pr.role %}<div><b>My role</b>{{ pr.role }}</div>{% endif %}
+  {% if pr.stack %}<div><b>Tech stack</b><span class="stk">{% for t in pr.stack %}<i>{{ t }}</i>{% endfor %}</span></div>{% endif %}
+</div>
 <p class="ovw">{{ D.overview or pr.text }}</p>
 {% if pr.kpis %}<div class="kpis">{% for k in pr.kpis %}<div class="kpi"><b>{{ k.v }}</b><span>{{ k.l }}</span></div>{% endfor %}</div>{% endif %}
 

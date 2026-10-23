@@ -6,10 +6,12 @@ display_name: Chunxiao (Calvin) Lin
 first: Chunxiao
 last: Lin
 title: Ph.D. student · Computer Engineering · Virginia Tech
-email: chunxiaol@vt.edu
+email: chunxiao.lin@yahoo.com
+email_school: chunxiaol@vt.edu
 scholar: https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en
 github: https://github.com/Chunxiao-Lin-2023
 photo: photo.jpg
+headline: FPGA & Hardware Accelerator Engineer
 role: Ph.D. student, Computer Engineering<br>Virginia Tech · <a href="https://bricc.ece.vt.edu/">BRICCS@VT</a>
 lab: "Advisor: Prof. Yang (Cindy) Yi"
 lab_url: https://www.yangyi.ece.vt.edu/
@@ -74,6 +76,18 @@ project_groups:
     pubs:
     - lin2026tcad
     highlight: true
+    role: 'First author: architecture, RTL implementation and FPGA evaluation.'
+    impact: Lets a wireless receiver keep learning on the chip itself, thousands of times faster and more energy-efficient
+      than a CPU or GPU.
+    stack:
+    - Verilog
+    - Vivado
+    - Virtex-7
+    - DSP48
+    - Systolic arrays
+    - Fixed-point
+    - Ethernet/UDP
+    - Python
   - id: hybrid-neuron
     title: Hybrid DSP–CLB reservoir neuron
     period: 2024 – 2025
@@ -95,6 +109,15 @@ project_groups:
     pubs:
     - lin2026icnc
     highlight: true
+    role: 'First author: neuron and tanh design, RTL implementation and FPGA evaluation.'
+    impact: Gets more work out of every DSP block, so the same chip predicts the radio channel faster.
+    stack:
+    - Verilog
+    - Vivado
+    - Virtex-7
+    - DSP48
+    - LUT design
+    - MATLAB/Python
   - id: bit-serial
     title: Bit-serial reservoir neuron
     period: 2021 – 2022
@@ -108,6 +131,14 @@ project_groups:
     pubs:
     - lin2022isqed
     highlight: true
+    role: 'First author: neuron architecture and FPGA implementation.'
+    impact: Cuts the logic needed for a neural-network layer by about 80% by hard-wiring its fixed weights.
+    stack:
+    - Verilog
+    - Vivado
+    - Bit-serial arithmetic
+    - CSD encoding
+    - Fixed-point
 - name: Real-time wireless systems
   projects:
   - id: testbeds
@@ -133,6 +164,19 @@ project_groups:
     - src: 1g_demo.mp4
       poster: 1g_demo.jpg
       cap: Earlier 1 GbE testbed (processor + programmable-logic hybrid), used to bring up each new model.
+    role: 'Designed and built both testbeds end to end: FPGA RTL, Ethernet path, host software and integration with
+      the radio setup.'
+    impact: 'Shows the hardware working in a live radio link, not only in simulation: every channel measurement
+      is predicted in under a millisecond.'
+    stack:
+    - Verilog
+    - 10G Ethernet (MAC/PCS)
+    - lwIP / UDP
+    - AXI
+    - Zynq / RFSoC
+    - USRP
+    - PROPSIM
+    - Python
   - id: sdr-fpga
     title: DSP-based ESN and SDR/FPGA platform for MIMO-OFDM detection
     period: 2022
@@ -152,6 +196,16 @@ project_groups:
     pubs:
     - lin2023iccad
     highlight: true
+    role: 'First author: DSP-based neuron design and the SDR/FPGA over-the-air platform.'
+    impact: Takes a neural-network receiver from simulation to real antennas and radios.
+    stack:
+    - Verilog
+    - Vivado
+    - Virtex-7
+    - DSP48
+    - USRP
+    - GNU Radio
+    - Ethernet
   - id: mmimo
     title: Scalable ESN symbol detector for massive MIMO-OFDM
     period: 2023
@@ -164,6 +218,14 @@ project_groups:
       count.
     pubs:
     - lin2024frontiers
+    role: 'First author: massive-MIMO extension and FPGA evaluation.'
+    impact: A small neural network that keeps working as base stations grow to dozens of antennas.
+    stack:
+    - Verilog
+    - Virtex-7
+    - DSP48
+    - MATLAB
+    - Python
 - name: Neuromorphic and spiking computing
   projects:
   - id: sparc
@@ -173,6 +235,12 @@ project_groups:
     text: A spiking reservoir with on-chip reward-modulated STDP learning, applied to spectrum sensing.
     pubs:
     - sparc2026tvlsi
+    role: Co-author.
+    impact: Brain-inspired spiking hardware that learns on chip to sense the radio spectrum.
+    stack:
+    - Spiking neural networks
+    - On-chip learning
+    - FPGA
   - id: loihi
     title: Legendre-SNN on Loihi-2
     period: 2026
@@ -181,6 +249,13 @@ project_groups:
       and 5G jamming detection.
     pubs:
     - gaurav2026tcasai
+    role: Co-author.
+    impact: Runs a spiking neural network on Intel's Loihi-2 neuromorphic chip for 5G jamming detection.
+    stack:
+    - Intel Loihi-2
+    - Lava
+    - Spiking neural networks
+    - Python
 - name: Surveys and book chapters
   projects:
   - id: surveys
@@ -192,6 +267,12 @@ project_groups:
     pubs:
     - liu2026ai
     - liu2025icdmw
+    role: Co-author.
+    impact: Overviews of reservoir computing, with benchmarks and wireless applications.
+    stack:
+    - Reservoir computing
+    - Echo state networks
+    - Python
   - id: books
     title: AI for circuit and system design
     period: 2025
@@ -201,6 +282,13 @@ project_groups:
     pubs:
     - lin2025book
     - yang2025book
+    role: First author of the FPGA CAD chapter; co-author of the trustworthy-IC chapter.
+    impact: How machine learning speeds up FPGA design tools and helps secure chips.
+    stack:
+    - FPGA CAD
+    - HLS
+    - Machine learning
+    - Hardware security
 - name: 'Earlier projects: VLSI, hardware security and networking'
   projects:
   - id: scan-chain
@@ -221,6 +309,14 @@ project_groups:
     - The attack extends to scan chains compressed with multiple-input signature registers (MISRs).
     pubs:
     - chen2021dft
+    role: Built the Python netlist-to-Verilog flow with the dynamic encryption logic and verified the attack model
+      in ModelSim; co-author of GF-Flush.
+    impact: Shows that a popular scan-chain protection can be broken in seconds.
+    stack:
+    - Python
+    - Verilog
+    - ModelSim
+    - Hardware security
   - id: sram
     title: Low-power 10T-SRAM for in-memory computing
     period: 2020
@@ -231,16 +327,32 @@ project_groups:
     points:
     - A 64×64 10T-SRAM array with two asymmetric sense amplifiers.
     - 'Leakage reduction: high-Vt devices, transistor sizing, stacking and negative Vgs.'
+    role: 'Course project: transistor-level array and sense-amplifier design.'
+    impact: Memory that also computes logic, with lower leakage power.
+    stack:
+    - Cadence Virtuoso
+    - Transistor-level design
+    - Low-power techniques
   - id: multiprocessor
     title: 4-node cardinal chip multiprocessor
     period: 2021
     tag: USC
     text: Design of a 4-node chip multiprocessor.
+    role: Course project.
+    impact: ''
+    stack:
+    - Verilog
+    - Computer architecture
   - id: cpu
     title: CPU hardware system design
     period: 2020
     tag: USC
     text: Design and implementation of a CPU hardware system.
+    role: Course project.
+    impact: ''
+    stack:
+    - Verilog
+    - Computer architecture
   - id: ntn
     title: ML-based handover for LEO non-terrestrial networks
     period: 2023
@@ -251,6 +363,13 @@ project_groups:
     - Each step, K-means groups the satellites by position; the user picks the cluster with the highest mean RSRP
       and keeps its satellite if it is in that cluster, otherwise hands over to the strongest one.
     - An ns-3 NTN setup with 10 ground users and 93 satellite base stations.
+    role: Designed and simulated the handover algorithm.
+    impact: Fewer dropped connections for users of low-orbit satellite networks.
+    stack:
+    - ns-3
+    - C++
+    - Python
+    - K-means
 live_demo:
   project: testbeds
   title: Real-time channel prediction on an FPGA
@@ -275,3 +394,7 @@ skills:
   - {area: "Platforms", items: "Xilinx Virtex-7 FPGA, Zynq-7000 SoC FPGA, Zynq UltraScale+ RFSoC, USRP software-defined radios"}
 
 highlight_order: [onchip-rls, hybrid-neuron, sdr-fpga, bit-serial]
+
+seeking: "Graduating May 2027 · open to full-time roles in FPGA / digital design, hardware accelerators and wireless systems"
+core_skills: [Verilog / SystemVerilog, RTL design, Xilinx Vivado, DSP48 datapaths, Systolic arrays, Fixed-point design,
+  AXI, 10G Ethernet, Zynq / RFSoC, PS–PL co-design, SDR (USRP), Python, MATLAB, C]

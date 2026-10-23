@@ -2,14 +2,6 @@
 {% block title %}CV · {{ site.name }}{% endblock %}
 {% block body %}
 <h1 class="page">Curriculum Vitae</h1>
-<p class="sub">{{ site.display_name }} · {{ site.email }}</p>
 <a class="cvdl" href="{{ root }}files/{{ site.cv_pdf }}" download>⬇ Download CV (PDF)</a>
-<h2>Education</h2>
-<table class="news">{% for e in site.education %}<tr><td><b>{{ e.degree }}</b><br><span class="mut">{{ e.school }}{% if e.note %} · {{ e.note }}{% endif %}</span></td></tr>{% endfor %}</table>
-<h2>Research interests</h2>
-<div class="chips">{% for i in site.interests %}<span>{{ i }}</span>{% endfor %}</div>
-<h2>Skills</h2>
-<table class="news">{% for s in site.skills %}<tr><td>{{ s.area }}</td><td>{{ s['items'] }}</td></tr>{% endfor %}</table>
-<h2>Publications</h2>
-<ol class="cvpubs">{% for p in pubs %}<li>{{ p.authors_h }}, “{{ p.title_h }},” <i>{{ p.venue_h }}</i>, {{ p.year }}{% if p.status %} ({{ p.status }}){% endif %}.</li>{% endfor %}</ol>
+<object class="cvpdf" data="{{ root }}files/{{ site.cv_pdf }}#view=FitH" type="application/pdf"><p><a href="{{ root }}files/{{ site.cv_pdf }}">Open the CV (PDF)</a></p></object>
 {% endblock %}

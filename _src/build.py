@@ -127,11 +127,20 @@ def main():
     for out, (tpl, active, extra) in pages.items():
         root = '../' * out.count('/')
         h = env.get_template(tpl).render(site=site, pubs=pubs, selected=[p for p in pubs if p.get('selected') == 'true'],
-                                         kinds=kinds, active=active, root=root, **extra)
+                                         kinds=kinds, active=active, root=root,
+                                         page_path=out.replace('index.html', ''), **extra)
         dst = os.path.join(OUT, out)
         os.makedirs(os.path.dirname(dst), exist_ok=True)
         open(dst, 'w', encoding='utf-8', newline='\n').write(h)
     print('wrote %d pages' % len(pages))
+    # 404, sitemap, robots
+    h = env.get_template('404.html').render(site=site, pubs=pubs, active='', root='/', page_path='404.html')
+    open(os.path.join(OUT, '404.html'), 'w', encoding='utf-8', newline='\n').write(h)
+    urls = ''.join('  <url><loc>%s/%s</loc></url>\n' % (site['url'], p.replace('index.html', '')) for p in pages)
+    open(os.path.join(OUT, 'sitemap.xml'), 'w', encoding='utf-8', newline='\n').write(
+        '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + urls + '</urlset>\n')
+    open(os.path.join(OUT, 'robots.txt'), 'w', encoding='utf-8', newline='\n').write(
+        'User-agent: *\nAllow: /\nSitemap: %s/sitemap.xml\n' % site['url'])
     os.makedirs(os.path.join(OUT, 'assets'), exist_ok=True)
     shutil.copy(os.path.join(SRC, 'style.css'), os.path.join(OUT, 'assets', 'style.css'))
     open(os.path.join(OUT, '.nojekyll'), 'w').close()
