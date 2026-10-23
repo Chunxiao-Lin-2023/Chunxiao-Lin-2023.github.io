@@ -411,6 +411,6 @@ toolbox:
   - group: IP & interfaces
     items: [10G Ethernet MAC + PCS/PMA, UDP/IP (lwIP), AXI4 / AXI-Stream, PS–PL (Zynq) interfaces, DSP48 slices, Block RAM]
   - group: Languages
-    items: [Verilog, SystemVerilog, Python, MATLAB, C]
+    items: [Verilog, SystemVerilog, Python, MATLAB, C, C++]
   - group: Software & simulation
     items: [GNU Radio, ns-3, Linux, Jupyter, PyCharm, CLion]
