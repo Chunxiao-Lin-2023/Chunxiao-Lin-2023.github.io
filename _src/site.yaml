@@ -407,10 +407,10 @@ toolbox:
   - group: Radio & lab equipment
     items: [USRP B210, USRP N310, USRP X310, Keysight PROPSIM F16 channel emulator, 10G SFP+ / 1G Ethernet links]
   - group: FPGA / EDA tools
-    items: [Xilinx Vivado, Xilinx Vitis, Intel Quartus, Cadence Virtuoso, ModelSim]
+    items: [Xilinx Vivado, Vivado ILA (Integrated Logic Analyzer), Vivado VIO (Virtual I/O), Xilinx Vitis, Intel Quartus, Cadence, ModelSim]
   - group: IP & interfaces
     items: [10G Ethernet MAC + PCS/PMA, UDP/IP (lwIP), AXI4 / AXI-Stream, PS–PL (Zynq) interfaces, DSP48 slices, Block RAM]
   - group: Languages
-    items: [Verilog, SystemVerilog, Python, MATLAB, C, C++]
+    items: [Verilog, SystemVerilog, Python, MATLAB, C]
   - group: Software & simulation
     items: [GNU Radio, ns-3, Linux, Jupyter, PyCharm, CLion]
