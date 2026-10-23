@@ -12,7 +12,7 @@ scholar: https://scholar.google.com/citations?user=kewMZ0wAAAAJ&hl=en
 linkedin: https://www.linkedin.com/in/chunxiao-lin/
 github: https://github.com/Chunxiao-Lin-2023
 photo: photo.jpg
-headline: FPGA & Hardware Accelerator Engineer
+headline: FPGA & System-Level Hardware Engineer
 role: Ph.D. student, Computer Engineering<br>Virginia Tech · <a href="https://bricc.ece.vt.edu/">BRICCS@VT</a>
 lab: "Advisor: Prof. Yang (Cindy) Yi"
 lab_url: https://www.yangyi.ece.vt.edu/
@@ -22,8 +22,9 @@ url: https://chunxiao-lin-2023.github.io
 about: |
   I am a Ph.D. student at Virginia Tech, advised by
   <a href="https://www.yangyi.ece.vt.edu/">Prof. Yang (Cindy) Yi</a>, and a member of <a href="https://bricc.ece.vt.edu/"><b>BRICCS@VT</b></a> (Brain-Inspired Computing, Communication, and Security Lab).
-  I design <b>FPGA accelerators for echo state networks</b> (reservoir computing), from cost-efficient
-  reservoir neurons to <b>on-chip learning</b>, and bring them into <b>real-time wireless systems</b>
+  I design hardware <b>from RTL microarchitecture to complete systems</b>: <b>FPGA accelerators for echo state networks</b>
+  (reservoir computing) with <b>on-chip learning</b>, and the <b>system-level design</b> around them (HW/SW partitioning,
+  10G Ethernet data paths, host software and integration with live radios) that runs them in <b>real-time wireless systems</b>
   for MIMO symbol detection and channel prediction.
 about2: |
   Before Virginia Tech, I received my master's degree in Electrical and Computer Engineering from the University of
@@ -396,6 +397,6 @@ skills:
 
 highlight_order: [onchip-rls, hybrid-neuron, sdr-fpga, bit-serial]
 
-seeking: "Graduating May 2027 · seeking full-time FPGA / RTL design roles in low-latency networking, wireless PHY and AI hardware acceleration"
-core_skills: [Verilog / SystemVerilog, RTL design, Xilinx Vivado, DSP48 datapaths, Systolic arrays, Fixed-point design,
+seeking: "Graduating May 2027 · seeking full-time FPGA, RTL and system-level hardware design roles in low-latency networking, wireless PHY and AI hardware acceleration"
+core_skills: [System-level design, HW/SW partitioning, End-to-end integration, Verilog / SystemVerilog, RTL design, Xilinx Vivado, DSP48 datapaths, Systolic arrays, Fixed-point design,
   AXI, 10G Ethernet, Zynq / RFSoC, PS–PL co-design, SDR (USRP), Python, MATLAB, C]
