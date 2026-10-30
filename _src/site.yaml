@@ -27,8 +27,8 @@ about: |
   10G Ethernet data paths, host software and integration with live radios) that runs them in <b>real-time wireless systems</b>
   for MIMO symbol detection and channel prediction.
 about2: |
-  Before Virginia Tech, I received my master's degree in Electrical and Computer Engineering from the University of
-  Southern California and my B.E. in Opto-electronic Information from Huazhong University of Science and Technology.
+  Before Virginia Tech, I received my M.S. in Electrical and Computer Engineering from the University of
+  Southern California (2021) and my B.S. in Electrical Engineering from Huazhong University of Science and Technology (2019).
 
 interests: [Reservoir computing, FPGA accelerators, On-chip learning, Next-G wireless, Neuromorphic hardware]
 
@@ -387,8 +387,8 @@ live_demo:
 
 education:
   - {degree: "Ph.D., Computer Engineering", school: "Virginia Tech", note: "Advisor: Prof. Yang (Cindy) Yi · 2021 – 2027 (expected)"}
-  - {degree: "Master's, Electrical and Computer Engineering", school: "University of Southern California", note: "Computer architecture and VLSI design · 2019 – 2021"}
-  - {degree: "B.E., Opto-electronic Information", school: "Huazhong University of Science and Technology", note: ""}
+  - {degree: "M.S., Electrical and Computer Engineering", school: "University of Southern California", note: "Computer architecture and VLSI design · 2019 – 2021"}
+  - {degree: "B.S., Electrical Engineering", school: "Huazhong University of Science and Technology", note: "2019"}
 
 skills:
   - {area: "Languages", items: "Verilog, SystemVerilog, Python, MATLAB, C"}
