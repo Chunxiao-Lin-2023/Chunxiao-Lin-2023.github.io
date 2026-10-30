@@ -68,7 +68,7 @@ Southern California and my B.E. in Opto-electronic Information from Huazhong Uni
 <div class="hgrid">
 <a class="hcard" href="projects/onchip-rls/">
   <img src="assets/img/pubs/tcad_overall.png" alt="">
-  <div class="hb"><b>On-chip RLS learning for MIMO channel prediction</b><div class="pmeta"><span class="ptag">TCAD'26</span><span class="per">2024 – 2026</span></div>
+  <div class="hb"><b>On-chip RLS learning for MIMO channel prediction</b><div class="pmeta"><span class="ptag">TCAD'26</span><span class="per">2024</span></div>
   <p>A complete echo state network on one FPGA: inference and recursive-least-squares (RLS) training share the same DSP arrays, so the channel predictor retrains itself on chip.</p>
   <div class="kpis"><div class="kpi"><b>3.87 µs</b><span>per training + inference step</span></div><div class="kpi"><b>>1600×</b><span>energy efficiency vs. CPU</span></div></div></div>
 </a>
@@ -76,14 +76,14 @@ Southern California and my B.E. in Opto-electronic Information from Huazhong Uni
 <a class="hcard" href="projects/hybrid-neuron/">
   <img src="assets/img/pubs/icnc_neuron.png" alt="">
   <div class="hb"><b>Hybrid DSP–CLB reservoir neuron</b><div class="pmeta"><span class="ptag">ICNC'26</span><span class="per">2024 – 2025</span></div>
-  <p>Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, so the DSPs never sit idle; a range-addressable tanh keeps the activation cheap.</p>
+  <p>Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, keeping the DSPs busy; a range-addressable tanh keeps the activation cheap.</p>
   <div class="kpis"><div class="kpi"><b>65.98M</b><span>input samples per second</span></div><div class="kpi"><b>97 cycles</b><span>ESN inference latency at 100 MHz</span></div></div></div>
 </a>
 
 <a class="hcard" href="projects/sdr-fpga/">
   <img src="assets/img/pubs/iccad_platform.png" alt="">
   <div class="hb"><b>DSP-based ESN and SDR/FPGA platform for MIMO-OFDM detection</b><div class="pmeta"><span class="ptag">ICCAD'23</span><span class="per">2022</span></div>
-  <p>A DSP48E1-array reservoir neuron for 2×2 MIMO-OFDM symbol detection, tested over the air with an SDR platform (PC, Virtex-7 FPGA and two USRPs running a GNU Radio Wi-Fi link).</p>
+  <p>A DSP48E1-array reservoir neuron for 2×2 MIMO-OFDM symbol detection, tested over the air with an SDR platform (PC, Virtex-7 FPGA and USRP radios running a GNU Radio Wi-Fi link).</p>
   <div class="kpis"><div class="kpi"><b>3.3×</b><span>input throughput vs SISO ESN accelerator</span></div><div class="kpi"><b>34.8 MS/s</b><span>input processing speed</span></div></div></div>
 </a>
 

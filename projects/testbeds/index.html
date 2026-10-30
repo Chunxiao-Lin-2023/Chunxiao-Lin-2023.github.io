@@ -44,12 +44,12 @@
 <h1 class="page">Real-time 10G Ethernet PC–FPGA testbed for distributed MIMO</h1>
 <div class="pmeta big"><span class="ongoing">Unpublished · 2026</span></div>
 <div class="glance">
-  <div><b>Why it matters</b>Shows the hardware working in a live radio link, not only in simulation: every channel measurement is predicted in under a millisecond.</div>
+  <div><b>Why it matters</b>Shows the hardware working in a live radio link, not only in simulation: every channel measurement is predicted within 0.9 ms.</div>
   <div><b>My role</b>Designed and built both testbeds end to end: FPGA RTL, Ethernet path, host software and integration with the radio setup.</div>
   <div><b>Tech stack</b><span class="stk"><i>Verilog</i><i>10G Ethernet (MAC/PCS)</i><i>lwIP / UDP</i><i>AXI</i><i>Zynq / RFSoC</i><i>USRP</i><i>PROPSIM</i><i>Python</i></span></div>
 </div>
 <p class="ovw">Channel predictors are only useful if they keep up with a live radio link. This testbed puts the FPGA reservoir-computing accelerator inside a real distributed MIMO (DMIMO) loop, so every new channel measurement is turned into a prediction and sent back within the same frame time.</p>
-<div class="kpis"><div class="kpi"><b>< 0.9 ms</b><span>end-to-end latency per frame</span></div><div class="kpi"><b>1,250 /s</b><span>channel predictions per user</span></div><div class="kpi"><b>≈ 27%</b><span>lower NMSE than outdated CSI</span></div></div>
+<div class="kpis"><div class="kpi"><b>≤ 0.9 ms</b><span>end-to-end latency per frame (10 GbE)</span></div><div class="kpi"><b>1,250 /s</b><span>channel predictions per user</span></div><div class="kpi"><b>≈ 27%</b><span>lower NMSE than outdated CSI</span></div></div>
 
 
 
@@ -102,7 +102,7 @@
   
   <h2>Results</h2>
   <div class="sec">
-    <ul class="res"><li>Prediction error: NMSE drops from about 0.012 when reusing the outdated channel to about 0.009 with the FPGA prediction, for both users.</li><li>Throughput: 1,250 channel estimates per second per user.</li><li>Latency: under 0.9 ms end to end on the 10 GbE testbed (under 2 ms on the 1 GbE testbed).</li><li>Power: 3.42 W for the FPGA on the 10 GbE testbed.</li></ul>
+    <ul class="res"><li>Prediction error: NMSE drops from 0.0119 when reusing the outdated channel to 0.0087 with the FPGA prediction, for both users.</li><li>Throughput: 1,250 channel estimates per second per user.</li><li>Latency: ≤ 0.9 ms end to end on the 10 GbE testbed (< 2 ms on the 1 GbE testbed).</li><li>Power: 3.42 W for the FPGA on the 10 GbE testbed.</li></ul>
     
     
     

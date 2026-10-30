@@ -6,7 +6,7 @@ design:
   - h: MAC_DA reservoir neuron
     p: "Each neuron computes its input and recurrent products as one multiply-accumulate over the concatenated vector {x; r}. Nine DSP slices work in parallel, and their partial sums are merged by a fast adder tree of four carry-save/carry-lookahead blocks, so a neuron finishes in ⌈(Ni+Nr)/9⌉+2 cycles. Because the reservoir is small, one MAC_DA per neuron is affordable."
   - h: RALUT-based tanh
-    p: "The tanh activation works on |s| (sign restored at the end) and truncates the input to [0, 8]. LUTs of intercepts and slopes feed a DSP that performs linear interpolation; above a threshold the DSP is bypassed and the intercept is used directly. This range-addressable LUT replaces two 256-entry BRAMs with three 128-entry ones, a 25% BRAM saving."
+    p: "The tanh activation works on |s| (sign restored at the end) and truncates the input to [0, 8]. LUTs of intercepts and slopes feed a DSP that performs linear interpolation; above a threshold the DSP is bypassed and the intercept is used directly. This range-addressable LUT replaces two 256-entry BRAMs with three 128-entry ones, 25% fewer table entries."
 results:
   - "On a 72×72 matrix-vector product, MAC_DA raises DSP efficiency from 65.0 to 81.1 MOPS/DSP and cuts processing time from 1040 ns to 900 ns (13.5%) compared with an earlier DSP-only MAC design, at the cost of more LUTs (25016 vs 9176), FFs (13688 vs 328) and power (0.253 W vs 0.183 W)."
   - "At 100 MHz the full ESN inference takes 97 clock cycles and processes 65.98M input samples/s, reported as 527% faster than the earlier ESN design."
@@ -17,7 +17,7 @@ kpis:
   - {v: "65.98M", l: "input samples per second"}
   - {v: "97 cycles", l: "ESN inference latency at 100 MHz"}
   - {v: "81.1 MOPS/DSP", l: "DSP efficiency (vs. 65.0 baseline)"}
-  - {v: "25%", l: "less BRAM for tanh"}
+  - {v: "25%", l: "fewer tanh table entries"}
 figures:
   - {file: hybrid-neuron_1.png, cap: "Reservoir neuron: the nine-DSP MAC_DA with its CSA/CLA adder tree, followed by the RALUT-based tanh.", section: design}
   - {file: hybrid-neuron_2.png, cap: "Resource use, DSP efficiency, power and processing time of MAC_DA versus the baseline MAC on a 72×72 matrix-vector product.", section: results}

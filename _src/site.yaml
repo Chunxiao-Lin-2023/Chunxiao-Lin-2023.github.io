@@ -35,7 +35,7 @@ interests: [Reservoir computing, FPGA accelerators, On-chip learning, Next-G wir
 research:
   - step: "1 · Inference"
     title: Cost-efficient reservoir neurons
-    text: CLB-only, DSP-only and hybrid DSP–CLB neurons, a range-addressable tanh, and a systolic readout.
+    text: Bit-serial, DSP-only and hybrid DSP–CLB neurons, a range-addressable tanh, and a systolic readout.
     img: isqed_arch.png
     refs: "ISQED'22 · ICCAD'23 · ICNC'26"
   - step: "2 · Learning"
@@ -57,7 +57,7 @@ project_groups:
   projects:
   - id: onchip-rls
     title: On-chip RLS learning for MIMO channel prediction
-    period: 2024 – 2026
+    period: '2024'
     tag: TCAD'26
     img: tcad_overall.png
     text: 'A complete echo state network on one FPGA: inference and recursive-least-squares (RLS) training share
@@ -66,7 +66,7 @@ project_groups:
     - v: 3.87 µs
       l: per training + prediction step (Virtex-7, 100 MHz)
     - v: 5.3×
-      l: lower NMSE than the prior on-chip ESN learner
+      l: lower NMSE than the prior on-chip-trained FPGA ESN (Mackey-Glass)
     - v: '>1600×'
       l: energy efficiency vs. a CPU (290× vs. a GPU)
     - v: 264 Mb/s
@@ -79,8 +79,8 @@ project_groups:
     - lin2026tcad
     highlight: true
     role: 'First author: architecture, RTL implementation and FPGA evaluation.'
-    impact: Lets a wireless receiver keep learning on the chip itself, thousands of times faster and more energy-efficient
-      than a CPU or GPU.
+    impact: Lets a wireless receiver keep learning on the chip itself, with over 1600× (CPU) and 290× (GPU) the energy
+      efficiency.
     stack:
     - Verilog
     - Vivado
@@ -95,8 +95,8 @@ project_groups:
     period: 2024 – 2025
     tag: ICNC'26
     img: icnc_neuron.png
-    text: Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, so the DSPs
-      never sit idle; a range-addressable tanh keeps the activation cheap.
+    text: Nine DSP slices multiply-accumulate while a CLB adder tree compresses their partial sums, keeping the
+      DSPs busy; a range-addressable tanh keeps the activation cheap.
     kpis:
     - v: 0.97 µs
       l: per prediction for a full ESN (64, 8, 64)
@@ -105,9 +105,9 @@ project_groups:
     - v: 5.7–14.2 dB
       l: lower NMSE than the AR predictor
     points:
-    - 'Range-addressable LUT tanh: interpolation where tanh bends, ±1 in saturation; the DSP is clock-gated above
-      the threshold and the table BRAM drops by 25%.'
-    - 13% less processing time than the DSP-only MAC on a 72×72 matrix–vector product.
+    - 'Range-addressable LUT tanh: interpolation where tanh bends, ±1 in saturation; the DSP is bypassed above
+      the threshold and the table needs 25% fewer entries.'
+    - 13.5% less processing time than the DSP-only MAC on a 72×72 matrix–vector product.
     pubs:
     - lin2026icnc
     highlight: true
@@ -134,7 +134,7 @@ project_groups:
     - lin2022isqed
     highlight: true
     role: 'First author: neuron architecture and FPGA implementation.'
-    impact: Cuts the logic needed for a neural-network layer by about 80% by hard-wiring its fixed weights.
+    impact: Cuts the LUTs needed for a reservoir neuron by about 80% by hard-wiring its fixed weights.
     stack:
     - Verilog
     - Vivado
@@ -169,7 +169,7 @@ project_groups:
     role: 'Designed and built both testbeds end to end: FPGA RTL, Ethernet path, host software and integration with
       the radio setup.'
     impact: 'Shows the hardware working in a live radio link, not only in simulation: every channel measurement
-      is predicted in under a millisecond.'
+      is predicted within 0.9 ms.'
     stack:
     - Verilog
     - 10G Ethernet (MAC/PCS)
@@ -185,7 +185,7 @@ project_groups:
     tag: ICCAD'23
     img: iccad_platform.png
     text: A DSP48E1-array reservoir neuron for 2×2 MIMO-OFDM symbol detection, tested over the air with an SDR platform
-      (PC, Virtex-7 FPGA and two USRPs running a GNU Radio Wi-Fi link).
+      (PC, Virtex-7 FPGA and USRP radios running a GNU Radio Wi-Fi link).
     kpis:
     - v: 3.3×
       l: throughput for only +21.4% LUT and +33% FF
@@ -213,8 +213,8 @@ project_groups:
     period: 2023
     tag: Frontiers'24
     img: front_mmimo_uplink.png
-    text: A hardware-accelerated reservoir neuron speeds up an ESN symbol detector for massive MIMO-OFDM, validated
-      on a Virtex-7 FPGA across a range of MIMO configurations against linear MMSE detection.
+    text: A hardware-accelerated reservoir neuron speeds up an ESN symbol detector for massive MIMO-OFDM, evaluated
+      in simulation from 2×2 up to 4×64 MIMO against linear MMSE detection and validated as a 2×2 design on a Virtex-7 FPGA.
     points:
     - Low bit error rate, low resource utilization and high throughput, with performance that scales with the antenna
       count.
@@ -295,7 +295,7 @@ project_groups:
   projects:
   - id: scan-chain
     title: Dynamically secured scan chains and the GF-Flush attack
-    period: 2020 – 2021
+    period: '2020'
     tag: DFT'21
     img: gfflush_scan.png
     text: Implemented a dynamically secured scan chain and verified a scan-based attack; the follow-up GF(2) algebraic

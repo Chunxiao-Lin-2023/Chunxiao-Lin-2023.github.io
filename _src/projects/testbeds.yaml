@@ -35,11 +35,11 @@ figures:
   - {file: testbeds_10g.jpg, cap: "The 10 GbE testbed: FPGA board with two 10 GbE links and the live visualizer.", section: photo}
   - {file: testbeds_1g.jpg, cap: "The earlier 1 GbE testbed used for model bring-up.", section: photo}
 results:
-  - "Prediction error: NMSE drops from about 0.012 when reusing the outdated channel to about 0.009 with the FPGA prediction, for both users."
+  - "Prediction error: NMSE drops from 0.0119 when reusing the outdated channel to 0.0087 with the FPGA prediction, for both users."
   - "Throughput: 1,250 channel estimates per second per user."
-  - "Latency: under 0.9 ms end to end on the 10 GbE testbed (under 2 ms on the 1 GbE testbed)."
+  - "Latency: ≤ 0.9 ms end to end on the 10 GbE testbed (< 2 ms on the 1 GbE testbed)."
   - "Power: 3.42 W for the FPGA on the 10 GbE testbed."
 kpis:
-  - {v: "< 0.9 ms", l: "end-to-end latency per frame"}
+  - {v: "≤ 0.9 ms", l: "end-to-end latency per frame (10 GbE)"}
   - {v: "1,250 /s", l: "channel predictions per user"}
   - {v: "≈ 27%", l: "lower NMSE than outdated CSI"}
