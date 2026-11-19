@@ -72,7 +72,7 @@
   .stat + .stat { border-left: 1px solid var(--line); }
   .stat b { display: block; font-size: clamp(26px, 2.8vw, 36px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
   .stat b small { font-size: .5em; font-weight: 600; margin-left: 2px; letter-spacing: -.01em; }
-  .stat span { display: block; margin-top: 8px; font-size: 14px; color: var(--muted); line-height: 1.35; }
+  .stat span { display: block; margin-top: 6px; font-size: 15px; color: var(--muted); line-height: 1.35; }
   .stat:nth-child(1) b { color: var(--blue); } .stat:nth-child(2) b { color: var(--green); } .stat:nth-child(3) b { color: var(--orange); }
   @media (max-width: 640px) { .stats { grid-template-columns: 1fr; gap: 24px; } .stat + .stat { border-left: 0; } }
 
@@ -95,29 +95,32 @@
   #topo { max-height: calc(100svh - var(--nav) - 320px); }
   svg text { font-family: var(--sans); }
   .tl { font-size: 17px; font-weight: 600; fill: var(--ink); letter-spacing: -.01em; }
-  .ts { font-size: 13.5px; fill: var(--ink-2); }
-  .tk { font-size: 12.5px; font-weight: 600; }
+  .ts { font-size: 14.5px; fill: var(--ink-2); }
+  .tk { font-size: 14px; font-weight: 600; }
+  #topo .tl { font-size: 23px; }
+  #topo .ts { font-size: 18.5px; }
+  #topo .tk { font-size: 17.5px; }
   .glow { transition: filter .35s; }
   .glow.on { filter: drop-shadow(0 0 10px rgba(36,138,61,.75)); }
   .glow.on-b { filter: drop-shadow(0 0 9px rgba(0,113,227,.6)); }
   .glow.on-o { filter: drop-shadow(0 0 9px rgba(194,94,0,.6)); }
   .stepline { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
-  .stepline span { font-size: 13.5px; padding: 6px 13px; border-radius: 99px; background: var(--bg-2); color: var(--ink-2); transition: background .3s, color .3s; }
+  .stepline span { font-size: 14.5px; padding: 6px 13px; border-radius: 99px; background: var(--bg-2); color: var(--ink-2); transition: background .3s, color .3s; }
   .stepline span i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; vertical-align: 0; }
   .stepline span.on { color: #fff; }
   .chips { margin-top: 12px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
-  .chips span { font-size: 14px; padding: 5px 13px; border-radius: 99px; background: #fff; color: var(--ink-2); }
+  .chips span { font-size: 15px; padding: 5px 13px; border-radius: 99px; background: #fff; color: var(--ink-2); }
   .chips b { font-weight: 600; color: var(--ink); margin-right: 5px; }
 
   /* ---------------------------------------------------------------- signal flow */
   .frame-fig { margin-top: 28px; }
   #frame { max-height: calc(100svh - var(--nav) - 230px); }
   .score-fig { margin-top: 20px; }
-  #score { display: block; width: 100%; height: clamp(260px, calc(100svh - var(--nav) - 300px), 420px); }
-  .cap { margin: 14px auto 0; max-width: 860px; font-size: 16px; line-height: 1.55; color: var(--ink-2); text-align: center; }
+  #score { display: block; width: 100%; height: clamp(280px, calc(100svh - var(--nav) - 318px), 430px); }
+  .cap { margin: 12px auto 0; max-width: 940px; font-size: 15.5px; line-height: 1.55; color: var(--ink-2); text-align: center; }
   .cap b { font-weight: 600; color: var(--ink); }
   .k-o { color: var(--orange); font-weight: 600; } .k-p { color: var(--blue); font-weight: 600; } .k-g { color: var(--green); font-weight: 600; }
-  .note { margin-top: 8px; text-align: center; font-size: 13px; color: var(--muted); }
+  .note { margin-top: 8px; text-align: center; font-size: 14px; color: var(--muted); }
 
   /* ---------------------------------------------------------------- demo */
   .film { margin: 22px auto 0; max-width: 1080px; }
@@ -128,17 +131,17 @@
   .yr { display: grid; grid-template-columns: 80px 1fr; gap: 0 20px; padding-block: 11px; border-top: 1px solid var(--line); }
   .yr .y { font-size: 20px; font-weight: 600; letter-spacing: -.02em; color: var(--muted); line-height: 1.2; }
   .yr ul { display: grid; gap: 12px; }
-  .work .t { font-size: 16px; font-weight: 600; line-height: 1.32; letter-spacing: -.018em; }
-  .work .a { margin-top: 2px; font-size: 13.5px; color: var(--ink-2); }
+  .work .t { font-size: 17px; font-weight: 600; line-height: 1.32; letter-spacing: -.018em; }
+  .work .a { margin-top: 2px; font-size: 14.5px; color: var(--ink-2); }
   .work .a b { font-weight: 600; color: var(--ink); }
-  .work .v { margin-top: 0; font-size: 13.5px; color: var(--muted); font-style: italic; }
-  .work .l { margin-left: 12px; font-style: normal; font-size: 13px; }
+  .work .v { margin-top: 0; font-size: 14.5px; color: var(--muted); font-style: italic; }
+  .work .l { margin-left: 12px; font-style: normal; font-size: 14.5px; }
   .work .l a + a { margin-left: 12px; }
   .work .l a { color: var(--link); }
   .work .l a:hover { text-decoration: underline; }
   @media (max-width: 640px) { .yr { grid-template-columns: 1fr; gap: 10px; } }
 
-  footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-size: 13px; color: var(--muted); }
+  footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-size: 14px; color: var(--muted); }
   footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
   footer a { color: var(--link); }
 
@@ -187,31 +190,31 @@
         </defs>
         <!-- feedback (drawn first, behind everything) -->
         <path d="M912 80 V24 H112 V44" fill="none" stroke="#c25e00" stroke-width="2.4" stroke-dasharray="8 6" marker-end="url(#ah-o)"/>
-        <text x="512" y="16" text-anchor="middle" class="tk" fill="#c25e00">CSI feedback: each user reports its predicted channel to the gNB</text>
+        <text x="512" y="17" text-anchor="middle" class="tk" fill="#c25e00">CSI feedback: the predicted channel goes back to the gNB</text>
         <!-- gNB host -> N310 -->
         <line x1="112" y1="146" x2="112" y2="196" stroke="#0071e3" stroke-width="4"/>
-        <text x="122" y="176" class="tk" fill="#0071e3">10 GbE</text>
+        <text x="124" y="178" class="tk" fill="#0071e3">10 GbE</text>
         <!-- 4x RF: N310 -> emulator -->
         <g stroke-width="3" fill="none">
           <path d="M206 228 L334 248" stroke="#e8772e"/><path d="M206 236 L334 256" stroke="#5b8fd6"/>
           <path d="M206 244 L334 264" stroke="#3aa35c"/><path d="M206 252 L334 272" stroke="#a083c9"/>
         </g>
-        <text x="262" y="226" text-anchor="middle" class="tk" fill="#424245">4× RF</text>
+        <text x="268" y="222" text-anchor="middle" class="tk" fill="#424245">4× RF</text>
         <!-- 2x RF to each X310 -->
         <g stroke-width="3" fill="none">
           <path d="M566 222 L654 124" stroke="#7a9a3a"/><path d="M566 232 L654 134" stroke="#e39a9a"/>
           <path d="M566 296 L654 432" stroke="#7a9a3a"/><path d="M566 306 L654 442" stroke="#e39a9a"/>
         </g>
-        <text x="626" y="168" text-anchor="middle" class="tk" fill="#424245">2× RF</text>
-        <text x="628" y="378" text-anchor="middle" class="tk" fill="#424245">2× RF</text>
+        <text x="580" y="170" text-anchor="middle" class="tk" fill="#424245">2× RF</text>
+        <text x="584" y="380" text-anchor="middle" class="tk" fill="#424245">2× RF</text>
         <!-- X310 -> host PC -->
         <line x1="820" y1="128" x2="868" y2="128" stroke="#0071e3" stroke-width="4"/>
         <line x1="820" y1="438" x2="868" y2="438" stroke="#0071e3" stroke-width="4"/>
         <!-- host PCs -> FPGA, one 10 GbE link each -->
         <line x1="960" y1="132" x2="1042" y2="234" stroke="#248a3d" stroke-width="5"/>
         <line x1="960" y1="434" x2="1042" y2="326" stroke="#248a3d" stroke-width="5"/>
-        <text x="1012" y="168" class="tk" fill="#248a3d">10 GbE</text>
-        <text x="980" y="382" text-anchor="end" class="tk" fill="#248a3d">10 GbE</text>
+        <text x="1012" y="166" class="tk" fill="#248a3d">10 GbE</text>
+        <text x="984" y="372" text-anchor="end" class="tk" fill="#248a3d">10 GbE</text>
 
         <!-- devices -->
         <g id="t-gnb" class="glow"><image href="img/pc.png" x="60" y="44" width="104" height="100"/><image href="img/n310.png" x="17" y="196" width="190" height="90"/></g>
@@ -221,21 +224,16 @@
         <g id="t-fpga" class="glow"><image href="img/zcu216.png" x="1018" y="214" width="170" height="128"/></g>
 
         <!-- labels -->
-        <text x="112" y="314" text-anchor="middle" class="tl">Base station (gNB)</text>
-        <text x="112" y="334" text-anchor="middle" class="ts">host PC + USRP N310</text>
-        <text x="112" y="352" text-anchor="middle" class="ts">4 antennas, precodes</text>
-        <text x="450" y="372" text-anchor="middle" class="tl">Channel emulator</text>
-        <text x="450" y="392" text-anchor="middle" class="ts">Keysight PROPSIM F16</text>
-        <text x="450" y="410" text-anchor="middle" class="ts">high-mobility fading, same every run</text>
-        <text x="806" y="196" text-anchor="middle" class="tl">User 1</text>
-        <text x="806" y="216" text-anchor="middle" class="ts">USRP X310 + host PC, 2 antennas</text>
-        <text x="806" y="234" text-anchor="middle" class="ts">estimates CSI on 32 subbands</text>
-        <text x="806" y="506" text-anchor="middle" class="tl">User 2</text>
-        <text x="806" y="526" text-anchor="middle" class="ts">USRP X310 + host PC, 2 antennas</text>
-        <text x="806" y="544" text-anchor="middle" class="ts">estimates CSI on 32 subbands</text>
-        <text x="1103" y="368" text-anchor="middle" class="tl">FPGA predictor</text>
-        <text x="1103" y="388" text-anchor="middle" class="ts">AMD ZCU216</text>
-        <text x="1103" y="406" text-anchor="middle" class="ts">one WESN per user</text>
+        <text x="112" y="318" text-anchor="middle" class="tl">Base station</text>
+        <text x="112" y="342" text-anchor="middle" class="ts">gNB · N310 · 4 antennas</text>
+        <text x="450" y="378" text-anchor="middle" class="tl">Channel emulator</text>
+        <text x="450" y="402" text-anchor="middle" class="ts">PROPSIM F16 · fading</text>
+        <text x="806" y="198" text-anchor="middle" class="tl">User 1</text>
+        <text x="806" y="222" text-anchor="middle" class="ts">X310 + host PC · 2 antennas</text>
+        <text x="806" y="512" text-anchor="middle" class="tl">User 2</text>
+        <text x="806" y="536" text-anchor="middle" class="ts">X310 + host PC · 2 antennas</text>
+        <text x="1103" y="374" text-anchor="middle" class="tl">FPGA predictor</text>
+        <text x="1103" y="398" text-anchor="middle" class="ts">ZCU216 · WESN</text>
 
         <!-- travelling pulses -->
         <circle id="d1" r="8" opacity="0"/><circle id="d2" r="8" opacity="0"/>
@@ -275,17 +273,17 @@
         <rect x="322" y="18" width="560" height="236" rx="18" fill="#f2f8f3" stroke="#248a3d" stroke-width="1.8"/>
         <text x="342" y="46" class="tl" fill="#248a3d">FPGA · one WESN per user</text>
         <g id="win" class="glow"><g id="hm-win" transform="translate(344,72)"></g>
-          <text x="412" y="182" text-anchor="middle" class="ts">window of recent frames</text></g>
+          <text x="398" y="176" text-anchor="middle" class="ts">window of</text><text x="398" y="194" text-anchor="middle" class="ts">recent frames</text></g>
         <line x1="456" y1="112" x2="500" y2="112" stroke="#424245" stroke-width="2" marker-end="url(#ah-k)"/>
         <g id="res" class="glow"><g id="neu"></g>
-          <text x="568" y="182" text-anchor="middle" class="ts">reservoir, fixed weights</text></g>
+          <text x="572" y="176" text-anchor="middle" class="ts">reservoir</text><text x="572" y="194" text-anchor="middle" class="ts">fixed weights</text></g>
         <line x1="636" y1="112" x2="682" y2="112" stroke="#424245" stroke-width="2" marker-end="url(#ah-k)"/>
-        <path d="M398 192 C 470 236, 660 236, 728 164" fill="none" stroke="#c25e00" stroke-width="1.8" stroke-dasharray="5 4"/>
-        <text x="566" y="244" text-anchor="middle" font-size="12" font-weight="500" fill="#c25e00">the window also feeds the readout directly</text>
+        <path d="M398 204 C 470 240, 660 240, 728 164" fill="none" stroke="#c25e00" stroke-width="1.8" stroke-dasharray="5 4"/>
+        <text x="566" y="245" text-anchor="middle" font-size="14" font-weight="500" fill="#c25e00">the window also feeds the readout directly</text>
         <g id="ro" class="glow"><rect x="688" y="70" width="80" height="88" rx="10" fill="#248a3d"/>
-          <text x="728" y="108" text-anchor="middle" font-size="14" font-weight="600" fill="#fff">readout</text>
-          <text x="728" y="126" text-anchor="middle" font-size="11.5" fill="#fff">linear</text>
-          <text x="790" y="96" class="ts" font-size="12.5">retrained</text><text x="790" y="112" class="ts" font-size="12.5">on every</text><text x="790" y="128" class="ts" font-size="12.5">frame</text></g>
+          <text x="728" y="108" text-anchor="middle" font-size="15.5" font-weight="600" fill="#fff">readout</text>
+          <text x="728" y="128" text-anchor="middle" font-size="13.5" fill="#fff">linear</text>
+          <text x="784" y="94" class="ts" font-size="14.5">retrained</text><text x="784" y="112" class="ts" font-size="14.5">on every</text><text x="784" y="130" class="ts" font-size="14.5">frame</text></g>
         <!-- arrow out -->
         <line x1="882" y1="100" x2="946" y2="100" stroke="#248a3d" stroke-width="2.4" marker-end="url(#ah-g)"/>
         <text x="914" y="90" text-anchor="middle" class="tk" fill="#248a3d">10 GbE</text>
@@ -309,7 +307,7 @@
     <p class="sub reveal">Frame after frame, slowed down over a thousand times.</p>
     <figure class="score-fig reveal">
       <canvas id="score" role="img" aria-label="A timeline: the true channel; one CSI frame every 0.8 ms; each frame's round trip through 10 GbE and the FPGA, under 0.9 ms, overlapping the next one; and for every frame the error of reusing the outdated channel versus the error of the prediction."></canvas>
-      <p class="cap">A user measures a CSI frame <b>every 0.8 ms</b>. Each frame makes a <b>round trip of at most 0.9 ms</b> through 10 GbE and the <span class="k-g">FPGA</span>, so the next frame is already on its way while the last prediction is coming back. The bottom row compares, for every frame, the error of reusing the <span class="k-o">outdated channel H(k)</span> with the error of the <span class="k-p">prediction Ĥ(k+1)</span>. Over the live run, the prediction's NMSE is <b>about 27% lower</b>.</p>
+      <p class="cap">A CSI frame arrives <b>every 0.8 ms</b> and makes a <b>round trip of at most 0.9 ms</b>, so consecutive round trips overlap. In the FPGA each frame <b>updates the reservoir states</b> (inference), <b>retrains the readout</b> (training) and <b>predicts Ĥ(k+1)</b>; stage widths are schematic. The bottom row compares the error of reusing <span class="k-o">H(k)</span> with that of the <span class="k-p">prediction</span>: over the live run, the prediction's NMSE is <b>about 27% lower</b>.</p>
     </figure>
   </div>
 </section>
@@ -446,8 +444,8 @@
     g.fillStyle = "#fff"; g.strokeStyle = C.orange; g.lineWidth = 2.4; g.beginPath(); g.arc(xp, y(vNow), 6, 0, 7); g.fill(); g.stroke();
     g.fillStyle = C.ink; g.beginPath(); g.arc(now, y(vNow), 5, 0, 7); g.fill();
     g.strokeStyle = C.blue; g.lineWidth = 3; g.beginPath(); g.arc(xp, y(vNext), 10, 0, 7); g.stroke();
-    g.font = "500 13px Inter, sans-serif"; g.textAlign = "center";
-    g.fillStyle = C.muted; g.fillText("now", now, H - 2);
+    g.font = "500 14px Inter, sans-serif"; g.textAlign = "center";
+    g.fillStyle = C.ink2; g.fillText("now", now, H - 2);
     g.fillStyle = C.orange; g.fillText("outdated", xp - 40, H - 2);
     g.fillStyle = C.blue; g.fillText("predicted", xp + 34, H - 2);
   }
@@ -526,25 +524,35 @@
   /* ------------------------------------------------ frame after frame: the score, in ms */
   const score = $("score");
   const ROWS = [
-    { name: "Channel", sub: "the true H(t)", c: C.ink },
-    { name: "User", sub: "a CSI frame every 0.8 ms", c: C.ink2 },
-    { name: "Round trip", sub: "10 GbE + FPGA, ≤ 0.9 ms", c: C.green },
-    { name: "Error", sub: "against the true next frame", c: C.blue },
+    { name: "Channel", sub: ["the true H(t)"], c: C.ink, w: .8 },
+    { name: "User", sub: ["a CSI frame every 0.8 ms"], c: C.ink2, w: .8 },
+    { name: "Round trip", sub: ["10 GbE + FPGA, ≤ 0.9 ms", "inference and training", "on every frame"], c: C.green, w: 1.55 },
+    { name: "Error", sub: ["against the true next frame"], c: C.blue, w: .9 },
+  ];
+  // what happens inside one round trip (widths are schematic, not measured)
+  const STAGES = [
+    { f: .08, c: "#6e6e73", name: "10 GbE in", kind: "" },
+    { f: .22, c: C.blue, name: "update reservoir states", kind: "inference" },
+    { f: .38, c: "#8944ab", name: "retrain the readout", kind: "training" },
+    { f: .14, c: "#0a7f8c", name: "predict Ĥ(k+1)", kind: "inference" },
+    { f: .18, c: "#6e6e73", name: "10 GbE out", kind: "" },
   ];
   const RT = .9 / .8;                                    // round trip in frames
-  function rr(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+  function rr(g, x, y, w, h, r) { r = Math.min(r, w / 2, h / 2); g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
   function drawScore(T) {
     const [g, W, H] = sizeCanvas(score);
     g.clearRect(0, 0, W, H);
-    const narrow = W < 640, L = narrow ? 92 : 190, R = W - 8, PX = narrow ? 96 : 160, play = L + (R - L) * .66;
-    const top = 18, bot = 28, rowH = (H - top - bot) / 4;
-    const X = t => play + (t - T) * PX, rowY = i => top + i * rowH, val = (i, v) => rowY(i) + rowH * .86 - v * rowH * .72;
+    const narrow = W < 640, L = narrow ? 96 : 210, R = W - 8, PX = narrow ? 110 : 230, play = L + (R - L) * .6;
+    const top = 18, bot = 30, unit = (H - top - bot) / ROWS.reduce((a, r) => a + r.w, 0);
+    const rowY = i => top + ROWS.slice(0, i).reduce((a, r) => a + r.w, 0) * unit, rowH = i => ROWS[i].w * unit;
+    const X = t => play + (t - T) * PX, val = (i, v) => rowY(i) + rowH(i) * .86 - v * rowH(i) * .72;
     const k0 = Math.floor(T - (play - L) / PX) - 2, k1 = Math.ceil(T + (R - play) / PX) + 1;
+    let active = -1;
     g.save(); g.beginPath(); g.rect(L, 0, R - L, H); g.clip();
-    g.font = "500 11.5px Inter, sans-serif"; g.textAlign = "left";
+    g.font = "500 13px Inter, sans-serif"; g.textAlign = "left";
     for (let k = k0; k <= k1; k++) {
       const x = X(k); g.strokeStyle = "rgba(29,29,31,.09)"; g.lineWidth = 1; g.beginPath(); g.moveTo(x, top); g.lineTo(x, H - bot); g.stroke();
-      g.fillStyle = C.muted; g.fillText(`${(k * .8).toFixed(1)} ms`, x + 5, H - 10);
+      if (x + 52 < R) { g.fillStyle = C.ink2; g.fillText(`${(k * .8).toFixed(1)} ms`, x + 5, H - 10); }
     }
     // row 0: true channel up to now
     g.beginPath();
@@ -555,37 +563,62 @@
       const x = X(k), v = hs(k);
       g.strokeStyle = "rgba(29,29,31,.25)"; g.setLineDash([2, 4]); g.beginPath(); g.moveTo(x, val(0, v)); g.lineTo(x, val(1, v)); g.stroke(); g.setLineDash([]);
       g.fillStyle = C.ink2; g.beginPath(); g.arc(x, val(1, v), 5, 0, 7); g.fill();
-      g.fillStyle = C.ink2; g.font = "600 11px Inter, sans-serif"; g.fillText(`H(${k})`, x + 8, val(1, v) + 4);
+      g.font = "600 13.5px Inter, sans-serif"; g.fillText(`H(${k})`, x + 9, val(1, v) + 5);
     }
-    // row 2: overlapping round trips, alternating lanes
+    // row 2: overlapping round trips, each split into its stages
     for (let k = k0; k <= Math.floor(T); k++) {
-      const a = k + .03, b = Math.min(k + RT, T), lane = ((k % 2) + 2) % 2;
-      if (b <= a) continue;
-      const done = T >= k + RT, y = rowY(2) + rowH * (lane ? .53 : .14), h = rowH * .33;
-      rr(g, X(a), y, (b - a) * PX, h, 7);
-      g.fillStyle = done ? "rgba(36,138,61,.16)" : C.green; g.fill();
-      if ((b - a) * PX > 70) { g.fillStyle = done ? C.green : "#fff"; g.font = "600 11.5px Inter, sans-serif";
-        g.fillText(`H(${k}) → Ĥ(${k + 1})`, X(a) + 8, y + h / 2 + 4); }
-      g.strokeStyle = "rgba(36,138,61,.4)"; g.lineWidth = 1.2; g.beginPath(); g.moveTo(X(k), val(1, hs(k)) + 6); g.lineTo(X(a), y + h / 2); g.stroke();
+      const a = k + .03, lane = ((k % 2) + 2) % 2, live = T < k + RT;
+      if (T <= a) continue;
+      const y = rowY(2) + rowH(2) * (lane ? .54 : .14), h = rowH(2) * .3;
+      let t = a;
+      g.save(); rr(g, X(a), y, RT * PX, h, 7); g.clip();
+      STAGES.forEach((st, i) => {
+        const s0 = t, s1 = t + st.f * (RT - .03); t = s1;
+        if (s0 >= T) return;
+        const e = Math.min(s1, T), now = live && T >= s0 && T < s1;
+        if (now) active = i;
+        g.globalAlpha = live ? (now ? 1 : .55) : .22;
+        g.fillStyle = st.c; g.fillRect(X(s0), y, (e - s0) * PX + .5, h);
+        g.globalAlpha = 1;
+        g.strokeStyle = "#fff"; g.lineWidth = 1.5; g.beginPath(); g.moveTo(X(s0), y); g.lineTo(X(s0), y + h); g.stroke();
+      });
+      g.restore();
+      g.fillStyle = live ? C.ink : C.ink2; g.font = `${live ? 600 : 500} 13px Inter, sans-serif`;
+      g.fillText(`H(${k}) → Ĥ(${k + 1})`, X(a) + 2, y - 5);
+      g.strokeStyle = "rgba(29,29,31,.25)"; g.lineWidth = 1.2; g.beginPath(); g.moveTo(X(k), val(1, hs(k)) + 6); g.lineTo(X(a), y + h / 2); g.stroke();
     }
     // row 3: when Ĥ(k+1) is back, compare both guesses with the true H(k+1)
-    const base = rowY(3) + rowH * .9, scale = rowH * 1.9;
+    const base = rowY(3) + rowH(3) * .9, scale = rowH(3) * 1.9, cap = rowH(3) * .78;
     g.strokeStyle = "rgba(29,29,31,.2)"; g.lineWidth = 1; g.beginPath(); g.moveTo(L, base); g.lineTo(R, base); g.stroke();
     for (let k = k0; k <= Math.floor(T - RT); k++) {
-      const x = X(k + RT), truth = hs(k + 1), eo = Math.abs(truth - hs(k)), ep = Math.abs(err(k));
-      g.fillStyle = C.orange; g.fillRect(x - 13, base - Math.min(rowH * .78, eo * scale), 11, Math.min(rowH * .78, eo * scale));
-      g.fillStyle = C.blue; g.fillRect(x + 2, base - Math.max(2, ep * scale), 11, Math.max(2, ep * scale));
+      const x = X(k + RT), truth = hs(k + 1), eo = Math.min(cap, Math.abs(truth - hs(k)) * scale), ep = Math.max(2, Math.abs(err(k)) * scale);
+      g.fillStyle = C.orange; g.fillRect(x - 15, base - eo, 12, eo);
+      g.fillStyle = C.blue; g.fillRect(x + 2, base - ep, 12, ep);
     }
     g.restore();
+    // row labels
     g.textAlign = "left";
     ROWS.forEach((r, i) => {
-      g.fillStyle = r.c; g.font = `600 ${narrow ? 13 : 15}px Inter, sans-serif`; g.fillText(r.name, 0, rowY(i) + rowH * .46);
-      if (!narrow) { g.fillStyle = C.muted; g.font = "400 12.5px Inter, sans-serif"; g.fillText(r.sub, 0, rowY(i) + rowH * .46 + 18); }
-      g.strokeStyle = "rgba(29,29,31,.08)"; g.lineWidth = 1; g.beginPath(); g.moveTo(0, rowY(i) + rowH); g.lineTo(W, rowY(i) + rowH); g.stroke();
+      const y0 = rowY(i) + Math.min(rowH(i) * .42, 30);
+      g.fillStyle = r.c; g.font = `600 ${narrow ? 14 : 17}px Inter, sans-serif`; g.fillText(r.name, 0, y0);
+      if (!narrow) r.sub.forEach((line, j) => { g.fillStyle = C.ink2; g.font = "400 14px Inter, sans-serif"; g.fillText(line, 0, y0 + 20 + j * 18); });
+      g.strokeStyle = "rgba(29,29,31,.08)"; g.lineWidth = 1; g.beginPath(); g.moveTo(0, rowY(i) + rowH(i)); g.lineTo(W, rowY(i) + rowH(i)); g.stroke();
     });
-    g.font = "600 12px Inter, sans-serif"; g.textAlign = "right";
-    g.fillStyle = C.orange; g.fillText("■ reuse H(k)", R - 4, rowY(3) + 16);
-    g.fillStyle = C.blue; g.fillText("■ prediction Ĥ(k+1)", R - 4, rowY(3) + 32);
+    // stage legend in the empty space right of the playhead; the running stage is highlighted
+    const lx = play + 22, ly = rowY(2) + 22;
+    if (R - lx > 200) STAGES.forEach((st, i) => {
+      if (i === 4) return;
+      const yy = ly + i * 22, on = i === active || (i === 0 && active === 4);
+      g.globalAlpha = on ? 1 : .75;
+      g.fillStyle = st.c; rr(g, lx, yy - 11, 14, 14, 3); g.fill();
+      g.fillStyle = on ? C.ink : C.ink2; g.font = `${on ? 700 : 500} 14px Inter, sans-serif`;
+      g.fillText(i === 0 ? "10 GbE in / out" : st.name, lx + 22, yy + 1);
+      if (st.kind) { const w = g.measureText(st.name).width; g.fillStyle = st.c; g.font = "600 12.5px Inter, sans-serif"; g.fillText(st.kind, lx + 30 + w, yy + 1); }
+      g.globalAlpha = 1;
+    });
+    g.font = "600 14px Inter, sans-serif"; g.textAlign = "right";
+    g.fillStyle = C.orange; g.fillText("■ reuse H(k)", R - 4, rowY(3) + 18);
+    g.fillStyle = C.blue; g.fillText("■ prediction Ĥ(k+1)", R - 4, rowY(3) + 36);
     g.strokeStyle = C.red; g.lineWidth = 2; g.beginPath(); g.moveTo(play, top - 6); g.lineTo(play, H - bot); g.stroke();
     g.fillStyle = C.red; g.beginPath(); g.moveTo(play - 6, top - 12); g.lineTo(play + 6, top - 12); g.lineTo(play, top - 2); g.closePath(); g.fill();
   }
