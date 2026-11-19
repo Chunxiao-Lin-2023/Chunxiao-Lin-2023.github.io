@@ -92,14 +92,14 @@
   .board { margin-top: 18px; background: #fff; border-radius: 22px; padding: 14px 20px 14px; }
   .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
   .scroll > svg { display: block; width: 100%; min-width: 760px; height: auto; }
-  #topo { max-height: calc(100svh - var(--nav) - 320px); }
+  #topo { max-height: calc(100svh - var(--nav) - 236px); }
   svg text { font-family: var(--sans); }
   .tl { font-size: 17px; font-weight: 600; fill: var(--ink); letter-spacing: -.01em; }
   .ts { font-size: 14.5px; fill: var(--ink-2); }
   .tk { font-size: 14px; font-weight: 600; }
-  #topo .tl { font-size: 23px; }
-  #topo .ts { font-size: 18.5px; }
-  #topo .tk { font-size: 17.5px; }
+  #topo .tl { font-size: 25px; }
+  #topo .ts { font-size: 20px; }
+  #topo .tk { font-size: 19px; }
   .glow { transition: filter .35s; }
   .glow.on { filter: drop-shadow(0 0 10px rgba(36,138,61,.75)); }
   .glow.on-b { filter: drop-shadow(0 0 9px rgba(0,113,227,.6)); }
@@ -108,7 +108,7 @@
   .stepline span { font-size: 14.5px; padding: 6px 13px; border-radius: 99px; background: var(--bg-2); color: var(--ink-2); transition: background .3s, color .3s; }
   .stepline span i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; vertical-align: 0; }
   .stepline span.on { color: #fff; }
-  .chips { margin-top: 12px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .chips { margin-top: 10px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
   .chips span { font-size: 15px; padding: 5px 13px; border-radius: 99px; background: #fff; color: var(--ink-2); }
   .chips b { font-weight: 600; color: var(--ink); margin-right: 5px; }
 
@@ -180,63 +180,61 @@
 <section class="sec grey" id="setup">
   <div class="wrap">
     <h2 class="reveal">Setup</h2>
-    <p class="sub reveal">One base station and two users, linked through a channel emulator; one FPGA predicts for both users.</p>
     <div class="chips reveal"><span><b>4 × 2</b>distributed MIMO</span><span><b>32</b>subbands per CSI frame</span><span><b>2 × 10 GbE</b>one link per user</span><span><b>1 FPGA</b>one WESN per user, in parallel</span></div>
     <figure class="board reveal">
       <div class="scroll">
-      <svg id="topo" viewBox="0 0 1200 560" role="img" aria-label="Testbed topology: the gNB host PC and USRP N310 connect over four RF links to a Keysight PROPSIM F16 channel emulator, which connects over two RF links each to two USRP X310 radios. Each X310 has a host PC, and each host PC has its own 10 GbE link to one ZCU216 FPGA. The predicted channel is fed back to the gNB.">
+      <svg id="topo" viewBox="0 0 1200 450" role="img" aria-label="Testbed topology: the gNB host PC and USRP N310 connect over four RF links to a Keysight PROPSIM F16 channel emulator, which connects over two RF links each to two USRP X310 radios. Each X310 has a host PC, and each host PC has its own 10 GbE link to one ZCU216 FPGA. The predicted channel is fed back to the gNB.">
         <defs>
-          <marker id="ah-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#c25e00"/></marker>
+          <marker id="ah-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#c25e00"/></marker>
         </defs>
-        <!-- feedback (drawn first, behind everything) -->
-        <path d="M912 80 V24 H112 V44" fill="none" stroke="#c25e00" stroke-width="2.4" stroke-dasharray="8 6" marker-end="url(#ah-o)"/>
-        <text x="512" y="17" text-anchor="middle" class="tk" fill="#c25e00">CSI feedback: the predicted channel goes back to the gNB</text>
+        <!-- feedback (behind everything) -->
+        <path d="M911 58 V26 H125 V36" fill="none" stroke="#c25e00" stroke-width="2.6" stroke-dasharray="9 6" marker-end="url(#ah-o)"/>
+        <text x="518" y="19" text-anchor="middle" class="tk" fill="#c25e00">CSI feedback: the predicted channel goes back to the gNB</text>
         <!-- gNB host -> N310 -->
-        <line x1="112" y1="146" x2="112" y2="196" stroke="#0071e3" stroke-width="4"/>
-        <text x="124" y="178" class="tk" fill="#0071e3">10 GbE</text>
+        <line x1="125" y1="136" x2="125" y2="180" stroke="#0071e3" stroke-width="4"/>
+        <text x="137" y="166" class="tk" fill="#0071e3">10 GbE</text>
         <!-- 4x RF: N310 -> emulator -->
         <g stroke-width="3" fill="none">
-          <path d="M206 228 L334 248" stroke="#e8772e"/><path d="M206 236 L334 256" stroke="#5b8fd6"/>
-          <path d="M206 244 L334 264" stroke="#3aa35c"/><path d="M206 252 L334 272" stroke="#a083c9"/>
+          <path d="M216 212 L334 226" stroke="#e8772e"/><path d="M216 220 L334 234" stroke="#5b8fd6"/>
+          <path d="M216 228 L334 242" stroke="#3aa35c"/><path d="M216 236 L334 250" stroke="#a083c9"/>
         </g>
-        <text x="268" y="222" text-anchor="middle" class="tk" fill="#424245">4× RF</text>
+        <text x="276" y="204" text-anchor="middle" class="tk" fill="#424245">4× RF</text>
         <!-- 2x RF to each X310 -->
         <g stroke-width="3" fill="none">
-          <path d="M566 222 L654 124" stroke="#7a9a3a"/><path d="M566 232 L654 134" stroke="#e39a9a"/>
-          <path d="M566 296 L654 432" stroke="#7a9a3a"/><path d="M566 306 L654 442" stroke="#e39a9a"/>
+          <path d="M570 198 L659 98" stroke="#7a9a3a"/><path d="M570 208 L659 108" stroke="#e39a9a"/>
+          <path d="M570 270 L659 326" stroke="#7a9a3a"/><path d="M570 280 L659 336" stroke="#e39a9a"/>
         </g>
-        <text x="580" y="170" text-anchor="middle" class="tk" fill="#424245">2× RF</text>
-        <text x="584" y="380" text-anchor="middle" class="tk" fill="#424245">2× RF</text>
+        <text x="610" y="128" text-anchor="end" class="tk" fill="#424245">2× RF</text>
+        <text x="614" y="350" text-anchor="end" class="tk" fill="#424245">2× RF</text>
         <!-- X310 -> host PC -->
-        <line x1="820" y1="128" x2="868" y2="128" stroke="#0071e3" stroke-width="4"/>
-        <line x1="820" y1="438" x2="868" y2="438" stroke="#0071e3" stroke-width="4"/>
+        <line x1="820" y1="102" x2="868" y2="102" stroke="#0071e3" stroke-width="4"/>
+        <line x1="820" y1="332" x2="868" y2="332" stroke="#0071e3" stroke-width="4"/>
         <!-- host PCs -> FPGA, one 10 GbE link each -->
-        <line x1="960" y1="132" x2="1042" y2="234" stroke="#248a3d" stroke-width="5"/>
-        <line x1="960" y1="434" x2="1042" y2="326" stroke="#248a3d" stroke-width="5"/>
-        <text x="1012" y="166" class="tk" fill="#248a3d">10 GbE</text>
-        <text x="984" y="372" text-anchor="end" class="tk" fill="#248a3d">10 GbE</text>
+        <line x1="956" y1="106" x2="1036" y2="186" stroke="#248a3d" stroke-width="5"/>
+        <line x1="956" y1="328" x2="1036" y2="270" stroke="#248a3d" stroke-width="5"/>
+        <text x="1016" y="234" text-anchor="end" class="tk" fill="#248a3d">10 GbE</text>
 
         <!-- devices -->
-        <g id="t-gnb" class="glow"><image href="img/pc.png" x="60" y="44" width="104" height="100"/><image href="img/n310.png" x="17" y="196" width="190" height="90"/></g>
-        <g id="t-emu" class="glow"><image href="img/propsim.png" x="325" y="172" width="250" height="175"/></g>
-        <g id="t-ue1" class="glow"><image href="img/x310.png" x="650" y="95" width="170" height="66"/><image href="img/pc.png" x="866" y="80" width="94" height="90"/></g>
-        <g id="t-ue2" class="glow"><image href="img/x310.png" x="650" y="405" width="170" height="66"/><image href="img/pc.png" x="866" y="390" width="94" height="90"/></g>
-        <g id="t-fpga" class="glow"><image href="img/zcu216.png" x="1018" y="214" width="170" height="128"/></g>
+        <g id="t-gnb" class="glow"><image href="img/pc.png" x="75" y="38" width="100" height="96"/><image href="img/n310.png" x="34" y="180" width="182" height="86"/></g>
+        <g id="t-emu" class="glow"><image href="img/propsim.png" x="330" y="150" width="240" height="168"/></g>
+        <g id="t-ue1" class="glow"><image href="img/x310.png" x="655" y="70" width="165" height="64"/><image href="img/pc.png" x="866" y="58" width="90" height="86"/></g>
+        <g id="t-ue2" class="glow"><image href="img/x310.png" x="655" y="300" width="165" height="64"/><image href="img/pc.png" x="866" y="288" width="90" height="86"/></g>
+        <g id="t-fpga" class="glow"><image href="img/zcu216.png" x="1022" y="165" width="165" height="124"/></g>
 
         <!-- labels -->
-        <text x="112" y="318" text-anchor="middle" class="tl">Base station</text>
-        <text x="112" y="342" text-anchor="middle" class="ts">gNB · N310 · 4 antennas</text>
-        <text x="450" y="378" text-anchor="middle" class="tl">Channel emulator</text>
-        <text x="450" y="402" text-anchor="middle" class="ts">PROPSIM F16 · fading</text>
-        <text x="806" y="198" text-anchor="middle" class="tl">User 1</text>
-        <text x="806" y="222" text-anchor="middle" class="ts">X310 + host PC · 2 antennas</text>
-        <text x="806" y="512" text-anchor="middle" class="tl">User 2</text>
-        <text x="806" y="536" text-anchor="middle" class="ts">X310 + host PC · 2 antennas</text>
-        <text x="1103" y="374" text-anchor="middle" class="tl">FPGA predictor</text>
-        <text x="1103" y="398" text-anchor="middle" class="ts">ZCU216 · WESN</text>
+        <text x="125" y="298" text-anchor="middle" class="tl">Base station (gNB)</text>
+        <text x="125" y="324" text-anchor="middle" class="ts">N310 · 4 antennas</text>
+        <text x="450" y="350" text-anchor="middle" class="tl">Channel emulator</text>
+        <text x="450" y="376" text-anchor="middle" class="ts">PROPSIM F16 · fading</text>
+        <text x="806" y="172" text-anchor="middle" class="tl">User 1</text>
+        <text x="806" y="198" text-anchor="middle" class="ts">X310 + host PC · 2 antennas</text>
+        <text x="806" y="404" text-anchor="middle" class="tl">User 2</text>
+        <text x="806" y="430" text-anchor="middle" class="ts">X310 + host PC · 2 antennas</text>
+        <text x="1104" y="320" text-anchor="middle" class="tl">FPGA predictor</text>
+        <text x="1104" y="346" text-anchor="middle" class="ts">ZCU216 · WESN</text>
 
         <!-- travelling pulses -->
-        <circle id="d1" r="8" opacity="0"/><circle id="d2" r="8" opacity="0"/>
+        <circle id="d1" r="9" opacity="0"/><circle id="d2" r="9" opacity="0"/>
       </svg>
       </div>
       <div class="stepline" id="stepline">
@@ -452,12 +450,12 @@
 
   /* ------------------------------------------------ setup: pulses along the real topology */
   const P = {
-    gnb:   [[112, 146], [112, 196]],
-    rf:    [[206, 240], [334, 260]],
-    ue1rf: [[566, 227], [654, 129]], ue2rf: [[566, 301], [654, 437]],
-    ue1x:  [[820, 128], [868, 128]], ue2x: [[820, 438], [868, 438]],
-    ue1f:  [[960, 132], [1042, 234]], ue2f: [[960, 434], [1042, 326]],
-    fb:    [[912, 80], [912, 24], [112, 24], [112, 44]],
+    gnb:   [[125, 136], [125, 180]],
+    rf:    [[216, 224], [334, 238]],
+    ue1rf: [[570, 203], [659, 103]], ue2rf: [[570, 275], [659, 331]],
+    ue1x:  [[820, 102], [868, 102]], ue2x: [[820, 332], [868, 332]],
+    ue1f:  [[956, 106], [1036, 186]], ue2f: [[956, 328], [1036, 270]],
+    fb:    [[911, 58], [911, 26], [125, 26], [125, 36]],
   };
   const rev = p => p.slice().reverse();
   const SEQ = [ // [duration s, step, color, path1, path2, glow]
