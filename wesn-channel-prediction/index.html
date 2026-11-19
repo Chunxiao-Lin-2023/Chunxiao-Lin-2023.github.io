@@ -25,7 +25,8 @@
     --nav: 52px; --ease: cubic-bezier(.22, .61, .24, 1);
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--nav); }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--nav); scroll-snap-type: y proximity; }
+  .hero, .sec { scroll-snap-align: start; }
   body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.47 var(--sans); letter-spacing: -.011em;
          -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   h1, h2, h3, p, figure, ol, ul { margin: 0; padding: 0; }
@@ -57,40 +58,41 @@
   @media (max-width: 560px) { .nav .kicker { display: none; } }
 
   /* ---------------------------------------------------------------- hero */
-  .hero { min-height: min(calc(88vh - var(--nav)), 820px); min-height: min(calc(88svh - var(--nav)), 820px); display: flex; flex-direction: column;
-          justify-content: flex-end; padding-bottom: 64px; text-align: center; }
-  #wave { display: block; width: 100%; height: clamp(160px, 28vh, 270px); margin-bottom: 26px; }
-  .hero h1 { font-size: clamp(34px, 4.6vw, 58px); line-height: 1.08; font-weight: 600; letter-spacing: -.03em; }
-  .hero .lede { font-size: clamp(18px, 1.7vw, 21px); line-height: 1.42; color: var(--ink-2); max-width: 700px; margin: 18px auto 0; letter-spacing: -.014em; }
-  .hero .who { margin-top: 26px; font-size: 17px; font-weight: 600; }
+  .hero { min-height: min(calc(100svh - var(--nav)), 820px); display: flex; flex-direction: column;
+          justify-content: center; padding-block: 24px 40px; text-align: center; }
+  #wave { display: block; width: 100%; height: clamp(110px, 20vh, 220px); margin-bottom: 18px; }
+  .hero h1 { font-size: clamp(32px, min(4.2vw, 6.4vh), 54px); line-height: 1.08; font-weight: 600; letter-spacing: -.03em; }
+  .hero .lede { font-size: clamp(16px, 1.5vw, 19px); line-height: 1.42; color: var(--ink-2); max-width: 680px; margin: 14px auto 0; letter-spacing: -.014em; }
+  .hero .who { margin-top: 18px; font-size: 16px; font-weight: 600; }
   .hero .with { margin-top: 2px; font-size: 15px; color: var(--muted); }
-  .hero .logos { margin-top: 20px; display: flex; justify-content: center; }
-  .hero .logos img { height: 38px; width: auto; }
-  .stats { margin: 48px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); max-width: 840px; }
+  .hero .logos { margin-top: 14px; display: flex; justify-content: center; }
+  .hero .logos img { height: 32px; width: auto; }
+  .stats { margin: 30px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); max-width: 840px; }
   .stat { padding: 0 18px; }
   .stat + .stat { border-left: 1px solid var(--line); }
-  .stat b { display: block; font-size: clamp(30px, 3.4vw, 42px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
+  .stat b { display: block; font-size: clamp(26px, 2.8vw, 36px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
   .stat b small { font-size: .5em; font-weight: 600; margin-left: 2px; letter-spacing: -.01em; }
   .stat span { display: block; margin-top: 8px; font-size: 14px; color: var(--muted); line-height: 1.35; }
   .stat:nth-child(1) b { color: var(--blue); } .stat:nth-child(2) b { color: var(--green); } .stat:nth-child(3) b { color: var(--orange); }
   @media (max-width: 640px) { .stats { grid-template-columns: 1fr; gap: 24px; } .stat + .stat { border-left: 0; } }
 
   /* ---------------------------------------------------------------- sections */
-  .sec { padding-block: clamp(72px, 9vw, 120px); }
+  .sec { min-height: calc(100svh - var(--nav)); display: flex; flex-direction: column; justify-content: center;
+         padding-block: clamp(28px, 5vh, 56px); }
+  .sec > .wrap, .hero > .wrap { width: 100%; }
   .sec.grey { background: var(--bg-2); }
   .sec.dark { background: #000; color: #f5f5f7; }
-  .sec h2 { font-size: clamp(32px, 4vw, 48px); line-height: 1.08; font-weight: 600; letter-spacing: -.028em; text-align: center; }
-  .sec .sub { margin: 14px auto 0; max-width: 720px; text-align: center; font-size: 19px; line-height: 1.42; color: var(--muted); letter-spacing: -.014em; }
+  .sec h2 { font-size: clamp(28px, min(3.2vw, 5.2vh), 40px); line-height: 1.08; font-weight: 600; letter-spacing: -.028em; text-align: center; }
+  .sec .sub { margin: 8px auto 0; max-width: 760px; text-align: center; font-size: 17px; line-height: 1.42; color: var(--muted); letter-spacing: -.014em; }
   .sec.dark .sub { color: #a1a1a6; }
-  .sec h3.part { margin-top: 64px; font-size: 22px; font-weight: 600; letter-spacing: -.02em; }
-  .sec h3.part span { color: var(--muted); font-weight: 400; margin-left: 8px; font-size: 17px; letter-spacing: -.01em; }
   html.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
   html.js .reveal.in { opacity: 1; transform: none; }
 
   /* ---------------------------------------------------------------- setup: the real topology */
-  .board { margin-top: 48px; background: #fff; border-radius: 26px; padding: 26px 28px 22px; }
+  .board { margin-top: 18px; background: #fff; border-radius: 22px; padding: 14px 20px 14px; }
   .scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-  .scroll > svg { display: block; width: 100%; min-width: 860px; height: auto; }
+  .scroll > svg { display: block; width: 100%; min-width: 760px; height: auto; }
+  #topo { max-height: calc(100svh - var(--nav) - 320px); }
   svg text { font-family: var(--sans); }
   .tl { font-size: 17px; font-weight: 600; fill: var(--ink); letter-spacing: -.01em; }
   .ts { font-size: 13.5px; fill: var(--ink-2); }
@@ -99,39 +101,39 @@
   .glow.on { filter: drop-shadow(0 0 10px rgba(36,138,61,.75)); }
   .glow.on-b { filter: drop-shadow(0 0 9px rgba(0,113,227,.6)); }
   .glow.on-o { filter: drop-shadow(0 0 9px rgba(194,94,0,.6)); }
-  .stepline { margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+  .stepline { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
   .stepline span { font-size: 13.5px; padding: 6px 13px; border-radius: 99px; background: var(--bg-2); color: var(--ink-2); transition: background .3s, color .3s; }
   .stepline span i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 7px; vertical-align: 0; }
   .stepline span.on { color: #fff; }
-  .specs { margin-top: 26px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
-  .spec { background: #fff; border-radius: 18px; padding: 18px 20px; }
-  .spec b { display: block; font-size: 26px; font-weight: 600; letter-spacing: -.025em; }
-  .spec span { display: block; margin-top: 4px; font-size: 14px; color: var(--ink-2); line-height: 1.38; }
-  @media (max-width: 900px) { .specs { grid-template-columns: 1fr 1fr; } }
+  .chips { margin-top: 12px; display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+  .chips span { font-size: 14px; padding: 5px 13px; border-radius: 99px; background: #fff; color: var(--ink-2); }
+  .chips b { font-weight: 600; color: var(--ink); margin-right: 5px; }
 
   /* ---------------------------------------------------------------- signal flow */
-  .frame-fig { margin-top: 22px; }
-  .score-fig { margin-top: 18px; }
-  #score { display: block; width: 100%; height: 420px; }
-  .cap { margin: 18px auto 0; max-width: 860px; font-size: 16px; line-height: 1.55; color: var(--ink-2); text-align: center; }
+  .frame-fig { margin-top: 28px; }
+  #frame { max-height: calc(100svh - var(--nav) - 230px); }
+  .score-fig { margin-top: 20px; }
+  #score { display: block; width: 100%; height: clamp(260px, calc(100svh - var(--nav) - 300px), 420px); }
+  .cap { margin: 14px auto 0; max-width: 860px; font-size: 16px; line-height: 1.55; color: var(--ink-2); text-align: center; }
   .cap b { font-weight: 600; color: var(--ink); }
   .k-o { color: var(--orange); font-weight: 600; } .k-p { color: var(--blue); font-weight: 600; } .k-g { color: var(--green); font-weight: 600; }
   .note { margin-top: 8px; text-align: center; font-size: 13px; color: var(--muted); }
 
   /* ---------------------------------------------------------------- demo */
-  .film { margin: 48px auto 0; max-width: 1080px; }
-  .film video { display: block; width: 100%; height: auto; border-radius: 18px; background: #111; }
+  .film { margin: 22px auto 0; max-width: 1080px; }
+  .film video { display: block; width: auto; max-width: 100%; max-height: calc(100svh - var(--nav) - 210px); height: auto; margin-inline: auto; border-radius: 16px; background: #111; }
 
   /* ---------------------------------------------------------------- papers */
-  .works { margin: 48px auto 0; max-width: 900px; }
-  .yr { display: grid; grid-template-columns: 110px 1fr; gap: 0 24px; padding-block: 24px; border-top: 1px solid var(--line); }
-  .yr .y { font-size: 26px; font-weight: 600; letter-spacing: -.02em; color: var(--muted); line-height: 1.2; }
-  .yr ul { display: grid; gap: 24px; }
-  .work .t { font-size: 18px; font-weight: 600; line-height: 1.32; letter-spacing: -.018em; }
-  .work .a { margin-top: 4px; font-size: 15px; color: var(--ink-2); }
+  .works { margin: 20px auto 0; max-width: 980px; }
+  .yr { display: grid; grid-template-columns: 80px 1fr; gap: 0 20px; padding-block: 11px; border-top: 1px solid var(--line); }
+  .yr .y { font-size: 20px; font-weight: 600; letter-spacing: -.02em; color: var(--muted); line-height: 1.2; }
+  .yr ul { display: grid; gap: 12px; }
+  .work .t { font-size: 16px; font-weight: 600; line-height: 1.32; letter-spacing: -.018em; }
+  .work .a { margin-top: 2px; font-size: 13.5px; color: var(--ink-2); }
   .work .a b { font-weight: 600; color: var(--ink); }
-  .work .v { margin-top: 2px; font-size: 15px; color: var(--muted); font-style: italic; }
-  .work .l { margin-top: 8px; display: flex; gap: 18px; font-size: 14px; }
+  .work .v { margin-top: 0; font-size: 13.5px; color: var(--muted); font-style: italic; }
+  .work .l { margin-left: 12px; font-style: normal; font-size: 13px; }
+  .work .l a + a { margin-left: 12px; }
   .work .l a { color: var(--link); }
   .work .l a:hover { text-decoration: underline; }
   @media (max-width: 640px) { .yr { grid-template-columns: 1fr; gap: 10px; } }
@@ -150,7 +152,7 @@
 <nav class="nav" id="nav">
   <div class="wrap">
     <div class="id"><span class="kicker">Live demonstration · 2026</span><a class="brand" href="#top">WESN Channel Prediction</a></div>
-    <div class="links"><a href="#setup">Setup</a><a href="#flow">Signal flow</a><a href="#demo">Demo</a><a href="#papers">Papers</a><a class="opt" href="../">Home</a></div>
+    <div class="links"><a href="#setup">Setup</a><a href="#flow">Signal flow</a><a href="#timing">Timing</a><a href="#demo">Demo</a><a href="#papers">Papers</a><a class="opt" href="../">Home</a></div>
   </div>
 </nav>
 
@@ -175,7 +177,8 @@
 <section class="sec grey" id="setup">
   <div class="wrap">
     <h2 class="reveal">Setup</h2>
-    <p class="sub reveal">The DMIMO testbed: one base station and two users, linked through a channel emulator. One FPGA predicts the channel for both users.</p>
+    <p class="sub reveal">One base station and two users, linked through a channel emulator; one FPGA predicts for both users.</p>
+    <div class="chips reveal"><span><b>4 × 2</b>distributed MIMO</span><span><b>32</b>subbands per CSI frame</span><span><b>2 × 10 GbE</b>one link per user</span><span><b>1 FPGA</b>one WESN per user, in parallel</span></div>
     <figure class="board reveal">
       <div class="scroll">
       <svg id="topo" viewBox="0 0 1200 560" role="img" aria-label="Testbed topology: the gNB host PC and USRP N310 connect over four RF links to a Keysight PROPSIM F16 channel emulator, which connects over two RF links each to two USRP X310 radios. Each X310 has a host PC, and each host PC has its own 10 GbE link to one ZCU216 FPGA. The predicted channel is fed back to the gNB.">
@@ -245,12 +248,6 @@
         <span data-c="#c25e00"><i style="background:#c25e00"></i>4 · predicted CSI fed back to the gNB</span>
       </div>
     </figure>
-    <div class="specs">
-      <div class="spec reveal"><b>4 × 2</b><span>distributed MIMO: a 4-antenna gNB, two 2-antenna users</span></div>
-      <div class="spec reveal"><b>32</b><span>subbands per CSI frame, for every antenna pair</span></div>
-      <div class="spec reveal"><b>2 × 10 GbE</b><span>one link per user between its host PC and the FPGA</span></div>
-      <div class="spec reveal"><b>1 FPGA</b><span>one WESN predictor per user, running in parallel</span></div>
-    </div>
   </div>
 </section>
 
@@ -258,9 +255,7 @@
 <section class="sec" id="flow">
   <div class="wrap">
     <h2 class="reveal">Signal flow</h2>
-    <p class="sub reveal">Follow one user's channel through the loop, frame by frame.</p>
-
-    <h3 class="part reveal">One frame<span>what travels and what the FPGA does with it</span></h3>
+    <p class="sub reveal">One CSI frame of one user: what travels over 10 GbE and what the FPGA does with it.</p>
     <figure class="frame-fig reveal">
       <div class="scroll">
       <svg id="frame" viewBox="0 0 1200 262" role="img" aria-label="One CSI frame, two receive by four transmit antenna pairs by 32 subbands, goes over 10 GbE to the FPGA. The FPGA keeps a window of recent frames, runs them through a fixed reservoir, retrains the linear readout and outputs the predicted next frame, which goes back over 10 GbE.">
@@ -304,7 +299,14 @@
       <p class="note">Heat maps show illustrative channel magnitudes, not measured data.</p>
     </figure>
 
-    <h3 class="part reveal">Frame after frame<span>timing and accuracy, slowed down over a thousand times</span></h3>
+  </div>
+</section>
+
+<!-- ================================================================ TIMING -->
+<section class="sec grey" id="timing">
+  <div class="wrap">
+    <h2 class="reveal">Timing</h2>
+    <p class="sub reveal">Frame after frame, slowed down over a thousand times.</p>
     <figure class="score-fig reveal">
       <canvas id="score" role="img" aria-label="A timeline: the true channel; one CSI frame every 0.8 ms; each frame's round trip through 10 GbE and the FPGA, under 0.9 ms, overlapping the next one; and for every frame the error of reusing the outdated channel versus the error of the prediction."></canvas>
       <p class="cap">A user measures a CSI frame <b>every 0.8 ms</b>. Each frame makes a <b>round trip of at most 0.9 ms</b> through 10 GbE and the <span class="k-g">FPGA</span>, so the next frame is already on its way while the last prediction is coming back. The bottom row compares, for every frame, the error of reusing the <span class="k-o">outdated channel H(k)</span> with the error of the <span class="k-p">prediction Ĥ(k+1)</span>. Over the live run, the prediction's NMSE is <b>about 27% lower</b>.</p>
@@ -337,14 +339,12 @@
           <li class="work">
             <p class="t">FPGA-based Reservoir Computing with On-chip Learning for MIMO Channel Prediction</p>
             <p class="a"><b>Chunxiao Lin</b>, Ummay Sumaya Khan, Meiyu Zheng, Muhammad Farhan Azmine, Lingjia Liu, Daniel J. Jakubisin, Yang Yi</p>
-            <p class="v">IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)</p>
-            <p class="l"><a href="https://doi.org/10.1109/TCAD.2026.3715776">DOI</a><a href="../files/2026_TCAD_AAM.pdf">PDF</a></p>
+            <p class="v">IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)<span class="l"><a href="https://doi.org/10.1109/TCAD.2026.3715776">DOI</a><a href="../files/2026_TCAD_AAM.pdf">PDF</a></span></p>
           </li>
           <li class="work">
             <p class="t">FPGA-based High-speed Reservoir Computing for MIMO Channel Prediction</p>
             <p class="a"><b>Chunxiao Lin</b>, Ummay Sumaya Khan, Lingjia Liu, Yang Yi</p>
-            <p class="v">International Conference on Computing, Networking and Communications (ICNC), pp. 465–470</p>
-            <p class="l"><a href="https://doi.org/10.1109/ICNC68183.2026.11417007">DOI</a><a href="../files/2026_ICNC_AAM.pdf">PDF</a></p>
+            <p class="v">International Conference on Computing, Networking and Communications (ICNC), pp. 465–470<span class="l"><a href="https://doi.org/10.1109/ICNC68183.2026.11417007">DOI</a><a href="../files/2026_ICNC_AAM.pdf">PDF</a></span></p>
           </li>
         </ul>
       </li>
@@ -353,8 +353,7 @@
           <li class="work">
             <p class="t">Leveraging Neuro-Inspired AI Accelerator for High-Speed Computing in 6G Networks</p>
             <p class="a"><b>Chunxiao Lin</b>, Muhammad Farhan Azmine, Yibin Liang, Yang Yi</p>
-            <p class="v">Frontiers in Computational Neuroscience, vol. 18, 1345644</p>
-            <p class="l"><a href="https://doi.org/10.3389/fncom.2024.1345644">DOI</a><a href="../files/04_Frontiers_2024.pdf">PDF</a></p>
+            <p class="v">Frontiers in Computational Neuroscience, vol. 18, 1345644<span class="l"><a href="https://doi.org/10.3389/fncom.2024.1345644">DOI</a><a href="../files/04_Frontiers_2024.pdf">PDF</a></span></p>
           </li>
         </ul>
       </li>
@@ -363,8 +362,7 @@
           <li class="work">
             <p class="t">Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerators</p>
             <p class="a"><b>Chunxiao Lin</b>, Muhammad Farhan Azmine, Yang Yi</p>
-            <p class="v">IEEE/ACM International Conference on Computer Aided Design (ICCAD), invited</p>
-            <p class="l"><a href="https://doi.org/10.1109/ICCAD57390.2023.10323918">DOI</a><a href="../files/2023_ICCAD_AAM.pdf">PDF</a></p>
+            <p class="v">IEEE/ACM International Conference on Computer Aided Design (ICCAD), invited<span class="l"><a href="https://doi.org/10.1109/ICCAD57390.2023.10323918">DOI</a><a href="../files/2023_ICCAD_AAM.pdf">PDF</a></span></p>
           </li>
         </ul>
       </li>
@@ -373,8 +371,7 @@
           <li class="work">
             <p class="t">FPGA-based Reservoir Computing with Optimized Reservoir Node Architecture</p>
             <p class="a"><b>Chunxiao Lin</b>, Yibin Liang, Yang Yi</p>
-            <p class="v">International Symposium on Quality Electronic Design (ISQED)</p>
-            <p class="l"><a href="https://doi.org/10.1109/ISQED54688.2022.9806247">DOI</a><a href="../files/2022_ISQED_AAM.pdf">PDF</a></p>
+            <p class="v">International Symposium on Quality Electronic Design (ISQED)<span class="l"><a href="https://doi.org/10.1109/ISQED54688.2022.9806247">DOI</a><a href="../files/2022_ISQED_AAM.pdf">PDF</a></span></p>
           </li>
         </ul>
       </li>
@@ -402,7 +399,7 @@
     nav.classList.toggle("dark", r.top <= 52 && r.bottom > 52);
   }
   addEventListener("scroll", onScroll, { passive: true }); onScroll();
-  if ("IntersectionObserver" in window && !reduce) {
+  if ("IntersectionObserver" in window && !reduce && !location.search.includes("t=")) {
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }),
       { rootMargin: "0px 0px -8% 0px" });
     document.querySelectorAll(".reveal").forEach(el => io.observe(el));
