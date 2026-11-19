@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Real-Time Channel Prediction for Distributed MIMO</title>
+<meta name="description" content="A windowed echo state network on an FPGA predicts each user's next channel inside a live distributed MIMO radio loop. Live demonstration by Chunxiao Lin, Virginia Tech.">
+<meta name="author" content="Chunxiao Lin">
+<link rel="canonical" href="https://chunxiao-lin-2023.github.io/wesn-channel-prediction/">
+<meta property="og:title" content="Real-Time Channel Prediction for Distributed MIMO">
+<meta property="og:description" content="An echo state network on an FPGA keeps up with a live radio link: one prediction per user every frame.">
+<meta property="og:image" content="https://chunxiao-lin-2023.github.io/assets/video/10g_demo.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230071e3'/%3E%3Cpath d='M5 20c4-9 7-9 11 0s7 9 11 0' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..700&display=swap">
+<script>document.documentElement.classList.add("js");</script>
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #ffffff; --bg-2: #f5f5f7; --ink: #1d1d1f; --ink-2: #424245; --muted: #6e6e73;
+    --line: #d2d2d7; --link: #0066cc;
+    --blue: #0071e3; --orange: #c25e00; --green: #248a3d; --red: #d70015;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    --nav: 52px; --ease: cubic-bezier(.22, .61, .24, 1);
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-padding-top: var(--nav); }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.47 var(--sans); letter-spacing: -.011em;
+         -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  h1, h2, h3, p, figure, ol, ul { margin: 0; padding: 0; }
+  ol, ul { list-style: none; }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
+  .wrap { max-width: 1240px; margin-inline: auto; padding-inline: max(24px, env(safe-area-inset-left, 0px)); }
+  .wrap.wide { max-width: 1440px; padding-inline: max(40px, env(safe-area-inset-left, 0px)); }
+
+  /* ---------------------------------------------------------------- nav */
+  .nav { position: sticky; top: 0; z-index: 20; height: var(--nav); background: rgba(255,255,255,.8);
+         -webkit-backdrop-filter: saturate(180%) blur(20px); backdrop-filter: saturate(180%) blur(20px);
+         border-bottom: 1px solid transparent; transition: border-color .3s, background-color .3s, color .3s; }
+  .nav.stuck { border-bottom-color: rgba(0,0,0,.1); }
+  .nav.dark { background: rgba(22,22,23,.82); color: #f5f5f7; border-bottom-color: rgba(255,255,255,.08); }
+  .nav.dark .links a { color: rgba(245,245,247,.85); }
+  .nav .wrap { height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+  .nav .id { position: relative; flex: 1; min-width: 0; height: 100%; }
+  .nav .id > * { position: absolute; left: 0; top: 50%; transform: translateY(-50%); white-space: nowrap; transition: opacity .4s, transform .4s var(--ease); }
+  .nav .kicker { font-size: 13px; color: var(--muted); }
+  .nav.dark .kicker { color: rgba(245,245,247,.7); }
+  .nav .brand { font-size: 17px; font-weight: 600; letter-spacing: -.016em; }
+  html.js .nav:not(.stuck) .brand { opacity: 0; transform: translateY(-20%); pointer-events: none; }
+  html.js .nav.stuck .kicker { opacity: 0; transform: translateY(-80%); }
+  html:not(.js) .nav .kicker { display: none; }
+  .nav .links { display: flex; gap: 28px; font-size: 13px; }
+  .nav .links a { padding-block: 8px; color: var(--ink-2); transition: color .2s; }
+  .nav .links a:hover { color: var(--link); }
+  @media (max-width: 760px) { .nav .links { gap: 16px; } .nav .links .opt { display: none; } }
+  @media (max-width: 560px) { .nav .kicker { display: none; } }
+
+  /* ---------------------------------------------------------------- hero */
+  .hero { min-height: min(calc(92vh - var(--nav)), 900px); min-height: min(calc(92svh - var(--nav)), 900px); display: flex; flex-direction: column;
+          justify-content: flex-end; padding-bottom: 72px; text-align: center; }
+  #wave { display: block; width: 100%; height: clamp(180px, 30vh, 300px); margin-bottom: 28px; }
+  .hero h1 { font-size: clamp(44px, 7.4vw, 92px); line-height: 1.04; font-weight: 600; letter-spacing: -.035em; }
+  .hero .lede { font-size: clamp(19px, 2vw, 24px); line-height: 1.35; color: var(--ink-2); max-width: 760px; margin: 22px auto 0; letter-spacing: -.016em; }
+  .hero .who { margin-top: 30px; font-size: 19px; font-weight: 600; }
+  .hero .with { margin-top: 4px; font-size: 17px; color: var(--muted); }
+  .hero .logos { margin-top: 26px; display: flex; justify-content: center; }
+  .hero .logos img { height: 44px; width: auto; }
+  .stats { margin: 60px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); max-width: 900px; }
+  .stat { padding: 0 18px; }
+  .stat + .stat { border-left: 1px solid var(--line); }
+  .stat b { display: block; font-size: clamp(34px, 4.4vw, 52px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
+  .stat b small { font-size: .5em; font-weight: 600; margin-left: 2px; letter-spacing: -.01em; }
+  .stat span { display: block; margin-top: 8px; font-size: 15px; color: var(--muted); line-height: 1.35; }
+  .stat:nth-child(1) b { color: var(--blue); } .stat:nth-child(2) b { color: var(--green); } .stat:nth-child(3) b { color: var(--orange); }
+  @media (max-width: 640px) { .stats { grid-template-columns: 1fr; gap: 26px; } .stat + .stat { border-left: 0; } }
+
+  /* ---------------------------------------------------------------- sections */
+  .sec { padding-block: clamp(80px, 11vw, 140px); }
+  .sec.grey { background: var(--bg-2); }
+  .sec.dark { background: #000; color: #f5f5f7; }
+  .sec h2 { font-size: clamp(40px, 5.6vw, 64px); line-height: 1.06; font-weight: 600; letter-spacing: -.03em; text-align: center; }
+  .sec .sub { margin: 16px auto 0; max-width: 720px; text-align: center; font-size: 21px; line-height: 1.38; color: var(--muted); letter-spacing: -.016em; }
+  .sec.dark .sub { color: #a1a1a6; }
+  html.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
+  html.js .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------------------------------------------------------------- setup chain */
+  .chain { margin-top: 64px; display: grid; grid-template-columns: 1fr 64px 1fr 64px 1fr 64px 1fr 64px 1fr; align-items: start; }
+  .player { background: #fff; border-radius: 22px; padding: 22px 20px 24px; min-height: 100%; }
+  .player .ph { height: 150px; display: grid; place-items: center; margin-bottom: 18px; }
+  .player .ph img { max-width: 100%; max-height: 150px; width: auto; height: auto; }
+  .player h3 { font-size: 21px; line-height: 1.2; font-weight: 600; letter-spacing: -.02em; }
+  .player h3 span { display: block; font-size: 15px; font-weight: 500; color: var(--muted); letter-spacing: -.01em; margin-top: 2px; }
+  .player .what { margin-top: 10px; font-size: 15px; line-height: 1.45; color: var(--ink-2); }
+  .player .t { margin-top: 12px; font-size: 15px; color: var(--muted); }
+  .player .t b { color: var(--ink); font-weight: 600; }
+  .player.fpga { box-shadow: 0 0 0 2px var(--green) inset; }
+  .player.fpga .t b { color: var(--green); }
+  .link { position: relative; height: 150px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+          margin-top: 22px; font-size: 12px; font-weight: 500; color: var(--muted); text-align: center; line-height: 1.2; }
+  .link::before { content: ""; width: 100%; height: 2px; background: linear-gradient(90deg, var(--line), var(--ink-2)); }
+  .link::after { content: ""; position: absolute; right: -2px; top: 50%; margin-top: -6px; border: 6px solid transparent; border-left: 8px solid var(--ink-2); }
+  .link span { position: absolute; top: calc(50% + 10px); }
+  .link .pulse { position: absolute; top: 50%; left: 0; width: 9px; height: 9px; margin-top: -4.5px; border-radius: 50%; background: var(--blue);
+                 animation: travel 2.4s var(--ease) infinite; }
+  .link.back .pulse { background: var(--green); }
+  @keyframes travel { 0% { left: 0; opacity: 0; } 15% { opacity: 1; } 85% { opacity: 1; } 100% { left: calc(100% - 9px); opacity: 0; } }
+  .verdict { width: 100%; height: 130px; border-radius: 16px; background: var(--bg-2); display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 12px; }
+  .verdict div { border-radius: 11px; display: flex; flex-direction: column; justify-content: center; align-items: center; font-size: 12px; font-weight: 500; text-align: center; line-height: 1.25; }
+  .verdict .o { background: #fbefe4; color: var(--orange); }
+  .verdict .p { background: #e8f1fc; color: var(--blue); }
+  .verdict b { font-size: 20px; font-weight: 600; letter-spacing: -.02em; }
+  .loop { margin-top: 40px; text-align: center; font-size: 17px; color: var(--ink-2); }
+  .loop b { font-weight: 600; color: var(--ink); }
+  @media (max-width: 1100px) {
+    .chain { grid-template-columns: 1fr; max-width: 520px; margin-inline: auto; }
+    .link { height: 58px; margin: 0; }
+    .link::before { width: 2px; height: 100%; background: linear-gradient(180deg, var(--line), var(--ink-2)); }
+    .link::after { right: auto; left: 50%; top: auto; bottom: -2px; margin: 0 0 0 -6px; border: 6px solid transparent; border-top: 8px solid var(--ink-2); }
+    .link span { top: 50%; left: calc(50% + 14px); transform: translateY(-50%); text-align: left; }
+    .link .pulse { display: none; }
+  }
+
+  /* ---------------------------------------------------------------- signal flow */
+  .system { margin-top: 56px; }
+  #score { display: block; width: 100%; height: 440px; }
+  .system figcaption { margin: 26px auto 0; max-width: 820px; font-size: 17px; line-height: 1.5; color: var(--ink-2); text-align: center; }
+  .system figcaption b { font-weight: 600; color: var(--ink); }
+  .k-o { color: var(--orange); font-weight: 600; } .k-p { color: var(--blue); font-weight: 600; } .k-g { color: var(--green); font-weight: 600; }
+
+  /* ---------------------------------------------------------------- demo */
+  .film { margin: 56px auto 0; max-width: 1080px; position: relative; }
+  .film video { display: block; width: 100%; height: auto; border-radius: 18px; background: #111; }
+  .film figcaption { margin-top: 18px; text-align: center; font-size: 15px; color: #a1a1a6; }
+
+  /* ---------------------------------------------------------------- papers */
+  .works { margin: 56px auto 0; max-width: 900px; }
+  .yr { display: grid; grid-template-columns: 110px 1fr; gap: 0 24px; padding-block: 26px; border-top: 1px solid var(--line); }
+  .yr .y { font-size: 28px; font-weight: 600; letter-spacing: -.02em; color: var(--muted); line-height: 1.2; }
+  .yr ul { display: grid; gap: 26px; }
+  .work .t { font-size: 19px; font-weight: 600; line-height: 1.32; letter-spacing: -.018em; }
+  .work .a { margin-top: 4px; font-size: 15px; color: var(--ink-2); }
+  .work .a b { font-weight: 600; color: var(--ink); }
+  .work .v { margin-top: 2px; font-size: 15px; color: var(--muted); font-style: italic; }
+  .work .l { margin-top: 8px; display: flex; gap: 18px; font-size: 14px; }
+  .work .l a { color: var(--link); }
+  .work .l a:hover { text-decoration: underline; }
+  @media (max-width: 640px) { .yr { grid-template-columns: 1fr; gap: 10px; } }
+
+  footer { border-top: 1px solid var(--line); padding-block: 28px 40px; font-size: 13px; color: var(--muted); }
+  footer .wrap { display: flex; justify-content: space-between; gap: 18px; flex-wrap: wrap; }
+  footer a { color: var(--link); }
+
+  @media (prefers-reduced-motion: reduce) {
+    html.js .reveal { opacity: 1; transform: none; transition: none; }
+    .link .pulse { animation: none; display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="wrap">
+    <div class="id"><span class="kicker">Live demonstration · 2026</span><a class="brand" href="#top">WESN Channel Prediction</a></div>
+    <div class="links"><a href="#setup">Setup</a><a href="#flow">Signal flow</a><a href="#demo">Demo</a><a href="#papers">Papers</a><a class="opt" href="../">Home</a></div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <canvas id="wave" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1>Real-Time Channel Prediction<br>for Distributed MIMO</h1>
+    <p class="lede">A windowed echo state network on an FPGA predicts each user's next channel inside a live radio loop, so the base station precodes with the channel it will meet, not the one it measured.</p>
+    <p class="who">Chunxiao Lin</p>
+    <p class="with">advised by Yang Yi · Virginia Tech</p>
+    <div class="logos"><img src="img/vt.png" alt="Virginia Tech" width="232" height="44"></div>
+    <div class="stats">
+      <div class="stat"><b>≤ 0.9<small>ms</small></b><span>end to end per frame, PC → FPGA → PC over 10 GbE</span></div>
+      <div class="stat"><b>1,250<small>/s</small></b><span>channel predictions per user, for two users at once</span></div>
+      <div class="stat"><b>≈ 27<small>%</small></b><span>lower NMSE than reusing the outdated channel</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="sec grey" id="setup">
+  <div class="wrap wide">
+    <h2 class="reveal">Setup</h2>
+    <p class="sub reveal">A 4×2 distributed MIMO link: one base station, two users, real radios and a channel emulator in between.</p>
+    <ol class="chain">
+      <li class="player reveal">
+        <div class="ph"><img src="img/n310.png" width="391" height="186" alt="Ettus USRP N310 software-defined radio."></div>
+        <h3>Base station<span>gNB · USRP N310</span></h3>
+        <p class="what">Four antennas. Sends pilots to both users and precodes its data with the channel they report back.</p>
+      </li>
+      <li class="link" aria-hidden="true"><i class="pulse"></i><span>pilots<br>over RF</span></li>
+      <li class="player reveal">
+        <div class="ph"><img src="img/propsim.png" width="900" height="628" alt="Keysight PROPSIM F16 radio channel emulator."></div>
+        <h3>The channel<span>Keysight PROPSIM F16</span></h3>
+        <p class="what">Every RF link passes through the emulator, which plays the same high-mobility fading scenario on every run.</p>
+      </li>
+      <li class="link" aria-hidden="true"><i class="pulse"></i><span>fading<br>signals</span></li>
+      <li class="player reveal">
+        <div class="ph"><img src="img/x310.png" width="446" height="172" alt="Ettus USRP X310 software-defined radio."></div>
+        <h3>Two users<span>UE · USRP X310 + host PC</span></h3>
+        <p class="what">Two antennas each. The host estimates the channel on 32 subbands from the pilots, one CSI frame at a time.</p>
+      </li>
+      <li class="link" aria-hidden="true"><i class="pulse"></i><span>CSI frames<br>10 GbE</span></li>
+      <li class="player fpga reveal">
+        <div class="ph"><img src="img/zcu216.png" width="408" height="308" alt="AMD Zynq UltraScale+ RFSoC ZCU216 FPGA board."></div>
+        <h3>FPGA predictor<span>WESN, one channel per user</span></h3>
+        <p class="what">A windowed echo state network retrains on the newest frames and predicts each user's next channel.</p>
+        <p class="t"><b>≤ 0.9 ms</b> per frame, end to end</p>
+      </li>
+      <li class="link back" aria-hidden="true"><i class="pulse"></i><span>prediction<br>10 GbE</span></li>
+      <li class="player reveal">
+        <div class="ph"><div class="verdict"><div class="o"><b>H(t)</b>outdated</div><div class="p"><b>Ĥ(t+1)</b>predicted</div></div></div>
+        <h3>CSI feedback<span>back to the gNB</span></h3>
+        <p class="what">The user reports the predicted channel instead of the one it measured, and the gNB precodes with it.</p>
+        <p class="t"><b>≈ 27%</b> lower NMSE than outdated CSI</p>
+      </li>
+    </ol>
+    <p class="loop reveal">The loop closes at the base station: <b>every frame, for both users, in real time.</b></p>
+  </div>
+</section>
+
+<section class="sec" id="flow">
+  <div class="wrap">
+    <h2 class="reveal">Signal flow</h2>
+    <figure class="system reveal">
+      <canvas id="score" role="img" aria-label="An animated timeline with four rows: the true channel, the CSI each user estimates once per frame, the FPGA retraining and predicting in every frame, and the precoder, which either reuses the outdated estimate or uses the prediction."></canvas>
+      <figcaption>Each bar is <b>one CSI frame</b>, slowed down about a thousand times. The user measures the channel once per frame, but by the time that measurement is used it is already a frame old: the <span class="k-o">outdated</span> step lags the true channel. The <span class="k-g">FPGA</span> retrains on the recent frames and returns a <span class="k-p">prediction</span> of the next one, so the precoder follows the channel instead of trailing it.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sec dark" id="demo">
+  <div class="wrap">
+    <h2 class="reveal">Demo</h2>
+    <p class="sub reveal">The live 10 GbE loop: channel frames stream to the FPGA and predictions come back, frame after frame.</p>
+    <figure class="film reveal">
+      <video controls preload="metadata" playsinline poster="../assets/video/10g_demo.jpg" width="1280" height="720">
+        <source src="../assets/video/10g_demo.mp4" type="video/mp4">
+        Your browser cannot play this video.
+      </video>
+    </figure>
+  </div>
+</section>
+
+<section class="sec" id="papers">
+  <div class="wrap">
+    <h2 class="reveal">Papers</h2>
+    <p class="sub reveal">The FPGA reservoir-computing work behind the demo.</p>
+    <ol class="works">
+      <li class="yr reveal"><span class="y">2026</span>
+        <ul>
+          <li class="work">
+            <p class="t">FPGA-based Reservoir Computing with On-chip Learning for MIMO Channel Prediction</p>
+            <p class="a"><b>Chunxiao Lin</b>, Ummay Sumaya Khan, Meiyu Zheng, Muhammad Farhan Azmine, Lingjia Liu, Daniel J. Jakubisin, Yang Yi</p>
+            <p class="v">IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems (TCAD)</p>
+            <p class="l"><a href="https://doi.org/10.1109/TCAD.2026.3715776">DOI</a><a href="../files/2026_TCAD_AAM.pdf">PDF</a></p>
+          </li>
+          <li class="work">
+            <p class="t">FPGA-based High-speed Reservoir Computing for MIMO Channel Prediction</p>
+            <p class="a"><b>Chunxiao Lin</b>, Ummay Sumaya Khan, Lingjia Liu, Yang Yi</p>
+            <p class="v">International Conference on Computing, Networking and Communications (ICNC), pp. 465–470</p>
+            <p class="l"><a href="https://doi.org/10.1109/ICNC68183.2026.11417007">DOI</a><a href="../files/2026_ICNC_AAM.pdf">PDF</a></p>
+          </li>
+        </ul>
+      </li>
+      <li class="yr reveal"><span class="y">2024</span>
+        <ul>
+          <li class="work">
+            <p class="t">Leveraging Neuro-Inspired AI Accelerator for High-Speed Computing in 6G Networks</p>
+            <p class="a"><b>Chunxiao Lin</b>, Muhammad Farhan Azmine, Yibin Liang, Yang Yi</p>
+            <p class="v">Frontiers in Computational Neuroscience, vol. 18, 1345644</p>
+            <p class="l"><a href="https://doi.org/10.3389/fncom.2024.1345644">DOI</a><a href="../files/04_Frontiers_2024.pdf">PDF</a></p>
+          </li>
+        </ul>
+      </li>
+      <li class="yr reveal"><span class="y">2023</span>
+        <ul>
+          <li class="work">
+            <p class="t">Accelerating Next-G Wireless Communications with FPGA-Based AI Accelerators</p>
+            <p class="a"><b>Chunxiao Lin</b>, Muhammad Farhan Azmine, Yang Yi</p>
+            <p class="v">IEEE/ACM International Conference on Computer Aided Design (ICCAD), invited</p>
+            <p class="l"><a href="https://doi.org/10.1109/ICCAD57390.2023.10323918">DOI</a><a href="../files/2023_ICCAD_AAM.pdf">PDF</a></p>
+          </li>
+        </ul>
+      </li>
+      <li class="yr reveal"><span class="y">2022</span>
+        <ul>
+          <li class="work">
+            <p class="t">FPGA-based Reservoir Computing with Optimized Reservoir Node Architecture</p>
+            <p class="a"><b>Chunxiao Lin</b>, Yibin Liang, Yang Yi</p>
+            <p class="v">International Symposium on Quality Electronic Design (ISQED)</p>
+            <p class="l"><a href="https://doi.org/10.1109/ISQED54688.2022.9806247">DOI</a><a href="../files/2022_ISQED_AAM.pdf">PDF</a></p>
+          </li>
+        </ul>
+      </li>
+    </ol>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap"><span>© 2026 Chunxiao Lin · Virginia Tech</span><a href="../">chunxiao-lin-2023.github.io</a></div>
+</footer>
+
+<script>
+(() => {
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const C = { ink: "#1d1d1f", ink2: "#424245", muted: "#6e6e73", line: "#d2d2d7", blue: "#0071e3", orange: "#c25e00", green: "#248a3d", red: "#d70015" };
+
+  /* ------------------------------------------------ nav: sticky state, dark over the demo */
+  const nav = document.getElementById("nav"), demo = document.getElementById("demo");
+  function onScroll() {
+    nav.classList.toggle("stuck", scrollY > 8);
+    const r = demo.getBoundingClientRect();
+    nav.classList.toggle("dark", r.top <= 52 && r.bottom > 52);
+  }
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  /* ------------------------------------------------ reveal on scroll */
+  if ("IntersectionObserver" in window && !reduce) {
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }),
+      { rootMargin: "0px 0px -8% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  } else document.querySelectorAll(".reveal").forEach(el => el.classList.add("in"));
+
+  /* ------------------------------------------------ canvas helpers */
+  function sizeCanvas(cv) {
+    const dpr = Math.min(2, devicePixelRatio || 1), w = cv.clientWidth, h = cv.clientHeight;
+    if (cv.width !== Math.round(w * dpr) || cv.height !== Math.round(h * dpr)) { cv.width = Math.round(w * dpr); cv.height = Math.round(h * dpr); }
+    const g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); return [g, w, h];
+  }
+  // one smooth "fading channel" used by both drawings (t in frames)
+  const chan = t => .5 + .26 * Math.sin(.83 * t) + .14 * Math.sin(2.1 * t + 1.1) + .07 * Math.sin(4.7 * t + 2.3);
+  const err = k => .03 * Math.sin(k * 12.9898);   // small, deterministic prediction error
+  const hs = t => chan(1.9 * t);                    // the score's channel: changes a lot within one frame
+  const visible = new Map();
+  if ("IntersectionObserver" in window) {
+    const vo = new IntersectionObserver(es => es.forEach(e => visible.set(e.target, e.isIntersecting)));
+    ["wave", "score"].forEach(id => vo.observe(document.getElementById(id)));
+  }
+  const isVisible = el => visible.size === 0 || visible.get(el) !== false;
+
+  /* ------------------------------------------------ hero: the channel keeps moving */
+  const wave = document.getElementById("wave");
+  function drawWave(T) {
+    const [g, W, H] = sizeCanvas(wave);
+    g.clearRect(0, 0, W, H);
+    const pxPer = Math.max(70, W / 15), now = W * .62, y = v => H * .88 - v * H * .76;
+    const tAt = x => T + (x - now) / pxPer;
+    // faint echoes
+    for (let k = 3; k >= 1; k--) {
+      g.beginPath();
+      for (let x = 0; x <= W; x += 3) { const v = chan(tAt(x) - k * .9) * .9 + .05; x ? g.lineTo(x, y(v)) : g.moveTo(x, y(v)); }
+      g.strokeStyle = `rgba(0,113,227,${.07 * (4 - k)})`; g.lineWidth = 2; g.stroke();
+    }
+    // the channel up to now, then the predicted continuation
+    g.beginPath();
+    for (let x = 0; x <= now; x += 2) { const v = chan(tAt(x)); x ? g.lineTo(x, y(v)) : g.moveTo(x, y(v)); }
+    g.strokeStyle = C.ink; g.lineWidth = 2.6; g.stroke();
+    g.beginPath(); g.setLineDash([6, 7]);
+    for (let x = now; x <= Math.min(W, now + pxPer * 1.2); x += 2) g.lineTo(x, y(chan(tAt(x))));
+    g.strokeStyle = C.blue; g.lineWidth = 2.6; g.stroke(); g.setLineDash([]);
+    // now line, last measurement held (outdated) and the predicted point
+    g.strokeStyle = "rgba(29,29,31,.18)"; g.lineWidth = 1; g.beginPath(); g.moveTo(now, 0); g.lineTo(now, H); g.stroke();
+    const xp = now + pxPer, vNow = chan(T), vNext = chan(T + 1);
+    g.strokeStyle = C.orange; g.lineWidth = 2; g.setLineDash([3, 4]); g.beginPath(); g.moveTo(now, y(vNow)); g.lineTo(xp, y(vNow)); g.stroke(); g.setLineDash([]);
+    g.fillStyle = "#fff"; g.strokeStyle = C.orange; g.lineWidth = 2.4; g.beginPath(); g.arc(xp, y(vNow), 6, 0, 7); g.fill(); g.stroke();
+    g.fillStyle = C.ink; g.beginPath(); g.arc(now, y(vNow), 5, 0, 7); g.fill();
+    g.strokeStyle = C.blue; g.lineWidth = 3; g.beginPath(); g.arc(xp, y(vNext), 10, 0, 7); g.stroke();
+    g.font = "500 13px Inter, sans-serif"; g.textAlign = "center";
+    g.fillStyle = C.muted; g.fillText("now", now, H - 4);
+    g.fillStyle = C.blue; g.fillText("next frame", xp, H - 4);
+  }
+
+  /* ------------------------------------------------ signal flow: a four-row score */
+  const score = document.getElementById("score");
+  const ROWS = [
+    { name: "Channel", sub: "what the radio meets", c: C.ink },
+    { name: "User", sub: "CSI estimate, once per frame", c: C.ink2 },
+    { name: "FPGA", sub: "WESN retrains, predicts", c: C.green },
+    { name: "Precoder", sub: "outdated vs. predicted", c: C.blue },
+  ];
+  function rr(g, x, y, w, h, r) { g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
+  function drawScore(T) {
+    const [g, W, H] = sizeCanvas(score);
+    g.clearRect(0, 0, W, H);
+    const narrow = W < 640, L = narrow ? 92 : 180, R = W - 8, P = narrow ? 92 : 150, play = L + (R - L) * .66;
+    const top = 18, rowH = (H - top - 26) / 4;
+    const X = t => play + (t - T) * P;
+    const k0 = Math.floor(T - (play - L) / P) - 1, k1 = Math.ceil(T + (R - play) / P) + 1;
+    const rowY = i => top + i * rowH, val = (i, v) => rowY(i) + rowH * .86 - v * rowH * .72;
+    g.save(); g.beginPath(); g.rect(L, 0, R - L, H); g.clip();
+    // bar lines (one per frame) and frame numbers
+    g.font = "500 11px Inter, sans-serif"; g.textAlign = "left";
+    for (let k = k0; k <= k1; k++) {
+      const x = X(k); g.strokeStyle = "rgba(29,29,31,.09)"; g.lineWidth = 1; g.beginPath(); g.moveTo(x, top); g.lineTo(x, H - 26); g.stroke();
+      g.fillStyle = C.muted; g.fillText(`frame ${k}`, x + 5, H - 10);
+    }
+    // row 0: the true channel, drawn up to the playhead
+    g.beginPath();
+    for (let x = L; x <= play; x += 2) { const v = hs(T + (x - play) / P); x === L ? g.moveTo(x, val(0, v)) : g.lineTo(x, val(0, v)); }
+    g.strokeStyle = C.ink; g.lineWidth = 2.4; g.stroke();
+    // row 1: one estimate per frame
+    for (let k = k0; k <= Math.floor(T); k++) {
+      const x = X(k), v = hs(k);
+      g.strokeStyle = "rgba(29,29,31,.25)"; g.setLineDash([2, 4]); g.beginPath(); g.moveTo(x, val(0, v)); g.lineTo(x, val(1, v)); g.stroke(); g.setLineDash([]);
+      g.fillStyle = C.ink2; g.beginPath(); g.arc(x, val(1, v), 5, 0, 7); g.fill();
+    }
+    // row 2: the FPGA works inside every frame
+    for (let k = k0; k <= Math.floor(T); k++) {
+      const a = k + .1, b = Math.min(k + .78, T);
+      if (b <= a) continue;
+      const active = T >= a && T < k + .78;
+      rr(g, X(a), rowY(2) + rowH * .22, (b - a) * P, rowH * .56, 9);
+      g.fillStyle = active ? C.green : "rgba(36,138,61,.16)"; g.fill();
+      if ((b - a) * P > 84) {
+        g.fillStyle = active ? "#fff" : C.green; g.font = "600 12px Inter, sans-serif";
+        g.fillText(narrow ? "predict" : "retrain + predict", X(a) + 10, rowY(2) + rowH * .5 + 4);
+      }
+      // the measurement goes in, the prediction comes out
+      g.strokeStyle = "rgba(36,138,61,.45)"; g.lineWidth = 1.4;
+      g.beginPath(); g.moveTo(X(k), val(1, hs(k)) + 6); g.lineTo(X(a), rowY(2) + rowH * .5); g.stroke();
+    }
+    // row 3: the precoder in frame k+1 uses either H(k) (outdated) or the prediction of H(k+1)
+    g.beginPath();
+    for (let x = L; x <= play; x += 2) { const v = hs(T + (x - play) / P); x === L ? g.moveTo(x, val(3, v)) : g.lineTo(x, val(3, v)); }
+    g.strokeStyle = "rgba(29,29,31,.35)"; g.lineWidth = 1.6; g.stroke();
+    for (let k = k0; k <= Math.floor(T); k++) {
+      const s = k + .78, e = Math.min(k + 1.78, T);
+      if (e <= s) continue;
+      const vo = hs(k), vp = hs(k + 1.28) + err(k);
+      g.lineWidth = 3;
+      g.strokeStyle = C.orange; g.beginPath(); g.moveTo(X(s), val(3, vo)); g.lineTo(X(e), val(3, vo)); g.stroke();
+      g.strokeStyle = C.blue; g.beginPath(); g.moveTo(X(s), val(3, vp)); g.lineTo(X(e), val(3, vp)); g.stroke();
+      g.strokeStyle = "rgba(36,138,61,.45)"; g.lineWidth = 1.4; g.beginPath(); g.moveTo(X(s), rowY(2) + rowH * .78); g.lineTo(X(s), val(3, vp)); g.stroke();
+    }
+    g.restore();
+    // labels
+    g.textAlign = "left";
+    ROWS.forEach((r, i) => {
+      g.fillStyle = r.c; g.font = `600 ${narrow ? 13 : 15}px Inter, sans-serif`; g.fillText(r.name, 0, rowY(i) + rowH * .46);
+      if (!narrow) { g.fillStyle = C.muted; g.font = "400 12.5px Inter, sans-serif"; g.fillText(r.sub, 0, rowY(i) + rowH * .46 + 18); }
+      g.strokeStyle = "rgba(29,29,31,.08)"; g.lineWidth = 1; g.beginPath(); g.moveTo(0, rowY(i) + rowH); g.lineTo(W, rowY(i) + rowH); g.stroke();
+    });
+    // legend for row 3
+    g.font = "500 12px Inter, sans-serif"; g.textAlign = "right";
+    g.fillStyle = C.orange; g.fillText("outdated", R - 4, rowY(3) + 14);
+    g.fillStyle = C.blue; g.fillText("predicted", R - 4, rowY(3) + 30);
+    // playhead
+    g.strokeStyle = C.red; g.lineWidth = 2; g.beginPath(); g.moveTo(play, top - 6); g.lineTo(play, H - 26); g.stroke();
+    g.fillStyle = C.red; g.beginPath(); g.moveTo(play - 6, top - 12); g.lineTo(play + 6, top - 12); g.lineTo(play, top - 2); g.closePath(); g.fill();
+  }
+
+  /* ------------------------------------------------ loop */
+  const qs = new URLSearchParams(location.search), frozen = qs.has("t") ? +qs.get("t") : (reduce ? 7.4 : null);
+  const t0 = performance.now();
+  function tick(now) {
+    const T = frozen !== null ? frozen : 4 + (now - t0) / 1000 / 1.1;  // 1.1 s per frame on screen
+    if (isVisible(wave)) drawWave(T * .9);
+    if (isVisible(score)) drawScore(T);
+    if (frozen === null) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+  addEventListener("resize", () => { if (frozen !== null) tick(0); });
+})();
+</script>
+</body>
+</html>
