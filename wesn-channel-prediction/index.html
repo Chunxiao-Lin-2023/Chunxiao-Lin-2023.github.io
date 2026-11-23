@@ -328,11 +328,11 @@
           <text x="726" y="88" text-anchor="middle" font-size="14" font-weight="700" fill="#fff" font-style="italic">W<tspan font-size="10" font-style="normal" dy="3">out</tspan></text>
           <use id="rt-icon" href="#retrain" x="746" y="77" width="12" height="12" color="#fff"/>
           <g id="bars"></g>
-          <circle cx="690" cy="66" r="11" fill="#1b6b31" stroke="#fff" stroke-width="2"/><text x="690" y="70.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">4</text>
-          <text x="786" y="96" class="ts" font-size="13" font-weight="600">readout</text><text x="786" y="112" font-size="12.5" font-weight="700" fill="#1b6b31">trained</text><text x="786" y="127" class="ts" font-size="12.5">every frame</text></g>
+          
+          <circle cx="796" cy="91" r="9" fill="#1b6b31"/><text x="796" y="95" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">4</text><text x="810" y="96" class="ts" font-size="13" font-weight="600">readout</text><text x="788" y="114" font-size="12.5" font-weight="700" fill="#1b6b31">trained</text><text x="788" y="130" class="ts" font-size="12.5">every frame</text></g>
         <g font-size="11.5" fill="#424245">
-          <use href="#lock" x="780" y="184" width="9" height="11" color="#424245"/><text x="794" y="194">fixed, never trained</text>
-          <use href="#retrain" x="779" y="203" width="11" height="11" color="#1b6b31"/><text x="794" y="213" fill="#1b6b31" font-weight="600">trained every frame</text>
+          <use href="#lock" x="772" y="190" width="9" height="11" color="#424245"/><text x="786" y="200">fixed (<tspan font-style="italic">W</tspan><tspan font-size="8.5" dy="2">in</tspan><tspan dy="-2">, </tspan><tspan font-style="italic">W</tspan>)</text>
+          <use href="#retrain" x="771" y="208" width="11" height="11" color="#1b6b31"/><text x="786" y="218" fill="#1b6b31" font-weight="600">trained (<tspan font-style="italic">W</tspan><tspan font-size="8.5" dy="2">out</tspan><tspan dy="-2">)</tspan></text>
         </g>
         <g id="parts"></g>
         </g>
@@ -606,7 +606,7 @@
     // slot 0 = current frame (top); slots 1..3 = window of older frames (bottom stack); 4 = leaving
     const e = ease(seg(p, .16, .32));
     const spot = sp => {
-      if (sp <= 0) return [345 - 40 * -sp, 61, 1 + sp];                                 // sliding in from the link
+      if (sp <= 0) return [345 - 18 * -sp, 61, 1 + sp];                                 // sliding in, inside the box
       if (sp < 1) return [345 + (345 - 345) * sp, 61 + (141 - 61) * sp, 1];               // current -> front of the window
       const j = sp - 1; return [345 + 9 * j, 141 + 9 * j, sp > 3 ? Math.max(0, 4 - sp) : 1];
     };
@@ -772,7 +772,7 @@
 
   /* ------------------------------------------------ one clock for everything */
   const qs = new URLSearchParams(location.search), frozen = qs.has("t") ? +qs.get("t") : (reduce ? 7.45 : null);
-  const t0 = performance.now(), FRAME_S = 1.15, SCORE_FRAME_S = 2.0, FLOW_FRAME_S = 3.4;   // seconds on screen per 0.8 ms frame (Timing runs slower)
+  const t0 = performance.now(), FRAME_S = 1.15, SCORE_FRAME_S = 2.0, FLOW_FRAME_S = 5.0;   // seconds on screen per 0.8 ms frame (Timing runs slower)
   function tick(now) {
     const T = frozen !== null ? frozen : 4 + (now - t0) / 1000 / FRAME_S;
     if (isVisible(wave)) drawWave(T * .9);
