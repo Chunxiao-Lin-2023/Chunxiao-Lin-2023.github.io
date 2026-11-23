@@ -629,13 +629,13 @@
 
   /* ------------------------------------------------ one clock for everything */
   const qs = new URLSearchParams(location.search), frozen = qs.has("t") ? +qs.get("t") : (reduce ? 7.45 : null);
-  const t0 = performance.now(), FRAME_S = 1.15;          // one 0.8 ms frame shown in 1.15 s
+  const t0 = performance.now(), FRAME_S = 1.15, SCORE_FRAME_S = 2.0;   // seconds on screen per 0.8 ms frame (Timing runs slower)
   function tick(now) {
     const T = frozen !== null ? frozen : 4 + (now - t0) / 1000 / FRAME_S;
     if (isVisible(wave)) drawWave(T * .9);
     if (isVisible($("topo"))) drawTopo(frozen !== null ? frozen * 1.21 : (now - t0) / 1000);
     if (isVisible($("frame"))) drawFrame(T);
-    if (isVisible(score)) drawScore(T);
+    if (isVisible(score)) drawScore(frozen !== null ? frozen : 4 + (now - t0) / 1000 / SCORE_FRAME_S);
     if (frozen === null) requestAnimationFrame(tick);
   }
   requestAnimationFrame(tick);
