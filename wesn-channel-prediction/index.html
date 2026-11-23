@@ -133,13 +133,13 @@
   .wcard.why li::before { content: ""; position: absolute; left: 0; top: .55em; width: 7px; height: 7px; border-radius: 50%; background: var(--blue); }
   @media (max-width: 1000px) { .wesn { grid-template-columns: 1fr 1fr; } }
   @media (max-width: 560px) { .wesn { grid-template-columns: 1fr; } }
-  #frame { max-height: calc(100svh - var(--nav) - 330px); min-height: 220px; }
+  #frame { max-height: calc(100svh - var(--nav) - 340px); min-height: 220px; }
   .score-fig { margin-top: 20px; }
   #score { display: block; width: 100%; height: clamp(280px, calc(100svh - var(--nav) - 318px), 430px); }
   .cap { margin: 12px auto 0; max-width: 940px; font-size: 15.5px; line-height: 1.55; color: var(--ink-2); text-align: center; }
   .cap b { font-weight: 600; color: var(--ink); }
   .k-o { color: var(--orange); font-weight: 600; } .k-p { color: var(--blue); font-weight: 600; } .k-g { color: var(--green); font-weight: 600; }
-  .note { margin-top: 8px; text-align: center; font-size: 14px; color: var(--muted); }
+  .note { margin-top: 6px; text-align: center; font-size: 14px; color: var(--muted); }
 
   /* ---------------------------------------------------------------- demo */
   #demo { padding-block: clamp(14px, 2.6vh, 28px); }
@@ -298,44 +298,39 @@
         <g transform="translate(-182.6,-11.4) scale(1.3)">
         <!-- FPGA box -->
         <rect x="322" y="18" width="560" height="236" rx="18" fill="#f2f8f3" stroke="#248a3d" stroke-width="1.8"/>
-        <text x="342" y="46" class="tl" fill="#248a3d">FPGA · one WESN per user</text>
-        <text id="f-step" x="864" y="46" text-anchor="end" font-size="14.5" font-weight="700" fill="#248a3d"></text>
-        <!-- skip connection: older frames -> readout, under everything -->
-        <path id="skip" d="M456 188 C 530 240, 670 244, 706 170" fill="none" stroke="#c25e00" stroke-width="2" stroke-dasharray="5 4"/>
-        <text x="604" y="247" text-anchor="middle" font-size="14" font-weight="500" fill="#c25e00">skip connection: straight to the readout</text>
-        <!-- 1 current frame and 2 window of older frames (cards are placed by the script) -->
-        <g id="hm-win"></g>
-        <g id="cur" class="glow"><rect x="343" y="59" width="92" height="52" rx="6" fill="none" stroke="#0071e3" stroke-width="2"/></g>
-        <circle cx="352" cy="128" r="11" fill="#0071e3"/><text x="352" y="132.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">1</text>
-        <text x="368" y="133" class="ts">current frame</text>
-        <g id="win" class="glow"><rect x="341" y="137" width="114" height="70" rx="8" fill="none" stroke="#c25e00" stroke-width="1.6" stroke-dasharray="4 3"/></g>
-        <circle cx="352" cy="226" r="11" fill="#c25e00"/><text x="352" y="230.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">2</text>
-        <text x="368" y="231" class="ts">older frames</text>
-        <g stroke="#7fa6d1" stroke-width="1.4">
-          <line x1="437" y1="80" x2="537" y2="84"/><line x1="437" y1="85" x2="523" y2="114"/>
-          <line x1="437" y1="90" x2="559" y2="104"/><line x1="437" y1="95" x2="542" y2="141"/>
-        </g>
-        <text x="474" y="72" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1d1d1f" font-style="italic">W<tspan font-size="9" font-style="normal" dy="3">in</tspan></text>
-        <use href="#lock" x="489" y="60" width="9" height="11" color="#424245"/>
-        <!-- 2 reservoir -->
+        <text x="342" y="44" class="tl" fill="#248a3d">FPGA · one WESN per user</text>
+        <!-- 4 W_out: trained links (drawn first, under the neurons) -->
+        <g id="ro" class="glow"><g id="wout"></g></g>
+        <circle cx="700" cy="52" r="9" fill="#1b6b31"/><text x="700" y="56" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">4</text>
+        <text x="714" y="57" font-size="14" font-weight="700" fill="#1b6b31" font-style="italic">W<tspan font-size="10" font-style="normal" dy="3">out</tspan></text>
+        <use id="rt-icon" href="#retrain" x="748" y="45" width="12" height="12" color="#1b6b31"/>
+        <!-- W_in: fixed links from the current frame into the reservoir -->
+        <g id="win-links" stroke="#7fa6d1" stroke-width="1.2"></g>
+        <text x="462" y="66" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1d1d1f" font-style="italic">W<tspan font-size="9" font-style="normal" dy="3">in</tspan></text>
+        <use href="#lock" x="477" y="54" width="9" height="11" color="#424245"/>
+        <!-- 3 reservoir -->
         <g id="res" class="glow">
-          <path id="loop" d="M552 70 C 556 50, 610 50, 616 72" fill="none" stroke="#248a3d" stroke-width="1.8" marker-end="url(#ah-g)"/>
-          <text x="578" y="45" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f" font-style="italic">W</text>
-          <use href="#lock" x="587" y="35" width="9" height="11" color="#424245"/>
+          <path id="loop" d="M566 62 C 572 38, 628 38, 636 66" fill="none" stroke="#248a3d" stroke-width="1.8" marker-end="url(#ah-g)"/>
+          <text x="598" y="36" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f" font-style="italic">W</text>
+          <use href="#lock" x="607" y="26" width="9" height="11" color="#424245"/>
           <g id="neu"></g>
-          <circle cx="530" cy="171" r="11" fill="#248a3d"/><text x="530" y="175.5" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">3</text>
-          <text x="584" y="176" text-anchor="middle" class="ts">reservoir</text><text x="584" y="194" text-anchor="middle" class="ts" font-size="13">W<tspan font-size="9.5" dy="3">in</tspan><tspan dy="-3">, W fixed</tspan></text></g>
-        <!-- 3 readout -->
-        <g id="ro" class="glow"><rect x="694" y="60" width="86" height="116" rx="11" fill="#e9f4ec" stroke="#248a3d" stroke-width="1.6"/>
-          <text x="722" y="80" text-anchor="middle" font-size="14" font-weight="700" fill="#1b6b31" font-style="italic">W<tspan font-size="10" font-style="normal" dy="3">out</tspan></text>
-          <use id="rt-icon" href="#retrain" x="744" y="68" width="12" height="12" color="#1b6b31"/>
-          <g id="wout"></g>
-          <circle cx="706" cy="170" r="4.5" fill="#c25e00"/>
-          
-          <circle cx="796" cy="91" r="9" fill="#1b6b31"/><text x="796" y="95" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">4</text><text x="810" y="96" class="ts" font-size="13" font-weight="600">readout</text><text x="788" y="114" font-size="12.5" font-weight="700" fill="#1b6b31">trained</text><text x="788" y="130" class="ts" font-size="12.5">every frame</text></g>
+        </g>
+        <circle cx="556" cy="163" r="9" fill="#248a3d"/><text x="556" y="167" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">3</text>
+        <text x="570" y="168" class="ts" font-size="13.5">reservoir · fixed</text>
+        <!-- 1 current frame and 2 older frames, as input neurons -->
+        <g id="cur" class="glow"><g id="n-cur"></g></g>
+        <circle cx="374" cy="160" r="9" fill="#0071e3"/><text x="374" y="164" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">1</text>
+        <text x="388" y="165" class="ts" font-size="13.5">current</text>
+        <g id="win" class="glow"><g id="n-old"></g></g>
+        <circle cx="344" cy="184" r="9" fill="#c25e00"/><text x="344" y="188" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">2</text>
+        <text x="358" y="189" class="ts" font-size="13.5">older frames</text>
+        <!-- output layer -->
+        <g id="n-out"></g>
+        <text x="820" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#0071e3">Ĥ(k+1)</text>
+        <!-- legend -->
         <g font-size="11.5" fill="#424245">
-          <use href="#lock" x="772" y="190" width="9" height="11" color="#424245"/><text x="786" y="200">fixed (<tspan font-style="italic">W</tspan><tspan font-size="8.5" dy="2">in</tspan><tspan dy="-2">, </tspan><tspan font-style="italic">W</tspan>)</text>
-          <use href="#retrain" x="771" y="208" width="11" height="11" color="#1b6b31"/><text x="786" y="218" fill="#1b6b31" font-weight="600">trained (<tspan font-style="italic">W</tspan><tspan font-size="8.5" dy="2">out</tspan><tspan dy="-2">)</tspan></text>
+          <use href="#lock" x="772" y="206" width="9" height="11" color="#424245"/><text x="786" y="216">fixed (<tspan font-style="italic">W</tspan><tspan font-size="8.5" dy="2">in</tspan><tspan dy="-2">, </tspan><tspan font-style="italic">W</tspan>)</text>
+          <use href="#retrain" x="771" y="224" width="11" height="11" color="#1b6b31"/><text x="786" y="234" fill="#1b6b31" font-weight="600">trained (<tspan font-style="italic">W</tspan><tspan font-size="8.5" dy="2">out</tspan><tspan dy="-2">)</tspan></text>
         </g>
         <g id="parts"></g>
         </g>
@@ -350,7 +345,7 @@
         <text x="1030" y="190" class="ts">for precoding</text>
       </svg>
       </div>
-      <p class="note">Heat maps show illustrative channel magnitudes, not measured data.</p>
+      <p class="note"><b id="f-step"></b> · values shown are illustrative, not measured data</p>
     </figure>
     <div class="wesn reveal">
       <div class="wcard" id="wc1"><h4><span class="wb" style="background:#0071e3">1</span>Current frame</h4>
@@ -358,13 +353,13 @@
         <p class="d">Drives the reservoir through fixed <i>W</i><sub>in</sub>.</p></div>
       <div class="wcard" id="wc2"><h4><span class="wb" style="background:#c25e00">2</span>Window of older frames</h4>
         <p class="eq"><b>u</b>(<i>k</i>−1), …, <b>u</b>(<i>k</i>−<i>L</i>+1)</p>
-        <p class="d">Skip straight to the readout.</p></div>
+        <p class="d">Linked straight to the outputs.</p></div>
       <div class="wcard" id="wc3"><h4><span class="wb" style="background:#248a3d">3</span>Reservoir · fixed</h4>
         <p class="eq"><b>x</b>(<i>k</i>) = tanh(<b>W</b><sub>in</sub><b>u</b>(<i>k</i>) + <b>W</b><b>x</b>(<i>k</i>−1))</p>
         <p class="d">Random, set once, never trained.</p></div>
       <div class="wcard" id="wc4"><h4><span class="wb" style="background:#1b6b31">4</span>Readout · trained</h4>
         <p class="eq"><b>Ĥ</b>(<i>k</i>+1) = <b>W</b><sub>out</sub>[<b>x</b>(<i>k</i>); window]</p>
-        <p class="d">Least squares, re-solved every frame.</p></div>
+        <p class="d">The green links, re-solved every frame.</p></div>
     </div>
     <p class="why reveal"><b>Why a WESN:</b> few weights to learn, so a handful of frames is enough · closed-form training with a fixed, predictable latency · fixed weights built straight into logic</p>
 
@@ -561,119 +556,101 @@
     steps.forEach((s, j) => { s.classList.toggle("on", j === step); s.style.background = j === step ? s.dataset.c : ""; });
   }
 
-  /* ------------------------------------------------ one frame: heat maps + an animated WESN */
+  /* ------------------------------------------------ one frame: heat maps + the WESN as a network */
   const hm = (g, rows, cols, cw, ch) => { const cells = [];
     for (let r = 0; r < rows; r++) for (let c = 0; c < cols; c++) cells.push([mk("rect", { x: c * cw, y: r * ch, width: cw - .8, height: ch - .8, rx: .8 }, g), r, c]);
     return cells; };
   const hIn = hm($("hm-in"), 8, 32, 5, 10), hOut = hm($("hm-out"), 8, 32, 5, 10);
-  const paint = (cells, t, col, noise, alpha) => cells.forEach(([e, r, c]) => {
-    const v = field(r, c, t) + (noise ? .06 * Math.sin(r * 7.1 + c * 3.3 + t * 5) : 0);
-    e.setAttribute("fill", col); e.setAttribute("fill-opacity", ((.12 + .85 * Math.max(0, Math.min(1, v))) * (alpha ?? 1)).toFixed(2)); });
-  // window: five frame cards on a ring, so one can slide in while the oldest slides out
-  const ring = [];
-  for (let j = 0; j < 5; j++) {
-    const g = mk("g", {}, $("hm-win"));
-    mk("rect", { x: -2, y: -2, width: 86, height: 46, rx: 4, fill: "#fff", stroke: "#b7cdb9" }, g);
-    const cells = []; for (let r = 0; r < 8; r++) for (let c = 0; c < 32; c++) cells.push([mk("rect", { x: c * 2.6, y: r * 5.2, width: 2.2, height: 4.6 }, g), r, c]);
-    ring.push({ g, cells, m: null });
-  }
-  // reservoir: neurons with their distance (in hops) from the input neuron
-  const NP = [[544, 84], [576, 74], [608, 92], [530, 116], [566, 106], [600, 122], [624, 106], [548, 146], [584, 140], [616, 150]];
+  const paint = (cells, t, col) => cells.forEach(([e, r, c]) => {
+    e.setAttribute("fill", col); e.setAttribute("fill-opacity", (.12 + .85 * field(r, c, t)).toFixed(2)); });
+  const node = (g, x, y, r, col) => mk("circle", { cx: x, cy: y, r, fill: col, "fill-opacity": .3, stroke: col, "stroke-width": 1.3 }, g);
+  // ---- layers (local coordinates of the FPGA box)
+  const CUR = [74, 96, 118, 140].map(y => [388, y]);                       // 1 current frame
+  const OLDX = [400, 376, 352], OLDY = [204, 222, 240];                    // 2 older frames: age 1, 2, 3
+  const OLD = []; OLDX.forEach((x, a) => OLDY.forEach((y, i) => OLD.push({ x, y, a: a + 1, i })));
+  const NP = [[556, 78], [588, 68], [620, 86], [542, 110], [578, 100], [612, 116], [636, 100], [560, 140], [596, 134], [628, 144]];
   const ED = [[0, 1], [1, 2], [0, 3], [3, 4], [4, 1], [4, 5], [5, 6], [2, 6], [3, 7], [7, 8], [8, 4], [8, 9], [9, 5]];
-  const hop = NP.map(() => 99); hop[3] = 0;
+  const INN = [0, 3, 4, 7], RO = [2, 6, 5, 9, 8];                          // reservoir neurons fed by W_in / read by W_out
+  const OUTP = [92, 118, 144, 170].map(y => [820, y]);
+  const hop = NP.map((_, i) => INN.includes(i) ? 0 : 99);
   for (let it = 0; it < 6; it++) ED.forEach(([u, v]) => { hop[v] = Math.min(hop[v], hop[u] + 1); hop[u] = Math.min(hop[u], hop[v] + 1); });
-  const edges = ED.map(([u, v]) => mk("line", { x1: NP[u][0], y1: NP[u][1], x2: NP[v][0], y2: NP[v][1], stroke: "#a9d3b4", "stroke-width": 1.4 }, $("neu")));
-  const neu = NP.map(([x, y]) => mk("circle", { cx: x, cy: y, r: 8, fill: C.green, "fill-opacity": .3, stroke: C.green, "stroke-width": 1.3 }, $("neu")));
-  // readout weights as bars
-  // W_out: every reservoir state (and the window, via the skip input) links to every output neuron
-  const SRC = [[608, 92], [624, 106], [600, 122], [616, 150], [706, 170]], OUT = [100, 121, 142, 163].map(y => [758, y]);
+  // ---- W_in: fixed links
+  CUR.forEach(([x, y]) => INN.forEach(j => mk("line", { x1: x, y1: y, x2: NP[j][0], y2: NP[j][1] }, $("win-links"))));
+  // ---- W_out: trained links, from reservoir states and straight from the older frames
   const links = [];
-  SRC.forEach((a, i) => OUT.forEach((b, j) => links.push({ i, j, el: mk("line", { x1: a[0], y1: a[1], x2: b[0], y2: b[1], stroke: C.green, "stroke-linecap": "round" }, $("wout")) })));
-  OUT.forEach(([x, y]) => mk("circle", { cx: x, cy: y, r: 6.5, fill: "#1b6b31", stroke: "#fff", "stroke-width": 1.5 }, $("wout")));
-  const wv = (i, j, k) => .1 + .9 * Math.abs(Math.sin(k * 1.73 + i * 2.17 + j * 1.31));
-  // particles
-  const dots = []; for (let i = 0; i < 9; i++) dots.push(mk("circle", { r: 4.5, opacity: 0 }, $("parts")));
-  const skip = $("skip"), skipLen = skip.getTotalLength();
-  const STEPS = [[.16, "receiving H(k)", C.ink2], [.32, "1–2 · frames shift down", C.blue], [.56, "3 · reservoir states update", C.green],
-                 [.74, "4 · readout retrained", "#1b6b31"], [1.01, "→ Ĥ(k+1) goes back", C.green]];
+  RO.forEach((j, i) => OUTP.forEach((o, q) => links.push({ i, q, el: mk("line", { x1: NP[j][0], y1: NP[j][1], x2: o[0], y2: o[1], stroke: C.green, "stroke-linecap": "round" }, $("wout")) })));
+  const CTRL = [620, 240];
+  OLD.forEach((n, i) => OUTP.forEach((o, q) => links.push({ i: 10 + i, q, skip: true,
+    el: mk("path", { d: `M${n.x} ${n.y} Q${CTRL[0]} ${CTRL[1]} ${o[0]} ${o[1]}`, fill: "none", stroke: C.green, "stroke-linecap": "round" }, $("wout")) })));
+  const wv = (i, q, k) => .08 + .92 * Math.abs(Math.sin(k * 1.73 + i * 2.17 + q * 1.31));
+  // ---- neurons (drawn over the links)
+  const edges = ED.map(([u, v]) => mk("line", { x1: NP[u][0], y1: NP[u][1], x2: NP[v][0], y2: NP[v][1], stroke: "#a9d3b4", "stroke-width": 1.4 }, $("neu")));
+  const neu = NP.map(([x, y]) => node($("neu"), x, y, 8, C.green));
+  const nCur = CUR.map(([x, y]) => node($("n-cur"), x, y, 7.5, C.blue));
+  const nOld = OLD.map(n => node($("n-old"), n.x, n.y, 6.5, C.orange));
+  const nOut = OUTP.map(([x, y]) => node($("n-out"), x, y, 7.5, "#1b6b31"));
+  const val = (i, m) => field(i * 2, 9, m * .8);                          // the value a frame puts on input neuron i
+  // ---- particles
+  const dots = []; for (let i = 0; i < 30; i++) dots.push(mk("circle", { r: 4, opacity: 0 }, $("parts")));
+  const STEPS = [[.16, "receiving H(k)", C.ink2], [.32, "① ② the window shifts", C.orange], [.58, "③ reservoir states update", C.green],
+                 [.76, "④ W_out re-solved", "#1b6b31"], [1.01, "→ Ĥ(k+1) goes back", C.blue]];
   const seg = (p, a, b) => Math.max(0, Math.min(1, (p - a) / (b - a)));
   const ease = f => f < .5 ? 2 * f * f : 1 - Math.pow(-2 * f + 2, 2) / 2;
   const bump = x => Math.max(0, 1 - Math.abs(x));
+  const quad = (a, c, b, t) => [(1 - t) ** 2 * a[0] + 2 * (1 - t) * t * c[0] + t * t * b[0], (1 - t) ** 2 * a[1] + 2 * (1 - t) * t * c[1] + t * t * b[1]];
   let lastK = null;
   function drawFrame(T) {
-    const k = Math.floor(T), p = T - k;
+    const k = Math.floor(T), p = T - k, tNow = performance.now() / 1000;
     if (k !== lastK) { paint(hIn, k * .8, C.ink2); lastK = k; }
-    // ---- step label
-    const st = STEPS.find(x => p < x[0]); $("f-step").textContent = st[1]; $("f-step").setAttribute("fill", st[2]);
-    // ---- incoming / outgoing frame on the 10 GbE links
+    const st = STEPS.find(x => p < x[0]); $("f-step").textContent = st[1]; $("f-step").style.color = st[2];
+    // ---- the frame on the 10 GbE links
     const fi = $("f-in"), fo = $("f-out");
     if (p < .16) { fi.setAttribute("cx", 176 + 60 * ease(seg(p, 0, .16))); fi.setAttribute("cy", 88); fi.setAttribute("opacity", 1); } else fi.setAttribute("opacity", 0);
     if (p > .78 && p < .88) { fo.setAttribute("cx", 966 + 56 * ease(seg(p, .78, .88))); fo.setAttribute("cy", 88); fo.setAttribute("opacity", 1); } else fo.setAttribute("opacity", 0);
-    // ---- 1 window: the new frame slides in at the front, the oldest slides out at the back
-    // slot 0 = current frame (top); slots 1..3 = window of older frames (bottom stack); 4 = leaving
-    const e = ease(seg(p, .16, .32));
-    const spot = sp => {
-      if (sp <= 0) return [345 - 18 * -sp, 61, 1 + sp];                                 // sliding in, inside the box
-      if (sp < 1) return [345 + (345 - 345) * sp, 61 + (141 - 61) * sp, 1];               // current -> front of the window
-      const j = sp - 1; return [345 + 9 * j, 141 + 9 * j, sp > 3 ? Math.max(0, 4 - sp) : 1];
-    };
-    const order = [];
-    for (let a = 4; a >= 0; a--) {                       // a = age; draw the oldest first
-      const m = k - a, slot = ring[((m % 5) + 5) % 5];
-      const sp = a - 1 + e, cur = sp < .5;
-      const col = cur ? "#0071e3" : "#c25e00";
-      if (slot.m !== m || slot.col !== col) { paint(slot.cells, m * .8, col); slot.m = m; slot.col = col; }
-      const [x, y, op] = spot(sp);
-      slot.g.setAttribute("transform", `translate(${x.toFixed(1)},${y.toFixed(1)})`); slot.g.setAttribute("opacity", op.toFixed(2));
-      order.push(slot.g);
-    }
-    order.forEach(g => $("hm-win").appendChild(g));
-    // ---- 2 reservoir: activity spreads hop by hop from the input neuron; the recurrent loop flows
-    const w = seg(p, .34, .56), on = p >= .32 && p < .58, t = performance.now() / 1000;
-    neu.forEach((n, i) => {
-      const act = on ? bump(w * 5 - hop[i] - .2) : 0;
-      n.setAttribute("fill-opacity", (.22 + .1 * Math.sin(t * 1.3 + i) + .7 * act).toFixed(2));
-      n.setAttribute("r", (8 + 3 * act).toFixed(1));
-    });
-    edges.forEach((l, i) => { const [u, v] = ED[i], act = on ? bump(w * 5 - Math.min(hop[u], hop[v]) - .7) : 0;
+    // ---- input neurons: after the shift the current layer holds H(k), the older layers H(k-1..k-3)
+    const shifted = p >= .25, base = shifted ? k : k - 1;
+    nCur.forEach((n, i) => n.setAttribute("fill-opacity", (.15 + .8 * val(i, base)).toFixed(2)));
+    nOld.forEach((n, i) => { const o = OLD[i]; n.setAttribute("fill-opacity", (.15 + .75 * val(o.i, base - o.a)).toFixed(2)); });
+    // ---- reservoir: activity spreads from the neurons fed by W_in
+    const w = seg(p, .34, .58), on = p >= .32 && p < .6;
+    neu.forEach((n, i) => { const act = on ? bump(w * 4 - hop[i] - .2) : 0;
+      n.setAttribute("fill-opacity", (.22 + .1 * Math.sin(tNow * 1.3 + i) + .7 * act).toFixed(2)); n.setAttribute("r", (8 + 3 * act).toFixed(1)); });
+    edges.forEach((l, i) => { const [u, v] = ED[i], act = on ? bump(w * 4 - Math.min(hop[u], hop[v]) - .7) : 0;
       l.setAttribute("stroke", act > .05 ? C.green : "#a9d3b4"); l.setAttribute("stroke-width", (1.4 + 1.6 * act).toFixed(2)); });
-    $("loop").setAttribute("stroke-dasharray", on ? "5 4" : "none"); $("loop").setAttribute("stroke-dashoffset", on ? (-t * 30).toFixed(1) : 0);
-    // ---- 3 readout: the weights re-solve to new values
-    const r3 = ease(seg(p, .58, .72));
-    $("rt-icon").setAttribute("transform", r3 > 0 && r3 < 1 ? `rotate(${(r3 * 360).toFixed(0)} 750 74)` : "");
-    const solving = p >= .58 && p < .76;
-    links.forEach(({ i, j, el }) => { const w = wv(i, j, k - 1) + (wv(i, j, k) - wv(i, j, k - 1)) * r3;
-      el.setAttribute("stroke-width", (.4 + 2.2 * w * w).toFixed(2)); el.setAttribute("stroke-opacity", ((solving ? .2 : .1) + (solving ? .7 : .45) * w).toFixed(2)); });
-    // ---- particles: newest frame -> reservoir, older frames -> readout (skip), states -> readout, readout -> out
-    const lanes = [
-      [.28, .40, [[440, 80], [530, 116]], C.blue, 0], [.30, .42, [[440, 86], [530, 116]], C.blue, 0], [.32, .44, [[440, 92], [530, 116]], C.blue, 0],
-      [.32, .62, null, C.orange, 0], [.36, .66, null, C.orange, 0], [.40, .70, null, C.orange, 0],
-      [.54, .64, [[624, 106], [758, 121]], C.green, 0], [.74, .82, [[764, 131], [882, 77]], C.green, 0], [.76, .84, [[764, 142], [882, 77]], C.green, 0],
-    ];
-    lanes.forEach(([a0, a1, pts, col], i) => {
-      const d = dots[i], f = seg(p, a0, a1);
-      if (f <= 0 || f >= 1) { d.setAttribute("opacity", 0); return; }
-      let x, y;
-      if (pts) { x = pts[0][0] + (pts[1][0] - pts[0][0]) * ease(f); y = pts[0][1] + (pts[1][1] - pts[0][1]) * ease(f); }
-      else { const q = skip.getPointAtLength(skipLen * ease(f)); x = q.x; y = q.y; }
-      d.setAttribute("cx", x.toFixed(1)); d.setAttribute("cy", y.toFixed(1)); d.setAttribute("fill", col); d.setAttribute("opacity", 1);
+    $("loop").setAttribute("stroke-dasharray", on ? "5 4" : "none"); $("loop").setAttribute("stroke-dashoffset", on ? (-tNow * 30).toFixed(1) : 0);
+    // ---- W_out: re-solved; every link changes its weight
+    const r3 = ease(seg(p, .6, .74)), solving = p >= .58 && p < .78;
+    $("rt-icon").setAttribute("transform", r3 > 0 && r3 < 1 ? `rotate(${(r3 * 360).toFixed(0)} 754 51)` : "");
+    links.forEach(({ i, q, el, skip }) => { const ww = wv(i, q, k - 1) + (wv(i, q, k) - wv(i, q, k - 1)) * r3;
+      el.setAttribute("stroke-width", ((skip ? .25 : .4) + (skip ? 1.1 : 2.2) * ww * ww).toFixed(2));
+      el.setAttribute("stroke-opacity", (skip ? (solving ? .12 : .05) + (solving ? .5 : .3) * ww : (solving ? .18 : .08) + (solving ? .65 : .4) * ww).toFixed(2)); });
+    // ---- output neurons light up with the prediction
+    const lit = seg(p, .7, .78);
+    nOut.forEach((n, q) => n.setAttribute("fill-opacity", (.2 + (.15 + .6 * val(q, k + 1)) * (p >= .7 ? lit : 0) + (p < .7 ? .55 * val(q, k) : 0)).toFixed(2)));
+    // ---- particles
+    const P = [];
+    CUR.forEach(([x, y], i) => P.push([.12, .22, [322, y], null, [x, y], C.ink2]));                                 // frame arrives
+    [0, 1, 2].forEach(i => P.push([.18, .3, CUR[i + 1], null, [OLDX[0], OLDY[i]], C.orange]));                    // current -> older (age 1)
+    [0, 1, 2].forEach(i => P.push([.18, .3, [OLDX[0], OLDY[i]], null, [OLDX[1], OLDY[i]], C.orange]));          // age 1 -> 2
+    [0, 1, 2].forEach(i => P.push([.18, .3, [OLDX[1], OLDY[i]], null, [OLDX[2], OLDY[i]], C.orange]));          // age 2 -> 3
+    CUR.forEach(([x, y], i) => P.push([.32 + i * .02, .44 + i * .02, [x, y], null, NP[INN[i]], C.blue]));       // through W_in
+    [0, 1, 2, 3].forEach(q => P.push([.6 + q * .02, .72 + q * .02, NP[RO[q]], null, OUTP[q], C.green]));         // states through W_out
+    [0, 4, 8].forEach((i, q) => P.push([.6 + q * .03, .74 + q * .02, [OLD[i].x, OLD[i].y], CTRL, OUTP[q + 1], C.orange])); // older frames, straight to the output
+    [1, 2].forEach(q => P.push([.76, .86, OUTP[q], null, [882, 77], C.blue]));                                   // prediction leaves
+    dots.forEach((d, i) => {
+      const L = P[i]; if (!L) { d.setAttribute("opacity", 0); return; }
+      const f = seg(p, L[0], L[1]); if (f <= 0 || f >= 1) { d.setAttribute("opacity", 0); return; }
+      const e = ease(f), q = L[3] ? quad(L[2], L[3], L[4], e) : [L[2][0] + (L[4][0] - L[2][0]) * e, L[2][1] + (L[4][1] - L[2][1]) * e];
+      d.setAttribute("cx", q[0].toFixed(1)); d.setAttribute("cy", q[1].toFixed(1)); d.setAttribute("fill", L[5]); d.setAttribute("opacity", 1);
     });
-    // ---- the prediction sweeps in column by column once it is back
+    // ---- the prediction heat map sweeps in once it is back
     const sw = seg(p, .86, .98) * 32;
-    hOut.forEach(([el, r, c]) => {
-      const fresh = c < sw, tt = (fresh ? k + 1 : k) * .8;
-      const v = field(r, c, tt) + .06 * Math.sin(r * 7.1 + c * 3.3 + tt * 5);
-      el.setAttribute("fill", C.blue); el.setAttribute("fill-opacity", ((.12 + .85 * Math.max(0, Math.min(1, v))) * (fresh || p < .86 ? 1 : .45)).toFixed(2));
-    });
-    // ---- highlights shared with the cards below
-    $("cur").classList.toggle("on-b", (p >= .16 && p < .44));
-    $("win").classList.toggle("on-o", (p >= .16 && p < .32) || (p >= .32 && p < .66));
-    $("res").classList.toggle("on", p >= .32 && p < .58);
-    $("ro").classList.toggle("on", p >= .58 && p < .76);
-    $("wc1").classList.toggle("on", p >= .16 && p < .44);
-    $("wc2").classList.toggle("on", p >= .16 && p < .66);
-    $("wc3").classList.toggle("on", p >= .32 && p < .58);
-    $("wc4").classList.toggle("on", p >= .58 && p < .76);
+    hOut.forEach(([el, r, c]) => { const fresh = c < sw, tt = (fresh ? k + 1 : k) * .8;
+      el.setAttribute("fill", C.blue); el.setAttribute("fill-opacity", ((.12 + .85 * field(r, c, tt)) * (fresh || p < .86 ? 1 : .45)).toFixed(2)); });
+    // ---- highlights shared with the cards
+    const A = p >= .14 && p < .44, B = (p >= .18 && p < .32) || (p >= .58 && p < .78), Cc = p >= .32 && p < .6, D = p >= .58 && p < .78;
+    $("cur").classList.toggle("on-b", A); $("win").classList.toggle("on-o", B); $("res").classList.toggle("on", Cc); $("ro").classList.toggle("on", D);
+    $("wc1").classList.toggle("on", A); $("wc2").classList.toggle("on", B); $("wc3").classList.toggle("on", Cc); $("wc4").classList.toggle("on", D);
   }
 
   /* ------------------------------------------------ frame after frame: the score, in ms */
