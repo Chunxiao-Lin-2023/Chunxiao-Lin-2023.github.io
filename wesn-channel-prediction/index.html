@@ -321,15 +321,19 @@
           <use href="#lock" x="610" y="25" width="9" height="11" color="#424245"/>
           <g id="neu"></g>
         </g>
-        <circle cx="559" cy="194" r="9" fill="#248a3d"/><text x="559" y="198" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">3</text>
-        <text x="573" y="199" class="ts" font-size="13.5">reservoir · fixed</text>
-        <!-- 1 current frame and 2 older frames, as input neurons -->
-        <g id="cur" class="glow"><g id="n-cur"></g></g>
-        <circle cx="374" cy="160" r="9" fill="#0071e3"/><text x="374" y="164" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">1</text>
-        <text x="388" y="165" class="ts" font-size="13.5" font-style="italic">u(k)</text>
-        <g id="win" class="glow"><g id="n-old"></g></g>
-        <circle cx="344" cy="184" r="9" fill="#c25e00"/><text x="344" y="188" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">2</text>
-        <text x="358" y="189" class="ts" font-size="13" font-style="italic">u(k−1) … u(k−5)</text>
+        <circle cx="559" cy="189" r="9" fill="#248a3d"/><text x="559" y="193" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">3</text>
+        <text x="573" y="194" class="ts" font-size="13.5">reservoir · fixed</text>
+        <!-- CSI window: 1 current frame, 2 history (tiles placed by the script) -->
+        <text x="342" y="66" font-size="12" font-weight="700" fill="#1d1d1f">CSI window</text>
+        <g id="cur" class="glow"><rect x="340" y="73" width="80" height="44" rx="6" fill="none" stroke="#0071e3" stroke-width="2"/></g>
+        <g id="win" class="glow"><rect x="336" y="148" width="104" height="70" rx="7" fill="none" stroke="#c25e00" stroke-width="1.5" stroke-dasharray="4 3"/></g>
+        <g id="tiles"></g>
+        <circle cx="349" cy="132" r="9" fill="#0071e3"/><text x="349" y="136" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">1</text>
+        <text x="363" y="136" font-size="12.5" font-weight="600" fill="#1d1d1f">current <tspan font-style="italic" font-weight="500">u(k)</tspan></text>
+        <text x="342" y="146" font-size="10.5" fill="#424245"></text>
+        <circle cx="349" cy="231" r="9" fill="#c25e00"/><text x="349" y="235" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">2</text>
+        <text x="363" y="235" font-size="12.5" font-weight="600" fill="#1d1d1f">history <tspan font-style="italic" font-weight="500">u(k−1) … u(k−5)</tspan></text>
+        <text x="604" y="243" text-anchor="middle" font-size="12" font-weight="600" fill="#1b6b31">skip connection</text>
         <!-- output layer -->
         <g id="n-out"></g>
         <text x="820" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#0071e3">Ĥ(k+1)</text>
@@ -356,10 +360,10 @@
     <div class="wesn reveal">
       <div class="wcard" id="wc1"><h4><span class="wb" style="background:#0071e3">1</span>Current frame</h4>
         <p class="eq"><b>u</b>(<i>k</i>)</p>
-        <p class="d">Enters the reservoir through fixed <b>W</b><sub>in</sub>.</p></div>
-      <div class="wcard" id="wc2"><h4><span class="wb" style="background:#c25e00">2</span>Window of older frames</h4>
+        <p class="d">CSI tile, antennas × subbands; enters via fixed <b>W</b><sub>in</sub>.</p></div>
+      <div class="wcard" id="wc2"><h4><span class="wb" style="background:#c25e00">2</span>History</h4>
         <p class="eq"><b>u</b>(<i>k</i>−1), …, <b>u</b>(<i>k</i>−5)</p>
-        <p class="d">Linked straight to the outputs.</p></div>
+        <p class="d">Skips the reservoir, straight to the outputs.</p></div>
       <div class="wcard" id="wc3"><h4><span class="wb" style="background:#248a3d">3</span>Reservoir · fixed</h4>
         <p class="eq"><b>x</b>(<i>k</i>) = tanh(<b>W</b><sub>in</sub><b>u</b>(<i>k</i>) + <b>W</b><b>x</b>(<i>k</i>−1))</p>
         <p class="d">Random recurrent weights, never trained.</p></div>
@@ -571,9 +575,14 @@
     e.setAttribute("fill", col); e.setAttribute("fill-opacity", (.12 + .85 * field(r, c, t)).toFixed(2)); });
   const node = (g, x, y, r, col) => mk("circle", { cx: x, cy: y, r, fill: col, "fill-opacity": .3, stroke: col, "stroke-width": 1.3 }, g);
   // ---- layers (local coordinates of the FPGA box)
-  const CUR = [74, 96, 118, 140].map(y => [388, y]);                       // 1 current frame u(k)
-  const OLDX = [400, 376, 352], OLDY = [204, 222, 240];                    // 2 older frames: age 1, 2, 3
-  const OLD = []; OLDX.forEach((x, a) => OLDY.forEach((y, i) => OLD.push({ x, y, a: a + 1, i })));
+  // CSI window: tiles on a ring of five, so one slides in while the oldest slides out
+  const ring = [];
+  for (let j = 0; j < 5; j++) { const g = mk("g", {}, $("tiles"));
+    mk("rect", { x: -2, y: -2, width: 76, height: 40, rx: 4, fill: "#fff", stroke: "#c8d6c9" }, g);
+    const cells = []; for (let r = 0; r < 6; r++) for (let c = 0; c < 12; c++) cells.push([mk("rect", { x: c * 6, y: r * 6, width: 5.2, height: 5.2, rx: .6 }, g), r, c]);
+    ring.push({ g, cells, m: null, col: null }); }
+  const TILE_OUT = [[421, 82], [421, 90], [421, 98], [421, 106]];          // where W_in leaves the current tile
+  const HIST_OUT = [440, 183];                                            // where the skip bundle leaves the history stack
   // reservoir: 8 neurons on a ring and 4 inside, in a pool centred at (585, 106)
   const CX = 607, CY = 112, NP = [];
   for (let i = 0; i < 8; i++) { const t = (i / 8) * 2 * Math.PI + Math.PI / 8; NP.push([CX + 44 * Math.cos(t), CY + 42 * Math.sin(t)]); }
@@ -587,21 +596,19 @@
   const hop = NP.map((_, i) => INN.includes(i) ? 0 : 99);
   for (let it = 0; it < 8; it++) ED.forEach(([u, v]) => { hop[v] = Math.min(hop[v], hop[u] + 1); hop[u] = Math.min(hop[u], hop[v] + 1); });
   // ---- W_in: fixed links
-  CUR.forEach(([x, y]) => INN.forEach(j => mk("line", { x1: x, y1: y, x2: NP[j][0], y2: NP[j][1] }, $("win-links"))));
+  TILE_OUT.forEach(([x, y], i) => mk("line", { x1: x, y1: y, x2: NP[INN[i]][0], y2: NP[INN[i]][1] }, $("win-links")));
   // ---- W_out: trained links, from the reservoir and straight from the older frames
   const links = [];
   RO.forEach((j, i) => OUTP.forEach((o, q) => links.push({ i, q, el: mk("line", { x1: NP[j][0], y1: NP[j][1], x2: o[0], y2: o[1], stroke: C.green, "stroke-linecap": "round" }, $("wout")) })));
-  const CTRL = [620, 252];
-  OLD.forEach((n, i) => OUTP.forEach((o, q) => links.push({ i: 10 + i, q, skip: true,
-    el: mk("path", { d: `M${n.x} ${n.y} Q${CTRL[0]} ${CTRL[1]} ${o[0]} ${o[1]}`, fill: "none", stroke: C.green, "stroke-linecap": "round" }, $("wout")) })));
+  const CTRL = [620, 268];
+  OUTP.forEach((o, q) => links.push({ i: 10 + q, q, skip: true,
+    el: mk("path", { d: `M${HIST_OUT[0]} ${HIST_OUT[1] + q * 4 - 6} Q${CTRL[0]} ${CTRL[1]} ${o[0]} ${o[1]}`, fill: "none", stroke: C.green, "stroke-linecap": "round" }, $("wout")) }));
   const wv = (i, q, k) => .08 + .92 * Math.abs(Math.sin(k * 1.73 + i * 2.17 + q * 1.31));
   // ---- reservoir: gently curved recurrent links, then the neurons on top
   const curve = ([x1, y1], [x2, y2]) => { const mx = (x1 + x2) / 2, my = (y1 + y2) / 2, cx = mx + (CX - mx) * .25, cy = my + (CY - my) * .25;
     return `M${x1.toFixed(1)} ${y1.toFixed(1)} Q${cx.toFixed(1)} ${cy.toFixed(1)} ${x2.toFixed(1)} ${y2.toFixed(1)}`; };
   const edges = ED.map(([u, v]) => mk("path", { d: curve(NP[u], NP[v]), fill: "none", stroke: "#a9d3b4", "stroke-width": 1.3 }, $("neu")));
   const neu = NP.map(([x, y]) => node($("neu"), x, y, 7.5, C.green));
-  const nCur = CUR.map(([x, y]) => node($("n-cur"), x, y, 7.5, C.blue));
-  const nOld = OLD.map(n => node($("n-old"), n.x, n.y, 6.5, C.orange));
   const nOut = OUTP.map(([x, y]) => node($("n-out"), x, y, 7.5, "#1b6b31"));
   const val = (i, m) => field(i * 2, 9, m * .8);
   // ---- particles
@@ -621,10 +628,21 @@
     const fi = $("f-in"), fo = $("f-out");
     if (p < .14) { fi.setAttribute("cx", 176 + 60 * ease(seg(p, 0, .14))); fi.setAttribute("cy", 88); fi.setAttribute("opacity", 1); } else fi.setAttribute("opacity", 0);
     if (p > .78 && p < .88) { fo.setAttribute("cx", 966 + 56 * ease(seg(p, .78, .88))); fo.setAttribute("cy", 88); fo.setAttribute("opacity", 1); } else fo.setAttribute("opacity", 0);
-    // ---- input neurons
-    const base = p >= .25 ? k : k - 1;
-    nCur.forEach((n, i) => n.setAttribute("fill-opacity", (.15 + .8 * val(i, base)).toFixed(2)));
-    nOld.forEach((n, i) => { const o = OLD[i]; n.setAttribute("fill-opacity", (.15 + .75 * val(o.i, base - o.a)).toFixed(2)); });
+    // ---- CSI window: the current tile slides down to the front of the history, which moves back one place
+    const e1 = ease(seg(p, .16, .32));
+    const spot = sp => {
+      if (sp <= 0) return [343 - 16 * -sp, 76, 1 + sp];                                   // new frame fades in
+      if (sp < 1) return [343 - 1 * sp, 76 + (154 - 76) * sp, 1];                          // current -> front of the history
+      const j = sp - 1; return [342 + 8 * j, 154 + 8 * j, sp > 3 ? Math.max(0, 4 - sp) : 1];
+    };
+    const order = [];
+    for (let a = 4; a >= 0; a--) {
+      const m = k - a, t = ring[((m % 5) + 5) % 5], sp = a - 1 + e1, col = sp < .5 ? C.blue : C.orange;
+      if (t.m !== m || t.col !== col) { t.cells.forEach(([el, r, c]) => { el.setAttribute("fill", col); el.setAttribute("fill-opacity", (.12 + .85 * field(r, c * 2.6, m * .8)).toFixed(2)); }); t.m = m; t.col = col; }
+      const [x, y, op] = spot(sp);
+      t.g.setAttribute("transform", `translate(${x.toFixed(1)},${y.toFixed(1)})`); t.g.setAttribute("opacity", op.toFixed(2)); order.push(t.g);
+    }
+    order.forEach(g => $("tiles").appendChild(g));
     // ---- reservoir: activity spreads from the neurons fed by W_in; W keeps circulating
     const w = seg(p, .34, .58), on = p >= .32 && p < .6;
     neu.forEach((n, i) => { const act = on ? bump(w * 4.5 - hop[i] - .2) : 0;
@@ -636,19 +654,15 @@
     const r3 = ease(seg(p, .6, .74)), solving = p >= .58 && p < .78;
     $("rt-icon").setAttribute("transform", r3 > 0 && r3 < 1 ? `rotate(${(r3 * 360).toFixed(0)} 766 51)` : "");
     links.forEach(({ i, q, el, skip }) => { const ww = wv(i, q, k - 1) + (wv(i, q, k) - wv(i, q, k - 1)) * r3;
-      el.setAttribute("stroke-width", ((skip ? .25 : .4) + (skip ? 1.1 : 2.2) * ww * ww).toFixed(2));
-      el.setAttribute("stroke-opacity", (skip ? (solving ? .12 : .05) + (solving ? .5 : .3) * ww : (solving ? .18 : .08) + (solving ? .65 : .4) * ww).toFixed(2)); });
+      el.setAttribute("stroke-width", ((skip ? .5 : .4) + (skip ? 2 : 2.2) * ww * ww).toFixed(2));
+      el.setAttribute("stroke-opacity", (skip ? (solving ? .2 : .1) + (solving ? .6 : .4) * ww : (solving ? .18 : .08) + (solving ? .65 : .4) * ww).toFixed(2)); });
     const lit = seg(p, .7, .78);
     nOut.forEach((n, q) => n.setAttribute("fill-opacity", (.2 + (.15 + .6 * val(q, k + 1)) * (p >= .7 ? lit : 0) + (p < .7 ? .55 * val(q, k) : 0)).toFixed(2)));
     // ---- particles
     const P = [];
-    CUR.forEach(([x, y]) => P.push([.12, .22, [322, y], null, [x, y], C.ink2]));
-    [0, 1, 2].forEach(i => P.push([.18, .3, CUR[i + 1], null, [OLDX[0], OLDY[i]], C.orange]));
-    [0, 1, 2].forEach(i => P.push([.18, .3, [OLDX[0], OLDY[i]], null, [OLDX[1], OLDY[i]], C.orange]));
-    [0, 1, 2].forEach(i => P.push([.18, .3, [OLDX[1], OLDY[i]], null, [OLDX[2], OLDY[i]], C.orange]));
-    CUR.forEach(([x, y], i) => P.push([.32 + i * .02, .44 + i * .02, [x, y], null, NP[INN[i]], C.blue]));
+    TILE_OUT.forEach(([x, y], i) => P.push([.32 + i * .02, .44 + i * .02, [x, y], null, NP[INN[i]], C.blue]));
     [0, 1, 2, 3].forEach(q => P.push([.6 + q * .02, .72 + q * .02, NP[RO[q]], null, OUTP[q], C.green]));
-    [0, 4, 8].forEach((i, q) => P.push([.6 + q * .03, .74 + q * .02, [OLD[i].x, OLD[i].y], CTRL, OUTP[q + 1], C.orange]));
+    [0, 1, 2].forEach(q => P.push([.6 + q * .03, .74 + q * .02, [HIST_OUT[0], HIST_OUT[1]], CTRL, OUTP[q + 1], C.orange]));
     [1, 2].forEach(q => P.push([.76, .86, OUTP[q], null, [882, 77], C.blue]));
     dots.forEach((d, i) => {
       const L = P[i]; if (!L) { d.setAttribute("opacity", 0); return; }
