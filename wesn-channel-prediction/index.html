@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Real-Time Channel Prediction for Distributed MIMO</title>
-<meta name="description" content="A windowed echo state network on an FPGA predicts each user's next channel inside a live distributed MIMO radio loop. Live demonstration by Chunxiao Lin, Virginia Tech.">
+<meta name="description" content="A 2-mode windowed echo state network on an FPGA predicts each user's next channel in about 0.1 ms, inside a live distributed MIMO radio loop. Live demonstration by Chunxiao Lin, Virginia Tech.">
 <meta name="author" content="Chunxiao Lin">
 <link rel="canonical" href="https://chunxiao-lin-2023.github.io/wesn-channel-prediction/">
 <meta property="og:title" content="Real-Time Channel Prediction for Distributed MIMO">
-<meta property="og:description" content="An echo state network on an FPGA keeps up with a live radio link: one prediction per user every frame.">
-<meta property="og:image" content="https://chunxiao-lin-2023.github.io/assets/video/10g_demo.jpg">
+<meta property="og:description" content="60.4 µs on the FPGA, 100 µs end to end: an echo state network keeps up with a live radio link, one prediction per user every frame.">
+<meta property="og:image" content="https://chunxiao-lin-2023.github.io/wesn-channel-prediction/media/demo_poster.jpg">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230071e3'/%3E%3Cpath d='M5 20c4-9 7-9 11 0s7 9 11 0' fill='none' stroke='white' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -67,14 +67,15 @@
   .hero .with { margin-top: 2px; font-size: 15px; color: var(--muted); }
   .hero .logos { margin-top: 14px; display: flex; justify-content: center; }
   .hero .logos img { height: 32px; width: auto; }
-  .stats { margin: 30px auto 0; display: grid; grid-template-columns: repeat(3, 1fr); max-width: 840px; }
+  .stats { margin: 30px auto 0; display: grid; grid-template-columns: repeat(4, 1fr); max-width: 1040px; }
   .stat { padding: 0 18px; }
   .stat + .stat { border-left: 1px solid var(--line); }
   .stat b { display: block; font-size: clamp(26px, 2.8vw, 36px); font-weight: 600; letter-spacing: -.03em; line-height: 1.05; }
   .stat b small { font-size: .5em; font-weight: 600; margin-left: 2px; letter-spacing: -.01em; }
   .stat span { display: block; margin-top: 6px; font-size: 15px; color: var(--muted); line-height: 1.35; }
-  .stat:nth-child(1) b { color: var(--blue); } .stat:nth-child(2) b { color: var(--green); } .stat:nth-child(3) b { color: var(--orange); }
-  @media (max-width: 640px) { .stats { grid-template-columns: 1fr; gap: 24px; } .stat + .stat { border-left: 0; } }
+  .stat:nth-child(1) b { color: var(--blue); } .stat:nth-child(2) b { color: var(--green); } .stat:nth-child(3) b { color: var(--ink); } .stat:nth-child(4) b { color: var(--orange); }
+  @media (max-width: 860px) { .stats { grid-template-columns: 1fr 1fr; gap: 22px 0; } .stat:nth-child(3) { border-left: 0; } }
+  @media (max-width: 480px) { .stats { grid-template-columns: 1fr; } .stat + .stat { border-left: 0; } }
 
   /* ---------------------------------------------------------------- sections */
   .sec { min-height: calc(100svh - var(--nav)); display: flex; flex-direction: column; justify-content: center;
@@ -123,7 +124,8 @@
   .wcard .eq { margin-top: 5px; font: 500 14px/1.3 var(--sans); color: var(--ink); background: #fff; border-radius: 8px; padding: 4px 9px; white-space: nowrap; overflow-x: auto; }
   .wcard.on .eq { background: var(--bg-2); }
   .wcard .eq i { font-style: italic; } .wcard .eq b { font-weight: 700; }
-  .wcard .eq sub { font-size: .72em; }
+  .wcard .eq sub, .wcard .d sub { font-size: .72em; }
+  .wcard .eq sup { font-size: .72em; }
   .wcard p.d { margin-top: 5px; font-size: 14px; line-height: 1.35; color: var(--ink-2); }
   .why { margin-top: 8px; text-align: center; font-size: 14.5px; color: var(--ink-2); }
   .why b { color: var(--blue); font-weight: 600; }
@@ -135,7 +137,7 @@
   @media (max-width: 560px) { .wesn { grid-template-columns: 1fr; } }
   #frame { max-height: calc(100svh - var(--nav) - 340px); min-height: 220px; }
   .score-fig { margin-top: 20px; }
-  #score { display: block; width: 100%; height: clamp(280px, calc(100svh - var(--nav) - 318px), 430px); }
+  #score { display: block; width: 100%; height: clamp(300px, calc(100svh - var(--nav) - 300px), 470px); }
   .cap { margin: 12px auto 0; max-width: 940px; font-size: 15.5px; line-height: 1.55; color: var(--ink-2); text-align: center; }
   .cap b { font-weight: 600; color: var(--ink); }
   .k-o { color: var(--orange); font-weight: 600; } .k-p { color: var(--blue); font-weight: 600; } .k-g { color: var(--green); font-weight: 600; }
@@ -187,14 +189,15 @@
   <canvas id="wave" aria-hidden="true"></canvas>
   <div class="wrap">
     <h1>Real-Time Channel Prediction<br>for Distributed MIMO</h1>
-    <p class="lede">A windowed echo state network on an FPGA predicts each user's next channel inside a live radio loop, so the base station precodes with the channel it will meet, not the one it measured.</p>
+    <p class="lede">A 2-mode windowed echo state network on an FPGA predicts each user's next channel in about 0.1 ms, inside a live radio loop, so the base station precodes with the channel it will meet, not the one it measured.</p>
     <p class="who">Chunxiao Lin</p>
     <p class="with">advised by Yang Yi · Virginia Tech</p>
     <div class="logos"><img src="img/vt.png" alt="Virginia Tech" width="201" height="38"></div>
     <div class="stats">
-      <div class="stat"><b>≤ 0.9<small>ms</small></b><span>round trip per frame,<br>PC → FPGA → PC over 10 GbE</span></div>
+      <div class="stat"><b>60.4<small>µs</small></b><span>FPGA compute per frame,<br>fixed and data-independent</span></div>
+      <div class="stat"><b>100<small>µs</small></b><span>median end to end, PC ↔ FPGA<br>over 10 GbE; p99 ≤ 200 µs</span></div>
       <div class="stat"><b>1,250<small>/s</small></b><span>channel predictions per user,<br>two users at once</span></div>
-      <div class="stat"><b>≈ 27<small>%</small></b><span>lower NMSE than reusing<br>the outdated channel</span></div>
+      <div class="stat"><b>≈ 27<small>%</small></b><span>lower NMSE: 0.0087 vs. 0.0119<br>with the outdated channel</span></div>
     </div>
   </div>
 </header>
@@ -207,7 +210,7 @@
     <div class="chips reveal"><span><b>4 × 2</b>distributed MIMO</span><span><b>32</b>subbands per CSI frame</span><span><b>2 × 10 GbE</b>one link per user</span><span><b>1 FPGA</b>one WESN per user, in parallel</span></div>
     <figure class="board reveal">
       <div class="scroll">
-      <svg id="topo" viewBox="0 0 1200 450" role="img" aria-label="Testbed topology: the gNB host PC and USRP N310 connect over four RF links to a Keysight PROPSIM F16 channel emulator, which connects over two RF links each to two USRP X310 radios. Each X310 has a host PC, and each host PC has its own 10 GbE link to one ZCU216 FPGA. The predicted channel is fed back to the gNB.">
+      <svg id="topo" viewBox="0 0 1200 450" role="img" aria-label="Testbed topology: the gNB host PC and USRP N310 connect over four RF links to a Keysight PROPSIM F16 channel emulator, which connects over two RF links each to two USRP X310 radios. Each X310 has a host PC, and each host PC has its own 10 GbE link to one VC709 FPGA. The predicted channel is fed back to the gNB.">
         <defs>
           <marker id="ah-o" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0 0L10 5L0 10z" fill="#c25e00"/></marker>
         </defs>
@@ -234,16 +237,17 @@
         <line x1="820" y1="102" x2="868" y2="102" stroke="#0071e3" stroke-width="4"/>
         <line x1="820" y1="332" x2="868" y2="332" stroke="#0071e3" stroke-width="4"/>
         <!-- host PCs -> FPGA, one 10 GbE link each -->
-        <line x1="956" y1="106" x2="1036" y2="186" stroke="#248a3d" stroke-width="5"/>
-        <line x1="956" y1="328" x2="1036" y2="270" stroke="#248a3d" stroke-width="5"/>
-        <text x="1016" y="234" text-anchor="end" class="tk" fill="#248a3d">10 GbE</text>
+        <line x1="956" y1="106" x2="1012" y2="206" stroke="#248a3d" stroke-width="5"/>
+        <line x1="956" y1="328" x2="1012" y2="246" stroke="#248a3d" stroke-width="5"/>
+        <text x="998" y="232" text-anchor="end" class="tk" fill="#248a3d">10 GbE</text>
 
         <!-- devices -->
         <g id="t-gnb" class="glow"><image href="img/pc.png" x="75" y="38" width="100" height="96"/><image href="img/n310.png" x="34" y="180" width="182" height="86"/></g>
         <g id="t-emu" class="glow"><image href="img/propsim.png" x="330" y="150" width="240" height="168"/></g>
         <g id="t-ue1" class="glow"><image href="img/x310.png" x="655" y="70" width="165" height="64"/><image href="img/pc.png" x="866" y="58" width="90" height="86"/></g>
         <g id="t-ue2" class="glow"><image href="img/x310.png" x="655" y="300" width="165" height="64"/><image href="img/pc.png" x="866" y="288" width="90" height="86"/></g>
-        <g id="t-fpga" class="glow"><image href="img/zcu216.png" x="1022" y="165" width="165" height="124"/></g>
+        <clipPath id="vcclip"><rect x="1012" y="197" width="186" height="58" rx="8"/></clipPath>
+        <g id="t-fpga" class="glow"><image href="img/vc709.jpg" x="1012" y="197" width="186" height="58" preserveAspectRatio="xMidYMid slice" clip-path="url(#vcclip)"/></g>
 
         <!-- labels -->
         <text x="125" y="298" text-anchor="middle" class="tl">Base station (gNB)</text>
@@ -254,8 +258,8 @@
         <text x="806" y="198" text-anchor="middle" class="ts">X310 + host PC · 2 antennas</text>
         <text x="806" y="404" text-anchor="middle" class="tl">User 2</text>
         <text x="806" y="430" text-anchor="middle" class="ts">X310 + host PC · 2 antennas</text>
-        <text x="1104" y="320" text-anchor="middle" class="tl">FPGA predictor</text>
-        <text x="1104" y="346" text-anchor="middle" class="ts">ZCU216 · WESN</text>
+        <text x="1105" y="286" text-anchor="middle" class="tl">FPGA predictor</text>
+        <text x="1105" y="312" text-anchor="middle" class="ts">VC709 · WESN</text>
 
         <!-- travelling pulses -->
         <circle id="d1" r="9" opacity="0"/><circle id="d2" r="9" opacity="0"/>
@@ -275,7 +279,7 @@
 <section class="sec" id="flow">
   <div class="wrap">
     <h2 class="reveal">Signal flow</h2>
-    <p class="sub reveal">One CSI frame of one user, through the windowed echo state network (WESN) on the FPGA.</p>
+    <p class="sub reveal">One CSI frame of one user, through the 2-mode WESN on the FPGA.</p>
     <figure class="frame-fig reveal">
       <div class="scroll">
       <svg id="frame" viewBox="0 0 1200 330" role="img" aria-label="One CSI frame, two receive by four transmit antenna pairs by 32 subbands, goes over 10 GbE to the FPGA. The FPGA keeps a window of recent frames, runs them through a fixed reservoir, retrains the linear readout and outputs the predicted next frame, which goes back over 10 GbE.">
@@ -306,13 +310,13 @@
         <use id="rt-icon" href="#retrain" x="748" y="45" width="12" height="12" color="#1b6b31"/>
         <!-- W_in: fixed links from the current frame into the reservoir -->
         <g id="win-links" stroke="#7fa6d1" stroke-width="1.2"></g>
-        <text x="462" y="66" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1d1d1f" font-style="italic">W<tspan font-size="9" font-style="normal" dy="3">in</tspan></text>
-        <use href="#lock" x="477" y="54" width="9" height="11" color="#424245"/>
+        <text x="458" y="66" text-anchor="middle" font-size="12.5" font-weight="700" fill="#1d1d1f">W₁, W₂</text>
+        <use href="#lock" x="482" y="55" width="9" height="11" color="#424245"/>
         <!-- 3 reservoir -->
         <g id="res" class="glow">
           <path id="loop" d="M566 62 C 572 38, 628 38, 636 66" fill="none" stroke="#248a3d" stroke-width="1.8" marker-end="url(#ah-g)"/>
-          <text x="598" y="36" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f" font-style="italic">W</text>
-          <use href="#lock" x="607" y="26" width="9" height="11" color="#424245"/>
+          <text x="596" y="36" text-anchor="middle" font-size="13" font-weight="700" fill="#1d1d1f">R₁, R₂</text>
+          <use href="#lock" x="618" y="26" width="9" height="11" color="#424245"/>
           <g id="neu"></g>
         </g>
         <circle cx="556" cy="163" r="9" fill="#248a3d"/><text x="556" y="167" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">3</text>
@@ -329,8 +333,8 @@
         <text x="820" y="80" text-anchor="middle" font-size="13" font-weight="700" fill="#0071e3">Ĥ(k+1)</text>
         <!-- legend -->
         <g font-size="11.5" fill="#424245">
-          <use href="#lock" x="772" y="206" width="9" height="11" color="#424245"/><text x="786" y="216">fixed (<tspan font-style="italic">W</tspan><tspan font-size="8.5" dy="2">in</tspan><tspan dy="-2">, </tspan><tspan font-style="italic">W</tspan>)</text>
-          <use href="#retrain" x="771" y="224" width="11" height="11" color="#1b6b31"/><text x="786" y="234" fill="#1b6b31" font-weight="600">trained (<tspan font-style="italic">W</tspan><tspan font-size="8.5" dy="2">out</tspan><tspan dy="-2">)</tspan></text>
+          <use href="#lock" x="752" y="206" width="9" height="11" color="#424245"/><text x="766" y="216">fixed (W₁, W₂, R₁, R₂)</text>
+          <use href="#retrain" x="751" y="224" width="11" height="11" color="#1b6b31"/><text x="766" y="234" fill="#1b6b31" font-weight="600">trained (<tspan font-style="italic">W</tspan><tspan font-size="8.5" dy="2">out</tspan><tspan dy="-2">)</tspan></text>
         </g>
         <g id="parts"></g>
         </g>
@@ -349,17 +353,17 @@
     </figure>
     <div class="wesn reveal">
       <div class="wcard" id="wc1"><h4><span class="wb" style="background:#0071e3">1</span>Current frame</h4>
-        <p class="eq"><b>u</b>(<i>k</i>)</p>
-        <p class="d">Drives the reservoir through fixed <i>W</i><sub>in</sub>.</p></div>
+        <p class="eq"><b>U</b>(<i>k</i>) <span style="font-weight:400">· 8 × 32 CSI matrix</span></p>
+        <p class="d">Drives the reservoir via fixed <b>W</b><sub>1</sub>, <b>W</b><sub>2</sub>.</p></div>
       <div class="wcard" id="wc2"><h4><span class="wb" style="background:#c25e00">2</span>Window of older frames</h4>
-        <p class="eq"><b>u</b>(<i>k</i>−1), …, <b>u</b>(<i>k</i>−<i>L</i>+1)</p>
+        <p class="eq"><b>U</b>(<i>k</i>−1), …, <b>U</b>(<i>k</i>−5)</p>
         <p class="d">Linked straight to the outputs.</p></div>
-      <div class="wcard" id="wc3"><h4><span class="wb" style="background:#248a3d">3</span>Reservoir · fixed</h4>
-        <p class="eq"><b>x</b>(<i>k</i>) = tanh(<b>W</b><sub>in</sub><b>u</b>(<i>k</i>) + <b>W</b><b>x</b>(<i>k</i>−1))</p>
-        <p class="d">Random, set once, never trained.</p></div>
+      <div class="wcard" id="wc3"><h4><span class="wb" style="background:#248a3d">3</span>2-mode reservoir · fixed</h4>
+        <p class="eq"><b>X</b>(<i>k</i>) = tanh(<b>W</b><sub>1</sub><b>U</b><b>W</b><sub>2</sub> + <b>R</b><sub>1</sub><b>X</b>(<i>k</i>−1)<b>R</b><sub>2</sub>)</p>
+        <p class="d"><b>W</b><sub>1</sub> mixes antennas, <b>W</b><sub>2</sub> subbands.</p></div>
       <div class="wcard" id="wc4"><h4><span class="wb" style="background:#1b6b31">4</span>Readout · trained</h4>
-        <p class="eq"><b>Ĥ</b>(<i>k</i>+1) = <b>W</b><sub>out</sub>[<b>x</b>(<i>k</i>); window]</p>
-        <p class="d">The green links, re-solved every frame.</p></div>
+        <p class="eq"><b>W</b><sub>out</sub> = <b>YZ</b><sup>⊤</sup>(<b>ZZ</b><sup>⊤</sup> + β<b>I</b>)<sup>−1</sup></p>
+        <p class="d">Pseudo-inverse, re-solved every frame.</p></div>
     </div>
     <p class="why reveal"><b>Why a WESN:</b> few weights to learn, so a handful of frames is enough · closed-form training with a fixed, predictable latency · fixed weights built straight into logic</p>
 
@@ -370,10 +374,10 @@
 <section class="sec grey" id="timing">
   <div class="wrap">
     <h2 class="reveal">Timing</h2>
-    <p class="sub reveal">Frame after frame, slowed down over a thousand times.</p>
+    <p class="sub reveal">Frame after frame, slowed down about 4,000 times.</p>
     <figure class="score-fig reveal">
       <canvas id="score" role="img" aria-label="A timeline: the true channel; one CSI frame every 0.8 ms; each frame's round trip through 10 GbE and the FPGA, under 0.9 ms, overlapping the next one; and for every frame the error of reusing the outdated channel versus the error of the prediction."></canvas>
-      <p class="cap">A CSI frame arrives <b>every 0.8 ms</b> and makes a <b>round trip of at most 0.9 ms</b>, so consecutive round trips overlap. In the FPGA each frame <b>updates the reservoir states</b> (inference), <b>retrains the readout</b> (training) and <b>predicts Ĥ(k+1)</b>; stage widths are schematic. The bottom row compares the error of reusing <span class="k-o">H(k)</span> with that of the <span class="k-p">prediction</span>: over the live run, the prediction's NMSE is <b>about 27% lower</b>.</p>
+      <p class="cap">A CSI frame leaves <b>every 0.8 ms</b>; its round trip through 10 GbE and the FPGA takes <b>100 µs at the median</b> (p99 ≤ 200 µs), so each prediction is back long before the next frame. Of that, <b>60.4 µs is FPGA compute</b>, the same for every frame: update the reservoir states (inference), retrain <i>W</i><sub>out</sub> (training), predict; stage widths inside the FPGA are schematic. Measured NMSE: <span class="k-p">0.0087</span> with the prediction vs. <span class="k-o">0.0119</span> with the outdated channel, <b>about 27% lower</b>.</p>
     </figure>
   </div>
 </section>
@@ -382,10 +386,10 @@
 <section class="sec dark" id="demo">
   <div class="wrap">
     <div class="filmbox">
-      <div class="demohead reveal"><h2>Demo</h2><p><b>Live 10 GbE loop</b> · CSI frames stream to the FPGA, predictions stream back</p></div>
+      <div class="demohead reveal"><h2>Demo</h2><p><b>Replay of a measured run</b> · 2026-11-13, dual 10 GbE on the VC709, 2 min, values unchanged</p></div>
       <figure class="film reveal">
-        <video controls preload="metadata" playsinline poster="../assets/video/10g_demo.jpg" width="1280" height="720">
-          <source src="../assets/video/10g_demo.mp4" type="video/mp4">
+        <video controls preload="metadata" playsinline poster="media/demo_poster.jpg" width="1280" height="720">
+          <source src="media/demo_2min.mp4" type="video/mp4">
           Your browser cannot play this video.
         </video>
       </figure>
@@ -523,7 +527,7 @@
     rf:    [[216, 224], [334, 238]],
     ue1rf: [[570, 203], [659, 103]], ue2rf: [[570, 275], [659, 331]],
     ue1x:  [[820, 102], [868, 102]], ue2x: [[820, 332], [868, 332]],
-    ue1f:  [[956, 106], [1036, 186]], ue2f: [[956, 328], [1036, 270]],
+    ue1f:  [[956, 106], [1012, 206]], ue2f: [[956, 328], [1012, 246]],
     fb:    [[911, 58], [911, 26], [125, 26], [125, 36]],
   };
   const rev = p => p.slice().reverse();
@@ -656,108 +660,111 @@
   /* ------------------------------------------------ frame after frame: the score, in ms */
   const score = $("score");
   const ROWS = [
-    { name: "Channel", sub: ["the true H(t)"], c: C.ink, w: .8 },
-    { name: "User", sub: ["a CSI frame every 0.8 ms"], c: C.ink2, w: .8 },
-    { name: "Round trip", sub: ["10 GbE + FPGA, ≤ 0.9 ms", "inference and training", "on every frame"], c: C.green, w: 1.55 },
-    { name: "Error", sub: ["against the true next frame"], c: C.blue, w: .9 },
+    { name: "Channel", sub: ["the true H(t)"], c: C.ink, w: .72 },
+    { name: "User", sub: ["a CSI frame every 0.8 ms"], c: C.ink2, w: .72 },
+    { name: "Round trip", sub: ["10 GbE + FPGA", "100 µs median"], c: C.green, w: .72 },
+    { name: "Zoomed in", sub: ["one round trip:", "inference and training"], c: "#1b6b31", w: 1.45 },
+    { name: "Error", sub: ["against the true next frame"], c: C.blue, w: .8 },
   ];
-  // what happens inside one round trip (widths are schematic, not measured)
-  const STAGES = [
-    { f: .08, c: "#6e6e73", name: "10 GbE in", kind: "" },
-    { f: .22, c: C.blue, name: "update reservoir states", kind: "inference" },
-    { f: .38, c: "#8944ab", name: "retrain the readout", kind: "training" },
-    { f: .14, c: "#0a7f8c", name: "predict Ĥ(k+1)", kind: "inference" },
-    { f: .18, c: "#6e6e73", name: "10 GbE out", kind: "" },
+  const RT = .1 / .8;                                     // median round trip, in frames
+  // one round trip, in microseconds: link + host 39.6 (split between the two directions), FPGA 60.4 (fixed)
+  const ZS = [
+    { us: 19.8, c: "#6e6e73", name: "10 GbE in", grp: "link" },
+    { us: 18.1, c: C.blue, name: "update states", kind: "inference", grp: "fpga" },
+    { us: 27.2, c: "#8944ab", name: "retrain W_out", kind: "training", grp: "fpga" },
+    { us: 15.1, c: "#0a7f8c", name: "predict", kind: "inference", grp: "fpga" },
+    { us: 19.8, c: "#6e6e73", name: "10 GbE out", grp: "link" },
   ];
-  const RT = .9 / .8;                                    // round trip in frames
   function rr(g, x, y, w, h, r) { r = Math.min(r, w / 2, h / 2); g.beginPath(); g.moveTo(x + r, y); g.arcTo(x + w, y, x + w, y + h, r); g.arcTo(x + w, y + h, x, y + h, r); g.arcTo(x, y + h, x, y, r); g.arcTo(x, y, x + w, y, r); g.closePath(); }
   function drawScore(T) {
     const [g, W, H] = sizeCanvas(score);
     g.clearRect(0, 0, W, H);
-    const narrow = W < 640, L = narrow ? 96 : 210, R = W - 8, PX = narrow ? 110 : 230, play = L + (R - L) * .6;
-    const top = 18, bot = 30, unit = (H - top - bot) / ROWS.reduce((a, r) => a + r.w, 0);
+    const narrow = W < 640, L = narrow ? 96 : 200, R = W - 8, PX = narrow ? 120 : 230, play = L + (R - L) * .55;
+    const top = 16, bot = 28, unit = (H - top - bot) / ROWS.reduce((a, r) => a + r.w, 0);
     const rowY = i => top + ROWS.slice(0, i).reduce((a, r) => a + r.w, 0) * unit, rowH = i => ROWS[i].w * unit;
     const X = t => play + (t - T) * PX, val = (i, v) => rowY(i) + rowH(i) * .86 - v * rowH(i) * .72;
-    const k0 = Math.floor(T - (play - L) / PX) - 2, k1 = Math.ceil(T + (R - play) / PX) + 1;
-    let active = -1;
-    g.save(); g.beginPath(); g.rect(L, 0, R - L, H); g.clip();
+    const k0 = Math.floor(T - (play - L) / PX) - 2, k1 = Math.ceil(T + (R - play) / PX) + 1, kc = Math.floor(T);
+    g.save(); g.beginPath(); g.rect(L, 0, R - L, rowY(3)); g.rect(L, rowY(4), R - L, H); g.clip();
     g.font = "500 13px Inter, sans-serif"; g.textAlign = "left";
     for (let k = k0; k <= k1; k++) {
-      const x = X(k); g.strokeStyle = "rgba(29,29,31,.09)"; g.lineWidth = 1; g.beginPath(); g.moveTo(x, top); g.lineTo(x, H - bot); g.stroke();
+      const x = X(k); g.strokeStyle = "rgba(29,29,31,.09)"; g.lineWidth = 1;
+      g.beginPath(); g.moveTo(x, top); g.lineTo(x, rowY(3)); g.moveTo(x, rowY(4)); g.lineTo(x, H - bot); g.stroke();
       if (x + 52 < R) { g.fillStyle = C.ink2; g.fillText(`${(k * .8).toFixed(1)} ms`, x + 5, H - 10); }
     }
-    // row 0: true channel up to now
+    // row 0: the true channel; row 1: one CSI frame per 0.8 ms
     g.beginPath();
     for (let x = L; x <= play; x += 2) { const v = hs(T + (x - play) / PX); x === L ? g.moveTo(x, val(0, v)) : g.lineTo(x, val(0, v)); }
     g.strokeStyle = C.ink; g.lineWidth = 2.4; g.stroke();
-    // row 1: one measurement per frame
-    for (let k = k0; k <= Math.floor(T); k++) {
+    for (let k = k0; k <= kc; k++) {
       const x = X(k), v = hs(k);
       g.strokeStyle = "rgba(29,29,31,.25)"; g.setLineDash([2, 4]); g.beginPath(); g.moveTo(x, val(0, v)); g.lineTo(x, val(1, v)); g.stroke(); g.setLineDash([]);
       g.fillStyle = C.ink2; g.beginPath(); g.arc(x, val(1, v), 5, 0, 7); g.fill();
       g.font = "600 13.5px Inter, sans-serif"; g.fillText(`H(${k})`, x + 9, val(1, v) + 5);
     }
-    // row 2: overlapping round trips, each split into its stages
-    for (let k = k0; k <= Math.floor(T); k++) {
-      const a = k + .03, lane = ((k % 2) + 2) % 2, live = T < k + RT;
-      if (T <= a) continue;
-      const y = rowY(2) + rowH(2) * (lane ? .54 : .14), h = rowH(2) * .3;
-      let t = a;
-      g.save(); rr(g, X(a), y, RT * PX, h, 7); g.clip();
-      STAGES.forEach((st, i) => {
-        const s0 = t, s1 = t + st.f * (RT - .03); t = s1;
-        if (s0 >= T) return;
-        const e = Math.min(s1, T), now = live && T >= s0 && T < s1;
-        if (now) active = i;
-        g.globalAlpha = live ? (now ? 1 : .55) : .22;
-        g.fillStyle = st.c; g.fillRect(X(s0), y, (e - s0) * PX + .5, h);
-        g.globalAlpha = 1;
-        g.strokeStyle = "#fff"; g.lineWidth = 1.5; g.beginPath(); g.moveTo(X(s0), y); g.lineTo(X(s0), y + h); g.stroke();
-      });
-      g.restore();
-      g.fillStyle = live ? C.ink : C.ink2; g.font = `${live ? 600 : 500} 13px Inter, sans-serif`;
-      g.fillText(`H(${k}) → Ĥ(${k + 1})`, X(a) + 2, y - 5);
-      g.strokeStyle = "rgba(29,29,31,.25)"; g.lineWidth = 1.2; g.beginPath(); g.moveTo(X(k), val(1, hs(k)) + 6); g.lineTo(X(a), y + h / 2); g.stroke();
+    // row 2: each round trip is short, done long before the next frame
+    const ry = rowY(2) + rowH(2) * .28, rh = rowH(2) * .44;
+    for (let k = k0; k <= kc; k++) {
+      const e = Math.min(k + RT, T); if (e <= k) continue;
+      const live = T < k + RT;
+      rr(g, X(k), ry, (e - k) * PX, rh, 5); g.fillStyle = live ? C.green : "rgba(36,138,61,.35)"; g.fill();
+      g.fillStyle = C.green; g.font = "600 12.5px Inter, sans-serif";
+      if (!live) g.fillText(`Ĥ(${k + 1}) back`, X(k + RT) + 6, ry + rh / 2 + 4);
     }
-    // row 3: when Ĥ(k+1) is back, compare both guesses with the true H(k+1)
-    const base = rowY(3) + rowH(3) * .9, scale = rowH(3) * 1.9, cap = rowH(3) * .78;
+    // row 4: error of both guesses against the true next frame, once Ĥ(k+1) is back
+    const base = rowY(4) + rowH(4) * .9, scale = rowH(4) * 1.9, cap = rowH(4) * .78;
     g.strokeStyle = "rgba(29,29,31,.2)"; g.lineWidth = 1; g.beginPath(); g.moveTo(L, base); g.lineTo(R, base); g.stroke();
     for (let k = k0; k <= Math.floor(T - RT); k++) {
-      const x = X(k + RT), truth = hs(k + 1), eo = Math.min(cap, Math.abs(truth - hs(k)) * scale), ep = Math.max(2, Math.abs(err(k)) * scale);
-      g.fillStyle = C.orange; g.fillRect(x - 15, base - eo, 12, eo);
-      g.fillStyle = C.blue; g.fillRect(x + 2, base - ep, 12, ep);
+      const x = X(k + RT), eo = Math.min(cap, Math.abs(hs(k + 1) - hs(k)) * scale), ep = Math.max(2, Math.abs(err(k)) * scale);
+      g.fillStyle = C.orange; g.fillRect(x - 3, base - eo, 12, eo);
+      g.fillStyle = C.blue; g.fillRect(x + 11, base - ep, 12, ep);
     }
     g.restore();
+    // row 3: the latest round trip, magnified to the full width
+    const zy = rowY(3), zh = rowH(3), bx0 = L + 10, bx1 = R - 150, by = zy + zh * .3, bh = zh * .22, tot = 100;
+    const f = Math.max(0, Math.min(1, (T - kc) / RT));                      // progress of the current round trip
+    g.strokeStyle = "rgba(36,138,61,.35)"; g.lineWidth = 1; g.setLineDash([3, 3]);
+    g.beginPath(); g.moveTo(X(kc), ry + rh); g.lineTo(bx0, by); g.moveTo(X(kc + RT), ry + rh); g.lineTo(bx1, by); g.stroke(); g.setLineDash([]);
+    let x = bx0, acc = 0, cur = -1;
+    ZS.forEach((st, i) => {
+      const w = (bx1 - bx0) * st.us / tot, s0 = acc / tot, s1 = (acc + st.us) / tot; acc += st.us;
+      const done = f >= s1, now = f > s0 && f < s1;
+      if (now) cur = i;
+      g.globalAlpha = done || now ? 1 : .22; g.fillStyle = st.c;
+      g.fillRect(x, by, now ? w * (f - s0) / (s1 - s0) : w, bh); g.globalAlpha = 1;
+      if (now) { g.globalAlpha = .22; g.fillRect(x, by, w, bh); g.globalAlpha = 1; }
+      g.strokeStyle = "#fff"; g.lineWidth = 2; g.beginPath(); g.moveTo(x, by); g.lineTo(x, by + bh); g.stroke();
+      if (st.grp === "fpga") {
+        g.fillStyle = i === cur ? C.ink : C.ink2; g.font = `${i === cur ? 700 : 500} 13px Inter, sans-serif`; g.textAlign = "center";
+        g.fillText(st.name.replace("W_out", "Wout"), x + w / 2, by - 8);
+        g.fillStyle = st.c; g.font = "600 11.5px Inter, sans-serif"; g.fillText(st.kind, x + w / 2, by + bh + 15);
+      }
+      x += w;
+    });
+    // brackets: FPGA 60.4 us (fixed) and link + host 39.6 us
+    const fx0 = bx0 + (bx1 - bx0) * 19.8 / tot, fx1 = bx0 + (bx1 - bx0) * 80.2 / tot, yb = by + bh + 22;
+    g.strokeStyle = "#1b6b31"; g.lineWidth = 1.5; g.beginPath(); g.moveTo(fx0, yb - 4); g.lineTo(fx0, yb); g.lineTo(fx1, yb); g.lineTo(fx1, yb - 4); g.stroke();
+    g.fillStyle = "#1b6b31"; g.font = "700 13px Inter, sans-serif"; g.textAlign = "center"; g.fillText("FPGA 60.4 µs, fixed", (fx0 + fx1) / 2, yb + 15);
+    g.fillStyle = C.ink2; g.font = "500 12.5px Inter, sans-serif";
+    g.fillText("10 GbE + host", (bx0 + fx0) / 2, yb + 15); g.fillText("10 GbE + host", (fx1 + bx1) / 2, yb + 15);
+    g.textAlign = "left"; g.fillStyle = C.ink; g.font = "700 15px Inter, sans-serif"; g.fillText("= 100 µs", bx1 + 12, by + bh / 2 + 1);
+    g.fillStyle = C.ink2; g.font = "500 12.5px Inter, sans-serif"; g.fillText("median; p99 ≤ 200 µs", bx1 + 12, by + bh / 2 + 18);
     // row labels
-    g.textAlign = "left";
     ROWS.forEach((r, i) => {
-      const y0 = rowY(i) + Math.min(rowH(i) * .42, 30);
-      g.fillStyle = r.c; g.font = `600 ${narrow ? 14 : 17}px Inter, sans-serif`; g.fillText(r.name, 0, y0);
-      if (!narrow) r.sub.forEach((line, j) => { g.fillStyle = C.ink2; g.font = "400 14px Inter, sans-serif"; g.fillText(line, 0, y0 + 20 + j * 18); });
+      const y0 = rowY(i) + Math.min(rowH(i) * .42, 28);
+      g.textAlign = "left"; g.fillStyle = r.c; g.font = `600 ${narrow ? 14 : 16.5}px Inter, sans-serif`; g.fillText(r.name, 0, y0);
+      if (!narrow) r.sub.forEach((line, j) => { g.fillStyle = C.ink2; g.font = "400 13.5px Inter, sans-serif"; g.fillText(line, 0, y0 + 19 + j * 17); });
       g.strokeStyle = "rgba(29,29,31,.08)"; g.lineWidth = 1; g.beginPath(); g.moveTo(0, rowY(i) + rowH(i)); g.lineTo(W, rowY(i) + rowH(i)); g.stroke();
     });
-    // stage legend in the empty space right of the playhead; the running stage is highlighted
-    const lx = play + 22, ly = rowY(2) + 22;
-    if (R - lx > 200) STAGES.forEach((st, i) => {
-      if (i === 4) return;
-      const yy = ly + i * 22, on = i === active || (i === 0 && active === 4);
-      g.globalAlpha = on ? 1 : .75;
-      g.fillStyle = st.c; rr(g, lx, yy - 11, 14, 14, 3); g.fill();
-      g.fillStyle = on ? C.ink : C.ink2; g.font = `${on ? 700 : 500} 14px Inter, sans-serif`;
-      g.fillText(i === 0 ? "10 GbE in / out" : st.name, lx + 22, yy + 1);
-      if (st.kind) { const w = g.measureText(st.name).width; g.fillStyle = st.c; g.font = "600 12.5px Inter, sans-serif"; g.fillText(st.kind, lx + 30 + w, yy + 1); }
-      g.globalAlpha = 1;
-    });
-    g.font = "600 14px Inter, sans-serif"; g.textAlign = "right";
-    g.fillStyle = C.orange; g.fillText("■ reuse H(k)", R - 4, rowY(3) + 18);
-    g.fillStyle = C.blue; g.fillText("■ prediction Ĥ(k+1)", R - 4, rowY(3) + 36);
-    g.strokeStyle = C.red; g.lineWidth = 2; g.beginPath(); g.moveTo(play, top - 6); g.lineTo(play, H - bot); g.stroke();
+    g.font = "600 13.5px Inter, sans-serif"; g.textAlign = "right";
+    g.fillStyle = C.orange; g.fillText("■ reuse H(k)", R - 4, rowY(4) + 17);
+    g.fillStyle = C.blue; g.fillText("■ prediction Ĥ(k+1)", R - 4, rowY(4) + 34);
+    g.strokeStyle = C.red; g.lineWidth = 2; g.beginPath(); g.moveTo(play, top - 6); g.lineTo(play, rowY(3)); g.moveTo(play, rowY(4)); g.lineTo(play, H - bot); g.stroke();
     g.fillStyle = C.red; g.beginPath(); g.moveTo(play - 6, top - 12); g.lineTo(play + 6, top - 12); g.lineTo(play, top - 2); g.closePath(); g.fill();
   }
 
   /* ------------------------------------------------ one clock for everything */
   const qs = new URLSearchParams(location.search), frozen = qs.has("t") ? +qs.get("t") : (reduce ? 7.45 : null);
-  const t0 = performance.now(), FRAME_S = 1.15, SCORE_FRAME_S = 2.0, FLOW_FRAME_S = 5.0;   // seconds on screen per 0.8 ms frame (Timing runs slower)
+  const t0 = performance.now(), FRAME_S = 1.15, SCORE_FRAME_S = 3.2, FLOW_FRAME_S = 5.0;   // seconds on screen per 0.8 ms frame (Timing runs slower)
   function tick(now) {
     const T = frozen !== null ? frozen : 4 + (now - t0) / 1000 / FRAME_S;
     if (isVisible(wave)) drawWave(T * .9);
