@@ -317,30 +317,41 @@
         <g id="win" class="glow"><g id="g-old"></g></g>
         <circle cx="351" cy="234" r="9" fill="#c25e00"/><text x="351" y="238" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">2</text>
         <text x="365" y="238" font-size="12.5" font-weight="600" fill="#1d1d1f">U(k−1) … U(k−5)</text>
-        <!-- 3 the 2-mode reservoir -->
+        <!-- 3 the 2-mode reservoir: X(k) = tanh(W1 U(k) W2 + R1 X(k-1) R2) -->
         <g id="res" class="glow">
-          <rect x="420" y="56" width="300" height="134" rx="12" fill="#fff" stroke="#248a3d" stroke-width="1.6"/>
+          <rect x="420" y="56" width="300" height="142" rx="12" fill="#fff" stroke="#248a3d" stroke-width="1.6"/>
           <circle cx="436" cy="73" r="9" fill="#248a3d"/><text x="436" y="77" text-anchor="middle" font-size="11.5" font-weight="700" fill="#fff">3</text>
-          <text x="450" y="78" font-size="13" font-weight="600" fill="#1d1d1f">2-mode reservoir · fixed</text>
-          <text x="462" y="93" font-size="10.5" fill="#424245">CSI stays a matrix: small W₁, W₂</text>
-          <g id="m-w1" class="glow"><rect x="436" y="98" width="13" height="46" rx="2" fill="#0071e3"/>
-            <text x="440" y="93" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">W₁</text><use href="#lock" x="448" y="84" width="7" height="9" color="#424245"/></g>
-          <text x="457" y="125" text-anchor="middle" font-size="14" font-weight="700">·</text>
-          <g id="m-u"><rect x="464" y="104" width="38" height="32" rx="3" fill="#fff" stroke="#0071e3" stroke-width="1.3"/><g id="g-u"></g></g>
-          <text x="509" y="125" text-anchor="middle" font-size="14" font-weight="700">·</text>
-          <g id="m-w2" class="glow"><rect x="516" y="114" width="42" height="12" rx="2" fill="#0071e3"/>
-            <text x="532" y="108" text-anchor="middle" font-size="12" font-weight="700" fill="#1d1d1f">W₂</text><use href="#lock" x="541" y="99" width="7" height="9" color="#424245"/></g>
-          <text x="566" y="125" text-anchor="middle" font-size="15" font-weight="700">+</text>
-          <g id="m-r" class="glow"><rect x="574" y="108" width="46" height="24" rx="5" fill="#e9f4ec" stroke="#248a3d" stroke-width="1.2"/>
-            <text x="597" y="124" text-anchor="middle" font-size="11.5" font-weight="700" fill="#1b6b31">R₁XR₂</text><use href="#lock" x="612" y="99" width="7" height="9" color="#424245"/></g>
-          <line x1="622" y1="120" x2="632" y2="120" stroke="#424245" stroke-width="1.6" marker-end="url(#ah-k)"/>
-          <g id="m-tanh" class="glow"><circle cx="646" cy="120" r="12" fill="#fff" stroke="#1d1d1f" stroke-width="1.4"/>
-            <text x="646" y="124" text-anchor="middle" font-size="10" font-weight="700">tanh</text></g>
-          <line x1="659" y1="120" x2="668" y2="120" stroke="#424245" stroke-width="1.6" marker-end="url(#ah-k)"/>
-          <text x="688" y="99" text-anchor="middle" font-size="12" font-weight="700" fill="#1b6b31">X(k)</text>
+          <text x="450" y="78" font-size="13" font-weight="600" fill="#1d1d1f">2-mode reservoir</text>
+          <use href="#lock" x="666" y="68" width="9" height="11" color="#424245"/><text x="679" y="78" font-size="11.5" fill="#424245">fixed</text>
+          <!-- row A: W1 . U(k) . W2 -->
+          <text x="494" y="96" text-anchor="middle" font-size="10.5" fill="#0071e3" font-weight="600">U(k)</text>
+          <g id="m-w1" class="glow"><rect x="434" y="100" width="26" height="26" rx="5" fill="#0071e3"/><g stroke="#fff" stroke-opacity=".35" stroke-width="1"><line x1="442.7" y1="103" x2="442.7" y2="123"/><line x1="451.3" y1="103" x2="451.3" y2="123"/><line x1="437" y1="108.7" x2="457" y2="108.7"/><line x1="437" y1="117.3" x2="457" y2="117.3"/></g><text x="447.0" y="117.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">W₁</text></g>
+          <text x="467" y="117" text-anchor="middle" font-size="14" font-weight="700" fill="#424245">·</text>
+          <g id="m-u"><rect x="474" y="100" width="40" height="26" rx="5" fill="#fff" stroke="#0071e3" stroke-width="1.3"/><g id="g-u"></g></g>
+          <text x="521" y="117" text-anchor="middle" font-size="14" font-weight="700" fill="#424245">·</text>
+          <g id="m-w2" class="glow"><rect x="528" y="100" width="26" height="26" rx="5" fill="#0071e3"/><g stroke="#fff" stroke-opacity=".35" stroke-width="1"><line x1="536.7" y1="103" x2="536.7" y2="123"/><line x1="545.3" y1="103" x2="545.3" y2="123"/><line x1="531" y1="108.7" x2="551" y2="108.7"/><line x1="531" y1="117.3" x2="551" y2="117.3"/></g><text x="541.0" y="117.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">W₂</text></g>
+          <!-- row B: R1 . X(k-1) . R2 -->
+          <text x="494" y="140" text-anchor="middle" font-size="10.5" fill="#1b6b31" font-weight="600">X(k−1)</text>
+          <g id="m-r1" class="glow"><rect x="434" y="144" width="26" height="26" rx="5" fill="#248a3d"/><g stroke="#fff" stroke-opacity=".35" stroke-width="1"><line x1="442.7" y1="147" x2="442.7" y2="167"/><line x1="451.3" y1="147" x2="451.3" y2="167"/><line x1="437" y1="152.7" x2="457" y2="152.7"/><line x1="437" y1="161.3" x2="457" y2="161.3"/></g><text x="447.0" y="161.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">R₁</text></g>
+          <text x="467" y="161" text-anchor="middle" font-size="14" font-weight="700" fill="#424245">·</text>
+          <g id="m-xp"><rect x="474" y="144" width="40" height="26" rx="5" fill="#fff" stroke="#248a3d" stroke-width="1.3"/><g id="g-xp"></g></g>
+          <text x="521" y="161" text-anchor="middle" font-size="14" font-weight="700" fill="#424245">·</text>
+          <g id="m-r2" class="glow"><rect x="528" y="144" width="26" height="26" rx="5" fill="#248a3d"/><g stroke="#fff" stroke-opacity=".35" stroke-width="1"><line x1="536.7" y1="147" x2="536.7" y2="167"/><line x1="545.3" y1="147" x2="545.3" y2="167"/><line x1="531" y1="152.7" x2="551" y2="152.7"/><line x1="531" y1="161.3" x2="551" y2="161.3"/></g><text x="541.0" y="161.5" text-anchor="middle" font-size="12.5" font-weight="700" fill="#fff">R₂</text></g>
+          <!-- sum, tanh, state -->
+          <path d="M556 113 C 572 113, 576 135, 588 135" fill="none" stroke="#0071e3" stroke-width="1.6"/>
+          <path d="M556 157 C 572 157, 576 135, 588 135" fill="none" stroke="#248a3d" stroke-width="1.6"/>
+          <g id="m-plus" class="glow"><circle cx="597" cy="135" r="9" fill="#fff" stroke="#1d1d1f" stroke-width="1.4"/>
+            <path d="M592 135h10M597 130v10" stroke="#1d1d1f" stroke-width="1.6"/></g>
+          <line x1="606" y1="135" x2="614" y2="135" stroke="#424245" stroke-width="1.5" marker-end="url(#ah-k)"/>
+          <g id="m-tanh" class="glow"><rect x="616" y="125" width="34" height="20" rx="10" fill="#fff" stroke="#1d1d1f" stroke-width="1.4"/>
+            <text x="633" y="139" text-anchor="middle" font-size="11" font-weight="700">tanh</text></g>
+          <line x1="650" y1="135" x2="660" y2="135" stroke="#424245" stroke-width="1.5" marker-end="url(#ah-k)"/>
+          <text x="690" y="111" text-anchor="middle" font-size="12" font-weight="700" fill="#1b6b31">X(k)</text>
+          <rect x="664" y="117" width="52" height="38" rx="6" fill="#fff" stroke="#248a3d" stroke-width="1.3"/>
           <g id="g-x"></g>
-          <path id="loop" d="M688 140 C 688 172, 600 174, 598 136" fill="none" stroke="#248a3d" stroke-width="1.6" marker-end="url(#ah-g)"/>
-          <text x="644" y="176" text-anchor="middle" font-size="10.5" fill="#1b6b31">state feeds back</text>
+          <!-- X(k) is kept as X(k-1) for the next frame -->
+          <path id="loop" d="M690 155 V184 H494 V172" fill="none" stroke="#248a3d" stroke-width="1.6" marker-end="url(#ah-g)"/>
+          <text x="592" y="180" text-anchor="middle" font-size="10.5" fill="#1b6b31">kept for the next frame</text>
         </g>
         <!-- output Ĥ(k+1): a matrix of output neurons -->
         <rect x="784" y="96" width="60" height="48" rx="7" fill="#fff" stroke="#0071e3" stroke-width="1.6"/><g id="g-out"></g>
@@ -591,11 +602,12 @@
   const STK = [2, 1, 0].map(a => { const g = mk("g", {}, $("g-old"));        // draw the oldest stack first
     mk("rect", { x: 342 + a * 7, y: 170 + a * 7, width: 50, height: 40, rx: 6, fill: "#fff", stroke: "#c25e00", "stroke-width": 1.2 }, g);
     return { a: a + 1, n: grid(g, 349 + a * 7, 177 + a * 7, 4, 5, 9, 9, 3, C.orange) }; }).reverse();   // STK[0] = age 1
-  const nU = grid($("g-u"), 470, 110, 4, 5, 7, 7, 2.4, C.blue);
-  const nX = grid($("g-x"), 675, 106, 4, 4, 9, 9, 3.4, C.green);
+  const nU = grid($("g-u"), 480, 104.5, 4, 5, 7, 5.7, 2.2, C.blue);
+  const nXp = grid($("g-xp"), 480, 148.5, 4, 5, 7, 5.7, 2.2, C.green);
+  const nX = grid($("g-x"), 672, 123, 4, 5, 9, 8.6, 3, C.green);
   const nOut = grid($("g-out"), 792, 104, 4, 5, 11, 11, 3.8, "#1b6b31");
   // ---- W_out: from the state X and straight from the older frames to the outputs
-  const OUTL = nOut.filter(n => n.j === 0), XR = nX.filter(n => n.j === 3);
+  const OUTL = nOut.filter(n => n.j === 0), XR = nX.filter(n => n.j === 4);
   const links = [], CTRL = [600, 262];
   XR.forEach((a, i) => OUTL.forEach((o, q) => links.push({ i, q, el: mk("line", { x1: a.x, y1: a.y, x2: o.x, y2: o.y, stroke: C.green, "stroke-linecap": "round" }, $("wout")) })));
   const OSRC = []; STK.forEach(st => st.n.filter(n => n.j === 4 && (n.i === 0 || n.i === 3)).forEach(n => OSRC.push(n)));
@@ -605,7 +617,7 @@
   // ---- particles
   const dots = []; for (let i = 0; i < 30; i++) dots.push(mk("circle", { r: 3.6, opacity: 0 }, $("parts")));
   const STEPS = [[.14, "receiving H(k)", C.ink2], [.32, "① ② the window shifts", C.orange],
-                 [.58, "③ 2-mode reservoir: W₁·U·W₂ + R₁XR₂ → tanh → X", C.green],
+                 [.42, "③ W₁ · U(k) · W₂", C.blue], [.5, "③ + R₁ · X(k−1) · R₂", C.green], [.58, "③ tanh → new state X(k)", C.green],
                  [.76, "④ W_out re-solved", "#1b6b31"], [1.01, "→ Ĥ(k+1) goes back", C.blue]];
   const seg = (p, a, b) => Math.max(0, Math.min(1, (p - a) / (b - a)));
   const ease = f => f < .5 ? 2 * f * f : 1 - Math.pow(-2 * f + 2, 2) / 2;
@@ -626,12 +638,18 @@
     // ---- 3: the 2-mode product, one factor at a time
     const uIn = seg(p, .36, .44), xFill = seg(p, .5, .58);
     nU.forEach(n => setOp(n, p >= .36 && p < .62 ? (.1 + .85 * v(n.i, n.j, k)) * Math.min(1, uIn * 1.6) : .12));
-    nX.forEach(n => setOp(n, xFill > n.j / 4 ? .2 + .75 * v(n.i + 1, n.j + 1, k + 7) : p >= .58 ? .2 + .75 * v(n.i + 1, n.j + 1, k + 7) : .18 + .1 * Math.sin(tNow * 1.4 + n.i + n.j)));
+    const xv = (n, m) => .2 + .75 * v(n.i + 1, n.j + 1, m + 7);
+    nX.forEach(n => setOp(n, xFill > n.j / 5 || p >= .58 ? xv(n, k) : p < .5 ? xv(n, k - 1) * .35 + .08 : .1));
+    nXp.forEach(n => setOp(n, p >= .4 && p < .62 ? xv(n, k - 1) : .12 + .5 * xv(n, k - 1) * .5));
     $("m-w1").classList.toggle("on-b", p >= .32 && p < .4);
-    $("m-w2").classList.toggle("on-b", p >= .42 && p < .48);
-    $("m-r").classList.toggle("on", p >= .45 && p < .51);
-    $("m-tanh").classList.toggle("on", p >= .49 && p < .54);
-    const loopOn = p >= .45 && p < .58;
+    $("m-u").classList.toggle("on-b", p >= .34 && p < .42);
+    $("m-w2").classList.toggle("on-b", p >= .38 && p < .44);
+    $("m-r1").classList.toggle("on", p >= .42 && p < .48);
+    $("m-xp").classList.toggle("on", p >= .42 && p < .48);
+    $("m-r2").classList.toggle("on", p >= .44 && p < .5);
+    $("m-plus").classList.toggle("on", p >= .47 && p < .51);
+    $("m-tanh").classList.toggle("on", p >= .5 && p < .54);
+    const loopOn = p >= .56 && p < .66;
     $("loop").setAttribute("stroke-dasharray", loopOn ? "5 4" : "none"); $("loop").setAttribute("stroke-dashoffset", loopOn ? (-tNow * 30).toFixed(1) : 0);
     // ---- 4: W_out re-solved
     const r3 = ease(seg(p, .6, .74)), solving = p >= .58 && p < .78;
@@ -645,7 +663,7 @@
     const P = [];
     [0, 1, 2, 3].forEach(i => P.push([.1, .2, [322, 76 + i * 11], null, [350, 72 + i * 11], C.ink2]));                       // frame arrives
     [0, 1, 2, 3].forEach(i => P.push([.18, .3, [372, 108], null, [366, 180 + i * 6], C.orange]));                         // current -> older stack
-    [0, 1, 2, 3].forEach(i => P.push([.34 + i * .015, .44 + i * .015, [394, 72 + i * 11], null, [490, 110 + i * 7], C.blue])); // U into the product
+    [0, 1, 2, 3].forEach(i => P.push([.33 + i * .015, .41 + i * .015, [396, 72 + i * 11], null, [494, 105 + i * 5.7], C.blue])); // U(k) into the product
     XR.forEach((n, q) => P.push([.6 + q * .02, .72 + q * .02, [n.x, n.y], null, [OUTL[q].x, OUTL[q].y], C.green]));        // X through W_out
     OSRC.slice(0, 3).forEach((n, q) => P.push([.6 + q * .03, .74 + q * .02, [n.x, n.y], CTRL, [OUTL[q + 1].x, OUTL[q + 1].y], C.orange])); // older frames, straight
     [1, 2].forEach(q => P.push([.76, .86, [844, 110 + q * 8], null, [882, 77], C.blue]));                                // prediction leaves
