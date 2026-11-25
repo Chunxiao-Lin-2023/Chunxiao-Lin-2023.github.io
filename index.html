@@ -59,9 +59,9 @@ Southern California (2021) and my B.S. in Electrical Engineering from Huazhong U
 <section class="demo2">
   <p class="lead"><b>Real-time channel prediction on an FPGA.</b> A base station and its users must know the radio channel, which is how the signal is distorted on the way. When users move, that knowledge goes stale within milliseconds. Here an FPGA accelerator learns how the channel changes and predicts the next one, live, for two users at once.</p>
   <video autoplay muted loop playsinline controls preload="auto" poster="assets/video/10g_demo.jpg"><source src="assets/video/10g_demo.mp4" type="video/mp4"></video>
-  <div class="explain"><div><b>Left: what the receiver measures</b>The live channel of every antenna pair of the two users, about 1,250 new measurements per second per user.</div><div><b>Middle: how good the prediction is</b>Prediction error of the FPGA (blue) against simply reusing the last measurement (orange). Lower is better; blue stays below orange.</div><div><b>Right: how fast</b>Time from a new measurement to the prediction arriving back at the PC (green), under one millisecond, and the FPGA's own share (grey).</div></div>
+  <div class="explain"><div><b>Left: what the receiver measures</b>The live channel of every antenna pair of the two users, about 1,250 new measurements per second per user.</div><div><b>Middle: how good the prediction is</b>Prediction error of the FPGA (blue) against simply reusing the last measurement (orange). Lower is better; blue stays below orange.</div><div><b>Right: how fast</b>Time from a new measurement to the prediction arriving back at the PC, about 0.1 ms. The blue band is the FPGA's own fixed 60.4 µs; the green band on top is the Ethernet link and the PC.</div></div>
   <figure><img src="assets/img/pubs/testbed_system.jpg" alt="System overview"><figcaption>The setup: a 4-antenna base station and two 2-antenna users are linked through a radio channel emulator; host PCs stream the channel to the FPGA over 10 Gb/s Ethernet.</figcaption></figure>
-  <p class="more"><a href="projects/testbeds/">How the testbed works →</a></p>
+  <p class="more"><a href="wesn-channel-prediction/">Step-by-step walkthrough and narrated video →</a> &nbsp;·&nbsp; <a href="projects/testbeds/">How the testbed works →</a></p>
 </section>
 
 <h2>Highlighted projects</h2>

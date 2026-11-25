@@ -1,5 +1,6 @@
 id: testbeds
 order: [setup, design, photo, demo, results]
+page_link: {href: "wesn-channel-prediction/", text: "Step-by-step walkthrough and narrated demo video →"}
 overview: >-
   Channel predictors are only useful if they keep up with a live radio link. This testbed puts the FPGA
   reservoir-computing accelerator inside a real distributed MIMO (DMIMO) loop, so every new channel
@@ -29,7 +30,8 @@ design:
   - h: Two testbed generations
     p: >-
       A first 1 GbE testbed (embedded processor plus programmable logic) is used to bring up each new model;
-      the 10 GbE testbed moves the whole Ethernet path into hardware for lower and steadier latency.
+      the 10 GbE testbed moves the whole Ethernet path into hardware for lower and steadier latency, and its
+      low-latency core computes each prediction in a fixed 60.4 µs.
 figures:
   - {file: testbeds_system.jpg, cap: "System setup: gNB and two UEs linked through the PROPSIM F16 channel emulator; the FPGA predicts the channel of each UE.", section: setup}
   - {file: testbeds_10g.jpg, cap: "The 10 GbE testbed: FPGA board with two 10 GbE links and the live visualizer.", section: photo}
@@ -37,9 +39,10 @@ figures:
 results:
   - "Prediction error: NMSE drops from 0.0119 when reusing the outdated channel to 0.0087 with the FPGA prediction, for both users."
   - "Throughput: 1,250 channel estimates per second per user."
-  - "Latency: ≤ 0.9 ms end to end on the 10 GbE testbed (< 2 ms on the 1 GbE testbed)."
+  - "Latency: 60.4 µs of FPGA compute per frame, fixed; 100 µs median end to end, PC to FPGA and back, on the 10 GbE testbed (99% of frames within 200 µs), well inside the 0.8 ms between measurements. The earlier 1 GbE testbed takes < 2 ms."
   - "Power: 3.42 W for the FPGA on the 10 GbE testbed."
 kpis:
-  - {v: "≤ 0.9 ms", l: "end-to-end latency per frame (10 GbE)"}
+  - {v: "60.4 µs", l: "FPGA compute per frame, fixed"}
+  - {v: "100 µs", l: "median end-to-end latency (10 GbE)"}
   - {v: "1,250 /s", l: "channel predictions per user"}
   - {v: "≈ 27%", l: "lower NMSE than outdated CSI"}

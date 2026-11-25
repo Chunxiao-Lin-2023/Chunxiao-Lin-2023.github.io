@@ -14,6 +14,7 @@
 </div>
 <p class="ovw">{{ D.overview or pr.text }}</p>
 {% if pr.kpis %}<div class="kpis">{% for k in pr.kpis %}<div class="kpi"><b>{{ k.v }}</b><span>{{ k.l }}</span></div>{% endfor %}</div>{% endif %}
+{% if D and D.page_link %}<p class="more"><a href="{{ root }}{{ D.page_link.href }}">{{ D.page_link.text }}</a></p>{% endif %}
 
 {% if D %}
 {% for s in (D.order or ['design', 'results']) %}

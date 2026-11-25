@@ -44,12 +44,13 @@
 <h1 class="page">Real-time 10G Ethernet PC–FPGA testbed for distributed MIMO</h1>
 <div class="pmeta big"><span class="ongoing">Unpublished · 2026</span></div>
 <div class="glance">
-  <div><b>Why it matters</b>Shows the hardware working in a live radio link, not only in simulation: every channel measurement is predicted within 0.9 ms.</div>
+  <div><b>Why it matters</b>Shows the hardware working in a live radio link, not only in simulation: every channel measurement is predicted and back at the PC in about 100 µs (median), well inside the 0.8 ms frame gap.</div>
   <div><b>My role</b>Designed and built both testbeds end to end: FPGA RTL, Ethernet path, host software and integration with the radio setup.</div>
   <div><b>Tech stack</b><span class="stk"><i>Verilog</i><i>10G Ethernet (MAC/PCS)</i><i>lwIP / UDP</i><i>AXI</i><i>Zynq / RFSoC</i><i>USRP</i><i>PROPSIM</i><i>Python</i></span></div>
 </div>
 <p class="ovw">Channel predictors are only useful if they keep up with a live radio link. This testbed puts the FPGA reservoir-computing accelerator inside a real distributed MIMO (DMIMO) loop, so every new channel measurement is turned into a prediction and sent back within the same frame time.</p>
-<div class="kpis"><div class="kpi"><b>≤ 0.9 ms</b><span>end-to-end latency per frame (10 GbE)</span></div><div class="kpi"><b>1,250 /s</b><span>channel predictions per user</span></div><div class="kpi"><b>≈ 27%</b><span>lower NMSE than outdated CSI</span></div></div>
+<div class="kpis"><div class="kpi"><b>60.4 µs</b><span>FPGA compute per frame, fixed</span></div><div class="kpi"><b>100 µs</b><span>median end-to-end latency (10 GbE)</span></div><div class="kpi"><b>1,250 /s</b><span>channel predictions per user</span></div><div class="kpi"><b>≈ 27%</b><span>lower NMSE than outdated CSI</span></div></div>
+<p class="more"><a href="../../wesn-channel-prediction/">Step-by-step walkthrough and narrated demo video →</a></p>
 
 
 
@@ -69,7 +70,7 @@
   
   <h2>Design</h2>
   <div class="sec">
-    <h3>One predictor per user</h3><p>The FPGA runs one windowed echo state network (WESN) channel per UE in parallel, so both users are served at the full frame rate.</p><h3>Learning while running</h3><p>The reservoir is fixed and only the readout is trained, so the predictor keeps retraining on the newest channel measurements and tracks the fading as it changes.</p><h3>Two testbed generations</h3><p>A first 1 GbE testbed (embedded processor plus programmable logic) is used to bring up each new model; the 10 GbE testbed moves the whole Ethernet path into hardware for lower and steadier latency.</p>
+    <h3>One predictor per user</h3><p>The FPGA runs one windowed echo state network (WESN) channel per UE in parallel, so both users are served at the full frame rate.</p><h3>Learning while running</h3><p>The reservoir is fixed and only the readout is trained, so the predictor keeps retraining on the newest channel measurements and tracks the fading as it changes.</p><h3>Two testbed generations</h3><p>A first 1 GbE testbed (embedded processor plus programmable logic) is used to bring up each new model; the 10 GbE testbed moves the whole Ethernet path into hardware for lower and steadier latency, and its low-latency core computes each prediction in a fixed 60.4 µs.</p>
     
     
   </div>
@@ -102,7 +103,7 @@
   
   <h2>Results</h2>
   <div class="sec">
-    <ul class="res"><li>Prediction error: NMSE drops from 0.0119 when reusing the outdated channel to 0.0087 with the FPGA prediction, for both users.</li><li>Throughput: 1,250 channel estimates per second per user.</li><li>Latency: ≤ 0.9 ms end to end on the 10 GbE testbed (< 2 ms on the 1 GbE testbed).</li><li>Power: 3.42 W for the FPGA on the 10 GbE testbed.</li></ul>
+    <ul class="res"><li>Prediction error: NMSE drops from 0.0119 when reusing the outdated channel to 0.0087 with the FPGA prediction, for both users.</li><li>Throughput: 1,250 channel estimates per second per user.</li><li>Latency: 60.4 µs of FPGA compute per frame, fixed; 100 µs median end to end, PC to FPGA and back, on the 10 GbE testbed (99% of frames within 200 µs), well inside the 0.8 ms between measurements. The earlier 1 GbE testbed takes < 2 ms.</li><li>Power: 3.42 W for the FPGA on the 10 GbE testbed.</li></ul>
     
     
     

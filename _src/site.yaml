@@ -169,7 +169,7 @@ project_groups:
     role: 'Designed and built both testbeds end to end: FPGA RTL, Ethernet path, host software and integration with
       the radio setup.'
     impact: 'Shows the hardware working in a live radio link, not only in simulation: every channel measurement
-      is predicted within 0.9 ms.'
+      is predicted and back at the PC in about 100 µs (median), well inside the 0.8 ms frame gap.'
     stack:
     - Verilog
     - 10G Ethernet (MAC/PCS)
@@ -382,7 +382,7 @@ live_demo:
   explain:
     - {h: "Left: what the receiver measures", p: "The live channel of every antenna pair of the two users, about 1,250 new measurements per second per user."}
     - {h: "Middle: how good the prediction is", p: "Prediction error of the FPGA (blue) against simply reusing the last measurement (orange). Lower is better; blue stays below orange."}
-    - {h: "Right: how fast", p: "Time from a new measurement to the prediction arriving back at the PC (green), under one millisecond, and the FPGA's own share (grey)."}
+    - {h: "Right: how fast", p: "Time from a new measurement to the prediction arriving back at the PC, about 0.1 ms. The blue band is the FPGA's own fixed 60.4 µs; the green band on top is the Ethernet link and the PC."}
   fig_cap: "The setup: a 4-antenna base station and two 2-antenna users are linked through a radio channel emulator; host PCs stream the channel to the FPGA over 10 Gb/s Ethernet."
 
 education:
